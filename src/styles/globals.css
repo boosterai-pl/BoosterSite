@@ -360,6 +360,30 @@ img {
 .hero-meta-cell.scroll-cell {
   text-align: right;
 }
+.hero-meta-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+.hero-meta-logo {
+  height: 18px;
+  width: auto;
+  max-width: 90px;
+  opacity: 0.8;
+  color: var(--paper);
+  transition: opacity 0.2s ease;
+  object-fit: contain;
+}
+.hero-meta-logo:hover {
+  opacity: 1;
+}
+/* SVG inline logos scale via viewBox; img logos need explicit height on the element */
+.hero-meta-logo img {
+  height: 18px;
+  width: auto;
+}
 
 /* ===== Marquee ===== */
 .marquee {

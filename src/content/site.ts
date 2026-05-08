@@ -29,8 +29,27 @@ export const site: SiteContent = {
     primaryCta: { label: "Book a free consultation", href: "#contact" },
     secondaryCta: { label: "See what we do", href: "#services" },
     meta: [
-      { label: "Partners", value: "Monday · ClickUp · Pipedrive · Tilio · Open Mercato" },
-      { label: "Built with", value: "Claude · n8n · Python · Open Mercato" },
+      {
+        label: "Partners",
+        value: "Monday · ClickUp · Pipedrive · Tilio · Open Mercato",
+        logos: [
+          { name: "Monday", component: "MondayLogo" },
+          { name: "ClickUp", component: "ClickUpLogo" },
+          { name: "Pipedrive", component: "PipedriveLogo" },
+          { name: "Tilio", component: "TilioLogo" },
+          { name: "Open Mercato", component: "OpenMercatoLogo" },
+        ],
+      },
+      {
+        label: "Built with",
+        value: "Claude · n8n · Python · Open Mercato",
+        logos: [
+          { name: "Claude", component: "ClaudeLogo" },
+          { name: "n8n", component: "N8nLogo" },
+          { name: "Python", component: "PythonLogo" },
+          { name: "Open Mercato", component: "OpenMercatoLogo" },
+        ],
+      },
       { label: "Currently shipping", value: "OHA Manager · Legal Flow · Municipal App" },
     ],
   },

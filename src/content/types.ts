@@ -29,9 +29,15 @@ export type HeadlineLine = {
   readonly accent?: string;
 };
 
+export type HeroMetaLogo = {
+  readonly name: string;
+  readonly component: string; // key matching BrandLogos export
+};
+
 export type HeroMetaCell = {
   readonly label: string;
   readonly value: string;
+  readonly logos?: readonly HeroMetaLogo[];
 };
 
 export type MarqueeItem = {

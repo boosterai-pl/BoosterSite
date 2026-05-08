@@ -1,6 +1,39 @@
 import type { CSSProperties } from "react";
-import type { HeroContent } from "@/content/types";
+import type { HeroContent, HeroMetaLogo } from "@/content/types";
 import { WordReveal, WordRevealAccent } from "./WordReveal";
+import {
+  MondayLogo,
+  ClickUpLogo,
+  PipedriveLogo,
+  TilioLogo,
+  OpenMercatoLogo,
+  ClaudeLogo,
+  N8nLogo,
+  PythonLogo,
+} from "./BrandLogos";
+
+const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  MondayLogo,
+  ClickUpLogo,
+  PipedriveLogo,
+  TilioLogo,
+  OpenMercatoLogo,
+  ClaudeLogo,
+  N8nLogo,
+  PythonLogo,
+};
+
+function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {
+  return (
+    <div className="hero-meta-logos">
+      {logos.map((logo) => {
+        const Logo = LOGO_MAP[logo.component];
+        if (!Logo) return null;
+        return <Logo key={logo.name} className="hero-meta-logo" />;
+      })}
+    </div>
+  );
+}
 
 type Props = { content: HeroContent };
 
@@ -66,7 +99,11 @@ export function Hero({ content }: Props) {
           {content.meta.map((cell) => (
             <div key={cell.label} className="hero-meta-cell">
               <span>{cell.label}</span>
-              <strong>{cell.value}</strong>
+              {cell.logos ? (
+                <MetaLogos logos={cell.logos} />
+              ) : (
+                <strong>{cell.value}</strong>
+              )}
             </div>
           ))}
           <div className="hero-meta-cell scroll-cell">
