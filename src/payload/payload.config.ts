@@ -1,5 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
@@ -32,6 +33,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers],
   globals: [HomePage],
+  sharp,
   typescript: {
     outputFile: path.resolve(dirname, "../payload-types.ts"),
   },
