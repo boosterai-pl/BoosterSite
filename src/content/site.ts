@@ -280,6 +280,7 @@ export const site: SiteContent = {
           { label: "About", href: "#about" },
           { label: "Team", href: "#team" },
           { label: "Case studies", href: "#work" },
+          { label: "Blog", href: "/blog" },
           { label: "Insights", href: "#insights" },
         ],
       },
