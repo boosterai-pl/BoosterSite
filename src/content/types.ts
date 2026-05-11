@@ -99,6 +99,15 @@ export type FooterColumn = {
   readonly links: readonly NavLink[];
 };
 
+export type BlogPost = {
+  readonly slug: string;
+  readonly title: string;
+  readonly date: string;
+  readonly description: string;
+  readonly author: string;
+  readonly content: string;
+};
+
 export type SiteContent = {
   readonly meta: SiteMeta;
   readonly nav: readonly NavLink[];
@@ -155,13 +164,4 @@ export type SiteContent = {
     readonly columns: readonly FooterColumn[];
     readonly bottom: readonly string[];
   };
-};
-
-export type BlogPost = {
-  readonly slug: string;
-  readonly title: string;
-  readonly date: string;
-  readonly description: string;
-  readonly author: string;
-  readonly content: string;
 };
