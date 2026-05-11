@@ -2,6 +2,10 @@ import { getPayload } from "payload";
 import config from "../src/payload/payload.config";
 import { site } from "../src/content/site";
 
+if (process.env.DATABASE_URI) {
+  process.env.PGHOST ??= new URL(process.env.DATABASE_URI).hostname;
+}
+
 async function seed() {
   const payload = await getPayload({ config });
 

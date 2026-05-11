@@ -4,6 +4,10 @@ import matter from "gray-matter";
 import { getPayload } from "payload";
 import config from "../src/payload/payload.config";
 
+if (process.env.DATABASE_URI) {
+  process.env.PGHOST ??= new URL(process.env.DATABASE_URI).hostname;
+}
+
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
 interface LexicalText {

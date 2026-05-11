@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "seed": "npx tsx scripts/seed.ts",
-    "migrate:mdx": "npx tsx scripts/migrate-mdx.ts"
+    "seed": "node --import tsx scripts/seed.ts",
+    "migrate:mdx": "node --import tsx scripts/migrate-mdx.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",
@@ -28,5 +28,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "typescript": "5.5.3"
+  },
+  "overrides": {
+    "@next/env": "16.2.6"
   }
 }
