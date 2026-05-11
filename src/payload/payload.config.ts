@@ -4,6 +4,7 @@ import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { Users } from "./collections/Users";
+import { Media } from "./collections/Media";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,7 +25,7 @@ export default buildConfig({
       titleSuffix: " — Booster CMS",
     },
   },
-  collections: [Users],
+  collections: [Users, Media],
   globals: [],
   typescript: {
     outputFile: path.resolve(dirname, "../payload-types.ts"),
