@@ -77,7 +77,7 @@ export default async function BlogPage({ searchParams }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <main className="blog-list-page">
+      <main className="blog-list-page blog-light">
         <section className="block">
           <div className="container-inner">
             <div className="blog-list-head">

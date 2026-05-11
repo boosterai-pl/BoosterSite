@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
       />
-      <main className="blog-post-page">
+      <main className="blog-post-page blog-light">
         <BlogPost post={blogPost} />
       </main>
     </>
