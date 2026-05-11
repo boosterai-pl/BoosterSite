@@ -156,3 +156,12 @@ export type SiteContent = {
     readonly bottom: readonly string[];
   };
 };
+
+export type BlogPost = {
+  readonly slug: string;
+  readonly title: string;
+  readonly date: string;
+  readonly description: string;
+  readonly author: string;
+  readonly content: string;
+};
