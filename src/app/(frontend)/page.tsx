@@ -14,6 +14,8 @@ import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const site = await loadSite();
   return (
