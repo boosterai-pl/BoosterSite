@@ -14,8 +14,8 @@ import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
-export default function HomePage() {
-  const site = loadSite();
+export default async function HomePage() {
+  const site = await loadSite();
   return (
     <>
       <SiteRuntime />
