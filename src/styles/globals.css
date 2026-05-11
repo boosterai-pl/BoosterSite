@@ -1314,3 +1314,118 @@ footer {
   font-size: 1rem;
   padding: 2rem 0;
 }
+
+/* ===== Blog light theme ===== */
+
+.blog-light-page {
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* Nav initial state on blog light pages (before JS hydration sets on-light) */
+.blog-light-page .nav:not(.scrolled) {
+  color: var(--ink);
+}
+.blog-light-page .nav.scrolled {
+  background: rgba(245, 243, 238, 0.85);
+  border-color: var(--line-dark);
+  color: var(--ink);
+}
+
+/* Eyebrow on light */
+.blog-light .eyebrow {
+  color: var(--muted-dark);
+}
+
+/* Blog card on light */
+.blog-light .blog-card {
+  border-color: var(--line-dark);
+  color: var(--ink);
+}
+
+.blog-light .blog-card:hover {
+  background: var(--paper-2);
+  box-shadow: 0 4px 24px rgba(10, 10, 10, 0.07);
+}
+
+.blog-light .blog-card-desc {
+  color: var(--muted-dark);
+}
+
+/* Pagination on light */
+.blog-light .blog-pagination a {
+  color: var(--accent);
+}
+
+.blog-light .blog-pagination-info {
+  color: var(--muted-dark);
+}
+
+.blog-light .blog-empty {
+  color: var(--muted-dark);
+}
+
+/* Breadcrumb on light */
+.blog-light .blog-breadcrumb {
+  color: var(--muted-dark);
+}
+
+.blog-light .blog-breadcrumb a {
+  color: var(--muted-dark);
+}
+
+.blog-light .blog-breadcrumb a:hover {
+  color: var(--ink);
+}
+
+/* Article body on light */
+.blog-light .blog-body {
+  color: var(--ink);
+}
+
+.blog-light .blog-body p {
+  color: rgba(10, 10, 10, 0.75);
+}
+
+.blog-light .blog-body ul,
+.blog-light .blog-body ol {
+  color: rgba(10, 10, 10, 0.75);
+}
+
+.blog-light .blog-body h2,
+.blog-light .blog-body h3 {
+  color: var(--ink);
+}
+
+.blog-light .blog-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-light .blog-body code {
+  background: var(--paper-2);
+  color: var(--ink);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Geist Mono", monospace;
+  font-size: 0.9em;
+}
+
+.blog-light .blog-body pre {
+  background: var(--paper-2);
+  border: 1px solid var(--line-dark);
+  padding: 20px;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+
+.blog-light .blog-back {
+  color: var(--muted-dark);
+}
+
+.blog-light .blog-back:hover {
+  color: var(--ink);
+}
