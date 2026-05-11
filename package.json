@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "seed": "npx tsx scripts/seed.ts"
+    "seed": "npx tsx scripts/seed.ts",
+    "migrate:mdx": "npx tsx scripts/migrate-mdx.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",

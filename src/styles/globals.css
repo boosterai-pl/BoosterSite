@@ -1282,3 +1282,35 @@ footer {
 .blog-back:hover {
   color: var(--paper);
 }
+
+/* ── Blog pagination ── */
+.blog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 0 1rem;
+}
+
+.blog-pagination a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.blog-pagination a:hover {
+  text-decoration: underline;
+}
+
+.blog-pagination-info {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.blog-empty {
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 2rem 0;
+}
