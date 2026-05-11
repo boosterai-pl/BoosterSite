@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function FrontendLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -31,9 +31,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
-        {/* eslint-disable-next-line react/no-danger */}
         <script
           type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",

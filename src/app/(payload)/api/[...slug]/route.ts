@@ -11,7 +11,7 @@ import {
 } from "@payloadcms/next/routes";
 import type { NextRequest } from "next/server";
 
-type RouteHandler = (req: NextRequest, ctx: { params: Promise<{ payload: string[] }> }) => Promise<Response>;
+type RouteHandler = (req: NextRequest, ctx: { params: Promise<{ slug: string[] }> }) => Promise<Response>;
 
 export const GET = REST_GET(config) as unknown as RouteHandler;
 export const POST = REST_POST(config) as unknown as RouteHandler;
