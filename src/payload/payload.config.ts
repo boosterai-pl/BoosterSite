@@ -9,6 +9,7 @@ import { Services } from "./collections/Services";
 import { CaseStudies } from "./collections/CaseStudies";
 import { TeamMembers } from "./collections/TeamMembers";
 import { Posts } from "./collections/Posts";
+import { HomePage } from "./globals/HomePage";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +31,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers],
-  globals: [],
+  globals: [HomePage],
   typescript: {
     outputFile: path.resolve(dirname, "../payload-types.ts"),
   },
