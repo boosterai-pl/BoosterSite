@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       images: [
         {
-          url: `https://boosterai.pl/api/og?slug=${post.slug}`,
+          url: `https://boosterai.pl/api/og?title=${encodeURIComponent(post.seoTitle ?? post.title)}&category=${encodeURIComponent(post.tags?.[0]?.tag ?? "Blog")}`,
           width: 1200,
           height: 630,
           alt: title,
@@ -118,7 +118,7 @@ export default async function BlogPostPage({ params }: Props) {
   const imageUrl =
     post.featuredImage?.url
       ? `https://boosterai.pl${post.featuredImage.url}`
-      : `https://boosterai.pl/api/og?slug=${post.slug}`;
+      : `https://boosterai.pl/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.tags?.[0]?.tag ?? "Blog")}`;
 
   const jsonLdArticle = {
     "@context": "https://schema.org",

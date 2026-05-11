@@ -30,7 +30,30 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {/* eslint-disable-next-line react/no-danger */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Booster",
+              url: "https://boosterai.pl",
+              logo: "https://boosterai.pl/assets/booster-sygnet.png",
+              description:
+                "AI-native service agency. CRM implementation, open-source ERP, B2B software and AI automation.",
+              email: "hello@boosterai.pl",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Warsaw",
+                addressCountry: "PL",
+              },
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
