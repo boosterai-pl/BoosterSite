@@ -30,7 +30,7 @@ export default function FrontendLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
