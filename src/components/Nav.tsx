@@ -2,6 +2,7 @@
 
 import type { NavLink } from "@/content/types";
 import { useScrolledNav } from "@/lib/hooks";
+import { LangSwitcher } from "@/components/LangSwitcher";
 
 type Props = {
   brand: string;
@@ -28,6 +29,7 @@ export function Nav({ brand, links, cta }: Props) {
           </a>
         ))}
       </div>
+      <LangSwitcher />
       <a href={cta.href} className="nav-cta">
         <span className="dot" />
         {cta.label}
