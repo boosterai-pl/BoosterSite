@@ -230,6 +230,47 @@ img {
 .nav-cta:hover .dot {
   background: #fff;
 }
+/* ── Language Switcher ──────────────────────────────────────────────────── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 12px;
+}
+
+.lang-switcher__option {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.45;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.lang-switcher__option:hover {
+  opacity: 0.75;
+}
+
+.lang-switcher__option--active {
+  opacity: 1;
+}
+
+.lang-switcher__sep {
+  color: var(--paper);
+  opacity: 0.25;
+  font-size: 0.75rem;
+}
+
+/* On light sections the nav goes dark */
+.nav.on-light .lang-switcher__option {
+  color: var(--ink);
+}
+
+.nav.on-light .lang-switcher__sep {
+  color: var(--ink);
+}
 @media (max-width: 800px) {
   .nav-links {
     display: none;
