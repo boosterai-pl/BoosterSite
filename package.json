@@ -9,15 +9,18 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "node --import tsx scripts/seed.ts",
-    "migrate:mdx": "node --import tsx scripts/migrate-mdx.ts"
+    "migrate:mdx": "node --import tsx scripts/migrate-mdx.ts",
+    "translate": "node --import tsx scripts/translate.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",
     "@payloadcms/next": "^3.84.1",
     "@payloadcms/richtext-lexical": "^3.84.1",
     "@vercel/og": "^0.11.1",
+    "dotenv": "^17.4.2",
     "gray-matter": "^4.0.3",
     "next": "^16.2.6",
+    "next-intl": "^4.12.0",
     "payload": "^3.84.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
