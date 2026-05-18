@@ -263,7 +263,7 @@ export const site: SiteContent = {
     button: { label: "Book free consultation", href: "/book" },
   },
   booking: {
-    calUrl: "https://cal.com/szymon-sidor-bruix3",
+    calUrl: "https://cal.com/szymon-bazan-iahn2z",
     eyebrow: "Umów rozmowę",
     headline: { text: "Bezpłatna", accent: "konsultacja." },
     body: "30 minut. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
