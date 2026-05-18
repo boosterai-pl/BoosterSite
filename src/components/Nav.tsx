@@ -8,9 +8,10 @@ type Props = {
   brand: string;
   links: readonly NavLink[];
   cta: { label: string; href: string };
+  logoHref?: string;
 };
 
-export function Nav({ brand, links, cta }: Props) {
+export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
   const { scrolled, onLight } = useScrolledNav();
   const classes = ["nav"];
   if (scrolled) classes.push("scrolled");
@@ -18,7 +19,7 @@ export function Nav({ brand, links, cta }: Props) {
 
   return (
     <nav className={classes.join(" ")}>
-      <a href="#top" className="nav-logo">
+      <a href={logoHref} className="nav-logo">
         <img src="/assets/booster-rocket.png" alt={`${brand} logo`} />
         <span>{brand}</span>
       </a>

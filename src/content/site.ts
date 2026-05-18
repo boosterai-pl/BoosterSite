@@ -15,7 +15,7 @@ export const site: SiteContent = {
     { label: "About", href: "#about" },
     { label: "Insights", href: "#insights" },
   ],
-  navCta: { label: "Book a call", href: "#contact" },
+  navCta: { label: "Book a call", href: "/book" },
   hero: {
     eyebrow: "AI Native — Service Agency",
     establishedLabel: "EST. 2025 / WARSAW → WORLDWIDE",
@@ -26,7 +26,7 @@ export const site: SiteContent = {
     ],
     lead:
       "Booster is an AI-native service agency. We implement CRMs, ship custom B2B software, and deploy open-source ERP — end-to-end, in weeks, not quarters.",
-    primaryCta: { label: "Book a free consultation", href: "#contact" },
+    primaryCta: { label: "Book a free consultation", href: "/book" },
     secondaryCta: { label: "See what we do", href: "#services" },
     meta: [
       {
@@ -260,7 +260,13 @@ export const site: SiteContent = {
       { text: "says", accent: "“next year.”" },
     ],
     body: "Book a 30-minute consultation. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
-    button: { label: "Book free consultation", href: "mailto:hello@boosterai.pl" },
+    button: { label: "Book free consultation", href: "/book" },
+  },
+  booking: {
+    calUrl: "https://cal.com/szymon-sidor-bruix3",
+    eyebrow: "Umów rozmowę",
+    headline: { text: "Bezpłatna", accent: "konsultacja." },
+    body: "30 minut. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
   },
   footer: {
     intro: "AI-native service agency. Warsaw → worldwide.",
