@@ -108,6 +108,13 @@ export type BlogPost = {
   readonly content: string;
 };
 
+export type BookingContent = {
+  readonly calUrl: string;
+  readonly eyebrow: string;
+  readonly headline: HeadlineLine;
+  readonly body: string;
+};
+
 export type SiteContent = {
   readonly meta: SiteMeta;
   readonly nav: readonly NavLink[];
@@ -164,4 +171,5 @@ export type SiteContent = {
     readonly columns: readonly FooterColumn[];
     readonly bottom: readonly string[];
   };
+  readonly booking: BookingContent;
 };

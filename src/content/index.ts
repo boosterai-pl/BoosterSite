@@ -94,7 +94,7 @@ function mapPayloadToSiteContent(
     nav: (nav ?? []).map((n) => ({ label: n.label as string, href: n.href as string })),
     navCta: {
       label: (navCta?.label as string) ?? "",
-      href: (navCta?.href as string) ?? "",
+      href: "/book",
     },
     hero: {
       eyebrow: (h.heroEyebrow as string) ?? "",
@@ -106,7 +106,7 @@ function mapPayloadToSiteContent(
       lead: (h.heroLead as string) ?? "",
       primaryCta: {
         label: (heroPrimaryCta?.label as string) ?? "",
-        href: (heroPrimaryCta?.href as string) ?? "",
+        href: "/book",
       },
       secondaryCta: {
         label: (heroSecondaryCta?.label as string) ?? "",
@@ -229,7 +229,7 @@ function mapPayloadToSiteContent(
       body: (h.ctaBody as string) ?? "",
       button: {
         label: (ctaButton?.label as string) ?? "",
-        href: (ctaButton?.href as string) ?? "",
+        href: "/book",
       },
     },
     footer: {
@@ -242,6 +242,12 @@ function mapPayloadToSiteContent(
         })),
       })),
       bottom: (footerBottom ?? []).map((b) => b.text as string),
+    },
+    booking: {
+      calUrl: "https://cal.com/szymon-sidor-bruix3",
+      eyebrow: "Umów rozmowę",
+      headline: { text: "Bezpłatna", accent: "konsultacja." },
+      body: "30 minut. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
     },
   };
 }

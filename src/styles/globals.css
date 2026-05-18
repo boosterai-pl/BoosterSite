@@ -1470,3 +1470,47 @@ footer {
 .blog-light .blog-back:hover {
   color: var(--ink);
 }
+
+/* ===== Booking page ===== */
+.booking-page {
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* Nav on booking page — always dark (light background) */
+.booking-page .nav:not(.scrolled) {
+  color: var(--ink);
+}
+.booking-page .nav.scrolled {
+  background: rgba(245, 243, 238, 0.85);
+  border-color: var(--line-dark);
+  color: var(--ink);
+}
+.booking-page .nav .lang-switcher__option {
+  color: var(--ink);
+}
+.booking-page .nav .lang-switcher__sep {
+  color: var(--ink);
+}
+
+.booking {
+  min-height: 100vh;
+  padding-top: 140px;
+}
+.booking-lead {
+  max-width: 560px;
+  margin-top: 1.5rem;
+}
+.booking-frame-wrap {
+  margin-top: 3rem;
+  border-radius: var(--radius, 12px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.booking-frame-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 700px;
+  border: 0;
+}
