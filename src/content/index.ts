@@ -1,4 +1,4 @@
-import type { SiteContent } from "./types";
+import type { SiteContent, PracticeContent } from "./types";
 import { getPayloadClient } from "@/lib/payload";
 
 // Fallback to static data during build if database is unavailable
@@ -82,6 +82,7 @@ function mapPayloadToSiteContent(
   const heroPrimaryCta = h.heroPrimaryCta as Record<string, unknown> | undefined;
   const heroSecondaryCta = h.heroSecondaryCta as Record<string, unknown> | undefined;
   const ctaButton = h.ctaButton as Record<string, unknown> | undefined;
+  const navCtaHref = (navCta?.href as string) ?? "https://cal.com/szymon-bazan-iahn2z";
 
   return {
     meta: {
@@ -94,7 +95,7 @@ function mapPayloadToSiteContent(
     nav: (nav ?? []).map((n) => ({ label: n.label as string, href: n.href as string })),
     navCta: {
       label: (navCta?.label as string) ?? "",
-      href: "/book",
+      href: navCtaHref,
     },
     hero: {
       eyebrow: (h.heroEyebrow as string) ?? "",
@@ -106,7 +107,7 @@ function mapPayloadToSiteContent(
       lead: (h.heroLead as string) ?? "",
       primaryCta: {
         label: (heroPrimaryCta?.label as string) ?? "",
-        href: "/book",
+        href: (heroPrimaryCta?.href as string) ?? "https://cal.com/szymon-bazan-iahn2z",
       },
       secondaryCta: {
         label: (heroSecondaryCta?.label as string) ?? "",
@@ -146,6 +147,7 @@ function mapPayloadToSiteContent(
       },
       items: services.map((s) => ({
         id: s.sortOrder as string,
+        slug: (s.slug as string) ?? "",
         title: s.title as string,
         description: s.description as string,
         tags: ((s.tags as AnyArr) ?? []).map((t) => t.tag as string),
@@ -229,7 +231,7 @@ function mapPayloadToSiteContent(
       body: (h.ctaBody as string) ?? "",
       button: {
         label: (ctaButton?.label as string) ?? "",
-        href: "/book",
+        href: navCtaHref,
       },
     },
     footer: {
@@ -243,13 +245,18 @@ function mapPayloadToSiteContent(
       })),
       bottom: (footerBottom ?? []).map((b) => b.text as string),
     },
+    practices: staticSite.practices,
     booking: {
       calUrl: "https://cal.com/szymon-bazan-iahn2z",
-      eyebrow: "Umów rozmowę",
-      headline: { text: "Bezpłatna", accent: "konsultacja." },
-      body: "30 minut. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
+      eyebrow: "Let's talk",
+      headline: { text: "Free", accent: "consultation." },
+      body: "30 minutes. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
     },
   };
 }
 
-export type { SiteContent } from "./types";
+export function getPractice(slug: string, site: SiteContent): PracticeContent | undefined {
+  return site.practices.find((p) => p.slug === slug);
+}
+
+export type { SiteContent, PracticeContent } from "./types";

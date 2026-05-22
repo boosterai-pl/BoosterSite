@@ -15,7 +15,7 @@ export const site: SiteContent = {
     { label: "About", href: "#about" },
     { label: "Insights", href: "#insights" },
   ],
-  navCta: { label: "Book a call", href: "/book" },
+  navCta: { label: "Book a call", href: "https://cal.com/szymon-bazan-iahn2z" },
   hero: {
     eyebrow: "AI Native — Service Agency",
     establishedLabel: "EST. 2025 / WARSAW → WORLDWIDE",
@@ -26,7 +26,7 @@ export const site: SiteContent = {
     ],
     lead:
       "Booster is an AI-native service agency. We implement CRMs, ship custom B2B software, and deploy open-source ERP — end-to-end, in weeks, not quarters.",
-    primaryCta: { label: "Book a free consultation", href: "/book" },
+    primaryCta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
     secondaryCta: { label: "See what we do", href: "#services" },
     meta: [
       {
@@ -50,7 +50,7 @@ export const site: SiteContent = {
           { name: "Open Mercato", component: "OpenMercatoLogo" },
         ],
       },
-      { label: "Currently shipping", value: "OHA Manager · Legal Flow · Municipal App" },
+      { label: "Currently shipping", value: "OOH Manager · Legal Flow · Municipal App" },
     ],
   },
   marquee: [
@@ -74,7 +74,7 @@ export const site: SiteContent = {
       {
         id: "001",
         title: "Speed is a feature.",
-        body: "OHA Manager — production in 6 weeks. Legal Flow for restructuring — shipping now. We replace 12-month roadmaps with weekly demos.",
+        body: "OOH Manager — production in 6 weeks. Legal Flow for restructuring — shipping now. We replace 12-month roadmaps with weekly demos.",
       },
       {
         id: "002",
@@ -99,6 +99,7 @@ export const site: SiteContent = {
     items: [
       {
         id: "01",
+        slug: "crm-implementation",
         title: "CRM Implementation & Automation",
         description:
           "Boxed CRM stacks tuned to your sales motion. We configure, integrate and automate Monday, ClickUp, Pipedrive and Tilio — partner-grade.",
@@ -106,6 +107,7 @@ export const site: SiteContent = {
       },
       {
         id: "02",
+        slug: "open-source-erp",
         title: "Open-source ERP & CRM",
         description:
           "Enterprise without the license tax. We deploy Open Mercato on your infrastructure — fully customizable, owned by you, extended by us.",
@@ -113,13 +115,15 @@ export const site: SiteContent = {
       },
       {
         id: "03",
+        slug: "b2b-software",
         title: "End-to-end B2B Software",
         description:
-          "Custom products built ground-up. OHA Manager, Legal Flow for restructuring, municipal applications — full stack, your IP.",
+          "Custom products built ground-up. OOH Manager, Legal Flow for restructuring, municipal applications — full stack, your IP.",
         tags: ["React", "Node", "Python", "Cloud"],
       },
       {
         id: "04",
+        slug: "ai-automation",
         title: "AI Automation Studio",
         description:
           "Process automations powered by Claude, n8n and Python. From document workflows to internal copilots — measurable ROI in the first quarter.",
@@ -133,7 +137,7 @@ export const site: SiteContent = {
     items: [
       {
         id: "01",
-        title: "OHA Manager",
+        title: "OOH Manager",
         description:
           "A workplace health & safety platform other teams quoted at 12 months. Shipped in six weeks.",
         tags: ["B2B SaaS", "6 WEEKS", "IN PRODUCTION"],
@@ -260,13 +264,115 @@ export const site: SiteContent = {
       { text: "says", accent: "“next year.”" },
     ],
     body: "Book a 30-minute consultation. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
-    button: { label: "Book free consultation", href: "/book" },
+    button: { label: "Book free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
   },
+  practices: [
+    {
+      slug: "crm-implementation",
+      eyebrow: "01 / CRM Implementation & Automation",
+      headline: { text: "Your sales motion,", accent: "automated." },
+      lead: "We implement and automate CRM platforms so your team spends time selling — not wrestling spreadsheets. As certified partners of Monday, ClickUp, Pipedrive and Tilio, we deliver partner-grade configurations tuned to the way you actually work.",
+      sections: [
+        {
+          title: "What we do",
+          body: "We take your existing sales process — or help you build one — and translate it into a CRM stack that runs on autopilot. That means pipeline configuration, lead scoring, automated follow-ups, cross-platform integrations and reporting dashboards. No generic templates. Every workspace is shaped around your deal stages, your team size and your growth targets.",
+        },
+        {
+          title: "How it works",
+          body: "We start with a discovery call to map your current workflow, pain points and tools. Within the first week you get a configured workspace with live data. Over the following weeks we layer in automations: lead routing, email sequences, Slack notifications, invoice triggers — whatever the process demands. Weekly demos keep you in control. Handover includes documentation and team training.",
+        },
+        {
+          title: "Who it's for",
+          body: "Sales teams of 3–50 people who have outgrown spreadsheets but don't need a six-figure Salesforce contract. Founders who want a CRM that works on day one. Revenue leaders who need reporting they can trust without a dedicated ops hire.",
+        },
+        {
+          title: "What you get",
+          body: "A fully configured CRM workspace. Automated pipelines and follow-ups. Integrations with your email, calendar, invoicing and marketing tools. A trained team and written documentation. Ongoing support on retainer if you need it.",
+        },
+      ],
+      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+    },
+    {
+      slug: "open-source-erp",
+      eyebrow: "02 / Open-source ERP & CRM",
+      headline: { text: "Enterprise software,", accent: "zero license fees." },
+      lead: "We deploy Open Mercato — an open-source ERP and CRM platform — on your own infrastructure. You get the capabilities of enterprise software without the vendor lock-in, the per-seat pricing or the six-month procurement cycle.",
+      sections: [
+        {
+          title: "What we do",
+          body: "We install, configure and extend Open Mercato to fit your business processes. That covers CRM, inventory, invoicing, procurement, HR modules — whatever your operation needs. Because the code is open-source, every customisation belongs to you. No license fees, no seat limits, no surprise renewals.",
+        },
+        {
+          title: "How it works",
+          body: "Discovery maps your current systems and data flows. We deploy Open Mercato on your cloud or on-premise infrastructure, migrate existing data, and configure modules to match your workflows. Custom features — a specific approval chain, a reporting view, a third-party integration — are built in-house and merged into your codebase. You own everything.",
+        },
+        {
+          title: "Who it's for",
+          body: "Mid-market and enterprise companies tired of paying six or seven figures a year for ERP seats. Organisations that need full control over their data and infrastructure. Teams that want to extend their business software without filing a vendor change request.",
+        },
+        {
+          title: "What you get",
+          body: "A production-ready Open Mercato deployment on your infrastructure. Configured modules for your core business processes. Data migration from legacy systems. Custom extensions built to your specification. Full source code ownership — no lock-in, ever.",
+        },
+      ],
+      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+    },
+    {
+      slug: "b2b-software",
+      eyebrow: "03 / End-to-end B2B Software",
+      headline: { text: "Custom products shipped in", accent: "weeks." },
+      lead: "We build B2B software products from scratch — full stack, cloud-native, production-ready. OOH Manager went from zero to production in six weeks. Legal Flow is shipping now. The IP is always yours.",
+      sections: [
+        {
+          title: "What we do",
+          body: "We take a product idea — or a problem without a product yet — and deliver working software. Not wireframes. Not proposals. Running code with real users. Our stack is React, Node, Python and cloud infrastructure, accelerated by AI-native tooling that lets a four-person team move at the speed of forty.",
+        },
+        {
+          title: "How it works",
+          body: "Week one is discovery: we map the problem, the users, and what success looks like at six weeks. Week two delivers a clickable prototype. From week three we build in public — daily check-ins, weekly demos, no committee. Architecture decisions are made by the people writing the code. You see progress every seven days.",
+        },
+        {
+          title: "Proof it works",
+          body: "OOH Manager — a workplace health and safety platform that other teams quoted at twelve months — shipped to production in six weeks. Legal Flow automates document workflows and case management for a law firm in restructuring proceedings. Municipal Application is a B2G product line for Polish local governments. All built end-to-end by Booster.",
+        },
+        {
+          title: "What you get",
+          body: "A production-grade B2B product. Full source code and IP ownership. Cloud infrastructure configured and deployed. Admin panel or CMS for your operations team. Post-launch support on retainer. Weekly demos throughout the build so there are no surprises at handover.",
+        },
+      ],
+      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+    },
+    {
+      slug: "ai-automation",
+      eyebrow: "04 / AI Automation Studio",
+      headline: { text: "Automation that pays for itself in", accent: "one quarter." },
+      lead: "We build process automations powered by Claude, n8n and Python. From document workflows to internal copilots — every deployment is measured against real ROI and expected to pay back inside ninety days.",
+      sections: [
+        {
+          title: "What we do",
+          body: "We identify manual, repetitive processes in your organisation and replace them with AI-powered automations. That includes document processing, data extraction, internal Q&A copilots, lead qualification bots, reporting pipelines and multi-system integrations. We use Claude for reasoning, n8n for orchestration and Python for everything in between.",
+        },
+        {
+          title: "How it works",
+          body: "We start with a process audit — not a slide deck, a working session. We map the inputs, outputs and decision points of the process you want to automate. Then we build it. A first working version typically ships within two weeks. We iterate based on real data, measure time saved and error rates, and hand over a system your team can maintain.",
+        },
+        {
+          title: "Proof it works",
+          body: "Kancelaria Jabłońska eliminated hours of daily paperwork by chaining n8n, Claude and Python into a single automation layer. Document classification, data extraction and case routing now run without human input. The system paid for itself within the first billing cycle.",
+        },
+        {
+          title: "What you get",
+          body: "Automated workflows deployed on your infrastructure or cloud. Integration with your existing tools — email, CRM, ERP, document storage. An admin dashboard for monitoring and exceptions. Documentation and team training. Measurable ROI tracked from day one.",
+        },
+      ],
+      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+    },
+  ],
   booking: {
     calUrl: "https://cal.com/szymon-bazan-iahn2z",
-    eyebrow: "Umów rozmowę",
-    headline: { text: "Bezpłatna", accent: "konsultacja." },
-    body: "30 minut. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
+    eyebrow: "Let's talk",
+    headline: { text: "Free", accent: "consultation." },
+    body: "30 minutes. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
   },
   footer: {
     intro: "AI-native service agency. Warsaw → worldwide.",
@@ -274,10 +380,10 @@ export const site: SiteContent = {
       {
         heading: "Services",
         links: [
-          { label: "CRM Implementation", href: "#services" },
-          { label: "Open-source ERP", href: "#services" },
-          { label: "B2B Software", href: "#services" },
-          { label: "AI Automation", href: "#services" },
+          { label: "CRM Implementation", href: "/practices/crm-implementation" },
+          { label: "Open-source ERP", href: "/practices/open-source-erp" },
+          { label: "B2B Software", href: "/practices/b2b-software" },
+          { label: "AI Automation", href: "/practices/ai-automation" },
         ],
       },
       {

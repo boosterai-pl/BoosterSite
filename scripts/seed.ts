@@ -32,23 +32,36 @@ async function seed() {
     console.log(`  Created: ${member.name}`);
   }
 
-  // 2. Create services
-  console.log("\nCreating services...");
+  // 2. Create or update services
+  console.log("\nCreating/updating services...");
   const serviceIds: string[] = [];
   for (const svc of site.services.items) {
     const existing = await payload.find({
       collection: "services",
-      where: { title: { equals: svc.title } },
+      where: { sortOrder: { equals: svc.id } },
     });
     if (existing.docs.length > 0) {
-      serviceIds.push(existing.docs[0].id as string);
-      console.log(`  Skipping existing: ${svc.title}`);
+      const existingId = existing.docs[0].id as string;
+      await payload.update({
+        collection: "services",
+        id: existingId,
+        data: {
+          sortOrder: svc.id,
+          slug: svc.slug,
+          title: svc.title,
+          description: svc.description,
+          tags: svc.tags.map((tag) => ({ tag })),
+        },
+      });
+      serviceIds.push(existingId);
+      console.log(`  Updated: ${svc.title}`);
       continue;
     }
     const created = await payload.create({
       collection: "services",
       data: {
         sortOrder: svc.id,
+        slug: svc.slug,
         title: svc.title,
         description: svc.description,
         tags: svc.tags.map((tag) => ({ tag })),
@@ -58,17 +71,28 @@ async function seed() {
     console.log(`  Created: ${svc.title}`);
   }
 
-  // 3. Create case studies
-  console.log("\nCreating case studies...");
+  // 3. Create or update case studies
+  console.log("\nCreating/updating case studies...");
   const caseIds: string[] = [];
   for (const cs of site.cases.items) {
     const existing = await payload.find({
       collection: "case-studies",
-      where: { title: { equals: cs.title } },
+      where: { sortOrder: { equals: cs.id } },
     });
     if (existing.docs.length > 0) {
-      caseIds.push(existing.docs[0].id as string);
-      console.log(`  Skipping existing: ${cs.title}`);
+      const existingId = existing.docs[0].id as string;
+      await payload.update({
+        collection: "case-studies",
+        id: existingId,
+        data: {
+          sortOrder: cs.id,
+          title: cs.title,
+          description: cs.description,
+          tags: cs.tags.map((tag) => ({ tag })),
+        },
+      });
+      caseIds.push(existingId);
+      console.log(`  Updated: ${cs.title}`);
       continue;
     }
     const created = await payload.create({

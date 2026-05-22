@@ -42,7 +42,11 @@ export function CTA({ content }: Props) {
         </h2>
         <div className="cta-row" data-reveal>
           <p>{content.body}</p>
-          <a href={content.button.href} className="btn btn-primary">
+          <a
+            href={content.button.href}
+            className="btn btn-primary"
+            {...(content.button.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
             {content.button.label}
             <span className="arrow">→</span>
           </a>

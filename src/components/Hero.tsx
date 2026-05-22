@@ -85,7 +85,11 @@ export function Hero({ content }: Props) {
         <div className="hero-sub" data-reveal style={subDelay}>
           <p className="lead">{content.lead}</p>
           <div className="hero-actions">
-            <a href={content.primaryCta.href} className="btn btn-primary">
+            <a
+              href={content.primaryCta.href}
+              className="btn btn-primary"
+              {...(content.primaryCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
               {content.primaryCta.label}
               <span className="arrow">→</span>
             </a>

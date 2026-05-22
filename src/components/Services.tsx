@@ -11,7 +11,7 @@ export function Services({ content }: Props) {
 
         <div className="services" data-reveal-stagger>
           {content.items.map((service) => (
-            <a href="/book" className="service-card" key={service.id}>
+            <a href={`/practices/${service.slug}`} className="service-card" key={service.id}>
               <div className="service-num">
                 <span>— {service.id}</span>
                 <span className="service-arrow">↗</span>

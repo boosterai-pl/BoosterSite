@@ -8,16 +8,16 @@ import { SiteRuntime } from "@/components/SiteRuntime";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Umów konsultację | Booster — AI-Native Agency",
+  title: "Book a consultation | Booster — AI-Native Agency",
   description:
-    "Zarezerwuj 30-minutową bezpłatną rozmowę z Booster. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
+    "Book a free 30-minute call with Booster. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
   alternates: {
     canonical: "https://boosterai.pl/book",
   },
   openGraph: {
-    title: "Umów konsultację | Booster — AI-Native Agency",
+    title: "Book a consultation | Booster — AI-Native Agency",
     description:
-      "Zarezerwuj 30-minutową bezpłatną rozmowę z Booster. Wrócimy z planem, ceną i demo w dwa tygodnie.",
+      "Book a free 30-minute call with Booster. We come back with a plan, a price and a demo in two weeks.",
     type: "website",
     url: "https://boosterai.pl/book",
     siteName: "Booster",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Bezpłatna konsultacja — Booster AI",
+  name: "Free consultation — Booster AI",
   description:
-    "30-minutowa rozmowa z zespołem Booster. Wrócimy z sześciotygodniowym planem, stałą ceną i pierwszym demo w dwa tygodnie.",
+    "A 30-minute call with the Booster team. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
   url: "https://boosterai.pl/book",
   provider: {
     "@type": "Organization",

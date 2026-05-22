@@ -18,6 +18,12 @@ export const Services: CollectionConfig = {
       admin: { description: 'Display order, e.g. "01", "02"' },
     },
     {
+      name: "slug",
+      type: "text",
+      unique: true,
+      admin: { description: "URL slug for practice subpage, e.g. crm-implementation" },
+    },
+    {
       name: "title",
       type: "text",
       required: true,

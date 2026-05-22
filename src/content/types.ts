@@ -52,9 +52,24 @@ export type ManifestoEntry = {
 
 export type Service = {
   readonly id: string;
+  readonly slug: string;
   readonly title: string;
   readonly description: string;
   readonly tags: readonly string[];
+};
+
+export type PracticeSection = {
+  readonly title: string;
+  readonly body: string;
+};
+
+export type PracticeContent = {
+  readonly slug: string;
+  readonly eyebrow: string;
+  readonly headline: HeadlineLine;
+  readonly lead: string;
+  readonly sections: readonly PracticeSection[];
+  readonly cta: { readonly label: string; readonly href: string };
 };
 
 export type CaseStudy = {
@@ -171,5 +186,6 @@ export type SiteContent = {
     readonly columns: readonly FooterColumn[];
     readonly bottom: readonly string[];
   };
+  readonly practices: readonly PracticeContent[];
   readonly booking: BookingContent;
 };

@@ -17,16 +17,14 @@ export function Booking({ content }: Props) {
           ) : null}
         </h1>
         <p className="lead booking-lead">{content.body}</p>
-        <div className="booking-frame-wrap">
-          <iframe
-            src={`${content.calUrl}?embed=true`}
-            width="100%"
-            height="700"
-            frameBorder={0}
-            title="Zarezerwuj konsultację"
-            loading="lazy"
-          />
-        </div>
+        <a
+          href={content.calUrl}
+          className="btn btn-primary booking-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Book a free consultation <span className="arrow">→</span>
+        </a>
       </div>
     </section>
   );

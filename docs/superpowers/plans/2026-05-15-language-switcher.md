@@ -87,7 +87,7 @@ const DO_NOT_TRANSLATE_KEYS = new Set([
 ]);
 
 const BRAND_NAMES = [
-  "Booster", "Claude", "n8n", "OHA Manager", "Legal Flow", "Open Mercato",
+  "Booster", "Claude", "n8n", "OOH Manager", "Legal Flow", "Open Mercato",
   "Monday", "ClickUp", "Pipedrive", "Tilio", "React", "Node", "Python",
   "RAG", "CRM", "ERP", "CMS", "AI", "B2B", "B2G", "SEO", "ISR",
   "Kancelaria Jabłońska",

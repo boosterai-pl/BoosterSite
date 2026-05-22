@@ -31,7 +31,11 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
         ))}
       </div>
       <LangSwitcher />
-      <a href={cta.href} className="nav-cta">
+      <a
+        href={cta.href}
+        className="nav-cta"
+        {...(cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
         <span className="dot" />
         {cta.label}
       </a>
