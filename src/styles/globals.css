@@ -910,7 +910,7 @@ section.block .container-inner {
 /* ===== Team ===== */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
 }
 @media (max-width: 900px) {
@@ -922,6 +922,11 @@ section.block .container-inner {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.team-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .team-photo {
   aspect-ratio: 3 / 4;
@@ -938,7 +943,7 @@ section.block .container-inner {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 
 /* ===== Insights / Blog ===== */
