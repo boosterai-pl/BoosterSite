@@ -635,12 +635,12 @@ section.block .container-inner {
 }
 .case-row {
   display: grid;
-  grid-template-columns: 80px 1.2fr 1.4fr 80px;
+  grid-template-columns: 1.2fr 1.8fr;
   gap: 32px;
   padding: 36px 0;
   border-top: 1px solid var(--line-dark);
   border-left: 2px solid transparent;
-  align-items: center;
+  align-items: start;
   transition: background 0.3s, padding 0.3s, border-color 0.3s;
 }
 .cases .case-row:last-child {
@@ -658,15 +658,6 @@ section.block .container-inner {
     gap: 12px;
   }
 }
-.case-row .num {
-  font-family: "Geist Mono", monospace;
-  font-size: 12px;
-  color: var(--muted-dark);
-  transition: color 0.25s;
-}
-.case-row:hover .num {
-  color: var(--accent);
-}
 .case-row h3 {
   font-size: clamp(22px, 2.6vw, 38px);
   font-weight: 500;
@@ -678,17 +669,7 @@ section.block .container-inner {
 }
 .case-row .desc {
   color: rgba(10, 10, 10, 0.6);
-}
-.case-row .arrow-cell {
-  text-align: right;
-  font-family: "Geist Mono", monospace;
-  font-size: 12px;
-  color: var(--muted-dark);
-  transition: color 0.25s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.case-row:hover .arrow-cell {
-  color: var(--accent);
-  transform: translateX(4px);
+  line-height: 1.7;
 }
 .case-meta {
   display: flex;
@@ -1019,9 +1000,9 @@ section.block .container-inner {
   color: rgba(255, 255, 255, 0.85);
 }
 .cta-row {
-  margin-top: 64px;
+  margin-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
   flex-wrap: wrap;
   gap: 32px;
@@ -1035,11 +1016,53 @@ section.block .container-inner {
 .cta .btn-primary {
   background: var(--ink);
   border-color: var(--ink);
+  padding: 20px 36px;
+  font-size: 16px;
 }
 .cta .btn-primary:hover {
   background: #fff;
   color: var(--accent);
   border-color: #fff;
+}
+
+/* ===== Section CTA (inline) ===== */
+.section-cta {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-dark);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.section-cta-micro {
+  font-size: 14px;
+  color: var(--muted-dark);
+  max-width: 30ch;
+}
+.light .section-cta-micro {
+  color: var(--muted-dark);
+}
+
+/* ===== Practice page CTA ===== */
+.practice-hero-cta {
+  margin-top: 2rem;
+}
+.practice-hero-cta .section-cta-micro {
+  margin-bottom: 0.75rem;
+}
+.practice-inline-cta {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line-dark);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.practice-inline-cta .section-cta-micro {
+  font-size: 14px;
+  color: var(--muted-dark);
 }
 
 /* ===== Footer ===== */

@@ -63,13 +63,20 @@ export type PracticeSection = {
   readonly body: string;
 };
 
+export type SectionCta = {
+  readonly microCopy?: string;
+  readonly label: string;
+  readonly href: string;
+};
+
 export type PracticeContent = {
   readonly slug: string;
   readonly eyebrow: string;
   readonly headline: HeadlineLine;
   readonly lead: string;
+  readonly heroCta?: SectionCta;
   readonly sections: readonly PracticeSection[];
-  readonly cta: { readonly label: string; readonly href: string };
+  readonly cta: SectionCta;
 };
 
 export type CaseStudy = {
@@ -141,6 +148,7 @@ export type SiteContent = {
     readonly eyebrow: string;
     readonly headline: HeadlineLine;
     readonly entries: readonly ManifestoEntry[];
+    readonly cta?: SectionCta;
   };
   readonly services: {
     readonly eyebrow: string;
@@ -151,6 +159,7 @@ export type SiteContent = {
     readonly eyebrow: string;
     readonly headline: HeadlineLine;
     readonly items: readonly CaseStudy[];
+    readonly cta?: SectionCta;
   };
   readonly speed: {
     readonly eyebrow: string;
@@ -161,6 +170,7 @@ export type SiteContent = {
     readonly eyebrow: string;
     readonly headline: HeadlineLine;
     readonly steps: readonly ProcessStep[];
+    readonly cta?: SectionCta;
   };
   readonly partners: {
     readonly eyebrow: string;

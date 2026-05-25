@@ -11,8 +11,7 @@ export function Cases({ content }: Props) {
 
         <div className="cases">
           {content.items.map((entry) => (
-            <a href="#" className="case-row" key={entry.id} data-reveal>
-              <div className="num">— {entry.id}</div>
+            <div className="case-row" key={entry.id} data-reveal>
               <div>
                 <h3>{entry.title}</h3>
                 <div className="case-meta">
@@ -22,10 +21,25 @@ export function Cases({ content }: Props) {
                 </div>
               </div>
               <div className="desc">{entry.description}</div>
-              <div className="arrow-cell">↗ Case study</div>
-            </a>
+            </div>
           ))}
         </div>
+
+        {content.cta ? (
+          <div className="section-cta" data-reveal>
+            {content.cta.microCopy ? (
+              <p className="section-cta-micro">{content.cta.microCopy}</p>
+            ) : null}
+            <a
+              href={content.cta.href}
+              className="btn btn-primary"
+              {...(content.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {content.cta.label}
+              <span className="arrow">→</span>
+            </a>
+          </div>
+        ) : null}
       </div>
     </section>
   );
