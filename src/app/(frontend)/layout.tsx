@@ -5,12 +5,12 @@ import "@/styles/globals.css";
 export const metadata: Metadata = {
   title: "Booster — AI-Native Service Agency",
   description:
-    "Booster is an AI-native service agency. We implement CRMs, ship custom B2B software, and deploy open-source ERP — end-to-end, in weeks, not quarters.",
+    "We build autonomous AI infrastructure for complex B2B operations. By replacing manual workarounds with custom platforms, we deliver end-to-end solutions in weeks, not quarters.",
   metadataBase: new URL("https://boosterai.pl"),
   openGraph: {
     title: "Booster — AI-Native Service Agency",
     description:
-      "We build what others quote for a year. CRM implementation, open-source ERP, B2B software and AI automation, shipped in six weeks.",
+      "Grow your revenue. Not your payroll. We build autonomous AI infrastructure for complex B2B operations — end-to-end solutions in weeks, not quarters.",
     type: "website",
     siteName: "Booster",
   },

@@ -59,7 +59,9 @@ export function Hero({ content }: Props) {
       <div className="hero-content">
         <div className="hero-tag" data-reveal>
           <span className="eyebrow">{content.eyebrow}</span>
-          <span className="mono est">{content.establishedLabel}</span>
+          {content.establishedLabel ? (
+            <span className="mono est">{content.establishedLabel}</span>
+          ) : null}
         </div>
 
         <h1 className="h-display">

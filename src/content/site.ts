@@ -15,17 +15,17 @@ export const site: SiteContent = {
     { label: "About", href: "#about" },
     { label: "Insights", href: "#insights" },
   ],
-  navCta: { label: "Book a call", href: "https://cal.com/szymon-bazan-iahn2z" },
+  navCta: { label: "Book a free AI consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
   hero: {
     eyebrow: "AI Native — Service Agency",
-    establishedLabel: "EST. 2025 / WARSAW → WORLDWIDE",
+    establishedLabel: "",
     headlineLines: [
-      { text: "We build what" },
-      { text: "others quote" },
-      { text: "for", accent: "a year." },
+      { text: "Grow your" },
+      { text: "revenue." },
+      { text: "Not your", accent: "payroll." },
     ],
     lead:
-      "Booster is an AI-native service agency. We implement CRMs, ship custom B2B software, and deploy open-source ERP — end-to-end, in weeks, not quarters.",
+      "We build autonomous AI infrastructure for complex B2B operations. By replacing manual workarounds with custom platforms, we deliver end-to-end solutions in weeks, not quarters.",
     primaryCta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
     secondaryCta: { label: "See what we do", href: "#services" },
     meta: [
@@ -74,24 +74,29 @@ export const site: SiteContent = {
       {
         id: "001",
         title: "Speed is a feature.",
-        body: "OOH Manager — production in 6 weeks. Legal Flow for restructuring — shipping now. We replace 12-month roadmaps with weekly demos.",
+        body: "OOH Advertising Platform — automated 7 out of 9 selling steps, cutting proposal times from a whole week to minutes. Legal Document Engine — saving hundreds of billable hours per case by transforming automated transcripts into legal drafts. We completely replace slow, 12-month software roadmaps and dry mockups with live, production-ready iterations you can test from week one.",
       },
       {
         id: "002",
         title: "AI in the loop, not in the headline.",
-        body: "We use Claude, n8n and Python where they earn their place — not as a sticker. Every automation we deploy is paid back inside one quarter.",
+        body: "We use Claude, n8n, and Python where they solve painful operational bottlenecks — not as a marketing sticker to ride the trend. Backed by veteran IT engineers, we systematically clean and deduplicate your historical data first, then deploy clean automation that stops your profit margins from shrinking as your company grows.",
       },
       {
         id: "003",
         title: "Boxed for SMB. Open-source for Enterprise.",
-        body: "Smaller teams get pre-shaped CRM stacks. Enterprises get Open Mercato — your code, your infrastructure, zero licenses, zero lock-in.",
+        body: "Mid-sized teams get pre-shaped, highly profitable CRM stacks deployed in days. Established mid-market enterprises with complex operations get Open Mercato — a flexible, license-free ERP and CRM ecosystem that ensures 100% control over your own code, infrastructure, and data with zero vendor lock-in.",
       },
       {
         id: "004",
         title: "End-to-end ownership.",
-        body: "From discovery, through architecture, to a CMS the marketing team can run alone. We hand you the keys, not a dependency.",
+        body: "We act as business consultants first and engineers second. Our process runs from deep-dive workflow mapping workshops, through tailored data architecture, to a system your team actually enjoys using. At the end of the 6 weeks, we hand you the keys and total infrastructure autonomy — not an ongoing, expensive dependency.",
       },
     ],
+    cta: {
+      microCopy: "No contact forms. No endless email chains.",
+      label: "Pick a time in our Founder's calendar",
+      href: "https://cal.com/szymon-bazan-iahn2z",
+    },
   },
   services: {
     eyebrow: "02 / Services",
@@ -99,22 +104,14 @@ export const site: SiteContent = {
     items: [
       {
         id: "01",
-        slug: "crm-implementation",
-        title: "CRM Implementation & Automation",
+        slug: "ai-automation",
+        title: "AI Automation Studio",
         description:
-          "Boxed CRM stacks tuned to your sales motion. We configure, integrate and automate Monday, ClickUp, Pipedrive and Tilio — partner-grade.",
-        tags: ["Monday", "ClickUp", "Pipedrive", "Tilio"],
+          "Process automations powered by Claude, n8n and Python. From document workflows to internal copilots — measurable ROI in the first quarter.",
+        tags: ["Claude", "n8n", "Python", "RAG"],
       },
       {
         id: "02",
-        slug: "open-source-erp",
-        title: "Open-source ERP & CRM",
-        description:
-          "Enterprise without the license tax. We deploy Open Mercato on your infrastructure — fully customizable, owned by you, extended by us.",
-        tags: ["Open Mercato", "ERP", "No lock-in", "Self-hosted"],
-      },
-      {
-        id: "03",
         slug: "b2b-software",
         title: "End-to-end B2B Software",
         description:
@@ -122,48 +119,61 @@ export const site: SiteContent = {
         tags: ["React", "Node", "Python", "Cloud"],
       },
       {
-        id: "04",
-        slug: "ai-automation",
-        title: "AI Automation Studio",
+        id: "03",
+        slug: "crm-implementation",
+        title: "CRM Implementation & Automation",
         description:
-          "Process automations powered by Claude, n8n and Python. From document workflows to internal copilots — measurable ROI in the first quarter.",
-        tags: ["Claude", "n8n", "Python", "RAG"],
+          "Boxed CRM stacks tuned to your sales motion. We configure, integrate and automate Monday, ClickUp, Pipedrive and Tilio — partner-grade.",
+        tags: ["Monday", "ClickUp", "Pipedrive", "Tilio"],
+      },
+      {
+        id: "04",
+        slug: "open-source-erp",
+        title: "Open-source ERP & CRM",
+        description:
+          "Enterprise without the license tax. We deploy Open Mercato on your infrastructure — fully customizable, owned by you, extended by us.",
+        tags: ["Open Mercato", "ERP", "No lock-in", "Self-hosted"],
       },
     ],
   },
   cases: {
     eyebrow: "03 / Selected work",
-    headline: { text: "Built in weeks.\nEarning", accent: "their keep." },
+    headline: { text: "Built in weeks.\nEarning", accent: "their keep." },
     items: [
       {
         id: "01",
         title: "OOH Manager",
         description:
-          "A workplace health & safety platform other teams quoted at 12 months. Shipped in six weeks.",
+          "Automated 7 out of 9 sales steps for a massive media network managing 40,000+ billboard locations. Smashed client proposal creation times from 7 full days of digging through 5 separate Excels down to just 30 minutes. Shipped to production in six weeks.",
         tags: ["B2B SaaS", "6 WEEKS", "IN PRODUCTION"],
       },
       {
         id: "02",
         title: "Legal Flow — Restructuring",
         description:
-          "Document workflow and case automation for a law firm operating in restructuring proceedings.",
+          "Saves hundreds of hours and tens of thousands of PLN per case for high-stakes restructuring proceedings (handling corporate debts of 500k+ PLN). Replaced slow manual notes with an AI engine that instantly transforms 1-hour audio client interviews into fully structured legal drafts for final review.",
         tags: ["Legal Tech", "Automation", "IN PROGRESS"],
       },
       {
         id: "03",
         title: "Municipal Application",
         description:
-          "A B2G product line for Polish gminy — citizen-facing services, internal workflow, AI assistance.",
+          "A B2G product line for Polish gminy powered by a license-free, open-source architecture to eliminate vendor lock-in. Integrates citizen-facing services, internal workflows, and AI assistance, shifting traditional public sector deployment from quarters to weeks.",
         tags: ["GovTech", "Multi-tenant", "PROTOTYPE"],
       },
       {
         id: "04",
         title: "Kancelaria Jabłońska — Office Ops",
         description:
-          "Internal automations chaining n8n, Claude and Python to remove repetitive paperwork.",
+          "Intelligent automation pipelines chaining n8n, Claude, and Python to clean, deduplicate, and structure thousands of messy business records. Removes repetitive office paperwork and manual system bottlenecks to protect operational margins as the business scales.",
         tags: ["Automation", "n8n + Claude", "LIVE"],
       },
     ],
+    cta: {
+      microCopy: "Ready to scale your operations?",
+      label: "Book a call with our Founder",
+      href: "https://cal.com/szymon-bazan-iahn2z",
+    },
   },
   speed: {
     eyebrow: "04 / Why us",
@@ -173,39 +183,39 @@ export const site: SiteContent = {
       { text: "in six weeks." },
     ],
     stats: [
-      { value: "6", suffix: "wks", label: "Avg. delivery / B2B product" },
-      { value: "0", suffix: "%", label: "License fees on open-source stack" },
-      { value: "4", suffix: "x", label: "CRM partnerships, all in production" },
-      { value: "100", suffix: "%", label: "Code ownership stays with the client" },
+      { value: "6", suffix: "wks", label: "From first workshop to live production deployment, completely replacing slow 12-month software roadmaps." },
+      { value: "0", suffix: "%", label: "License fees and vendor lock-in, leveraging flexible open-source enterprise stacks to keep your architecture independent." },
+      { value: "4", suffix: "x", label: "Certified platform partnerships (Pipedrive, Monday, ClickUp, Twilio) instantly upgraded with autonomous AI agent layers." },
+      { value: "100", suffix: "%", label: "Code ownership and data autonomy, deployed securely on your infrastructure with zero ongoing agency dependency." },
     ],
   },
   process: {
     eyebrow: "05 / How we work",
-    headline: { text: "One operator.\nFour stages.", accent: "No committee." },
+    headline: { text: "Three engineers.\nFour stages.", accent: "No corporate drag." },
     steps: [
       {
         id: "01",
-        title: "Discover",
+        title: "Map",
         description:
-          "A working call. We map the problem, the existing stack and what success looks like at six weeks.",
+          "A strategic workshop. We deep-dive into your operational workflows and locate your most expensive manual bottlenecks to design a clear 6-week AI automation roadmap.",
       },
       {
         id: "02",
-        title: "Mockup",
+        title: "Cleanse",
         description:
-          "We sketch the product end-to-end before a single line of CMS work — fast, cheap, opinionated.",
+          "Data structuring. Before writing a single line of code, we gather your scattered historical records and eliminate spreadsheet duplication to build a clean format for the AI architecture.",
       },
       {
         id: "03",
-        title: "Build",
+        title: "Deploy",
         description:
-          "Daily check-ins. Weekly demos. Claude Code accelerates the boilerplate; humans own architecture.",
+          "Production-first execution. We skip dry mockups and messy staging environments. We deploy custom LLM layers directly to your live infrastructure so your team can test real scenarios from week three.",
       },
       {
         id: "04",
-        title: "Hand over",
+        title: "Own",
         description:
-          "CMS-driven content, SEO baked in, marketing pixels wired. You run the site; we stay on retainer.",
+          "Total autonomy. We hand you the keys, full code ownership, and total infrastructure independence. You run the system natively with zero vendor lock-in and zero ongoing license fees.",
       },
     ],
   },
@@ -269,104 +279,139 @@ export const site: SiteContent = {
   },
   practices: [
     {
-      slug: "crm-implementation",
-      eyebrow: "01 / CRM Implementation & Automation",
-      headline: { text: "Your sales motion,", accent: "automated." },
-      lead: "We implement and automate CRM platforms so your team spends time selling — not wrestling spreadsheets. As certified partners of Monday, ClickUp, Pipedrive and Tilio, we deliver partner-grade configurations tuned to the way you actually work.",
+      slug: "ai-automation",
+      eyebrow: "01 / AI Automation Studio",
+      headline: { text: "Automation that stops your margins from", accent: "shrinking." },
+      lead: "We build custom process automations powered by Claude, n8n, and Python to freeze your operational overhead. From turning messy client data into structured document drafts to building internal sales copilots, we systematically replace manual spreadsheet workarounds. Every deployment is measured against real ROI and engineered to pay for itself inside 90 days.",
+      heroCta: {
+        label: "Find your 90-day payback slot",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
       sections: [
         {
           title: "What we do",
-          body: "We take your existing sales process — or help you build one — and translate it into a CRM stack that runs on autopilot. That means pipeline configuration, lead scoring, automated follow-ups, cross-platform integrations and reporting dashboards. No generic templates. Every workspace is shaped around your deal stages, your team size and your growth targets.",
+          body: "We find the exact manual bottlenecks slowing down your growth and replace them with automated AI workflows. This includes fixing messy databases, automated B2B quoting pipelines, smart document processing, and deep multi-system syncs. We use Claude for reasoning, n8n for workflows, and Python to connect everything securely.",
         },
         {
           title: "How it works",
-          body: "We start with a discovery call to map your current workflow, pain points and tools. Within the first week you get a configured workspace with live data. Over the following weeks we layer in automations: lead routing, email sequences, Slack notifications, invoice triggers — whatever the process demands. Weekly demos keep you in control. Handover includes documentation and team training.",
+          body: "We start with a process audit — not a slide deck, but a live working session. We find the problem areas, clean your messy data first, and build directly on your production servers. A working version is ready within weeks, so your team can test it with real data from day one while we track time saved and reduce errors.",
         },
         {
-          title: "Who it's for",
-          body: "Sales teams of 3–50 people who have outgrown spreadsheets but don't need a six-figure Salesforce contract. Founders who want a CRM that works on day one. Revenue leaders who need reporting they can trust without a dedicated ops hire.",
-        },
-        {
-          title: "What you get",
-          body: "A fully configured CRM workspace. Automated pipelines and follow-ups. Integrations with your email, calendar, invoicing and marketing tools. A trained team and written documentation. Ongoing support on retainer if you need it.",
-        },
-      ],
-      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
-    },
-    {
-      slug: "open-source-erp",
-      eyebrow: "02 / Open-source ERP & CRM",
-      headline: { text: "Enterprise software,", accent: "zero license fees." },
-      lead: "We deploy Open Mercato — an open-source ERP and CRM platform — on your own infrastructure. You get the capabilities of enterprise software without the vendor lock-in, the per-seat pricing or the six-month procurement cycle.",
-      sections: [
-        {
-          title: "What we do",
-          body: "We install, configure and extend Open Mercato to fit your business processes. That covers CRM, inventory, invoicing, procurement, HR modules — whatever your operation needs. Because the code is open-source, every customisation belongs to you. No license fees, no seat limits, no surprise renewals.",
-        },
-        {
-          title: "How it works",
-          body: "Discovery maps your current systems and data flows. We deploy Open Mercato on your cloud or on-premise infrastructure, migrate existing data, and configure modules to match your workflows. Custom features — a specific approval chain, a reporting view, a third-party integration — are built in-house and merged into your codebase. You own everything.",
-        },
-        {
-          title: "Who it's for",
-          body: "Mid-market and enterprise companies tired of paying six or seven figures a year for ERP seats. Organisations that need full control over their data and infrastructure. Teams that want to extend their business software without filing a vendor change request.",
+          title: "Proof it works",
+          body: "Kancelaria Jabłońska eliminated hours of daily spreadsheet chaos by connecting n8n, Claude, and Python into a single automation layer. Document tracking, removing duplicate records, and case routing now run smoothly in the background, paying for the system within the very first month.",
         },
         {
           title: "What you get",
-          body: "A production-ready Open Mercato deployment on your infrastructure. Configured modules for your core business processes. Data migration from legacy systems. Custom extensions built to your specification. Full source code ownership — no lock-in, ever.",
+          body: "Full Control: Custom workflows built on your own servers or cloud with zero license fees and no platform lock-in. System Integration: Clean connections with your existing tools — email, CRM, ERP, and data storage. Human Oversight: A simple dashboard built for your team to monitor the system and approve actions. 100% Code Ownership: You own the code completely, we train your team, and we track your real ROI from day one.",
         },
       ],
-      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+      cta: {
+        microCopy: "Zero license fees. 100% your code.",
+        label: "Get your custom stack",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
     },
     {
       slug: "b2b-software",
-      eyebrow: "03 / End-to-end B2B Software",
-      headline: { text: "Custom products shipped in", accent: "weeks." },
-      lead: "We build B2B software products from scratch — full stack, cloud-native, production-ready. OOH Manager went from zero to production in six weeks. Legal Flow is shipping now. The IP is always yours.",
+      eyebrow: "02 / End-to-end B2B Software",
+      headline: { text: "Custom software shipped in", accent: "weeks, not months." },
+      lead: "We build custom B2B software from scratch — full stack, cloud-native, and production-ready. We completely replace slow, traditional 12-month roadmaps with live, working code delivered in weeks. The intellectual property is 100% yours from day one, with zero vendor lock-in and zero ongoing license fees.",
+      heroCta: {
+        microCopy: "Bypass the 12-month corporate software drag.",
+        label: "Skip the roadmap — Pick a time",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
       sections: [
         {
           title: "What we do",
-          body: "We take a product idea — or a problem without a product yet — and deliver working software. Not wireframes. Not proposals. Running code with real users. Our stack is React, Node, Python and cloud infrastructure, accelerated by AI-native tooling that lets a four-person team move at the speed of forty.",
+          body: "We turn your complex business processes or product ideas into working software. No dry wireframes, no endless proposals — just running code built for real users. Our core stack (React, Node, Python) is accelerated by AI-native tools, allowing our lean engineering team to move at 10x speed with zero corporate drag.",
         },
         {
           title: "How it works",
-          body: "Week one is discovery: we map the problem, the users, and what success looks like at six weeks. Week two delivers a clickable prototype. From week three we build in public — daily check-ins, weekly demos, no committee. Architecture decisions are made by the people writing the code. You see progress every seven days.",
+          body: "Week one is process mapping: we isolate your bottlenecks and define what success looks like at week six. From week two, we skip useless mockups and build directly on your secure production infrastructure. No slow committees. You see live, working progress every seven days and test with real data early on.",
         },
         {
           title: "Proof it works",
-          body: "OOH Manager — a workplace health and safety platform that other teams quoted at twelve months — shipped to production in six weeks. Legal Flow automates document workflows and case management for a law firm in restructuring proceedings. Municipal Application is a B2G product line for Polish local governments. All built end-to-end by Booster.",
+          body: "OOH Manager — Automated 7 out of 9 sales steps for a media network with 40,000+ billboard locations. Smashed proposal creation times from 7 days of digging through 5 separate Excels down to 30 minutes. Shipped in 6 weeks. Legal Flow — Automates high-stakes document workflows for restructuring proceedings, transforming 1-hour audio interviews into fully structured legal drafts. Municipal Application — A license-free, open-source B2G product line for Polish local governments, built to eliminate expensive vendor lock-in.",
         },
         {
           title: "What you get",
-          body: "A production-grade B2B product. Full source code and IP ownership. Cloud infrastructure configured and deployed. Admin panel or CMS for your operations team. Post-launch support on retainer. Weekly demos throughout the build so there are no surprises at handover.",
+          body: "Production-Ready Product: A secure, scalable B2B software built on your cloud or servers. 100% IP Ownership: Full source code ownership with absolute freedom from ongoing platform licenses. Admin Control Panel: A clean dashboard built specifically for your internal operations team. Zero-Surprise Delivery: Weekly live demos throughout the build so you always know exactly what is being shipped.",
         },
       ],
-      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+      cta: {
+        microCopy: "Ready to build software you actually own?",
+        label: "Book your scoping call with our Founder",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
     },
     {
-      slug: "ai-automation",
-      eyebrow: "04 / AI Automation Studio",
-      headline: { text: "Automation that pays for itself in", accent: "one quarter." },
-      lead: "We build process automations powered by Claude, n8n and Python. From document workflows to internal copilots — every deployment is measured against real ROI and expected to pay back inside ninety days.",
+      slug: "crm-implementation",
+      eyebrow: "03 / CRM Implementation & Automation",
+      headline: { text: "Your sales motion,", accent: "automated." },
+      lead: "We implement and automate CRM platforms so your pipeline runs on autopilot and your team spends time selling — not wrestling with broken spreadsheets. As certified partners of Monday, ClickUp, Pipedrive, and Tilio, we deliver high-performance setups tailored exactly to your real business workflows.",
+      heroCta: {
+        microCopy: "Stop losing deals to manual spreadsheet chaos.",
+        label: "Automate your pipeline — Pick a time",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
       sections: [
         {
           title: "What we do",
-          body: "We identify manual, repetitive processes in your organisation and replace them with AI-powered automations. That includes document processing, data extraction, internal Q&A copilots, lead qualification bots, reporting pipelines and multi-system integrations. We use Claude for reasoning, n8n for orchestration and Python for everything in between.",
+          body: "We map your existing sales process and translate it into a CRM engine that drives revenue. We configure clean pipelines, set up automated follow-ups, and build cross-platform integrations alongside live reporting dashboards. No generic templates. Every workspace is shaped around your deal stages, team size, and growth targets.",
         },
         {
           title: "How it works",
-          body: "We start with a process audit — not a slide deck, a working session. We map the inputs, outputs and decision points of the process you want to automate. Then we build it. A first working version typically ships within two weeks. We iterate based on real data, measure time saved and error rates, and hand over a system your team can maintain.",
+          body: "We start with a live working session to map your current workflows and tools. Before anything else, we clean and deduplicate your historical customer data so your new system is free of old trash. Within days, you get a fully configured workspace loaded with real data. From there, we layer in native automations — lead routing, email sequences, and invoice triggers — while keeping you in control with weekly live demos.",
         },
         {
-          title: "Proof it works",
-          body: "Kancelaria Jabłońska eliminated hours of daily paperwork by chaining n8n, Claude and Python into a single automation layer. Document classification, data extraction and case routing now run without human input. The system paid for itself within the first billing cycle.",
+          title: "Who it's for",
+          body: "Sales teams of 3–50 people who have outgrown basic spreadsheets but want to avoid expensive, multi-month Salesforce contracts. Founders who need a reliable CRM infrastructure that works perfectly from day one. Revenue leaders who demand accurate reporting they can actually trust without hiring a dedicated operations team.",
         },
         {
           title: "What you get",
-          body: "Automated workflows deployed on your infrastructure or cloud. Integration with your existing tools — email, CRM, ERP, document storage. An admin dashboard for monitoring and exceptions. Documentation and team training. Measurable ROI tracked from day one.",
+          body: "Fully Configured CRM: A customized workspace built specifically for your team's daily sales motion. Autonomous Workflows: Automated lead routing, instant follow-ups, and internal team notifications. Deep Tool Integration: Seamless connections with your email, calendar, invoicing, and communications stack. Clean Data & Onboarding: All legacy data safely migrated, full documentation provided, and your team completely trained.",
         },
       ],
-      cta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
+      cta: {
+        microCopy: "Build a CRM stack your sales team will actually enjoy using.",
+        label: "Book a scoping call with our Founder",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
+    },
+    {
+      slug: "open-source-erp",
+      eyebrow: "04 / Enterprise software, zero license fees.",
+      headline: { text: "Enterprise power.", accent: "Zero user-seat pricing." },
+      lead: "We deploy Open Mercato — a flexible, open-source ERP and CRM ecosystem — directly on your own secure infrastructure. You get the full power of enterprise software without the vendor lock-in, expensive per-seat subscriptions, or slow corporate procurement cycles.",
+      heroCta: {
+        microCopy: "Stop paying six-figure bills for software user licenses.",
+        label: "Drop per-seat pricing — Pick a time",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
+      sections: [
+        {
+          title: "What we do",
+          body: "We tailor and scale Open Mercato to fit your exact business operations. This covers CRM, inventory, invoicing, and procurement modules — whatever your team needs. Since the system is open-source, every custom feature belongs entirely to you. No user limits, no hidden fees, no surprise renewals.",
+        },
+        {
+          title: "How it works",
+          body: "We start by mapping your data flows and isolating your bottlenecks. Before moving anything, we clean and structure your messy historical data so nothing gets lost. Then, we deploy Open Mercato directly onto your secure servers, customizing workflows — like approval chains or deep integrations — straight into your own codebase.",
+        },
+        {
+          title: "Who it's for",
+          body: "Mid-market enterprises tired of paying huge annual bills just for CRM and ERP user seats. Organisations that demand absolute control over their sensitive business data and secure infrastructure. Teams that want to update their software instantly without waiting for slow corporate vendor approvals.",
+        },
+        {
+          title: "What you get",
+          body: "Production-Ready ERP/CRM: A secure Open Mercato ecosystem running live on your cloud or hardware. Clean Data Migration: Your historical business records cleaned, structured, and safely moved from legacy systems. 100% Code Ownership: Full source code control with zero platform lock-in and no ongoing subscription renewals. Custom Extensions: Tailored workflows and modules built exactly for your team's daily operations.",
+        },
+      ],
+      cta: {
+        microCopy: "Take full ownership of your enterprise software.",
+        label: "Book a consultation with our Founder",
+        href: "https://cal.com/szymon-bazan-iahn2z",
+      },
     },
   ],
   booking: {

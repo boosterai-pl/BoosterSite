@@ -18,6 +18,22 @@ export function Process({ content }: Props) {
             </div>
           ))}
         </div>
+
+        {content.cta ? (
+          <div className="section-cta" data-reveal>
+            {content.cta.microCopy ? (
+              <p className="section-cta-micro">{content.cta.microCopy}</p>
+            ) : null}
+            <a
+              href={content.cta.href}
+              className="btn btn-primary"
+              {...(content.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {content.cta.label}
+              <span className="arrow">→</span>
+            </a>
+          </div>
+        ) : null}
       </div>
     </section>
   );
