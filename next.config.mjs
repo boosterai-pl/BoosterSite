@@ -6,8 +6,10 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
-  serverActions: {
-    bodySizeLimit: "10mb",
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
   },
 };
 
