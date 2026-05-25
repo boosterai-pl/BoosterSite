@@ -37,11 +37,11 @@ export default buildConfig({
   globals: [HomePage],
   plugins: [
     vercelBlobStorage({
+      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
       collections: {
         media: true,
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN || "",
-      clientUploads: false,
+      token: process.env.BLOB_READ_WRITE_TOKEN ?? "",
     }),
     mcpPlugin({
       collections: {
