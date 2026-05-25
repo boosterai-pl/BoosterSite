@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
+  serverActions: {
+    bodySizeLimit: "10mb",
+  },
 };
 
 export default withPayload(nextConfig);
