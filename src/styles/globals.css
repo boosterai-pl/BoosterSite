@@ -928,6 +928,12 @@ section.block .container-inner {
   flex-direction: column;
   gap: 4px;
 }
+.team-card-index {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted-dark);
+  margin-bottom: 4px;
+}
 .team-photo {
   aspect-ratio: 3 / 4;
   overflow: hidden;

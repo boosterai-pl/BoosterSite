@@ -203,12 +203,14 @@ function mapPayloadToSiteContent(
         text: (teamHeadline?.text as string) ?? "",
         ...(teamHeadline?.accent ? { accent: teamHeadline.accent as string } : {}),
       },
-      members: team.map((t) => ({
-        id: t.sortOrder as string,
-        name: t.name as string,
-        role: t.role as string,
-        photo: ((t.photo as Record<string, unknown> | null)?.url as string) ?? "",
-      })),
+      members: [...team]
+        .sort((a, b) => String(a.sortOrder).localeCompare(String(b.sortOrder)))
+        .map((t) => ({
+          id: t.sortOrder as string,
+          name: t.name as string,
+          role: t.role as string,
+          photo: ((t.photo as Record<string, unknown> | null)?.url as string) ?? "",
+        })),
     },
     insights: {
       eyebrow: (h.insightsEyebrow as string) ?? "",

@@ -19,6 +19,7 @@ function MemberCard({ member }: { member: SiteContent["team"]["members"][number]
         ) : null}
       </div>
       <div className="team-card-info">
+        <div className="team-card-index mono">{member.id}</div>
         <h4>{member.name}</h4>
         <div className="role">{member.role}</div>
       </div>
