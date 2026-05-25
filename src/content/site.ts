@@ -226,10 +226,10 @@ export const site: SiteContent = {
       accent: "forty.",
     },
     members: [
-      { id: "01", name: "Szymon Bazan", role: "Founder · Sales" },
-      { id: "02", name: "Szymon Sidor", role: "Engineering · Web" },
-      { id: "03", name: "Wojtek", role: "Engineering · Products" },
-      { id: "04", name: "Andrzej", role: "Brand · Operations" },
+      { id: "01", name: "Szymon Bazan", role: "Founder · Sales", photo: "/assets/team/szymon-bazan.jpg" },
+      { id: "02", name: "Szymon Sidor", role: "Engineering · Web", photo: "/assets/team/szymon-sidor.jpg" },
+      { id: "03", name: "Wojtek", role: "Engineering · Products", photo: "/assets/team/wojtek.jpg" },
+      { id: "04", name: "Andrzej", role: "Brand · Operations", photo: "/assets/team/andrzej.jpg" },
     ],
   },
   insights: {

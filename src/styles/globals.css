@@ -923,8 +923,10 @@ section.block .container-inner {
   flex-direction: column;
   gap: 16px;
 }
-.team-card .placeholder {
+.team-photo {
   aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 4px;
 }
 .team-card h4 {
   font-size: 18px;

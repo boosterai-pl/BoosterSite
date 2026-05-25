@@ -1,6 +1,6 @@
+import Image from "next/image";
 import type { SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
-import { Placeholder } from "./Placeholder";
 
 type Props = { content: SiteContent["team"] };
 
@@ -13,11 +13,17 @@ export function Team({ content }: Props) {
         <div className="team-grid" data-reveal-stagger>
           {content.members.map((member) => (
             <div className="team-card" key={member.id}>
-              <Placeholder
-                num={`Img ${member.id}`}
-                description={member.name}
-                variant="light"
-              />
+              <div className="team-photo">
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    width={400}
+                    height={400}
+                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                  />
+                ) : null}
+              </div>
               <h4>{member.name}</h4>
               <div className="role">{member.role}</div>
             </div>

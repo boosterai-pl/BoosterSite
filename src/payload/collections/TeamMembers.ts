@@ -27,5 +27,13 @@ export const TeamMembers: CollectionConfig = {
       type: "text",
       required: true,
     },
+    {
+      name: "photo",
+      type: "upload",
+      relationTo: "media" as const,
+      admin: {
+        description: "Profile photo for the team member.",
+      },
+    },
   ],
 };

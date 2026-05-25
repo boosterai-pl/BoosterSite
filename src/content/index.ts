@@ -207,6 +207,7 @@ function mapPayloadToSiteContent(
         id: t.sortOrder as string,
         name: t.name as string,
         role: t.role as string,
+        photo: ((t.photo as Record<string, unknown> | null)?.url as string) ?? "",
       })),
     },
     insights: {
