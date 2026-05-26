@@ -9,7 +9,7 @@ import { Speed } from "@/components/Speed";
 import { Process } from "@/components/Process";
 import { Partners } from "@/components/Partners";
 import { Team } from "@/components/Team";
-import { Insights } from "@/components/Insights";
+// import { Insights } from "@/components/Insights"; // TODO: restore when insights section is ready
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
@@ -36,7 +36,7 @@ export default async function PlPage() {
         <Process content={site.process} />
         <Partners content={site.partners} />
         <Team content={site.team} />
-        <Insights content={site.insights} />
+        {/* <Insights content={site.insights} /> */}
         <CTA content={site.cta} />
       </main>
       <Footer brand={site.meta.brand} content={site.footer} />

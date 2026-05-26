@@ -501,27 +501,16 @@ section.block .container-inner {
   }
 }
 
-/* ===== Manifesto (sticky) ===== */
-.manifesto {
+/* ===== Manifesto ===== */
+.manifesto-list {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 80px;
 }
 @media (max-width: 900px) {
-  .manifesto {
+  .manifesto-list {
     grid-template-columns: 1fr;
-    gap: 40px;
   }
-}
-.manifesto-sticky {
-  position: sticky;
-  top: 120px;
-  align-self: flex-start;
-}
-.manifesto-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
 }
 .manifesto-item {
   padding: 40px 0;
@@ -531,8 +520,17 @@ section.block .container-inner {
   gap: 24px;
   align-items: start;
 }
-.manifesto-item:last-child {
+.manifesto-item:last-child,
+.manifesto-item:nth-last-child(2):nth-child(odd) {
   border-bottom: 1px solid var(--line-dark);
+}
+@media (max-width: 900px) {
+  .manifesto-item:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+  }
+  .manifesto-item:last-child {
+    border-bottom: 1px solid var(--line-dark);
+  }
 }
 .manifesto-item .num {
   font-family: "Geist Mono", monospace;
@@ -545,7 +543,6 @@ section.block .container-inner {
 }
 .manifesto-item p {
   color: rgba(10, 10, 10, 0.65);
-  max-width: 52ch;
 }
 
 /* ===== Services grid ===== */
