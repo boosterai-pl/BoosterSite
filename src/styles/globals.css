@@ -1188,8 +1188,8 @@ html.js-reveal [data-reveal-stagger].visible > *:nth-child(6) {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
-  padding-block: 0.12em;
-  margin-block: -0.12em;
+  padding-block: 0.18em;
+  margin-block: -0.18em;
 }
 html.js-reveal .word-reveal > span {
   display: inline-block;
