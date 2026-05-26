@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import type { NavLink } from "@/content/types";
 import { useScrolledNav } from "@/lib/hooks";
 import { LangSwitcher } from "@/components/LangSwitcher";
@@ -13,6 +14,10 @@ type Props = {
 
 export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
   const { scrolled, onLight } = useScrolledNav();
+  const pathname = usePathname();
+  const isPolish = pathname === "/pl" || pathname.startsWith("/pl/");
+  const homePath = isPolish ? "/pl" : "/";
+
   const classes = ["nav"];
   if (scrolled) classes.push("scrolled");
   if (onLight) classes.push("on-light");
@@ -24,11 +29,16 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
         <span>{brand}</span>
       </a>
       <div className="nav-links">
-        {links.map((link) => (
-          <a key={link.href + link.label} href={link.href}>
-            {link.label}
-          </a>
-        ))}
+        {links.map((link) => {
+          const resolved = link.href.startsWith("#") && pathname !== homePath
+            ? `${homePath}${link.href}`
+            : link.href;
+          return (
+            <a key={link.href + link.label} href={resolved}>
+              {link.label}
+            </a>
+          );
+        })}
       </div>
       <LangSwitcher />
       <a
