@@ -53,6 +53,29 @@ export default buildConfig({
       globals: {
         "home-page": { enabled: { find: true, update: false } },
       },
+      overrideAuth: async (req, getDefault) => {
+        const token = req.headers.get("Authorization")?.replace("Bearer ", "").trim();
+        const devKey = process.env.MCP_API_KEY ?? "";
+        if (token && token === devKey) {
+          const { docs } = await req.payload.find({
+            collection: "users",
+            limit: 1,
+            pagination: false,
+          });
+          const user = docs[0] ?? ({ id: "mcp", email: "mcp@localhost" } as never);
+          return {
+            // per-collection capabilities (camelCased slugs)
+            posts: { find: true, create: true, update: true, delete: true },
+            services: { find: true },
+            caseStudies: { find: true },
+            teamMembers: { find: true },
+            // per-global capabilities (camelCased slugs)
+            homePage: { find: true },
+            user: { ...user, collection: "users", _strategy: "mcp-api-key" },
+          };
+        }
+        return getDefault();
+      },
     }),
   ],
   sharp,
