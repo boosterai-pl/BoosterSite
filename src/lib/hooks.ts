@@ -4,9 +4,24 @@ import { useEffect, useRef, useState } from "react";
 
 export function useReveal(): void {
   useEffect(() => {
+    // Gate the hidden-by-default CSS: only add opacity:0 once JS is ready
+    // to manage the IntersectionObserver. Without this class, content stays
+    // visible — a safe fallback for bfcache restores and broken hydration.
+    document.documentElement.classList.add("js-reveal");
+
     const els = document.querySelectorAll<HTMLElement>(
       "[data-reveal], [data-reveal-stagger], .word-reveal",
     );
+
+    // Elements already in or above the viewport (e.g. after back-navigation
+    // restores scroll position) will never intersect, so reveal them now.
+    const viewportBottom = window.innerHeight;
+    els.forEach((el) => {
+      if (el.getBoundingClientRect().bottom < viewportBottom) {
+        el.classList.add("visible");
+      }
+    });
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -18,8 +33,15 @@ export function useReveal(): void {
       },
       { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    els.forEach((el) => {
+      if (!el.classList.contains("visible")) {
+        io.observe(el);
+      }
+    });
+    return () => {
+      io.disconnect();
+      document.documentElement.classList.remove("js-reveal");
+    };
   }, []);
 }
 
