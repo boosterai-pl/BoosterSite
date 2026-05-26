@@ -446,7 +446,7 @@ export const site: SiteContent = {
         heading: "Contact",
         links: [
           { label: "hello@boosterai.pl", href: "mailto:hello@boosterai.pl" },
-          { label: "LinkedIn", href: "#" },
+          { label: "LinkedIn", href: "https://www.linkedin.com/company/boosterai-en/" },
           { label: "GitHub", href: "#" },
           { label: "X / Twitter", href: "#" },
         ],
