@@ -31,23 +31,20 @@ export const site: SiteContent = {
     meta: [
       {
         label: "Partners",
-        value: "Monday · ClickUp · Pipedrive · Tilio · Open Mercato",
+        value: "Monday · ClickUp · Pipedrive · Tilio",
         logos: [
           { name: "Monday", component: "MondayLogo" },
           { name: "ClickUp", component: "ClickUpLogo" },
           { name: "Pipedrive", component: "PipedriveLogo" },
           { name: "Tilio", component: "TilioLogo" },
-          { name: "Open Mercato", component: "OpenMercatoLogo" },
         ],
       },
       {
         label: "Built with",
-        value: "Claude · n8n · Python · Open Mercato",
+        value: "Claude · n8n",
         logos: [
           { name: "Claude", component: "ClaudeLogo" },
           { name: "n8n", component: "N8nLogo" },
-          { name: "Python", component: "PythonLogo" },
-          { name: "Open Mercato", component: "OpenMercatoLogo" },
         ],
       },
       { label: "Currently shipping", value: "OOH Manager · Legal Flow · Municipal App" },

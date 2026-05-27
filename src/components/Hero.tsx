@@ -6,10 +6,8 @@ import {
   ClickUpLogo,
   PipedriveLogo,
   TilioLogo,
-  OpenMercatoLogo,
   ClaudeLogo,
   N8nLogo,
-  PythonLogo,
 } from "./BrandLogos";
 
 const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -17,10 +15,8 @@ const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   ClickUpLogo,
   PipedriveLogo,
   TilioLogo,
-  OpenMercatoLogo,
   ClaudeLogo,
   N8nLogo,
-  PythonLogo,
 };
 
 function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {
