@@ -1,9 +1,9 @@
 import type { SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
 
-type Props = { content: SiteContent["services"] };
+type Props = { content: SiteContent["services"]; basePath?: string };
 
-export function Services({ content }: Props) {
+export function Services({ content, basePath = "/practices" }: Props) {
   return (
     <section className="block" id="services">
       <div className="container-inner">
@@ -11,7 +11,7 @@ export function Services({ content }: Props) {
 
         <div className="services" data-reveal-stagger>
           {content.items.map((service) => (
-            <a href={`/practices/${service.slug}`} className="service-card" key={service.id}>
+            <a href={`${basePath}/${service.slug}`} className="service-card" key={service.id}>
               <div className="service-num">
                 <span>— {service.id}</span>
                 <span className="service-arrow">↗</span>

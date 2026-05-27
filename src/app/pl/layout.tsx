@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@/styles/globals.css";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "Booster — Agencja AI-Native",
@@ -53,6 +54,7 @@ export default function PlLayout({ children }: { children: ReactNode }) {
           }}
         />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
