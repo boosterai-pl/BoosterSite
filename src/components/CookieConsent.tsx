@@ -60,6 +60,7 @@ export function CookieConsent() {
   const [view, setView] = useState<View>("hidden");
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
+  const [hasSavedConsent, setHasSavedConsent] = useState(false);
   const [dismissing, setDismissing] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
   const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -70,6 +71,7 @@ export function CookieConsent() {
     if (saved) {
       setAnalytics(saved.analytics);
       setMarketing(saved.marketing);
+      setHasSavedConsent(true);
       loadConsentScripts(saved);
       setView("hidden");
     } else {
@@ -112,6 +114,7 @@ export function CookieConsent() {
     writeConsent(state);
     setAnalytics(true);
     setMarketing(true);
+    setHasSavedConsent(true);
     loadConsentScripts(state);
     dismiss();
   }, [dismiss]);
@@ -126,6 +129,7 @@ export function CookieConsent() {
     writeConsent(state);
     setAnalytics(false);
     setMarketing(false);
+    setHasSavedConsent(true);
     dismiss();
   }, [dismiss]);
 
@@ -137,6 +141,7 @@ export function CookieConsent() {
       timestamp: new Date().toISOString(),
     };
     writeConsent(state);
+    setHasSavedConsent(true);
     loadConsentScripts(state);
     dismiss();
   }, [analytics, marketing, dismiss]);
@@ -157,8 +162,7 @@ export function CookieConsent() {
 
   /* Floating reopen button (always visible when consent was given) */
   if (view === "hidden" && !dismissing) {
-    const saved = readConsent();
-    if (!saved) return null;
+    if (!hasSavedConsent) return null;
     return (
       <button
         type="button"
