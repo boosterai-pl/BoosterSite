@@ -1185,6 +1185,8 @@ html.js-reveal [data-reveal-stagger].visible > *:nth-child(6) {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
+  padding-inline: 0.08em;
+  margin-inline: -0.08em;
   padding-block: 0.15em;
   margin-block: -0.15em;
 }
