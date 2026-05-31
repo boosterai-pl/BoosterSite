@@ -1,0 +1,42 @@
+# Booster — AI-Native Service Agency
+
+> Booster is an AI-native service agency based in Warsaw, Poland. We build autonomous AI infrastructure for complex B2B operations — CRM implementation, open-source ERP, custom B2B software, and AI automation. End-to-end solutions shipped in six weeks, not twelve months.
+
+- Founded in 2025, Warsaw-based, serving clients worldwide
+- Four-person engineering team with 10x velocity via AI-native tooling (Claude, n8n, Python)
+- Certified CRM partners: Monday, ClickUp, Pipedrive, Tilio
+- Open-source ERP deployment via Open Mercato — zero license fees, zero vendor lock-in
+- Contact: hello@boosterai.pl
+- Book a free 30-min consultation: https://cal.com/szymon-bazan-iahn2z
+
+## Services
+
+- [AI Automation Studio](https://boosterai.pl/practices/ai-automation): Process automations powered by Claude, n8n and Python. Document workflows, internal copilots, measurable ROI in 90 days.
+- [End-to-end B2B Software](https://boosterai.pl/practices/b2b-software): Custom products built ground-up (React, Node, Python). Full stack, cloud-native, 100% your IP. Shipped in weeks, not months.
+- [CRM Implementation & Automation](https://boosterai.pl/practices/crm-implementation): Boxed CRM stacks for Monday, ClickUp, Pipedrive, Tilio — configured, integrated, and automated for your sales motion.
+- [Open-source ERP & CRM](https://boosterai.pl/practices/open-source-erp): Open Mercato deployed on your infrastructure — enterprise power with zero per-seat pricing and full code ownership.
+
+## Case Studies
+
+- [OOH Manager](https://boosterai.pl/#work): Automated 7 out of 9 sales steps for a media network with 40,000+ billboard locations. Proposal creation cut from 7 days to 30 minutes. Shipped in 6 weeks.
+- [Legal Flow — Restructuring](https://boosterai.pl/#work): AI engine transforms 1-hour audio client interviews into fully structured legal drafts, saving hundreds of billable hours per case.
+- [Municipal Application](https://boosterai.pl/#work): License-free, open-source B2G product line for Polish local governments, replacing expensive vendor lock-in with weeks-not-quarters deployment.
+- [Kancelaria Jablonska — Office Ops](https://boosterai.pl/#work): n8n + Claude + Python automation pipelines to clean, deduplicate, and structure thousands of messy business records.
+
+## Process
+
+- [How We Work](https://boosterai.pl/#process): Four-stage delivery in six weeks — Map (strategic workshop and roadmap), Cleanse (data structuring and deduplication), Deploy (production-first from week three), Own (full code handover with zero lock-in).
+
+## Team
+
+- [Szymon Bazan](https://boosterai.pl/#about): Founder and Sales
+- [Andrzej Chmielewski](https://boosterai.pl/#about): Brand and Operations
+- [Wojciech Kozak](https://boosterai.pl/#about): Engineering and Products
+- [Szymon Sidor](https://boosterai.pl/#about): Engineering and Web
+- [Wiktor Weremczuk](https://boosterai.pl/#about): Engineering and Web
+
+## Optional
+
+- [LinkedIn](https://www.linkedin.com/company/boosterai-en/): Company LinkedIn page
+- [Blog](https://boosterai.pl/blog): Field notes from the build — insights on AI-native delivery, open-source ERP, and B2B operations
+- [Book a Consultation](https://boosterai.pl/book): Free 30-minute consultation with the Founder — we come back with a six-week plan, a fixed price, and a first demo in two weeks

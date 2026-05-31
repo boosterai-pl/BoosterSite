@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { initGA4 } from "@/lib/analytics";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -37,20 +38,17 @@ function writeConsent(state: ConsentState): void {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Script injection (stubs — uncomment when adding real scripts)     */
+/*  Script injection                                                   */
 /* ------------------------------------------------------------------ */
 
 function loadConsentScripts(consent: ConsentState): void {
   if (consent.analytics) {
-    // TODO: inject GA4
-    // const s = document.createElement("script");
-    // s.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX";
-    // s.async = true;
-    // document.head.appendChild(s);
+    const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+    if (gaId) initGA4(gaId);
   }
 
   if (consent.marketing) {
-    // TODO: inject Facebook Pixel / Google Ads
+    // TODO: inject Facebook Pixel / Google Ads when ready
   }
 }
 
