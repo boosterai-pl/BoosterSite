@@ -4,9 +4,11 @@ import { usePathname } from "next/navigation";
 
 export function LangSwitcher() {
   const pathname = usePathname();
-  const isPolish = pathname === "/pl" || pathname.startsWith("/pl/");
-  const englishHref = isPolish ? pathname.replace(/^\/pl\/?/, "/") : pathname;
-  const polishHref = isPolish ? pathname : `/pl${pathname === "/" ? "" : pathname}`;
+  // Normalize: strip trailing /index that Next.js static build can expose
+  const normalized = pathname.replace(/\/index$/, "") || "/";
+  const isPolish = normalized === "/pl" || normalized.startsWith("/pl/");
+  const englishHref = isPolish ? normalized.replace(/^\/pl\/?/, "") || "/" : normalized;
+  const polishHref = isPolish ? normalized : `/pl${normalized === "/" ? "" : normalized}`;
 
   return (
     <div className="lang-switcher">
