@@ -10,8 +10,7 @@
     "typecheck": "tsc --noEmit",
     "seed": "node --import tsx scripts/seed.ts",
     "migrate:mdx": "node --import tsx scripts/migrate-mdx.ts",
-    "translate": "node --import tsx scripts/translate.ts",
-    "sync:cms-content": "node --require ./scripts/_patch-next-env.cjs --import tsx scripts/sync-cms-content.ts"
+    "translate": "node --import tsx scripts/translate.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",
