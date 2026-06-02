@@ -51,7 +51,7 @@ export const HomePage: GlobalConfig = {
           label: "Hero",
           fields: [
             { name: "heroEyebrow", type: "text", required: true, localized: true },
-            { name: "heroEstablishedLabel", type: "text", required: true, localized: true },
+            { name: "heroEstablishedLabel", type: "text", localized: true },
             {
               name: "heroHeadlineLines",
               type: "array",
