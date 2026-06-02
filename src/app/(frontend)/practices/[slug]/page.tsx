@@ -34,6 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: practice.lead,
     alternates: {
       canonical: `https://boosterai.pl/practices/${slug}`,
+      languages: {
+        en: `https://boosterai.pl/practices/${slug}`,
+        pl: `https://boosterai.pl/pl/practices/${slug}`,
+        "x-default": `https://boosterai.pl/practices/${slug}`,
+      },
     },
     openGraph: {
       title: `${practice.eyebrow.split(" / ")[1] ?? title} | Booster`,

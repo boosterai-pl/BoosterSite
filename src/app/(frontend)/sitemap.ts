@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getPayloadClient } from "@/lib/payload";
 
+const practiceSlugs = ["crm-implementation", "open-source-erp", "b2b-software", "ai-automation"];
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [
     {
@@ -8,6 +10,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1.0,
+      alternates: {
+        languages: {
+          en: "https://boosterai.pl",
+          pl: "https://boosterai.pl/pl",
+        },
+      },
+    },
+    {
+      url: "https://boosterai.pl/pl",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
+      alternates: {
+        languages: {
+          en: "https://boosterai.pl",
+          pl: "https://boosterai.pl/pl",
+        },
+      },
     },
     {
       url: "https://boosterai.pl/blog",
@@ -16,6 +36,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
   ];
+
+  for (const slug of practiceSlugs) {
+    entries.push(
+      {
+        url: `https://boosterai.pl/practices/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.8,
+        alternates: {
+          languages: {
+            en: `https://boosterai.pl/practices/${slug}`,
+            pl: `https://boosterai.pl/pl/practices/${slug}`,
+          },
+        },
+      },
+      {
+        url: `https://boosterai.pl/pl/practices/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.8,
+        alternates: {
+          languages: {
+            en: `https://boosterai.pl/practices/${slug}`,
+            pl: `https://boosterai.pl/pl/practices/${slug}`,
+          },
+        },
+      },
+    );
+  }
 
   try {
     const payload = await getPayloadClient();

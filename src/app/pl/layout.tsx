@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   description:
     "Booster to agencja usług AI-native. Wdrażamy systemy CRM, dostarczamy oprogramowanie B2B i wdrażamy open-source ERP — kompleksowo, w tygodniach, nie kwartałach.",
   metadataBase: new URL("https://boosterai.pl"),
+  alternates: {
+    canonical: "https://boosterai.pl/pl",
+    languages: {
+      en: "https://boosterai.pl",
+      pl: "https://boosterai.pl/pl",
+      "x-default": "https://boosterai.pl",
+    },
+  },
   openGraph: {
     title: "Booster — Agencja AI-Native",
     description:

@@ -27,11 +27,13 @@ export const Services: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "description",
       type: "textarea",
       required: true,
+      localized: true,
     },
     {
       name: "tags",
@@ -41,6 +43,7 @@ export const Services: CollectionConfig = {
           name: "tag",
           type: "text",
           required: true,
+          localized: true,
         },
       ],
     },

@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   description:
     "We build autonomous AI infrastructure for complex B2B operations. By replacing manual workarounds with custom platforms, we deliver end-to-end solutions in weeks, not quarters.",
   metadataBase: new URL("https://boosterai.pl"),
+  alternates: {
+    canonical: "https://boosterai.pl",
+    languages: {
+      en: "https://boosterai.pl",
+      pl: "https://boosterai.pl/pl",
+      "x-default": "https://boosterai.pl",
+    },
+  },
   openGraph: {
     title: "Booster — AI-Native Service Agency",
     description:

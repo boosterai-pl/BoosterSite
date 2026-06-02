@@ -21,11 +21,13 @@ export const CaseStudies: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "description",
       type: "textarea",
       required: true,
+      localized: true,
     },
     {
       name: "tags",
@@ -35,6 +37,7 @@ export const CaseStudies: CollectionConfig = {
           name: "tag",
           type: "text",
           required: true,
+          localized: true,
         },
       ],
     },

@@ -12,6 +12,7 @@ import { Services } from "./collections/Services";
 import { CaseStudies } from "./collections/CaseStudies";
 import { TeamMembers } from "./collections/TeamMembers";
 import { Posts } from "./collections/Posts";
+import { Practices } from "./collections/Practices";
 import { HomePage } from "./globals/HomePage";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -33,7 +34,15 @@ export default buildConfig({
       titleSuffix: " — Booster CMS",
     },
   },
-  collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers],
+  localization: {
+    locales: [
+      { code: "en", label: "English" },
+      { code: "pl", label: "Polish" },
+    ],
+    defaultLocale: "en",
+    fallback: true,
+  },
+  collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers, Practices],
   globals: [HomePage],
   plugins: [
     vercelBlobStorage({
@@ -49,6 +58,7 @@ export default buildConfig({
         services: { enabled: { find: true, create: false, update: false, delete: false } },
         "case-studies": { enabled: { find: true, create: false, update: false, delete: false } },
         "team-members": { enabled: { find: true, create: false, update: false, delete: false } },
+        practices: { enabled: { find: true, create: false, update: false, delete: false } },
       },
       globals: {
         "home-page": { enabled: { find: true, update: false } },
