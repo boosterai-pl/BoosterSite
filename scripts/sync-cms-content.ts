@@ -42,7 +42,7 @@ import plMessages from "../messages/pl.json";
 const pl = applyTranslations(en, plMessages as Record<string, string>, "pl");
 
 type Locale = "en" | "pl";
-const LOCALES: Locale[] = ["en", "pl"];
+const LOCALES: Locale[] = ["pl", "en"]; // kept for reference, not used in main sync loops
 const content = { en, pl };
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -85,25 +85,19 @@ async function main() {
       where: { name: { equals: member.name } },
     });
 
+    const plMember = pl.team.members.find((x) => x.id === member.id) ?? member;
+    const memberData = {
+      sortOrder: member.id,
+      name: member.name,
+      role: { en: member.role, pl: plMember.role },
+    };
+
     if (existing.docs.length > 0) {
       id = existing.docs[0].id as string;
+      await (payload.update as Function)({ collection: "team-members", id, locale: "all", data: memberData });
     } else {
-      const created = await payload.create({
-        collection: "team-members",
-        locale: "en",
-        data: { sortOrder: member.id, name: member.name, role: member.role },
-      });
+      const created = await (payload.create as Function)({ collection: "team-members", locale: "all", data: memberData });
       id = created.id as string;
-    }
-
-    for (const locale of LOCALES) {
-      const m = content[locale].team.members.find((x) => x.id === member.id) ?? member;
-      await payload.update({
-        collection: "team-members",
-        id,
-        locale,
-        data: { sortOrder: m.id, name: m.name, role: m.role },
-      });
     }
 
     teamIds.push(id);
@@ -122,37 +116,21 @@ async function main() {
       where: { sortOrder: { equals: svc.id } },
     });
 
+    const plSvc = pl.services.items.find((x) => x.id === svc.id) ?? svc;
+    const svcData = {
+      sortOrder: svc.id,
+      slug: svc.slug,
+      title: { en: svc.title, pl: plSvc.title },
+      description: { en: svc.description, pl: plSvc.description },
+      tags: svc.tags.map((tag, i) => ({ tag: { en: tag, pl: plSvc.tags[i] ?? tag } })),
+    };
+
     if (existing.docs.length > 0) {
       id = existing.docs[0].id as string;
+      await (payload.update as Function)({ collection: "services", id, locale: "all", data: svcData });
     } else {
-      const created = await payload.create({
-        collection: "services",
-        locale: "en",
-        data: {
-          sortOrder: svc.id,
-          slug: svc.slug,
-          title: svc.title,
-          description: svc.description,
-          tags: svc.tags.map((tag) => ({ tag })),
-        },
-      });
+      const created = await (payload.create as Function)({ collection: "services", locale: "all", data: svcData });
       id = created.id as string;
-    }
-
-    for (const locale of LOCALES) {
-      const s = content[locale].services.items.find((x) => x.id === svc.id) ?? svc;
-      await payload.update({
-        collection: "services",
-        id,
-        locale,
-        data: {
-          sortOrder: s.id,
-          slug: s.slug,
-          title: s.title,
-          description: s.description,
-          tags: s.tags.map((tag) => ({ tag })),
-        },
-      });
     }
 
     serviceIds.push(id);
@@ -171,35 +149,20 @@ async function main() {
       where: { sortOrder: { equals: cs.id } },
     });
 
+    const plCs = pl.cases.items.find((x) => x.id === cs.id) ?? cs;
+    const csData = {
+      sortOrder: cs.id,
+      title: { en: cs.title, pl: plCs.title },
+      description: { en: cs.description, pl: plCs.description },
+      tags: cs.tags.map((tag, i) => ({ tag: { en: tag, pl: plCs.tags[i] ?? tag } })),
+    };
+
     if (existing.docs.length > 0) {
       id = existing.docs[0].id as string;
+      await (payload.update as Function)({ collection: "case-studies", id, locale: "all", data: csData });
     } else {
-      const created = await payload.create({
-        collection: "case-studies",
-        locale: "en",
-        data: {
-          sortOrder: cs.id,
-          title: cs.title,
-          description: cs.description,
-          tags: cs.tags.map((tag) => ({ tag })),
-        },
-      });
+      const created = await (payload.create as Function)({ collection: "case-studies", locale: "all", data: csData });
       id = created.id as string;
-    }
-
-    for (const locale of LOCALES) {
-      const c = content[locale].cases.items.find((x) => x.id === cs.id) ?? cs;
-      await payload.update({
-        collection: "case-studies",
-        id,
-        locale,
-        data: {
-          sortOrder: c.id,
-          title: c.title,
-          description: c.description,
-          tags: c.tags.map((tag) => ({ tag })),
-        },
-      });
     }
 
     caseIds.push(id);
@@ -209,32 +172,6 @@ async function main() {
   // ── practices ───────────────────────────────────────────────────────────────
   console.log("\nSyncing practices...");
 
-  const practiceData = (p: PracticeContent) => ({
-    sortOrder: p.eyebrow.split(" /")[0] ?? p.slug,
-    slug: p.slug,
-    eyebrow: p.eyebrow,
-    headline: {
-      text: p.headline.text,
-      ...(p.headline.accent ? { accent: p.headline.accent } : {}),
-    },
-    lead: p.lead,
-    ...(p.heroCta
-      ? {
-          heroCta: {
-            ...(p.heroCta.microCopy ? { microCopy: p.heroCta.microCopy } : {}),
-            label: p.heroCta.label,
-            href: p.heroCta.href,
-          },
-        }
-      : {}),
-    sections: p.sections.map((s) => ({ title: s.title, body: s.body })),
-    cta: {
-      ...(p.cta.microCopy ? { microCopy: p.cta.microCopy } : {}),
-      label: p.cta.label,
-      href: p.cta.href,
-    },
-  });
-
   for (const practice of en.practices) {
     let id: string;
 
@@ -243,139 +180,190 @@ async function main() {
       where: { slug: { equals: practice.slug } },
     });
 
+    const plPractice = pl.practices.find((x) => x.slug === practice.slug) ?? practice;
+    const practiceData = {
+      sortOrder: practice.eyebrow.split(" /")[0] ?? practice.slug,
+      slug: practice.slug,
+      eyebrow: { en: practice.eyebrow, pl: plPractice.eyebrow },
+      headline: {
+        text: { en: practice.headline.text, pl: plPractice.headline.text },
+        accent: { en: practice.headline.accent ?? "", pl: plPractice.headline.accent ?? "" },
+      },
+      lead: { en: practice.lead, pl: plPractice.lead },
+      heroCta: {
+        microCopy: { en: practice.heroCta?.microCopy ?? "", pl: plPractice.heroCta?.microCopy ?? "" },
+        label: { en: practice.heroCta?.label ?? "", pl: plPractice.heroCta?.label ?? "" },
+        href: practice.heroCta?.href ?? "",
+      },
+      sections: practice.sections.map((s, i) => ({
+        title: { en: s.title, pl: plPractice.sections[i]?.title ?? s.title },
+        body: { en: s.body, pl: plPractice.sections[i]?.body ?? s.body },
+      })),
+      cta: {
+        microCopy: { en: practice.cta.microCopy ?? "", pl: plPractice.cta.microCopy ?? "" },
+        label: { en: practice.cta.label, pl: plPractice.cta.label },
+        href: practice.cta.href,
+      },
+    };
+
     if (existing.docs.length > 0) {
       id = existing.docs[0].id as string;
+      await (payload.update as Function)({ collection: "practices", id, locale: "all", data: practiceData });
     } else {
-      const created = await payload.create({
-        collection: "practices",
-        locale: "en",
-        data: practiceData(practice),
-      });
+      const created = await (payload.create as Function)({ collection: "practices", locale: "all", data: practiceData });
       id = created.id as string;
-    }
-
-    for (const locale of LOCALES) {
-      const p = content[locale].practices.find((x) => x.slug === practice.slug) ?? practice;
-      await payload.update({
-        collection: "practices",
-        id,
-        locale,
-        data: practiceData(p),
-      });
     }
 
     console.log(`  synced: ${practice.slug}`);
   }
 
   // ── home page global ────────────────────────────────────────────────────────
+  // Use locale:"all" to write both locales in a single call so Payload creates
+  // the localized array rows for BOTH locales atomically — sequential locale
+  // calls cause the second call to delete and recreate parent rows, losing the
+  // first locale's data.
   console.log("\nSyncing home-page global...");
 
-  for (const locale of LOCALES) {
-    const s = content[locale];
-    await payload.updateGlobal({
-      slug: "home-page",
-      locale,
-      data: {
-        brand: s.meta.brand,
-        tagline: s.meta.tagline,
-        contactEmail: s.meta.contactEmail,
-        establishedLine: s.meta.establishedLine,
-        version: s.meta.version,
-        nav: s.nav.map((n) => ({ label: n.label, href: n.href })),
-        navCta: { label: s.navCta.label, href: s.navCta.href },
-        heroEyebrow: s.hero.eyebrow,
-        heroEstablishedLabel: s.hero.establishedLabel,
-        heroHeadlineLines: s.hero.headlineLines.map((l) => ({
-          text: l.text,
-          ...(l.accent ? { accent: l.accent } : {}),
-        })),
-        heroLead: s.hero.lead,
-        heroPrimaryCta: { label: s.hero.primaryCta.label, href: s.hero.primaryCta.href },
-        heroSecondaryCta: { label: s.hero.secondaryCta.label, href: s.hero.secondaryCta.href },
-        heroMeta: s.hero.meta.map((m) => ({
-          label: m.label,
-          value: m.value,
-          ...(m.logos ? { logos: m.logos.map((l) => ({ name: l.name, component: l.component })) } : {}),
-        })),
-        marquee: s.marquee.map((m) => ({ label: m.label })),
-        manifestoEyebrow: s.manifesto.eyebrow,
-        manifestoHeadline: {
-          text: s.manifesto.headline.text,
-          ...(s.manifesto.headline.accent ? { accent: s.manifesto.headline.accent } : {}),
-        },
-        manifestoEntries: s.manifesto.entries.map((e) => ({
-          entryId: e.id,
-          title: e.title,
-          body: e.body,
-        })),
-        servicesEyebrow: s.services.eyebrow,
-        servicesHeadline: {
-          text: s.services.headline.text,
-          ...(s.services.headline.accent ? { accent: s.services.headline.accent } : {}),
-        },
-        servicesItems: serviceIds,
-        casesEyebrow: s.cases.eyebrow,
-        casesHeadline: {
-          text: s.cases.headline.text,
-          ...(s.cases.headline.accent ? { accent: s.cases.headline.accent } : {}),
-        },
-        casesItems: caseIds,
-        speedEyebrow: s.speed.eyebrow,
-        speedHeadlineLines: s.speed.headlineLines.map((l) => ({
-          text: l.text,
-          ...(l.accent ? { accent: l.accent } : {}),
-        })),
-        speedStats: s.speed.stats.map((stat) => ({
-          value: stat.value,
-          ...(stat.suffix ? { suffix: stat.suffix } : {}),
-          label: stat.label,
-        })),
-        processEyebrow: s.process.eyebrow,
-        processHeadline: {
-          text: s.process.headline.text,
-          ...(s.process.headline.accent ? { accent: s.process.headline.accent } : {}),
-        },
-        processSteps: s.process.steps.map((step) => ({
-          stepId: step.id,
-          title: step.title,
-          description: step.description,
-        })),
-        partnersEyebrow: s.partners.eyebrow,
-        partnersItems: s.partners.items.map((p) => ({ name: p.name, role: p.role })),
-        teamEyebrow: s.team.eyebrow,
-        teamHeadline: {
-          text: s.team.headline.text,
-          ...(s.team.headline.accent ? { accent: s.team.headline.accent } : {}),
-        },
-        teamMembers: teamIds,
-        insightsEyebrow: s.insights.eyebrow,
-        insightsHeadline: {
-          text: s.insights.headline.text,
-          ...(s.insights.headline.accent ? { accent: s.insights.headline.accent } : {}),
-        },
-        insightsPosts: s.insights.posts.map((p) => ({
-          insightId: p.id,
-          category: p.category,
-          date: p.date,
-          title: p.title,
-        })),
-        ctaEyebrow: s.cta.eyebrow,
-        ctaHeadlineLines: s.cta.headlineLines.map((l) => ({
-          text: l.text,
-          ...(l.accent ? { accent: l.accent } : {}),
-        })),
-        ctaBody: s.cta.body,
-        ctaButton: { label: s.cta.button.label, href: s.cta.button.href },
-        footerIntro: s.footer.intro,
-        footerColumns: s.footer.columns.map((col) => ({
-          heading: col.heading,
-          links: col.links.map((l) => ({ label: l.label, href: l.href })),
-        })),
-        footerBottom: s.footer.bottom.map((text) => ({ text })),
+  // Helper: build a localized value object { en: valEn, pl: valPl }
+  const loc = <T>(getVal: (s: typeof en) => T) =>
+    ({ en: getVal(content.en), pl: getVal(content.pl) } as unknown);
+
+  // For arrays with localized fields we must provide the full localized shape
+  const locArray = <T>(getArr: (s: typeof en) => T[]) =>
+    content.en.hero.headlineLines.length > 0 // just to keep TS happy
+      ? ({ en: getArr(content.en), pl: getArr(content.pl) } as unknown)
+      : [];
+
+  await (payload.updateGlobal as Function)({
+    slug: "home-page",
+    locale: "all",
+    data: {
+      brand: en.meta.brand,
+      contactEmail: en.meta.contactEmail,
+      version: en.meta.version,
+      tagline: { en: en.meta.tagline, pl: pl.meta.tagline },
+      establishedLine: { en: en.meta.establishedLine, pl: pl.meta.establishedLine },
+      nav: en.nav.map((n, i) => ({
+        label: { en: n.label, pl: pl.nav[i]?.label ?? n.label },
+        href: n.href,
+      })),
+      navCta: {
+        label: { en: en.navCta.label, pl: pl.navCta.label },
+        href: en.navCta.href,
       },
-    });
-    console.log(`  synced locale: ${locale}`);
-  }
+      heroEyebrow: { en: en.hero.eyebrow, pl: pl.hero.eyebrow },
+      heroEstablishedLabel: { en: en.hero.establishedLabel, pl: pl.hero.establishedLabel },
+      heroHeadlineLines: en.hero.headlineLines.map((l, i) => ({
+        text: { en: l.text, pl: pl.hero.headlineLines[i]?.text ?? l.text },
+        accent: { en: l.accent ?? "", pl: pl.hero.headlineLines[i]?.accent ?? "" },
+      })),
+      heroLead: { en: en.hero.lead, pl: pl.hero.lead },
+      heroPrimaryCta: {
+        label: { en: en.hero.primaryCta.label, pl: pl.hero.primaryCta.label },
+        href: en.hero.primaryCta.href,
+      },
+      heroSecondaryCta: {
+        label: { en: en.hero.secondaryCta.label, pl: pl.hero.secondaryCta.label },
+        href: en.hero.secondaryCta.href,
+      },
+      heroMeta: en.hero.meta.map((m, i) => ({
+        label: { en: m.label, pl: pl.hero.meta[i]?.label ?? m.label },
+        value: { en: m.value, pl: pl.hero.meta[i]?.value ?? m.value },
+        ...(m.logos ? {
+          logos: m.logos.map((l) => ({ name: l.name, component: l.component })),
+        } : {}),
+      })),
+      marquee: en.marquee.map((m, i) => ({
+        label: { en: m.label, pl: pl.marquee[i]?.label ?? m.label },
+      })),
+      manifestoEyebrow: { en: en.manifesto.eyebrow, pl: pl.manifesto.eyebrow },
+      manifestoHeadline: {
+        text: { en: en.manifesto.headline.text, pl: pl.manifesto.headline.text },
+        accent: { en: en.manifesto.headline.accent ?? "", pl: pl.manifesto.headline.accent ?? "" },
+      },
+      manifestoEntries: en.manifesto.entries.map((e, i) => ({
+        entryId: e.id,
+        title: { en: e.title, pl: pl.manifesto.entries[i]?.title ?? e.title },
+        body: { en: e.body, pl: pl.manifesto.entries[i]?.body ?? e.body },
+      })),
+      servicesEyebrow: { en: en.services.eyebrow, pl: pl.services.eyebrow },
+      servicesHeadline: {
+        text: { en: en.services.headline.text, pl: pl.services.headline.text },
+        accent: { en: en.services.headline.accent ?? "", pl: pl.services.headline.accent ?? "" },
+      },
+      servicesItems: serviceIds,
+      casesEyebrow: { en: en.cases.eyebrow, pl: pl.cases.eyebrow },
+      casesHeadline: {
+        text: { en: en.cases.headline.text, pl: pl.cases.headline.text },
+        accent: { en: en.cases.headline.accent ?? "", pl: pl.cases.headline.accent ?? "" },
+      },
+      casesItems: caseIds,
+      speedEyebrow: { en: en.speed.eyebrow, pl: pl.speed.eyebrow },
+      speedHeadlineLines: en.speed.headlineLines.map((l, i) => ({
+        text: { en: l.text, pl: pl.speed.headlineLines[i]?.text ?? l.text },
+        accent: { en: l.accent ?? "", pl: pl.speed.headlineLines[i]?.accent ?? "" },
+      })),
+      speedStats: en.speed.stats.map((s, i) => ({
+        value: s.value,
+        suffix: { en: s.suffix ?? "", pl: pl.speed.stats[i]?.suffix ?? "" },
+        label: { en: s.label, pl: pl.speed.stats[i]?.label ?? s.label },
+      })),
+      processEyebrow: { en: en.process.eyebrow, pl: pl.process.eyebrow },
+      processHeadline: {
+        text: { en: en.process.headline.text, pl: pl.process.headline.text },
+        accent: { en: en.process.headline.accent ?? "", pl: pl.process.headline.accent ?? "" },
+      },
+      processSteps: en.process.steps.map((s, i) => ({
+        stepId: s.id,
+        title: { en: s.title, pl: pl.process.steps[i]?.title ?? s.title },
+        description: { en: s.description, pl: pl.process.steps[i]?.description ?? s.description },
+      })),
+      partnersEyebrow: { en: en.partners.eyebrow, pl: pl.partners.eyebrow },
+      partnersItems: en.partners.items.map((p, i) => ({
+        name: p.name,
+        role: { en: p.role, pl: pl.partners.items[i]?.role ?? p.role },
+      })),
+      teamEyebrow: { en: en.team.eyebrow, pl: pl.team.eyebrow },
+      teamHeadline: {
+        text: { en: en.team.headline.text, pl: pl.team.headline.text },
+        accent: { en: en.team.headline.accent ?? "", pl: pl.team.headline.accent ?? "" },
+      },
+      teamMembers: teamIds,
+      insightsEyebrow: { en: en.insights.eyebrow, pl: pl.insights.eyebrow },
+      insightsHeadline: {
+        text: { en: en.insights.headline.text, pl: pl.insights.headline.text },
+        accent: { en: en.insights.headline.accent ?? "", pl: pl.insights.headline.accent ?? "" },
+      },
+      insightsPosts: en.insights.posts.map((p, i) => ({
+        insightId: p.id,
+        category: { en: p.category, pl: pl.insights.posts[i]?.category ?? p.category },
+        date: { en: p.date, pl: pl.insights.posts[i]?.date ?? p.date },
+        title: { en: p.title, pl: pl.insights.posts[i]?.title ?? p.title },
+      })),
+      ctaEyebrow: { en: en.cta.eyebrow, pl: pl.cta.eyebrow },
+      ctaHeadlineLines: en.cta.headlineLines.map((l, i) => ({
+        text: { en: l.text, pl: pl.cta.headlineLines[i]?.text ?? l.text },
+        accent: { en: l.accent ?? "", pl: pl.cta.headlineLines[i]?.accent ?? "" },
+      })),
+      ctaBody: { en: en.cta.body, pl: pl.cta.body },
+      ctaButton: {
+        label: { en: en.cta.button.label, pl: pl.cta.button.label },
+        href: en.cta.button.href,
+      },
+      footerIntro: { en: en.footer.intro, pl: pl.footer.intro },
+      footerColumns: en.footer.columns.map((col, i) => ({
+        heading: { en: col.heading, pl: pl.footer.columns[i]?.heading ?? col.heading },
+        links: col.links.map((l, j) => ({
+          label: { en: l.label, pl: pl.footer.columns[i]?.links[j]?.label ?? l.label },
+          href: l.href,
+        })),
+      })),
+      footerBottom: en.footer.bottom.map((text, i) => ({
+        text: { en: text, pl: pl.footer.bottom[i] ?? text },
+      })),
+    },
+  });
+  console.log("  synced both locales in single call");
 
   console.log("\nDone. All CMS content synced in EN and PL.");
   process.exit(0);
