@@ -1,7 +1,5 @@
 import type { SiteContent, PracticeContent } from "./types";
 import { getPayloadClient } from "@/lib/payload";
-import { applyTranslations } from "@/lib/translate";
-import plMessages from "../../messages/pl.json";
 
 // Fallback to static data during build if database is unavailable
 import { site as staticSite } from "./site";
@@ -69,9 +67,7 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
     );
   } catch {
     // Fall back to static data if Payload is unavailable (e.g., during initial build)
-    return locale === "pl"
-      ? applyTranslations(staticSite, plMessages as Record<string, string>, "pl")
-      : staticSite;
+    return staticSite;
   }
 }
 
