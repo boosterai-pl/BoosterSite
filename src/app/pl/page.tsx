@@ -13,14 +13,11 @@ import { Team } from "@/components/Team";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
-import { applyTranslations } from "@/lib/translate";
-import plMessages from "../../../messages/pl.json";
 
 export const revalidate = 60;
 
 export default async function PlPage() {
-  const siteEn = await loadSite();
-  const site = applyTranslations(siteEn, plMessages as Record<string, string>, "pl");
+  const site = await loadSite("pl");
 
   return (
     <>

@@ -4,12 +4,16 @@ import { usePathname } from "next/navigation";
 
 export function LangSwitcher() {
   const pathname = usePathname();
-  const isPolish = pathname === "/pl" || pathname.startsWith("/pl/");
+  // Normalize: strip trailing /index that Next.js static build can expose
+  const normalized = pathname.replace(/\/index$/, "") || "/";
+  const isPolish = normalized === "/pl" || normalized.startsWith("/pl/");
+  const englishHref = isPolish ? normalized.replace(/^\/pl\/?/, "") || "/" : normalized;
+  const polishHref = isPolish ? normalized : `/pl${normalized === "/" ? "" : normalized}`;
 
   return (
     <div className="lang-switcher">
       <a
-        href="/"
+        href={englishHref}
         className={`lang-switcher__option${!isPolish ? " lang-switcher__option--active" : ""}`}
         aria-current={!isPolish ? "true" : undefined}
       >
@@ -17,7 +21,7 @@ export function LangSwitcher() {
       </a>
       <span className="lang-switcher__sep" aria-hidden>|</span>
       <a
-        href="/pl"
+        href={polishHref}
         className={`lang-switcher__option${isPolish ? " lang-switcher__option--active" : ""}`}
         aria-current={isPolish ? "true" : undefined}
       >

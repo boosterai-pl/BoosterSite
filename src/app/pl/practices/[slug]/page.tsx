@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { loadSite, getPractice } from "@/content";
-import { applyTranslations } from "@/lib/translate";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
-import plMessages from "../../../../../messages/pl.json";
 
 export const revalidate = 3600;
 
@@ -24,8 +22,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const siteEn = await loadSite();
-  const site = applyTranslations(siteEn, plMessages as Record<string, string>, "pl");
+  const site = await loadSite("pl");
   const practice = getPractice(slug, site);
   if (!practice) return {};
 
@@ -33,13 +30,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     (practice.headline.accent ? ` ${practice.headline.accent}` : "");
 
   return {
-    title: `${practice.eyebrow.split(" / ")[1] ?? title} | Booster — Agencja AI-Native`,
+    title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster — Agencja AI-Native`,
     description: practice.lead,
     alternates: {
       canonical: `https://boosterai.pl/pl/practices/${slug}`,
+      languages: {
+        en: `https://boosterai.pl/practices/${slug}`,
+        pl: `https://boosterai.pl/pl/practices/${slug}`,
+        "x-default": `https://boosterai.pl/practices/${slug}`,
+      },
     },
     openGraph: {
-      title: `${practice.eyebrow.split(" / ")[1] ?? title} | Booster`,
+      title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster`,
       description: practice.lead,
       type: "website",
       url: `https://boosterai.pl/pl/practices/${slug}`,
@@ -50,8 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PlPracticePage({ params }: Props) {
   const { slug } = await params;
-  const siteEn = await loadSite();
-  const site = applyTranslations(siteEn, plMessages as Record<string, string>, "pl");
+  const site = await loadSite("pl");
   const practice = getPractice(slug, site);
   if (!practice) notFound();
 
@@ -74,7 +75,7 @@ export default async function PlPracticePage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 3,
-        name: practice.eyebrow.split(" / ")[1] ?? practice.headline.text,
+        name: (practice.eyebrow ?? "").split(" / ")[1] ?? practice.headline.text,
         item: `https://boosterai.pl/pl/practices/${slug}`,
       },
     ],

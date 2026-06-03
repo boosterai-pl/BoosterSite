@@ -4,23 +4,31 @@ import { getPayloadClient } from "@/lib/payload";
 // Fallback to static data during build if database is unavailable
 import { site as staticSite } from "./site";
 
-export async function loadSite(): Promise<SiteContent> {
+export type SiteLocale = "en" | "pl";
+
+export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> {
   try {
     const payload = await getPayloadClient();
 
-    const home = await payload.findGlobal({ slug: "home-page" });
+    const home = await payload.findGlobal({
+      slug: "home-page",
+      locale,
+      fallbackLocale: "en",
+    });
 
     // Fetch related collections
     const servicesRelation = home.servicesItems as Array<{ id: string }> | null;
     const casesRelation = home.casesItems as Array<{ id: string }> | null;
     const teamRelation = home.teamMembers as Array<{ id: string }> | null;
 
-    const [servicesResult, casesResult, teamResult] = await Promise.all([
+    const [servicesResult, casesResult, teamResult, practicesResult] = await Promise.all([
       servicesRelation && servicesRelation.length > 0
         ? payload.find({
             collection: "services",
             where: { id: { in: servicesRelation.map((s) => s.id).join(",") } },
             limit: 20,
+            locale,
+            fallbackLocale: "en",
           })
         : Promise.resolve({ docs: [] as unknown[] }),
       casesRelation && casesRelation.length > 0
@@ -28,6 +36,8 @@ export async function loadSite(): Promise<SiteContent> {
             collection: "case-studies",
             where: { id: { in: casesRelation.map((c) => c.id).join(",") } },
             limit: 20,
+            locale,
+            fallbackLocale: "en",
           })
         : Promise.resolve({ docs: [] as unknown[] }),
       teamRelation && teamRelation.length > 0
@@ -35,8 +45,17 @@ export async function loadSite(): Promise<SiteContent> {
             collection: "team-members",
             where: { id: { in: teamRelation.map((t) => t.id).join(",") } },
             limit: 20,
+            locale,
+            fallbackLocale: "en",
           })
         : Promise.resolve({ docs: [] as unknown[] }),
+      payload.find({
+        collection: "practices",
+        limit: 20,
+        sort: "sortOrder",
+        locale,
+        fallbackLocale: "en",
+      }),
     ]);
 
     return mapPayloadToSiteContent(
@@ -44,6 +63,7 @@ export async function loadSite(): Promise<SiteContent> {
       servicesResult.docs as Record<string, unknown>[],
       casesResult.docs as Record<string, unknown>[],
       teamResult.docs as Record<string, unknown>[],
+      practicesResult.docs as Record<string, unknown>[],
     );
   } catch {
     // Fall back to static data if Payload is unavailable (e.g., during initial build)
@@ -56,6 +76,7 @@ function mapPayloadToSiteContent(
   services: Record<string, unknown>[],
   cases: Record<string, unknown>[],
   team: Record<string, unknown>[],
+  practices: Record<string, unknown>[],
 ): SiteContent {
   type AnyArr = Record<string, unknown>[];
 
@@ -248,7 +269,42 @@ function mapPayloadToSiteContent(
       })),
       bottom: (footerBottom ?? []).map((b) => b.text as string),
     },
-    practices: staticSite.practices,
+    practices: practices.length > 0
+      ? practices.map((p) => {
+          const headline = p.headline as Record<string, unknown> | undefined;
+          const heroCta = p.heroCta as Record<string, unknown> | undefined;
+          const sections = p.sections as AnyArr | undefined;
+          const cta = p.cta as Record<string, unknown> | undefined;
+
+          return {
+            slug: (p.slug as string) ?? "",
+            eyebrow: (p.eyebrow as string) ?? "",
+            headline: {
+              text: (headline?.text as string) ?? "",
+              ...(headline?.accent ? { accent: headline.accent as string } : {}),
+            },
+            lead: (p.lead as string) ?? "",
+            ...(heroCta?.label && heroCta?.href
+              ? {
+                  heroCta: {
+                    ...(heroCta.microCopy ? { microCopy: heroCta.microCopy as string } : {}),
+                    label: heroCta.label as string,
+                    href: heroCta.href as string,
+                  },
+                }
+              : {}),
+            sections: (sections ?? []).map((section) => ({
+              title: section.title as string,
+              body: section.body as string,
+            })),
+            cta: {
+              ...(cta?.microCopy ? { microCopy: cta.microCopy as string } : {}),
+              label: (cta?.label as string) ?? "",
+              href: (cta?.href as string) ?? "",
+            },
+          };
+        })
+      : staticSite.practices,
     booking: {
       calUrl: "https://cal.com/szymon-bazan-iahn2z",
       eyebrow: "Let's talk",

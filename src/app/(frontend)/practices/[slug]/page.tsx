@@ -30,13 +30,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     (practice.headline.accent ? ` ${practice.headline.accent}` : "");
 
   return {
-    title: `${practice.eyebrow.split(" / ")[1] ?? title} | Booster — AI-Native Agency`,
+    title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster — AI-Native Agency`,
     description: practice.lead,
     alternates: {
       canonical: `https://boosterai.pl/practices/${slug}`,
+      languages: {
+        en: `https://boosterai.pl/practices/${slug}`,
+        pl: `https://boosterai.pl/pl/practices/${slug}`,
+        "x-default": `https://boosterai.pl/practices/${slug}`,
+      },
     },
     openGraph: {
-      title: `${practice.eyebrow.split(" / ")[1] ?? title} | Booster`,
+      title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster`,
       description: practice.lead,
       type: "website",
       url: `https://boosterai.pl/practices/${slug}`,
@@ -70,7 +75,7 @@ export default async function PracticePage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 3,
-        name: practice.eyebrow.split(" / ")[1] ?? practice.headline.text,
+        name: (practice.eyebrow ?? "").split(" / ")[1] ?? practice.headline.text,
         item: `https://boosterai.pl/practices/${slug}`,
       },
     ],

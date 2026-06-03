@@ -38,6 +38,7 @@ export const Posts: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "slug",
@@ -52,6 +53,7 @@ export const Posts: CollectionConfig = {
       name: "excerpt",
       type: "textarea",
       required: true,
+      localized: true,
       admin: {
         description: "Used as meta description for SEO (max 160 chars recommended).",
       },
@@ -60,6 +62,7 @@ export const Posts: CollectionConfig = {
       name: "content",
       type: "richText",
       required: true,
+      localized: true,
     },
     {
       name: "featuredImage",
@@ -96,6 +99,7 @@ export const Posts: CollectionConfig = {
           name: "tag",
           type: "text",
           required: true,
+          localized: true,
         },
       ],
     },
@@ -118,6 +122,7 @@ export const Posts: CollectionConfig = {
               name: "seoTitle",
               label: "Meta Title",
               type: "text",
+              localized: true,
               admin: {
                 description:
                   "Overrides the post title in <title> tag and OG. Leave blank to use post title.",
@@ -127,6 +132,7 @@ export const Posts: CollectionConfig = {
               name: "seoDescription",
               label: "Meta Description",
               type: "textarea",
+              localized: true,
               admin: {
                 description:
                   "Overrides excerpt for meta description. Leave blank to use excerpt.",

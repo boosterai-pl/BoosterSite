@@ -26,6 +26,7 @@ export const TeamMembers: CollectionConfig = {
       name: "role",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "photo",
