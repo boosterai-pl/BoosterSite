@@ -1,13 +1,4 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@vercel/vercel-plugin"],
-  "mcp": {
-    "payload": {
-      "type": "remote",
-      "url": "http://localhost:3000/api/mcp",
-      "headers": {
-        "Authorization": "Bearer ${MCP_API_KEY}"
-      }
-    }
-  }
+  "plugin": ["@vercel/vercel-plugin"]
 }
