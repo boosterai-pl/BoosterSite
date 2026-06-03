@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "ui-component-placement",
+    "severity": "warning",
+    "description": "Reusable UI primitives (tables, chips, dropdowns, dialogs) must live in `packages/ui/`, not inline in mockup screens. Screen-specific compositions (assembling primitives with hardcoded data) stay local. Flag: a generic component defined inside a mockup file that would be useful in `apps/web`. SKIP if no changes in apps/mockups/."
+  },
+  {
+    "slug": "ui-mock-data-typing",
+    "severity": "warning",
+    "description": "Mock data must be typed against `@ooh/contracts` Zod-inferred types. Local types are acceptable only when contracts lacks the schema, and only with a `TODO: Move to @ooh/contracts` comment. SKIP if no changes in apps/mockups/."
+  },
+  {
+    "slug": "ui-index-registration",
+    "severity": "critical",
+    "description": "New screens must be registered in `src/index.tsx` and `src/main.tsx`. All query-param variants must be listed in the index entry. SKIP if no new mockup screens added."
+  },
+  {
+    "slug": "ui-no-business-logic",
+    "severity": "warning",
+    "description": "Mockup screens must not contain business logic. Display approximations (e.g. deriving a display number from mock data) are acceptable with a NOTE comment. Actual business rules (validation, state transitions, permission checks) are not. SKIP if no changes in apps/mockups/."
+  },
+  {
+    "slug": "ui-test-bar",
+    "severity": "warning",
+    "description": "Mockup tests are smoke tests: verify the screen renders, key elements are present, query-param variants work. Do NOT flag missing value assertions, incomplete coverage, or test file size for mockup tests. SKIP if no changes in apps/mockups/."
+  },
+  {
+    "slug": "ui-mockup-match",
+    "severity": "warning",
+    "description": "Implementation must match the corresponding mockup screen. Read the mockup screen from `apps/mockups/src/screens/` and compare structure, layout, and component usage. Flag significant deviations. SKIP if no changes in apps/web/ or packages/ui/."
+  },
+  {
+    "slug": "ui-component-reuse",
+    "severity": "critical",
+    "description": "Implementation MUST import existing `@ooh/ui` components, not recreate them. Before flagging, read `packages/ui/src/components/` to see what exists. If the PR defines or inlines a component in `apps/web/` (or anywhere outside `packages/ui/`) that duplicates or reimplements anything already in `packages/ui/` - even partially - flag it as critical. Do not accept 'close enough' variants: if the existing component can be used with a new prop or minor extension, that is the correct path. SKIP if no changes in apps/web/."
+  },
+  {
+    "slug": "ui-new-component-without-mockup",
+    "severity": "warning",
+    "description": "If the PR creates a new component in `packages/ui/` that has no corresponding usage in `apps/mockups/`, flag as warning. SKIP if no new components added to packages/ui/."
+  },
+  {
+    "slug": "ui-shadcn-pattern",
+    "severity": "warning",
+    "description": "Components in `packages/ui/` must follow shadcn/ui conventions: single `.tsx` file in `src/components/`, `class-variance-authority` for variants, `cn()` helper for class merging. No business logic or domain knowledge in UI primitives. SKIP if no changes in packages/ui/."
+  },
+  {
+    "slug": "ui-no-inline-html-in-index",
+    "severity": "warning",
+    "description": "Index/page files in `apps/web/` (e.g. `page.tsx`, `index.tsx`) must not contain inline HTML markup. All JSX should be extracted into separate React components and composed via imports. The index file should read as a high-level layout of named components, not raw `<div>`/`<section>`/`<span>` trees. SKIP if no changes to index/page files in apps/web/."
+  },
+  {
+    "slug": "ui-component-complexity",
+    "severity": "warning",
+    "description": "Components with high nesting depth (>3-4 levels of domain-meaningful elements), multiple independent UI sections that could stand alone, or large conditional branches should be split into smaller, focused components. Each component should have a single responsibility. Do NOT flag based on line count — ESLint owns `max-lines-per-function` and `max-lines`. SKIP if no new components added."
+  },
+  {
+    "slug": "ui-permission-hook-placement",
+    "severity": "critical",
+    "description": "Flag any `useHasPermission` call inside `packages/ui/`. UI primitives must accept permission state as props from parent components in `apps/web/`. SKIP if no changes in packages/ui/."
+  },
+  {
+    "slug": "screen-map-new-screen",
+    "severity": "critical",
+    "description": "For mockup PRs that add a new `*.mockup.tsx` screen: verify a matching entry exists in `screens[]` in `src/data/screen-graph.ts` with `clickupTaskId` and `mockupPath`. Also verify relevant navigation transitions are added to `transitions[]`. SKIP if no new mockup screens added."
+  },
+  {
+    "slug": "screen-map-impl-badge",
+    "severity": "critical",
+    "description": "For `apps/web` PRs that implement a screen: verify the corresponding node id is added to `appImplementedNodeIds` in `src/data/screen-map.ts`. SKIP if no screens implemented in this PR."
+  },
+  {
+    "slug": "screen-map-removal",
+    "severity": "critical",
+    "description": "For PRs that remove a screen from mockups or web: verify its id is removed from `mockupReadyNodeIds` / `appImplementedNodeIds` / `screens[]` / `transitions[]`. SKIP if no screens removed. Full rules: `apps/mockups/AGENTS.md` under 'Screen Map and Storyboard'."
+  }
+]

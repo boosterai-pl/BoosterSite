@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/boosterai-pl/agentkit/main/schemas/lock.schema.json",
+  "lockVersion": "1",
+  "source": "github:boosterai-pl/agentkit",
+  "ref": "main",
+  "installed": {
+    "skills": {
+      "code-reviewing": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "deferring-findings": {
+        "version": "1.1.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "fixing-pull-requests": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "reviewing-fixing-loop": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "searching-the-web": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "testing-conventions": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "agent-browser": {
+        "version": "external",
+        "installPath": ".agents/skills",
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      }
+    },
+    "agents": {
+      "architect": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "developer": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "librarian": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "manual-tester": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "researcher": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "reviewer": {
+        "syncedAt": "2026-06-03T09:12:55.844Z"
+      }
+    },
+    "commands": {}
+  }
+}

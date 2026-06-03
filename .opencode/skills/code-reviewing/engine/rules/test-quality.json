@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "test-missing-invariant",
+    "severity": "critical",
+    "description": "Flag new business rules in NestJS services that have zero corresponding test coverage."
+  },
+  {
+    "slug": "test-state-machine-paths",
+    "severity": "critical",
+    "description": "State machine transitions should be tested for both valid and invalid paths."
+  },
+  {
+    "slug": "test-logic-change-no-test",
+    "severity": "critical",
+    "description": "Flag actual business-logic changes without updated or added tests: server-side invariants, permissions, state transitions, money or availability rules, API or worker behavior, data transformations, or contract semantics. SKIP purely presentational UI variants, class composition, visual-only branches, AND pure wrappers around a single external dependency where any unit test would only mock that dependency (these fail the value gate from `testing-conventions`). Load `testing-conventions` SKILL.md before flagging — apply its value gate first."
+  },
+  {
+    "slug": "test-ui-variant-no-test",
+    "severity": "warning",
+    "description": "Flag new reusable UI component variants or presentational branches without focused tests when a regression would be user-visible. Do not use this rule for one-off markup or class-only changes."
+  },
+  {
+    "slug": "test-schema-smoke",
+    "severity": "critical",
+    "description": "Zod schema test that only validates built-in validators (`.min()`, `.max()`, `.default()`, `.email()`, `.uuid()`, `z.coerce` coercion, enum rejection) with no custom `.refine()`, `.transform()`, or `discriminatedUnion`. Those are the library's job, not yours. Exception: if a parameter controls the limit (e.g. `createSchema(maxPageSize)`) test that the parameter is correctly wired to `.max()` - that catches a real wiring bug."
+  },
+  {
+    "slug": "test-passthrough-delegation",
+    "severity": "critical",
+    "description": "Unit test where mock returns X and assertion checks X came back with no transformation or branching in between. Proves the mock works, not the code."
+  },
+  {
+    "slug": "test-per-field-repetition",
+    "severity": "critical",
+    "description": "N near-identical tests varying only the field name when all fields go through the same code path. Collapse into one test with multiple assertions."
+  },
+  {
+    "slug": "test-excessive-mock-wiring",
+    "severity": "critical",
+    "description": "Mock setup exceeds 5x the assertion code. Replace with an integration/e2e test."
+  },
+  {
+    "slug": "test-framework-behavior",
+    "severity": "critical",
+    "description": "Tests that NestJS routes requests, React renders components, TanStack Query caches, or Drizzle returns rows. Those libraries have their own test suites."
+  },
+  {
+    "slug": "test-shared-state",
+    "severity": "critical",
+    "description": "No shared mutable state between tests - each test sets up and tears down its own data."
+  },
+  {
+    "slug": "test-execution-order",
+    "severity": "critical",
+    "description": "Tests must not depend on execution order."
+  },
+  {
+    "slug": "test-module-level-mutation",
+    "severity": "warning",
+    "description": "Flag test files that import or mutate module-level variables shared across test cases."
+  },
+  {
+    "slug": "test-clear-mocks-wipes-infra",
+    "severity": "critical",
+    "description": "Flag `vi.clearAllMocks()` in shared `resetMocks()` helpers that re-seeds only some infrastructure mock methods. Every method the production code can call - including teardown methods like `quit`/`disconnect` - must be re-seeded."
+  },
+  {
+    "slug": "test-app-close-missing-drain",
+    "severity": "warning",
+    "description": "Flag `await app.close()` without prior `app.getHttpServer().closeAllConnections()`. On Node 18+, `close()` alone hangs on keep-alive sockets."
+  },
+  {
+    "slug": "test-keepalive-timeout-tweak",
+    "severity": "warning",
+    "description": "Flag `app.getHttpServer().keepAliveTimeout = 0` or `= 1`. Use Node defaults; drain via `closeAllConnections()`."
+  },
+  {
+    "slug": "test-mock-ioredis-required",
+    "severity": "critical",
+    "description": "Flag specs that import `AppModule`/`RedisModule`/`BullModule` without `vi.mock('ioredis', ...)`, `vi.mock('@nest-lab/throttler-storage-redis', ...)`, and `vi.mock('@nestjs/bullmq', ...)` (last one only required if the module imports BullMQ)."
+  },
+  {
+    "slug": "test-false-green",
+    "severity": "critical",
+    "description": "Flag `expect(true).toBe(true)` or other tautological assertions."
+  },
+  {
+    "slug": "test-call-count-assertion",
+    "severity": "warning",
+    "description": "Flag tests that assert on internal method call counts instead of observable results."
+  },
+  {
+    "slug": "test-unfailable-assertion",
+    "severity": "critical",
+    "description": "Flag tests where the assertion cannot possibly fail given the test setup."
+  },
+  {
+    "slug": "test-mock-at-boundary",
+    "severity": "warning",
+    "description": "Mock at boundaries (DB adapters, HTTP clients, queue producers), not internal service methods."
+  },
+  {
+    "slug": "test-mock-replicates-logic",
+    "severity": "warning",
+    "description": "Flag mocks that replicate business logic instead of returning fixed responses."
+  }
+]
