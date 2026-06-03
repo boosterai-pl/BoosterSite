@@ -58,3 +58,7 @@ Env loading is handled by [`dotenvx`](https://dotenvx.com/) — all `npm run` sc
 - **Never commit** `.env.local`, `.env.keys`, or any plaintext `.env*` file other than `.env.example`.
 
 Vercel deployments read env from the Vercel dashboard directly — dotenvx is not required at runtime there, only for local dev and any CI that consumes the encrypted file.
+
+### OpenCode + Payload MCP
+
+The `payload` MCP server in `opencode.json` reads `MCP_API_KEY` from the OpenCode process environment via `{env:MCP_API_KEY}`. To launch OpenCode with the key auto-loaded from dotenvx, run `npm run opencode` (wraps `opencode` in `dotenvx run` with `.env.local` + `.env.production`). Requires `.env.keys` to decrypt `.env.production` — share that out-of-band, never commit.

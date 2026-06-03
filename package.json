@@ -13,7 +13,8 @@
     "translate": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE -- node --import tsx scripts/translate.ts",
     "env:encrypt": "dotenvx encrypt -f .env.production",
     "env:decrypt": "dotenvx decrypt -f .env.production",
-    "env:keypair": "dotenvx keypair -f .env.production"
+    "env:keypair": "dotenvx keypair -f .env.production",
+    "opencode": "dotenvx run -f .env.local -f .env.production --overload --ignore=MISSING_ENV_FILE -- opencode"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",

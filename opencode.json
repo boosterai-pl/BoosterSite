@@ -5,8 +5,9 @@
     "payload": {
       "type": "remote",
       "url": "http://localhost:3000/api/mcp",
+      "oauth": false,
       "headers": {
-        "Authorization": "Bearer ${MCP_API_KEY}"
+        "Authorization": "Bearer {env:MCP_API_KEY}"
       }
     }
   }
