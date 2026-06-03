@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Self-contained launcher for the bundled review-cli engine (zero deps, prebuilt dist).
+set -euo pipefail
+SCRIPT_DIR="$(cd -- "$(dirname "$0")" && pwd)"
+exec node "$SCRIPT_DIR/dist/index.js" "$@"

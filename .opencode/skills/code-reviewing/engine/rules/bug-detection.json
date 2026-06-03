@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "bug-strict-lifecycle",
+    "severity": "critical",
+    "description": "Verify transitions follow `FREE -> OPTION -> RESERVED -> SOLD` strictly. No skipped steps, no reverse transitions without explicit override."
+  },
+  {
+    "slug": "bug-transition-server-side",
+    "severity": "critical",
+    "description": "Confirm all transitions are server-side only with actor and reason tracking persisted."
+  },
+  {
+    "slug": "bug-ttl-expiry",
+    "severity": "warning",
+    "description": "Check TTL expiry handling - temporary holds must have expiration timestamps and worker-driven expiry jobs."
+  },
+  {
+    "slug": "bug-expiry-revalidation",
+    "severity": "critical",
+    "description": "Verify expiry actions revalidate current state before transitioning to avoid stale overwrites."
+  },
+  {
+    "slug": "bug-race-condition",
+    "severity": "critical",
+    "description": "Verify booking actions use DB-level locks or serializable transaction isolation."
+  },
+  {
+    "slug": "bug-acceptance-idempotent",
+    "severity": "warning",
+    "description": "Check that offer acceptance is idempotent - repeated calls produce the same result."
+  },
+  {
+    "slug": "bug-toctou",
+    "severity": "critical",
+    "description": "Flag TOCTOU bugs: availability checked in one query, then booked in a separate query without lock."
+  },
+  {
+    "slug": "bug-parallel-conflict",
+    "severity": "warning",
+    "description": "Confirm parallel reservation requests for the same inventory return deterministic conflict responses."
+  },
+  {
+    "slug": "bug-transaction-boundary",
+    "severity": "critical",
+    "description": "Check that coupled acceptance and reservation writes happen within a single transaction boundary."
+  },
+  {
+    "slug": "bug-immutable-versions",
+    "severity": "critical",
+    "description": "Verify published offer versions are immutable snapshots - no mutations after publish."
+  },
+  {
+    "slug": "bug-acceptance-version-target",
+    "severity": "critical",
+    "description": "Check that client acceptance targets a specific version ID, not the latest mutable draft."
+  },
+  {
+    "slug": "bug-published-mutation",
+    "severity": "critical",
+    "description": "Flag any code path that modifies fields on a published or accepted offer version."
+  },
+  {
+    "slug": "bug-version-new-row",
+    "severity": "warning",
+    "description": "Confirm version creation produces a new row/record, not an in-place update."
+  },
+  {
+    "slug": "bug-outbox-missing",
+    "severity": "critical",
+    "description": "Verify outbox pattern for external side effects - events persisted to DB before delivery."
+  },
+  {
+    "slug": "bug-worker-retry",
+    "severity": "warning",
+    "description": "Check that worker jobs have retry configuration and explicit failure/dead-letter handling."
+  },
+  {
+    "slug": "bug-fire-and-forget",
+    "severity": "critical",
+    "description": "Flag fire-and-forget calls to external systems (CRM, Slack, email) without persistence or retry."
+  },
+  {
+    "slug": "bug-external-timeout",
+    "severity": "warning",
+    "description": "Verify timeout and circuit-breaker configuration on external HTTP calls."
+  },
+  {
+    "slug": "bug-duplicate-query-key",
+    "severity": "critical",
+    "description": "Same TanStack Query key array literal (e.g. ['suppliers'], ['media-units', id]) appearing in 2+ files. Query keys must be defined once in a query factory. Duplicates cause cache inconsistency when one call site changes the key shape but another does not."
+  },
+  {
+    "slug": "bug-server-state-in-usestate",
+    "severity": "warning",
+    "description": "Copying `useQuery` result data into `useState`. This creates a stale local copy that opts out of TanStack Query background refetches. Use query data directly, or use `select` to derive. Exception: form `defaultValues` with `staleTime: Infinity`."
+  },
+  {
+    "slug": "bug-filter-in-usestate",
+    "severity": "warning",
+    "description": "Filters, pagination, or sort state stored in `useState` instead of TanStack Router URL search params. URL state is required for bookmarkability and correct back/forward navigation."
+  }
+]

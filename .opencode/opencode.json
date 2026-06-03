@@ -1,0 +1,25 @@
+{
+  "model": "anthropic/claude-sonnet-4-6",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "permission": {
+    "skill": {
+      "*": "deny",
+      "code-reviewing": "allow",
+      "deferring-findings": "allow",
+      "editing-markdown-docs": "allow",
+      "fixing-pull-requests": "allow",
+      "humanizing-ai-text": "allow",
+      "managing-branches": "allow",
+      "managing-opencode-skills": "allow",
+      "managing-pr-descriptions": "allow",
+      "merging-pull-requests": "allow",
+      "opening-pull-requests": "allow",
+      "polling-monitoring": "allow",
+      "reviewing-fixing-loop": "allow",
+      "searching-the-web": "allow",
+      "using-agentkit": "allow",
+      "vercel-react-best-practices": "allow",
+      "frontend-design": "allow"
+    }
+  }
+}

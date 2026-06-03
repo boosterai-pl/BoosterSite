@@ -1,0 +1,37 @@
+{
+  "domains": [
+    { "id": 1, "name": "security", "ruleFile": "security.json" },
+    { "id": 2, "name": "bug-detection", "ruleFile": "bug-detection.json" },
+    { "id": 3, "name": "code-quality", "ruleFile": "code-quality.json" },
+    { "id": 4, "name": "requirements", "ruleFile": "requirements.json" },
+    { "id": 5, "name": "test-quality", "ruleFile": "test-quality.json" },
+    { "id": 6, "name": "ui-compliance", "ruleFile": "ui-rules.json" },
+    { "id": 7, "name": "spec-docs", "ruleFile": "spec-docs-quality.json" },
+    { "id": 8, "name": "ds-guardian", "ruleFile": "ds-guardian.json" }
+  ],
+  "classification": {
+    "boundaryPatterns": [
+      { "pattern": "^packages/db/|^packages/contracts/", "boundary": "contracts+db" },
+      { "pattern": "^apps/api/", "boundary": "api" },
+      { "pattern": "^apps/worker/", "boundary": "worker" },
+      { "pattern": "^apps/web/|^packages/ui/|^apps/mockups/", "boundary": "web" }
+    ],
+    "testPatterns": ["\\.(test|spec)\\.[^./]+$", "/e2e/", "/__tests__/"],
+    "codePatterns": ["^apps/", "^packages/", "^scripts/", "^\\.github/scripts/"],
+    "excludedCodePatterns": ["^tools/"],
+    "specRoots": ["openspec/changes/"],
+    "uiRoots": ["apps/web/", "packages/ui/", "apps/mockups/"],
+    "alwaysOnDomains": ["security", "requirements", "spec-docs"],
+    "codeDomains": ["bug-detection", "code-quality"],
+    "testDomains": ["test-quality"],
+    "uiDomains": ["ui-compliance", "ds-guardian"]
+  },
+  "orchestration": {
+    "reviewerAgent": "reviewer",
+    "defaultTitle": "[title not provided]",
+    "defaultDescription": "[description not provided]",
+    "returnInstruction": "Return exactly one line: <domain>: phase=<phase> critical <criticalDone>/<criticalTotal>, warning <warningDone>/<warningTotal>, passes=<n> skipped=<n> findings=<n> (matches `<cli> status --branch ... --domain ...`; copy that line).",
+    "spawnPromptTemplate": "Run:\n{{promptCommand}}\n\nFollow the returned instructions exactly. Do not review outside the assigned domain. Do not load the `code-reviewing` skill; the CLI prompt is the only source of truth for the review workflow.",
+    "promptTemplate": "BRANCH: {{branch}}\nDOMAIN: {{domain}}\nTITLE: {{title}}\nDESCRIPTION: {{description}}\nCHANGED FILES:\n{{changedFiles}}\n\nREVIEW TARGET:\n{{reviewTargetInstructions}}\n\nLESSONS:\nBefore starting the CLI workflow, read `.opencode/lessons-learned.md` once. Treat every lesson as a project-specific heuristic ranked alongside the canonical rules for this domain. When a finding matches a documented lesson, cite the lesson identifier as `lessons-learned.md > <lesson heading>` inside the finding body. Lessons do not override canonical rules — they augment them.\n\nCLI WORKFLOW:\n1. Run `{{cliPath}} start --branch \"{{branch}}\" --domain {{domain}}`.\n2. Run `{{cliPath}} next --branch \"{{branch}}\" --domain {{domain}}` whenever you need the current rule reprinted.\n3. Follow the CLI rule-by-rule and use the review target guidance above before reading full files.\n4. Record a pass with `{{cliPath}} pass --branch \"{{branch}}\" --domain {{domain}} --evidence \"<what you checked>\"` when the rule applies and no issue exists.\n5. Record a skip with `{{cliPath}} skip --branch \"{{branch}}\" --domain {{domain}} --reason changed-file-scope --note \"<why this rule is not applicable>\"` when the rule was reviewed but is not applicable to the change scope.\n6. Record a finding by writing a concise finding body to a temp file (format: one-line severity+slug header, 1–3 sentences stating what is wrong and where, then at most one \"Consider: <pattern or direction>\" sentence — no fix code blocks, no spec excerpts, no \"Affected files\" lists), then run `{{cliPath}} finding --branch \"{{branch}}\" --domain {{domain}} --file <path> --line <n> --side RIGHT|LEFT --body-file \"<path-to-temp-file>\"`. Do not put Markdown finding bodies in shell arguments; backticks, quotes, and $() are not shell-safe. IMPORTANT: --file MUST be a file that appears in the CHANGED FILES list above. The CLI will hard-block findings that target files outside the diff. If the issue is in pre-existing code that this PR depends on or exposes, anchor the finding to the changed line that introduces or calls that code, and quote the problematic pre-existing code in the finding body.\n7. Keep going until the CLI prints `DOMAIN COMPLETE`.\n8. If needed, inspect progress with `{{cliPath}} status --branch \"{{branch}}\" --domain {{domain}}` or append notes with `{{cliPath}} notes --branch \"{{branch}}\" --domain {{domain}} --append \"<note>\"`.\n\nRETURN:\n{{returnInstruction}}"
+  }
+}
