@@ -1,0 +1,152 @@
+[
+  {
+    "slug": "spec-triage-missing",
+    "severity": "critical",
+    "description": "For spec PRs, fetch the source ClickUp ticket (ID from branch `CU-<id>/spec/...` or `proposal.md` frontmatter). If the description lacks the SPLIT banner, evaluate against `.agents/skills/triaging-clickup-tickets/SKILL.md` heuristics; flag CRITICAL if it should have been split. If the description has the banner, the PR MUST target exactly one subtask, not the parent or multiple subtasks; flag CRITICAL otherwise."
+  },
+  {
+    "slug": "spec-structure-incomplete",
+    "severity": "critical",
+    "description": "`.openspec.yaml` must declare `schema: ooh-sdd`."
+  },
+  {
+    "slug": "spec-structure-incomplete",
+    "severity": "critical",
+    "description": "Verify `proposal.md` has all required sections: Why, What Changes, Affected Boundaries, Non-Goals, Capabilities, Traceability."
+  },
+  {
+    "slug": "spec-structure-incomplete",
+    "severity": "critical",
+    "description": "Verify `design.md` (when present) has required sections: Scope (MUST/MUST NOT/NICE TO HAVE), Decisions, Risks."
+  },
+  {
+    "slug": "spec-structure-incomplete",
+    "severity": "critical",
+    "description": "Every requirement must have at least one scenario."
+  },
+  {
+    "slug": "spec-no-failure-scenario",
+    "severity": "warning",
+    "description": "Every ADDED or MODIFIED requirement must have at least one non-happy-path scenario."
+  },
+  {
+    "slug": "spec-structure-incomplete",
+    "severity": "critical",
+    "description": "If `tasks.md` is absent from the change, flag it. Unlike `design.md`, `tasks.md` is always required."
+  },
+  {
+    "slug": "spec-tasks-lifecycle",
+    "severity": "critical",
+    "description": "`tasks.md` must contain all 11 numbered sections (1-11). Sections 3 `[worker]`, 5 `[e2e-tests]`, and 6 `[browser-qa]` are conditional - when not applicable they must contain `N/A` instead of tasks, NOT be deleted. Flag any missing section heading."
+  },
+  {
+    "slug": "spec-tasks-lifecycle",
+    "severity": "critical",
+    "description": "`tasks.md` must contain `[task-verify]` with exactly 2 tasks, `[review]` with exactly 1 task, `[spec-verify]` with exactly 1 task, `[archive]` with exactly 1 task, and `[pull-request]` as the last section with exactly 1 task."
+  },
+  {
+    "slug": "spec-tasks-acceptance",
+    "severity": "warning",
+    "description": "Each implementation task in boundary sections (`[contracts+db]`, `[api]`, `[worker]`, `[web]`) and the `[e2e-tests]` section must have Accepts-when, Test-first, and Spec-scenarios sub-fields."
+  },
+  {
+    "slug": "spec-phantom-req",
+    "severity": "critical",
+    "description": "Every `REQ-*` ID referenced in proposal or spec files must exist in `docs/requirements/*.md`. Flag any reference that has no matching definition."
+  },
+  {
+    "slug": "spec-req-status-invalid",
+    "severity": "warning",
+    "description": "If `docs/requirements/*.md` is modified, every requirement status must be one of: planned, in-progress, implemented, validated, deferred. Flag any other value."
+  },
+  {
+    "slug": "spec-feature-doc-missing",
+    "severity": "warning",
+    "description": "If the PR adds or modifies runtime code in `apps/` or `packages/` that introduces new user-facing behavior, verify `docs/features/<feature>/README.md` exists and is updated. On spec-only PRs, only flag if a new capability directory is added under `openspec/changes/<name>/specs/` with no corresponding feature doc update."
+  },
+  {
+    "slug": "spec-feature-not-indexed",
+    "severity": "warning",
+    "description": "If `docs/features/<feature>/README.md` is modified or created, verify a corresponding row exists in `docs/FEATURES.md`."
+  },
+  {
+    "slug": "spec-internal-mismatch",
+    "severity": "critical",
+    "description": "Capabilities listed in `proposal.md` must match the directories present under `specs/`. Flag any capability listed but missing as a directory, or any directory present but not listed."
+  },
+  {
+    "slug": "spec-internal-mismatch",
+    "severity": "critical",
+    "description": "Affected boundaries listed in `proposal.md` must match the boundary sections present in `tasks.md`. Flag mismatches."
+  },
+  {
+    "slug": "spec-tasks-lifecycle",
+    "severity": "critical",
+    "description": "`[e2e-tests]` section must contain tasks (not `N/A`) when functional boundaries (api, worker, or web) exist."
+  },
+  {
+    "slug": "spec-tasks-lifecycle",
+    "severity": "warning",
+    "description": "`[browser-qa]` section must contain tasks (not `N/A`) when functional boundaries exist AND `[web]` tasks are present."
+  },
+  {
+    "slug": "spec-internal-mismatch",
+    "severity": "warning",
+    "description": "Design decisions referenced in `tasks.md` Context fields must exist in `design.md`. Flag references to decisions not defined there."
+  },
+  {
+    "slug": "spec-internal-mismatch",
+    "severity": "warning",
+    "description": "Factual claims about the codebase in `design.md` (file paths, line numbers, function names) should be spot-checked against actual files. Flag claims that are demonstrably wrong."
+  },
+  {
+    "slug": "spec-stale-on-code-change",
+    "severity": "critical",
+    "description": "If code adds or changes routes, service methods, or BullMQ jobs, verify the corresponding `openspec/specs/<capability>/spec.md` reflects the new behavior. Only flag when behavior changes, not internal refactors."
+  },
+  {
+    "slug": "spec-stale-on-code-change",
+    "severity": "critical",
+    "description": "If code changes reservation state transitions, offer versioning, or permission logic, verify `docs/features/<feature>/README.md` Key Decisions are still accurate."
+  },
+  {
+    "slug": "spec-stale-on-code-change",
+    "severity": "warning",
+    "description": "If code adds or changes an endpoint contract, verify the corresponding `docs/requirements/*.md` status reflects reality."
+  },
+  {
+    "slug": "spec-agents-rules-drift",
+    "severity": "warning",
+    "description": "If an `AGENTS.md` file adds or changes a convention that reviewers should enforce (e.g., banned imports, required patterns, file placement rules), check whether the corresponding code-reviewing domain file already covers it. If not, flag as warning: the code-reviewing skill needs updating to include the new rule."
+  },
+  {
+    "slug": "agents-descriptive-opener",
+    "severity": "warning",
+    "description": "When an `AGENTS.md` or `AGENT.md` file changes, flag descriptive openers like `This package provides...`, `The module is...`, `This document describes...`, or long why/prose blocks before any directive. AGENTS files must open with an imperative directive, `When you need ...`, or a `MUST` constraint. Fix guidance: Load `editing-markdown-docs` before editing the file. If the AGENTS file lives inside `.opencode/skills/` or `.agents/skills/`, load `managing-opencode-skills` as well."
+  },
+  {
+    "slug": "agents-table-column-drift",
+    "severity": "warning",
+    "description": "When an `AGENTS.md` or `AGENT.md` file changes, flag generic table headers like `Description`, `Purpose`, or `Details`. AGENTS tables must answer `when` or `what to copy` using headers like `When to use`, `When to modify`, `Copy from`, or `Configuration`. Fix guidance: Load `editing-markdown-docs` before editing the file. If the AGENTS file lives inside `.opencode/skills/` or `.agents/skills/`, load `managing-opencode-skills` as well."
+  },
+  {
+    "slug": "agents-missing-when-framing",
+    "severity": "warning",
+    "description": "When an `AGENTS.md` or `AGENT.md` file changes, flag sections that explain a reference, pattern, or file group without telling the agent when to use it, copy from it, or modify it. AGENTS content must be operational, not explanatory. Prefer `When you need ...` tables and constraint-framed bullets (`**Entity** — short. MUST ...`). Fix guidance: Load `editing-markdown-docs` before editing the file. If the AGENTS file lives inside `.opencode/skills/` or `.agents/skills/`, load `managing-opencode-skills` as well."
+  },
+  {
+    "slug": "spec-test-redundant",
+    "severity": "warning",
+    "description": "For spec PRs (any changed file under `openspec/changes/`): load `testing-conventions` skill and the `AGENTS.md` of every package in `proposal.md` Affected Boundaries. Apply the value gate ('Would this catch a bug that types or the library's own tests do not?') to every `spec.md` scenario and every `tasks.md` Test-first path. Flag scenarios or test files that exercise framework/library behavior (NOT NULL, FK existence, pgEnum, Drizzle insert/select, NestJS routing, passthrough `*.controller.spec.ts` alongside service spec, Zod built-ins per the `testing-conventions` Zod table) or violate per-package `AGENTS.md` test conventions. Propose a replacement scenario when one exists (custom CHECK constraints, non-trivial query joins, `.refine()` / `.transform()` / `discriminatedUnion`, business logic). If no `openspec/changes/` files changed, submit pass with evidence 'SKIP: not a spec PR'."
+  },
+  {
+    "slug": "spec-validation-gate-weakened",
+    "severity": "critical",
+    "description": "If the PR removes, skips, marks `continue-on-error`, or otherwise weakens `task openspec:check`, `scripts/check-openspec.mjs`, or `openspec validate --all`, flag as critical. Deterministic OpenSpec checks must stay automated and blocking."
+  },
+  {
+    "slug": "spec-archive-gate-missing",
+    "severity": "critical",
+    "description": "If the PR changes the ooh-sdd `[archive]` task-generation instructions and removes the requirement to run `task openspec:check -- <change-id>` after archiving, flag as critical."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-6",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "permission": {
+    "skill": {
+      "*": "deny",
+      "code-reviewing": "allow",
+      "deferring-findings": "allow",
+      "fixing-pull-requests": "allow",
+      "reviewing-fixing-loop": "allow",
+      "searching-the-web": "allow",
+      "testing-conventions": "allow",
+      "agent-browser": "allow"
+    }
+  }
+}

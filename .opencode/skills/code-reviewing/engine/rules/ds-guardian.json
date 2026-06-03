@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "ds-status-raw-color",
+    "severity": "critical",
+    "description": "Flag raw Tailwind color utilities used to represent OOH reservation status (free, option, reserved, sold) instead of the DS semantic tokens. Grep changed lines for patterns like `bg-green-`, `text-green-`, `bg-yellow-`, `text-yellow-`, `bg-blue-`, `text-blue-`, `bg-red-`, `text-red-` in `apps/web/src/**/*.{ts,tsx}` and `packages/ui/src/**/*.{ts,tsx}`. Correct alternatives: `bg-status-free`, `bg-status-option`, `bg-status-reserved`, `bg-status-sold` (and `text-status-*` variants) defined in `packages/ui/src/styles/globals.css`. For badge-style status: use the `Badge` component with `success`, `warning`, `info`, or `destructive` variant. Boy Scout Rule: when the PR touches a file that uses raw status colors, migrate at minimum the changed lines. SKIP if no changes in apps/web/ or packages/ui/."
+  },
+  {
+    "slug": "ds-arbitrary-value",
+    "severity": "warning",
+    "description": "Flag Tailwind arbitrary-value utilities in non-DS-internal code. Grep changed lines in `apps/web/src/**/*.{ts,tsx}` for the pattern `(text|p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|ml|mr|w|h|gap|space|rounded|top|left|right|bottom|inset)-\\[` (e.g. `text-[13px]`, `p-[7px]`, `w-[320px]`). Arbitrary values bypass the Tailwind spacing and type scale. Use the nearest scale step or extend the `@theme` in `globals.css`. Exceptions: values in `packages/ui/src/components/` are at DS-maintainer discretion and should only be flagged if they duplicate a scale value that already exists. SKIP if no changes in apps/web/ or packages/ui/."
+  },
+  {
+    "slug": "ds-hardcoded-hex-color",
+    "severity": "critical",
+    "description": "Flag hardcoded hex, rgb(), or hsl() color literals in `className` strings or `style` props inside `apps/web/src/**/*.{ts,tsx}`. Grep changed lines for `#[0-9a-fA-F]{3,6}`, `rgb(`, or `hsl(` within JSX `className` or `style=`. DS semantic tokens (`--primary`, `--destructive`, `--status-*`, etc.) in `globals.css` must be used instead via Tailwind utilities (`bg-primary`, `text-destructive`, `bg-status-free`). Hardcoded color literals in `packages/ui/src/components/` are a DS-maintainer concern; flag only new instances added by the PR, not pre-existing ones in that directory. SKIP if no changes in apps/web/ or packages/ui/."
+  },
+  {
+    "slug": "ds-inline-style-bypass",
+    "severity": "warning",
+    "description": "Flag `style={{ color: ..., backgroundColor: ..., borderColor: ... }}` props on JSX elements in `apps/web/src/**/*.{ts,tsx}` and `packages/ui/src/**/*.{ts,tsx}` when the same effect is achievable via a Tailwind utility or DS token. Inline styles for color bypass theming and dark-mode support. Acceptable exceptions: third-party component APIs that only accept style objects (e.g. react-map-gl, react-day-picker), and animation/transform values with no Tailwind equivalent. Require a `// DS-BYPASS: <reason>` comment on acceptable exceptions. SKIP if no changes in apps/web/ or packages/ui/."
+  },
+  {
+    "slug": "ds-status-chip-dot-color",
+    "severity": "warning",
+    "description": "The `StatusChip` component accepts a `dotColor` prop expecting a `bg-status-*` Tailwind class. Grep changed lines in `apps/web/src/**/*.{ts,tsx}` for `dotColor=` and verify the value uses `bg-status-free`, `bg-status-option`, `bg-status-reserved`, or `bg-status-sold`. Any other color class passed to `dotColor` (e.g. `bg-green-500`) is a DS violation. SKIP if no changes in apps/web/."
+  },
+  {
+    "slug": "ds-inline-svg",
+    "severity": "warning",
+    "description": "Flag new inline `<svg` markup in `apps/web/src/**/*.{ts,tsx}` and `packages/ui/src/**/*.{ts,tsx}` when an existing icon component or shared SVG asset would do. Grep changed lines for `<svg`, `<path`, `<circle`, or `<rect` inside JSX. Inline SVG is allowed only when the shape is feature-specific and cannot be expressed with an existing icon set or shared component. Require a short justification comment nearby for exceptions. SKIP if no changes in apps/web/ or packages/ui/."
+  }
+]
