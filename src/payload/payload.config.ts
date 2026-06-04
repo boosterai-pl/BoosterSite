@@ -17,64 +17,8 @@ import { HomePage } from "./globals/HomePage.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-async function migrateHeadlineFields(payload: Parameters<NonNullable<Parameters<typeof buildConfig>[0]["onInit"]>>[0]) {
-  for (const locale of ["en", "pl"] as const) {
-    const home = await payload.findGlobal({ slug: "home-page", locale, fallbackLocale: false }) as Record<string, unknown>;
-
-    // Skip if new fields are already populated
-    const heroHeadline = home.heroHeadline as Record<string, unknown> | null;
-    if (heroHeadline?.text) continue;
-
-    const heroLines = home.heroHeadlineLines as Array<{ text: string; accent?: string }> | null;
-    const speedLines = home.speedHeadlineLines as Array<{ text: string }> | null;
-    const ctaLines = home.ctaHeadlineLines as Array<{ text: string; accent?: string }> | null;
-
-    if (!heroLines?.length && !speedLines?.length && !ctaLines?.length) continue;
-
-    const lastHeroLine = heroLines?.at(-1);
-    const lastCtaLine = ctaLines?.at(-1);
-
-    await payload.updateGlobal({
-      slug: "home-page",
-      locale,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data: {
-        ...(heroLines?.length ? {
-          heroHeadline: {
-            text: heroLines.map((l) => l.text).join("\n"),
-            ...(lastHeroLine?.accent ? { accent: lastHeroLine.accent } : {}),
-          },
-        } : {}),
-        ...(speedLines?.length ? {
-          speedHeadline: {
-            line1: speedLines[0]?.text ?? "",
-            strikeText: locale === "pl" ? "12 miesięcy," : "12 months",
-            accentText: locale === "pl" ? "my wdrażamy" : "we ship",
-            line3: speedLines[2]?.text ?? "",
-          },
-        } : {}),
-        ...(ctaLines?.length ? {
-          ctaHeadline: {
-            text: ctaLines.map((l) => l.text).join("\n"),
-            ...(lastCtaLine?.accent ? { accent: lastCtaLine.accent } : {}),
-          },
-        } : {}),
-      } as never,
-    });
-
-    payload.logger.info(`[headline-migration] locale=${locale} migrated successfully.`);
-  }
-}
-
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "DEVELOPMENT-SECRET-CHANGE-ME-PLEASE",
-  onInit: async (payload) => {
-    try {
-      await migrateHeadlineFields(payload);
-    } catch (err) {
-      payload.logger.error({ err }, "[headline-migration] failed — site will fall back to static content until resolved.");
-    }
-  },
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
