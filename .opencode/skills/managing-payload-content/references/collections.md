@@ -22,13 +22,13 @@ Slug: `services` | Localized: `title`, `description`, `tags[].tag`
 
 ```bash
 # List all services (English, ordered)
-curl "http://localhost:3000/api/services?locale=en&limit=100&sort=sortOrder"
+curl "$BASE/api/services?locale=en&limit=100&sort=sortOrder"
 
 # Get single service by slug
-curl "http://localhost:3000/api/services?where[slug][equals]=crm-implementation&locale=en"
+curl "$BASE/api/services?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=en"
 
 # Get single service by ID
-curl "http://localhost:3000/api/services/$ID?locale=en"
+curl "$BASE/api/services/$ID?locale=en"
 ```
 
 ---
@@ -50,10 +50,10 @@ Slug: `case-studies` | Localized: `title`, `description`, `tags[].tag`
 
 ```bash
 # List all case studies
-curl "http://localhost:3000/api/case-studies?locale=en&limit=100&sort=sortOrder"
+curl "$BASE/api/case-studies?locale=en&limit=100&sort=sortOrder"
 
 # Get by ID
-curl "http://localhost:3000/api/case-studies/$ID?locale=en"
+curl "$BASE/api/case-studies/$ID?locale=en"
 ```
 
 ---
@@ -75,13 +75,13 @@ Slug: `team-members` | Localized: `role`
 
 ```bash
 # List all team members
-curl "http://localhost:3000/api/team-members?locale=en&limit=100&sort=sortOrder"
+curl "$BASE/api/team-members?locale=en&limit=100&sort=sortOrder"
 
 # With photo populated
-curl "http://localhost:3000/api/team-members?locale=en&depth=1&sort=sortOrder"
+curl "$BASE/api/team-members?locale=en&depth=1&sort=sortOrder"
 
 # Get by ID
-curl "http://localhost:3000/api/team-members/$ID?locale=en"
+curl "$BASE/api/team-members/$ID?locale=en"
 ```
 
 ---
@@ -112,11 +112,11 @@ Slug: `practices` | Localized: `eyebrow`, `headline.text`, `headline.accent`, `l
 
 ```bash
 # List all practices
-curl "http://localhost:3000/api/practices?locale=en&limit=100&sort=sortOrder"
+curl "$BASE/api/practices?locale=en&limit=100&sort=sortOrder"
 
 # Get by slug
-curl "http://localhost:3000/api/practices?where[slug][equals]=crm-implementation&locale=en"
+curl "$BASE/api/practices?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=en"
 
 # Get by ID
-curl "http://localhost:3000/api/practices/$ID?locale=en"
+curl "$BASE/api/practices/$ID?locale=en"
 ```

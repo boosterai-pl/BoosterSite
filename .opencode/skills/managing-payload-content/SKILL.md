@@ -4,43 +4,63 @@ description: Use when reading or editing Payload CMS content — blog posts, ser
 compatibility: opencode
 ---
 
-## Base URL
+## Setup
 
-Always `http://localhost:3000/api`. Requires the local dev server running (`npm run dev`).
+Read the base URL and credentials from `.env.local` at the start of every session:
+
+```bash
+BASE=$(dotenvx get PAYLOAD_URL -f .env.local)
+# BASE is e.g. https://boostersite-nine.vercel.app or http://localhost:3000
+```
+
+If `PAYLOAD_URL` is not set, ask the user. Do not hardcode a URL.
+
+Admin panel: `$BASE/admin`
 
 ## Auth
 
 **Reads (GET)** — all collections are public, no auth needed.
 
-**Writes (POST / PATCH / DELETE)** — require a Payload JWT. Get one from `.env.local`:
+**Writes (POST / PATCH / DELETE)** — require a Payload JWT:
 
 ```bash
+BASE=$(dotenvx get PAYLOAD_URL -f .env.local)
 PAYLOAD_EMAIL=$(dotenvx get PAYLOAD_EMAIL -f .env.local)
 PAYLOAD_PASSWORD=$(dotenvx get PAYLOAD_PASSWORD -f .env.local)
-TOKEN=$(curl -s -X POST http://localhost:3000/api/users/login \
+TOKEN=$(curl -s -X POST "$BASE/api/users/login" \
   -H "Content-Type: application/json" \
   -d "{\"email\":\"$PAYLOAD_EMAIL\",\"password\":\"$PAYLOAD_PASSWORD\"}" \
   | jq -r .token)
 ```
 
-Use `Authorization: JWT $TOKEN` on all write requests. Tokens expire — re-login if you get a 401.
+Use `Authorization: JWT $TOKEN` on all write requests. Re-login on 401.
 
 If `PAYLOAD_EMAIL` / `PAYLOAD_PASSWORD` are not in `.env.local`, ask the user to add them.
 
 ## Localization
 
-All localized fields accept `?locale=en` (default) or `?locale=pl`. To update both locales, make two PATCH calls — one per locale.
+All localized fields accept `?locale=en` (default) or `?locale=pl`. Make two PATCH calls — one per locale — when updating localized fields.
 
-## Common Query Parameters
+## Query Parameters
 
 | Param | Example | Effect |
 |-------|---------|--------|
 | `locale` | `?locale=pl` | Return Polish copy |
 | `limit` | `?limit=100` | Max docs returned (default 10) |
 | `sort` | `?sort=sortOrder` | Sort by field |
-| `where[field][equals]` | `?where[slug][equals]=my-post` | Filter |
+| `where` filter | see below | Filter by field value |
 | `depth` | `?depth=1` | Populate relationships (default 0) |
 | `draft` | `?draft=true` | Include draft versions (posts only) |
+
+**`where` filter** — URL-encode the brackets or quote the full URL:
+
+```bash
+# URL-encoded (safe in all shells)
+curl "$BASE/api/practices?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=en"
+
+# Quoted URL (also works in bash)
+curl "$BASE/api/practices?where[slug][equals]=crm-implementation&locale=en"
+```
 
 ## Collections Overview
 
@@ -55,19 +75,24 @@ All localized fields accept `?locale=en` (default) or `?locale=pl`. To update bo
 
 ## Quick Recipes
 
-**List all posts (published, English):**
+**List all services (ordered):**
 ```bash
-curl "http://localhost:3000/api/posts?locale=en&limit=100"
+curl "$BASE/api/services?locale=en&limit=100&sort=sortOrder"
 ```
 
 **Get home-page copy:**
 ```bash
-curl "http://localhost:3000/api/globals/home-page?locale=en"
+curl "$BASE/api/globals/home-page?locale=en" | jq '{brand, tagline, heroLead}'
+```
+
+**Find practice by slug:**
+```bash
+curl "$BASE/api/practices?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=en"
 ```
 
 **Update a post field:**
 ```bash
-curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID" \
+curl -s -X PATCH "$BASE/api/posts/$POST_ID?locale=en" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"title": "New title"}'
@@ -75,9 +100,10 @@ curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID" \
 
 ## DOs and DON'Ts
 
-- DO check `jq` is available; pipe responses through `| jq` for readability
+- DO read `PAYLOAD_URL` from `.env.local` every time — never hardcode
+- DO pipe responses through `| jq` for readability
 - DO re-login if you get a 401 — tokens expire
-- DO use `?depth=1` when you need related documents (author, featuredImage) populated
-- DO make separate PATCH calls per locale when updating localized fields
+- DO use `?depth=1` when you need related documents populated
+- DO make separate PATCH calls per locale for localized fields
 - DON'T include `id`, `createdAt`, `updatedAt` in create/update bodies
-- DON'T attempt writes on services, case-studies, team-members, practices, or home-page via REST — those are admin-managed; direct the user to the Payload admin panel at `http://localhost:3000/admin`
+- DON'T attempt writes on services, case-studies, team-members, practices, or home-page — admin-managed only

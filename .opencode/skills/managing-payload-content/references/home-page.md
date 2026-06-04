@@ -6,13 +6,13 @@ Slug: `home-page` (global) | Read-only via REST | Edit via admin panel: `http://
 
 ```bash
 # Full home page (English)
-curl "http://localhost:3000/api/globals/home-page?locale=en"
+curl "$BASE/api/globals/home-page?locale=en"
 
 # Polish
-curl "http://localhost:3000/api/globals/home-page?locale=pl"
+curl "$BASE/api/globals/home-page?locale=pl"
 
 # With relationships populated (servicesItems, casesItems, teamMembers)
-curl "http://localhost:3000/api/globals/home-page?locale=en&depth=1"
+curl "$BASE/api/globals/home-page?locale=en&depth=1"
 ```
 
 ---
@@ -152,14 +152,14 @@ All localized fields accept `?locale=en` or `?locale=pl`.
 
 Home page is read-only via the REST API (no unauthenticated writes, and admin-only by design). To change copy:
 
-1. Read the current value: `curl "http://localhost:3000/api/globals/home-page?locale=en" | jq '.fieldName'`
-2. Open the admin panel: `http://localhost:3000/admin/globals/home-page`
+1. Read the current value: `curl "$BASE/api/globals/home-page?locale=en" | jq '.fieldName'`
+2. Open the admin panel: `$BASE/admin/globals/home-page`
 3. Navigate to the relevant tab and edit directly
 
 Or, if write access via JWT is needed (and the user has admin credentials):
 
 ```bash
-curl -s -X POST "http://localhost:3000/api/globals/home-page" \
+curl -s -X POST "$BASE/api/globals/home-page" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"heroLead": "Updated lead text."}'

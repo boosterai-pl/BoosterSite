@@ -49,13 +49,13 @@ When updating `content`, always send a complete valid Lexical root object. Fetch
 
 ```bash
 # All published posts, English
-curl "http://localhost:3000/api/posts?locale=en&limit=100&sort=-publishedAt"
+curl "$BASE/api/posts?locale=en&limit=100&sort=-publishedAt"
 
 # Draft posts included
-curl "http://localhost:3000/api/posts?locale=en&draft=true&limit=100"
+curl "$BASE/api/posts?locale=en&draft=true&limit=100"
 
 # Filter by slug
-curl "http://localhost:3000/api/posts?locale=en&where[slug][equals]=my-post-slug"
+curl "$BASE/api/posts?where%5Bslug%5D%5Bequals%5D=my-post-slug&locale=en"
 ```
 
 Response shape: `{ docs: [...], totalDocs, limit, page, totalPages, hasNextPage, hasPrevPage }`
@@ -64,16 +64,16 @@ Response shape: `{ docs: [...], totalDocs, limit, page, totalPages, hasNextPage,
 
 ```bash
 # By ID
-curl "http://localhost:3000/api/posts/$POST_ID?locale=en"
+curl "$BASE/api/posts/$POST_ID?locale=en"
 
 # With author and featuredImage populated
-curl "http://localhost:3000/api/posts/$POST_ID?locale=en&depth=1"
+curl "$BASE/api/posts/$POST_ID?locale=en&depth=1"
 ```
 
 ## Create Post
 
 ```bash
-curl -s -X POST "http://localhost:3000/api/posts" \
+curl -s -X POST "$BASE/api/posts" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -99,19 +99,19 @@ Only send fields you want to change — PATCH is non-destructive for top-level f
 
 ```bash
 # Update title (English)
-curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID?locale=en" \
+curl -s -X PATCH "$BASE/api/posts/$POST_ID?locale=en" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"title": "Updated Title"}'
 
 # Update title (Polish) — separate call
-curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID?locale=pl" \
+curl -s -X PATCH "$BASE/api/posts/$POST_ID?locale=pl" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"title": "Zaktualizowany tytuł"}'
 
 # Update tags (replaces the entire array)
-curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID" \
+curl -s -X PATCH "$BASE/api/posts/$POST_ID" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"tags": [{"tag": "ai"}, {"tag": "automation"}]}'
@@ -122,7 +122,7 @@ curl -s -X PATCH "http://localhost:3000/api/posts/$POST_ID" \
 ## Delete Post
 
 ```bash
-curl -s -X DELETE "http://localhost:3000/api/posts/$POST_ID" \
+curl -s -X DELETE "$BASE/api/posts/$POST_ID" \
   -H "Authorization: JWT $TOKEN"
 ```
 
@@ -130,7 +130,7 @@ curl -s -X DELETE "http://localhost:3000/api/posts/$POST_ID" \
 
 When asked to change copy in a post:
 
-1. Fetch the post: `curl "http://localhost:3000/api/posts?where[slug][equals]=SLUG&locale=en"`
+1. Fetch the post: `curl "$BASE/api/posts?where%5Bslug%5D%5Bequals%5D=SLUG&locale=en"`
 2. Extract the `id` and the field(s) to change
 3. PATCH only the changed fields
 4. If bilingual, repeat for `?locale=pl`
