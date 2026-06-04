@@ -1,9 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as dotenv from "dotenv";
-
-// Load .env.local
-dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 import { site } from "../src/content/site";
 

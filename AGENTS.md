@@ -46,3 +46,19 @@ Loaded via Google Fonts in `src/app/layout.tsx`: **Geist** (sans), **Geist Mono*
 ## TypeScript
 
 Strict mode on, `allowJs: false`. All types must be explicit. Content types in `src/content/types.ts` use `readonly` throughout — maintain that.
+
+## Environment variables (dotenvx)
+
+Env loading is handled by [`dotenvx`](https://dotenvx.com/) — all `npm run` scripts that need env are wrapped with `dotenvx run`. Do **not** call `dotenv.config()` from application or script code.
+
+- **Local dev**: edit `.env.local` (plaintext, gitignored). Scripts load it via `dotenvx run -f .env.local --ignore=MISSING_ENV_FILE`.
+- **Shared / CI**: `.env.production` is committed **encrypted** (public-key crypto). The matching private key lives in `.env.keys` (gitignored). To decrypt at runtime, set `DOTENV_PRIVATE_KEY_PRODUCTION` in the deploy environment.
+- **Template**: `.env.example` lists every required key with empty values. Update it whenever a new env var is introduced.
+- **Adding/changing prod secrets**: edit `.env.production` (it stays valid both encrypted and plaintext), then `npm run env:encrypt`.
+- **Never commit** `.env.local`, `.env.keys`, or any plaintext `.env*` file other than `.env.example`.
+
+Vercel deployments read env from the Vercel dashboard directly — dotenvx is not required at runtime there, only for local dev and any CI that consumes the encrypted file.
+
+### OpenCode + Payload MCP
+
+The `payload` MCP server in `opencode.json` reads `MCP_API_KEY` from the OpenCode process environment via `{env:MCP_API_KEY}`. To launch OpenCode with the key auto-loaded from dotenvx, run `npm run opencode` (wraps `opencode` in `dotenvx run` with `.env.local` + `.env.production`). Requires `.env.keys` to decrypt `.env.production` — share that out-of-band, never commit.

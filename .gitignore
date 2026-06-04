@@ -27,6 +27,13 @@ yarn-error.log*
 # env files
 .env*
 !.env.example
+# dotenvx — encrypted env files are safe to commit
+!.env.production
+!.env.staging
+!.env.ci
+# never commit private keys
+.env.keys
+.env.vault
 
 # vercel
 .vercel
