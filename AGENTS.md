@@ -61,4 +61,39 @@ Vercel deployments read env from the Vercel dashboard directly — dotenvx is no
 
 ### OpenCode + Payload MCP
 
-The `payload` MCP server in `opencode.json` reads `MCP_API_KEY` from the OpenCode process environment via `{env:MCP_API_KEY}`. To launch OpenCode with the key auto-loaded from dotenvx, run `npm run opencode` (wraps `opencode` in `dotenvx run` with `.env.local` + `.env.production`). Requires `.env.keys` to decrypt `.env.production` — share that out-of-band, never commit.
+The `payload` MCP server has been removed. Payload content is now managed via the `managing-payload-content` skill (direct curl REST API calls). See `.opencode/skills/managing-payload-content/SKILL.md`.
+
+## Payload CMS
+
+- **Admin panel**: `$PAYLOAD_URL/admin`
+- **Prod URL**: `https://boostersite-nine.vercel.app` (set as `PAYLOAD_URL` in `.env.local`)
+- **Auth**: email + password → JWT. No API key auth — `useAPIKey` is not enabled on the Users collection. Credentials stored as `PAYLOAD_EMAIL` / `PAYLOAD_PASSWORD` in `.env.local`.
+- **Reads**: all collections are public, no auth needed.
+- **Writes**: require JWT — login via `POST $PAYLOAD_URL/api/users/login`.
+
+## Vercel Deployments
+
+Project lives under the **`szymon-bazans-projects`** Vercel scope (not `andrzejchm`). Use the `VERCEL_TOKEN` from `.env.local` to authenticate API calls.
+
+Active deployments (as of June 2026):
+
+| Target | URL | Branch |
+|--------|-----|--------|
+| production (latest) | `boostersite-29qprne2q-szymon-bazans-projects.vercel.app` | `main` |
+| preview | `boostersite-j14fahntx-szymon-bazans-projects.vercel.app` | `feat/payload-content-skill-clean` |
+
+Production alias: `https://boostersite-nine.vercel.app`
+
+## Database (Neon)
+
+`DATABASE_URI` is environment-specific and encrypted everywhere except `.env.local`:
+
+| Env | Source | Status |
+|-----|--------|--------|
+| local dev | `.env.local` (plaintext) | endpoint `ep-billowing-block-al5iw9u9.c-3.eu-central-1.aws.neon.tech/neondb` |
+| production | `.env.production` (dotenvx-encrypted) | requires `DOTENV_PRIVATE_KEY_PRODUCTION` in `.env.keys` |
+| Vercel preview | Vercel dashboard (dotenvx-encrypted blob) | different endpoint, exact value unknown without key |
+
+The Vercel production env entry for `DATABASE_URI` is empty — production relies on dotenvx decrypting `.env.production` at build time via `DOTENV_PRIVATE_KEY_PRODUCTION`.
+
+To decrypt `.env.production` locally, add the private key to `.env.keys` (see command below).

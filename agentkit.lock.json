@@ -39,6 +39,16 @@
         "version": "external",
         "installPath": ".agents/skills",
         "syncedAt": "2026-06-03T09:12:55.844Z"
+      },
+      "managing-opencode-skills": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-04T14:29:26.487Z"
+      },
+      "editing-markdown-docs": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-04T14:29:26.487Z"
       }
     },
     "agents": {
