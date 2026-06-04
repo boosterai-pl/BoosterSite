@@ -13,7 +13,6 @@ export const site: SiteContent = {
     { label: "Work", href: "#work" },
     { label: "Process", href: "#process" },
     { label: "About", href: "#about" },
-    { label: "Insights", href: "#insights" },
   ],
   navCta: { label: "Book a free AI consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
   hero: {
