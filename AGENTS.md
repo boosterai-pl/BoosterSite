@@ -65,6 +65,19 @@ The `payload` MCP server has been removed. Payload content is now managed via th
 
 ## Payload CMS
 
+### Database migrations
+
+Schema changes are managed via explicit migration files in `migrations/` (Drizzle under the hood, `push: false`). **Never** rely on auto-push in any environment.
+
+Workflow when you change a collection or global schema:
+1. `npm run db:migrate:create <name>` — generate a migration file from the schema diff
+2. Commit the generated file alongside the schema change
+3. `npm run db:migrate` — apply pending migrations locally (also runs on deploy)
+
+Other commands: `db:migrate:status` (inspect state), `db:migrate:fresh` (drop + replay all — dev only).
+
+---
+
 - **Admin panel**: `$PAYLOAD_URL/admin`
 - **Prod URL**: `https://boostersite-nine.vercel.app` (set as `PAYLOAD_URL` in `.env.local`)
 - **Auth**: email + password → JWT. No API key auth — `useAPIKey` is not enabled on the Users collection. Credentials stored as `PAYLOAD_EMAIL` / `PAYLOAD_PASSWORD` in `.env.local`.

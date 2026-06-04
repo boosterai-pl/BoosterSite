@@ -23,6 +23,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
+    push: false,
+    migrationDir: path.resolve(dirname, "../../migrations"),
   }),
   editor: lexicalEditor(),
   admin: {
