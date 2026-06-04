@@ -76,7 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     for (const post of result.docs) {
-      const p = post as Record<string, unknown>;
+      const p = post as unknown as Record<string, unknown>;
       entries.push({
         url: `https://boosterai.pl/blog/${p.slug as string}`,
         lastModified: new Date(p.updatedAt as string),

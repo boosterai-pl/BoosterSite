@@ -59,11 +59,11 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
     ]);
 
     return mapPayloadToSiteContent(
-      home as Record<string, unknown>,
-      servicesResult.docs as Record<string, unknown>[],
-      casesResult.docs as Record<string, unknown>[],
-      teamResult.docs as Record<string, unknown>[],
-      practicesResult.docs as Record<string, unknown>[],
+      home as unknown as Record<string, unknown>,
+      servicesResult.docs as unknown as Record<string, unknown>[],
+      casesResult.docs as unknown as Record<string, unknown>[],
+      teamResult.docs as unknown as Record<string, unknown>[],
+      practicesResult.docs as unknown as Record<string, unknown>[],
     );
   } catch {
     // Fall back to static data if Payload is unavailable (e.g., during initial build)
