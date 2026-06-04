@@ -122,10 +122,10 @@ async function seed() {
       navCta: { label: site.navCta.label, href: site.navCta.href },
       heroEyebrow: site.hero.eyebrow,
       heroEstablishedLabel: site.hero.establishedLabel,
-      heroHeadlineLines: site.hero.headlineLines.map((l) => ({
-        text: l.text,
-        ...(l.accent ? { accent: l.accent } : {}),
-      })),
+      heroHeadline: {
+        text: site.hero.headline.text,
+        ...(site.hero.headline.accent ? { accent: site.hero.headline.accent } : {}),
+      },
       heroLead: site.hero.lead,
       heroPrimaryCta: { label: site.hero.primaryCta.label, href: site.hero.primaryCta.href },
       heroSecondaryCta: { label: site.hero.secondaryCta.label, href: site.hero.secondaryCta.href },
@@ -158,10 +158,12 @@ async function seed() {
       },
       casesItems: caseIds,
       speedEyebrow: site.speed.eyebrow,
-      speedHeadlineLines: site.speed.headlineLines.map((l) => ({
-        text: l.text,
-        ...(l.accent ? { accent: l.accent } : {}),
-      })),
+      speedHeadline: {
+        line1: site.speed.headline.line1,
+        strikeText: site.speed.headline.strikeText,
+        accentText: site.speed.headline.accentText,
+        line3: site.speed.headline.line3,
+      },
       speedStats: site.speed.stats.map((s) => ({
         value: s.value,
         ...(s.suffix ? { suffix: s.suffix } : {}),
@@ -197,10 +199,10 @@ async function seed() {
         title: p.title,
       })),
       ctaEyebrow: site.cta.eyebrow,
-      ctaHeadlineLines: site.cta.headlineLines.map((l) => ({
-        text: l.text,
-        ...(l.accent ? { accent: l.accent } : {}),
-      })),
+      ctaHeadline: {
+        text: site.cta.headline.text,
+        ...(site.cta.headline.accent ? { accent: site.cta.headline.accent } : {}),
+      },
       ctaBody: site.cta.body,
       ctaButton: { label: site.cta.button.label, href: site.cta.button.href },
       footerIntro: site.footer.intro,

@@ -5,11 +5,11 @@ import { WordReveal, WordRevealAccent } from "./WordReveal";
 type Props = { content: SiteContent["cta"] };
 
 export function CTA({ content }: Props) {
+  const lines = content.headline.text.split("\n");
   let runningDelay = 0;
-  const lineDelays = content.headlineLines.map((line) => {
+  const lineDelays = lines.map((line) => {
     const start = runningDelay;
-    const wordCount = line.text.split(" ").length;
-    runningDelay = start + wordCount * 0.06 + 0.1;
+    runningDelay = start + line.split(" ").length * 0.06 + 0.1;
     return start;
   });
 
@@ -22,17 +22,17 @@ export function CTA({ content }: Props) {
           <span className="eyebrow cta-eyebrow">{content.eyebrow}</span>
         </div>
         <h2 style={heroStyle}>
-          {content.headlineLines.map((line, idx) => {
-            const accentDelay =
-              lineDelays[idx] + line.text.split(" ").length * 0.06;
+          {lines.map((line, idx) => {
+            const isLast = idx === lines.length - 1;
+            const accentDelay = lineDelays[idx] + line.split(" ").length * 0.06;
             return (
               <div key={idx} data-reveal>
-                <WordReveal text={line.text} delayBase={lineDelays[idx]} />
-                {line.accent ? (
+                <WordReveal text={line} delayBase={lineDelays[idx]} />
+                {isLast && content.headline.accent ? (
                   <>
                     {" "}
                     <WordRevealAccent delay={accentDelay} className="serif">
-                      {line.accent}
+                      {content.headline.accent}
                     </WordRevealAccent>
                   </>
                 ) : null}

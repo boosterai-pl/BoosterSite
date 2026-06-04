@@ -18,11 +18,7 @@ export const site: SiteContent = {
   hero: {
     eyebrow: "AI Native — Service Agency",
     establishedLabel: "",
-    headlineLines: [
-      { text: "Grow your" },
-      { text: "revenue." },
-      { text: "Not your", accent: "payroll." },
-    ],
+    headline: { text: "Grow your\nrevenue.\nNot your", accent: "payroll." },
     lead:
       "We build autonomous AI infrastructure for complex B2B operations. By replacing manual workarounds with custom platforms, we deliver end-to-end solutions in weeks, not quarters.",
     primaryCta: { label: "Book a free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
@@ -173,11 +169,12 @@ export const site: SiteContent = {
   },
   speed: {
     eyebrow: "04 / Why us",
-    headlineLines: [
-      { text: "The work others quote at" },
-      { text: "12 months we ship" },
-      { text: "in six weeks." },
-    ],
+    headline: {
+      line1: "The work others quote at",
+      strikeText: "12 months",
+      accentText: "we ship",
+      line3: "in six weeks.",
+    },
     stats: [
       { value: "6", suffix: "wks", label: "From first workshop to live production deployment, completely replacing slow 12-month software roadmaps." },
       { value: "0", suffix: "%", label: "License fees and vendor lock-in, leveraging flexible open-source enterprise stacks to keep your architecture independent." },
@@ -265,11 +262,7 @@ export const site: SiteContent = {
   },
   cta: {
     eyebrow: "Let's start",
-    headlineLines: [
-      { text: "Tell us where" },
-      { text: "your roadmap" },
-      { text: "says", accent: "“next year.”" },
-    ],
+    headline: { text: "Tell us where\nyour roadmap\nsays", accent: "\u201cnext year.\u201d" },
     body: "Book a 30-minute consultation. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
     button: { label: "Book free consultation", href: "https://cal.com/szymon-bazan-iahn2z" },
   },
