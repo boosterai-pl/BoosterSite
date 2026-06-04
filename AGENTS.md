@@ -101,12 +101,12 @@ Production alias: `https://boostersite-nine.vercel.app`
 
 `DATABASE_URI` is environment-specific and encrypted everywhere except `.env.local`:
 
-| Env | Source | Status |
-|-----|--------|--------|
+| Env | Source | Notes |
+|-----|--------|-------|
 | local dev | `.env.local` (plaintext) | endpoint `ep-billowing-block-al5iw9u9.c-3.eu-central-1.aws.neon.tech/neondb` |
-| production | `.env.production` (dotenvx-encrypted) | requires `DOTENV_PRIVATE_KEY_PRODUCTION` in `.env.keys` |
-| Vercel preview | Vercel dashboard (dotenvx-encrypted blob) | different endpoint, exact value unknown without key |
+| production | Vercel dashboard (`type: sensitive`) | not readable via API — set directly in Vercel project settings |
+| Vercel preview | Vercel dashboard (`type: encrypted`) | dotenvx-encrypted blob, different Neon branch |
 
-The Vercel production env entry for `DATABASE_URI` is empty — production relies on dotenvx decrypting `.env.production` at build time via `DOTENV_PRIVATE_KEY_PRODUCTION`.
+The Vercel production `DATABASE_URI` is marked `sensitive` — the API returns `""` but the value IS set and injected at build/runtime. Do not confuse this with an empty value.
 
 To decrypt `.env.production` locally, add the private key to `.env.keys` (see command below).
