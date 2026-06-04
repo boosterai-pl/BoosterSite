@@ -879,13 +879,13 @@ export interface HomePage {
   };
   heroEyebrow: string;
   heroEstablishedLabel?: string | null;
-  heroHeadlineLines?:
-    | {
-        text: string;
-        accent?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Use newlines (\n) to separate visual lines for the word-reveal animation. Accent is appended to the last line.
+   */
+  heroHeadline: {
+    text: string;
+    accent?: string | null;
+  };
   heroLead: string;
   heroPrimaryCta: {
     label: string;
@@ -944,13 +944,15 @@ export interface HomePage {
   };
   casesItems?: (number | CaseStudy)[] | null;
   speedEyebrow: string;
-  speedHeadlineLines?:
-    | {
-        text: string;
-        accent?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * The middle line renders as: ~~strikeText~~ accentText (crossed-out + colored). line1 and line3 are plain text lines above and below.
+   */
+  speedHeadline: {
+    line1: string;
+    strikeText: string;
+    accentText: string;
+    line3: string;
+  };
   speedStats?:
     | {
         value: string;
@@ -1001,13 +1003,13 @@ export interface HomePage {
       }[]
     | null;
   ctaEyebrow: string;
-  ctaHeadlineLines?:
-    | {
-        text: string;
-        accent?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Use newlines (\n) to separate visual lines for the word-reveal animation. Accent is appended to the last line.
+   */
+  ctaHeadline: {
+    text: string;
+    accent?: string | null;
+  };
   ctaBody: string;
   ctaButton: {
     label: string;
@@ -1061,12 +1063,11 @@ export interface HomePageSelect<T extends boolean = true> {
       };
   heroEyebrow?: T;
   heroEstablishedLabel?: T;
-  heroHeadlineLines?:
+  heroHeadline?:
     | T
     | {
         text?: T;
         accent?: T;
-        id?: T;
       };
   heroLead?: T;
   heroPrimaryCta?:
@@ -1133,12 +1134,13 @@ export interface HomePageSelect<T extends boolean = true> {
       };
   casesItems?: T;
   speedEyebrow?: T;
-  speedHeadlineLines?:
+  speedHeadline?:
     | T
     | {
-        text?: T;
-        accent?: T;
-        id?: T;
+        line1?: T;
+        strikeText?: T;
+        accentText?: T;
+        line3?: T;
       };
   speedStats?:
     | T
@@ -1196,12 +1198,11 @@ export interface HomePageSelect<T extends boolean = true> {
         id?: T;
       };
   ctaEyebrow?: T;
-  ctaHeadlineLines?:
+  ctaHeadline?:
     | T
     | {
         text?: T;
         accent?: T;
-        id?: T;
       };
   ctaBody?: T;
   ctaButton?:
