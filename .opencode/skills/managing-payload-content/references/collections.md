@@ -1,6 +1,6 @@
-# Read-Only Collections Reference
+# Collections Reference
 
-These collections are managed via the Payload admin panel (`http://localhost:3000/admin`). Agents can read them freely — writes require direct admin access.
+All collections below support full CRUD via the Payload REST API. Reads are public (no auth). Writes require a JWT — see the Auth section in [SKILL.md](../SKILL.md).
 
 ---
 
@@ -31,6 +31,26 @@ curl "$BASE/api/services?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=e
 curl "$BASE/api/services/$ID?locale=en"
 ```
 
+### Writes
+
+```bash
+# Create
+curl -s -X POST "$BASE/api/services" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sortOrder": "05", "slug": "new-service", "title": "New Service", "description": "Short description.", "tags": [{"tag": "automation"}]}'
+
+# Update (PATCH — send only changed fields)
+curl -s -X PATCH "$BASE/api/services/$ID?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Updated Title"}'
+
+# Delete
+curl -s -X DELETE "$BASE/api/services/$ID" \
+  -H "Authorization: JWT $TOKEN"
+```
+
 ---
 
 ## Case Studies
@@ -54,6 +74,26 @@ curl "$BASE/api/case-studies?locale=en&limit=100&sort=sortOrder"
 
 # Get by ID
 curl "$BASE/api/case-studies/$ID?locale=en"
+```
+
+### Writes
+
+```bash
+# Create
+curl -s -X POST "$BASE/api/case-studies" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sortOrder": "03", "title": "New Case Study", "description": "What we did.", "tags": [{"tag": "crm"}]}'
+
+# Update
+curl -s -X PATCH "$BASE/api/case-studies/$ID?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Updated Title"}'
+
+# Delete
+curl -s -X DELETE "$BASE/api/case-studies/$ID" \
+  -H "Authorization: JWT $TOKEN"
 ```
 
 ---
@@ -82,6 +122,26 @@ curl "$BASE/api/team-members?locale=en&depth=1&sort=sortOrder"
 
 # Get by ID
 curl "$BASE/api/team-members/$ID?locale=en"
+```
+
+### Writes
+
+```bash
+# Create (photo is optional — pass a media document ID if available)
+curl -s -X POST "$BASE/api/team-members" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sortOrder": "04", "name": "Jane Doe", "role": "Engineer"}'
+
+# Update role (localized — repeat for each locale)
+curl -s -X PATCH "$BASE/api/team-members/$ID?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"role": "Senior Engineer"}'
+
+# Delete
+curl -s -X DELETE "$BASE/api/team-members/$ID" \
+  -H "Authorization: JWT $TOKEN"
 ```
 
 ---
@@ -119,4 +179,33 @@ curl "$BASE/api/practices?where%5Bslug%5D%5Bequals%5D=crm-implementation&locale=
 
 # Get by ID
 curl "$BASE/api/practices/$ID?locale=en"
+```
+
+### Writes
+
+```bash
+# Create
+curl -s -X POST "$BASE/api/practices" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sortOrder": "06",
+    "slug": "new-practice",
+    "eyebrow": "What we do",
+    "headline": {"text": "Practice Headline", "accent": "accent part"},
+    "lead": "Intro paragraph.",
+    "heroCta": {"microCopy": "Ready?", "label": "Get started", "href": "/contact"},
+    "sections": [{"title": "Section 1", "body": "Body text."}],
+    "cta": {"microCopy": "Let us help", "label": "Contact us", "href": "/contact"}
+  }'
+
+# Update a field (localized)
+curl -s -X PATCH "$BASE/api/practices/$ID?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"eyebrow": "Updated eyebrow"}'
+
+# Delete
+curl -s -X DELETE "$BASE/api/practices/$ID" \
+  -H "Authorization: JWT $TOKEN"
 ```

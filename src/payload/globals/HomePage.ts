@@ -53,10 +53,11 @@ export const HomePage: GlobalConfig = {
             { name: "heroEyebrow", type: "text", required: true, localized: true },
             { name: "heroEstablishedLabel", type: "text", localized: true },
             {
-              name: "heroHeadlineLines",
-              type: "array",
+              name: "heroHeadline",
+              type: "group",
+              admin: { description: "Use newlines (\\n) to separate visual lines for the word-reveal animation." },
               fields: [
-                { name: "text", type: "text", required: true, localized: true },
+                { name: "text", type: "textarea", required: true, localized: true },
                 { name: "accent", type: "text", localized: true },
               ],
             },
@@ -187,11 +188,14 @@ export const HomePage: GlobalConfig = {
           fields: [
             { name: "speedEyebrow", type: "text", required: true, localized: true },
             {
-              name: "speedHeadlineLines",
-              type: "array",
+              name: "speedHeadline",
+              type: "group",
+              admin: { description: "The middle line renders as: ~~strikeText~~ accentText (visual design — crossed out + colored)." },
               fields: [
-                { name: "text", type: "text", required: true, localized: true },
-                { name: "accent", type: "text", localized: true },
+                { name: "line1", type: "text", required: true, localized: true },
+                { name: "strikeText", type: "text", required: true, localized: true },
+                { name: "accentText", type: "text", required: true, localized: true },
+                { name: "line3", type: "text", required: true, localized: true },
               ],
             },
             {
@@ -296,10 +300,11 @@ export const HomePage: GlobalConfig = {
           fields: [
             { name: "ctaEyebrow", type: "text", required: true, localized: true },
             {
-              name: "ctaHeadlineLines",
-              type: "array",
+              name: "ctaHeadline",
+              type: "group",
+              admin: { description: "Use newlines (\\n) to separate visual lines for the word-reveal animation." },
               fields: [
-                { name: "text", type: "text", required: true, localized: true },
+                { name: "text", type: "textarea", required: true, localized: true },
                 { name: "accent", type: "text", localized: true },
               ],
             },

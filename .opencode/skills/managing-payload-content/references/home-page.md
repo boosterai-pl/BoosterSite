@@ -1,6 +1,6 @@
 # Home Page Global Reference
 
-Slug: `home-page` (global) | Read-only via REST | Edit via admin panel: `http://localhost:3000/admin`
+Slug: `home-page` (global) | Reads are public | Writes require JWT — see Auth in [SKILL.md](../SKILL.md)
 
 ## Fetch
 
@@ -148,21 +148,51 @@ All localized fields accept `?locale=en` or `?locale=pl`.
 
 ---
 
-## Editing Home Page Copy
+## Updating Home Page Copy
 
-Home page is read-only via the REST API (no unauthenticated writes, and admin-only by design). To change copy:
+Globals use `POST` to update — there is no `id`, only one document exists.
 
-1. Read the current value: `curl "$BASE/api/globals/home-page?locale=en" | jq '.fieldName'`
-2. Open the admin panel: `$BASE/admin/globals/home-page`
-3. Navigate to the relevant tab and edit directly
-
-Or, if write access via JWT is needed (and the user has admin credentials):
+### Update a single field
 
 ```bash
-curl -s -X POST "$BASE/api/globals/home-page" \
+curl -s -X POST "$BASE/api/globals/home-page?locale=en" \
   -H "Authorization: JWT $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"heroLead": "Updated lead text."}'
 ```
 
-Note: `POST` on a global updates it (globals have no `id` — there is only one document).
+### Update a localized field in Polish
+
+```bash
+curl -s -X POST "$BASE/api/globals/home-page?locale=pl" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"heroLead": "Zaktualizowany tekst."}'
+```
+
+### Update nav items
+
+```bash
+curl -s -X POST "$BASE/api/globals/home-page" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"nav": [{"label": "Services", "href": "#services"}, {"label": "Blog", "href": "/blog"}]}'
+```
+
+### Update footer columns
+
+```bash
+curl -s -X POST "$BASE/api/globals/home-page?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"footerColumns": [{"heading": "Company", "links": [{"label": "About", "href": "/about"}]}]}'
+```
+
+**Important for array fields:** `POST` replaces the entire array. Fetch the current value first if you want to append items.
+
+### Copy-text edit workflow
+
+1. Read current value: `curl "$BASE/api/globals/home-page?locale=en" | jq '.fieldName'`
+2. POST only the changed fields
+3. If bilingual, repeat for `?locale=pl`
+4. Confirm: re-fetch and show the updated field

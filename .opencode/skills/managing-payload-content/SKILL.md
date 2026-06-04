@@ -67,11 +67,11 @@ curl "$BASE/api/practices?where[slug][equals]=crm-implementation&locale=en"
 | Collection | Slug | Write? | Reference |
 |------------|------|--------|-----------|
 | Posts | `posts` | full CRUD | [references/posts.md](references/posts.md) |
-| Services | `services` | read only | [references/collections.md](references/collections.md) |
-| Case Studies | `case-studies` | read only | [references/collections.md](references/collections.md) |
-| Team Members | `team-members` | read only | [references/collections.md](references/collections.md) |
-| Practices | `practices` | read only | [references/collections.md](references/collections.md) |
-| Home Page (global) | `home-page` | read only | [references/home-page.md](references/home-page.md) |
+| Services | `services` | full CRUD | [references/collections.md](references/collections.md) |
+| Case Studies | `case-studies` | full CRUD | [references/collections.md](references/collections.md) |
+| Team Members | `team-members` | full CRUD | [references/collections.md](references/collections.md) |
+| Practices | `practices` | full CRUD | [references/collections.md](references/collections.md) |
+| Home Page (global) | `home-page` | read + update | [references/home-page.md](references/home-page.md) |
 
 ## Quick Recipes
 
@@ -98,6 +98,22 @@ curl -s -X PATCH "$BASE/api/posts/$POST_ID?locale=en" \
   -d '{"title": "New title"}'
 ```
 
+**Update home-page copy (global — POST = update):**
+```bash
+curl -s -X POST "$BASE/api/globals/home-page?locale=en" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"heroLead": "New lead text."}'
+```
+
+**Create a team member:**
+```bash
+curl -s -X POST "$BASE/api/team-members" \
+  -H "Authorization: JWT $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sortOrder": "05", "name": "Jane Doe", "role": "Engineer"}'
+```
+
 ## DOs and DON'Ts
 
 - DO read `PAYLOAD_URL` from `.env.local` every time — never hardcode
@@ -106,4 +122,4 @@ curl -s -X PATCH "$BASE/api/posts/$POST_ID?locale=en" \
 - DO use `?depth=1` when you need related documents populated
 - DO make separate PATCH calls per locale for localized fields
 - DON'T include `id`, `createdAt`, `updatedAt` in create/update bodies
-- DON'T attempt writes on services, case-studies, team-members, practices, or home-page — admin-managed only
+- DON'T include `id`, `createdAt`, `updatedAt`, or `readingTime` in create/update bodies — these are auto-managed

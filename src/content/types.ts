@@ -14,10 +14,17 @@ export type NavLink = {
   readonly href: string;
 };
 
+export type SpeedHeadline = {
+  readonly line1: string;
+  readonly strikeText: string;
+  readonly accentText: string;
+  readonly line3: string;
+};
+
 export type HeroContent = {
   readonly eyebrow: string;
   readonly establishedLabel: string;
-  readonly headlineLines: readonly HeadlineLine[];
+  readonly headline: HeadlineLine;
   readonly lead: string;
   readonly primaryCta: { readonly label: string; readonly href: string };
   readonly secondaryCta: { readonly label: string; readonly href: string };
