@@ -31,7 +31,7 @@ export default async function HomePage() {
         <Speed content={site.speed} />
         <Process content={site.process} />
         <Partners content={site.partners} />
-        <Team content={site.team} />
+        {/* <Team content={site.team} /> */}
         {/* <Insights content={site.insights} /> */}
         <CTA content={site.cta} />
       </main>
