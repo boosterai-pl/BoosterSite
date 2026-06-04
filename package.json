@@ -2,6 +2,7 @@
   "name": "booster-site",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE -- next dev",
     "build": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE -- next build",

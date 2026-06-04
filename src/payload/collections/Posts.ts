@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { estimateReadingTime } from "../../lib/reading-time";
+import { estimateReadingTime } from "../../lib/reading-time.ts";
 
 export const Posts: CollectionConfig = {
   slug: "posts",

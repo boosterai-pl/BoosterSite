@@ -6,14 +6,14 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { mcpPlugin } from "@payloadcms/plugin-mcp";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
-import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
-import { Services } from "./collections/Services";
-import { CaseStudies } from "./collections/CaseStudies";
-import { TeamMembers } from "./collections/TeamMembers";
-import { Posts } from "./collections/Posts";
-import { Practices } from "./collections/Practices";
-import { HomePage } from "./globals/HomePage";
+import { Users } from "./collections/Users.ts";
+import { Media } from "./collections/Media.ts";
+import { Services } from "./collections/Services.ts";
+import { CaseStudies } from "./collections/CaseStudies.ts";
+import { TeamMembers } from "./collections/TeamMembers.ts";
+import { Posts } from "./collections/Posts.ts";
+import { Practices } from "./collections/Practices.ts";
+import { HomePage } from "./globals/HomePage.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
