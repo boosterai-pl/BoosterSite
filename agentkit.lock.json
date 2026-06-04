@@ -49,6 +49,11 @@
         "version": "1.0.0",
         "installPath": ".opencode/skills",
         "syncedAt": "2026-06-04T14:29:26.487Z"
+      },
+      "polling-monitoring": {
+        "version": "1.0.0",
+        "installPath": ".opencode/skills",
+        "syncedAt": "2026-06-04T20:38:08.790Z"
       }
     },
     "agents": {

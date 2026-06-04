@@ -12,6 +12,7 @@
       "editing-markdown-docs": "allow",
       "fixing-pull-requests": "allow",
       "managing-opencode-skills": "allow",
+      "polling-monitoring": "allow",
       "reviewing-fixing-loop": "allow",
       "searching-the-web": "allow",
       "testing-conventions": "allow"
