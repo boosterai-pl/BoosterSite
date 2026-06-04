@@ -8,6 +8,7 @@
       "agent-browser": "allow",
       "code-reviewing": "allow",
       "deferring-findings": "allow",
+      "deploying-boostersite": "allow",
       "editing-markdown-docs": "allow",
       "fixing-pull-requests": "allow",
       "managing-opencode-skills": "allow",
