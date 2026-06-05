@@ -14,6 +14,7 @@ function MemberCard({ member }: { member: SiteContent["team"]["members"][number]
             alt={member.name}
             width={400}
             height={400}
+            sizes="(max-width: 768px) 50vw, 20vw"
             style={{ objectFit: "cover", width: "100%", height: "100%" }}
           />
         ) : null}
