@@ -8,6 +8,7 @@ import {
   TilioLogo,
   ClaudeLogo,
   N8nLogo,
+  OpenCodeLogo,
 } from "./BrandLogos";
 
 const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -17,6 +18,7 @@ const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   TilioLogo,
   ClaudeLogo,
   N8nLogo,
+  OpenCodeLogo,
 };
 
 function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {
