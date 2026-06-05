@@ -19,6 +19,12 @@ export const Media: CollectionConfig = {
         position: "centre",
       },
       {
+        name: "portrait",
+        width: 600,
+        height: 800,
+        position: "centre",
+      },
+      {
         name: "og",
         width: 1200,
         height: 630,
