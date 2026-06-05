@@ -33,7 +33,7 @@ No test suite configured. Verification order: `lint → typecheck → build`.
 
 ## Brand logos (`src/components/BrandLogos.tsx`)
 
-Logo components are named `MondayLogo`, `ClickUpLogo`, `PipedriveLogo`, `TilioLogo`, `OpenMercatoLogo`, `ClaudeLogo`, `N8nLogo`, `PythonLogo`. Static assets live in `public/assets/logos/`. To add a new logo: create a component here and add its `component` key to `HeroMetaLogo` in `site.ts`.
+Logo components are named `MondayLogo`, `ClickUpLogo`, `PipedriveLogo`, `TilioLogo` (brand: **Tillio** — two l's), `OpenMercatoLogo`, `ClaudeLogo`, `N8nLogo`, `PythonLogo`. Static assets live in `public/assets/logos/`. To add a new logo: create a component here and add its `component` key to `HeroMetaLogo` in `site.ts`.
 
 ## Fonts
 
