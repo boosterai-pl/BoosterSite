@@ -88,14 +88,12 @@ Other commands: `db:migrate:status` (inspect state), `db:migrate:fresh` (drop + 
 
 Project lives under the **`szymon-bazans-projects`** Vercel scope (not `andrzejchm`). Use the `VERCEL_TOKEN` from `.env.local` to authenticate API calls.
 
-Active deployments (as of June 2026):
+- Push to any branch → preview deployment (auto, URL changes each push)
+- Merge to `main` → production deployment (auto)
+- Production alias: `https://boostersite-nine.vercel.app`
+- Only squash merge is enabled on the repo.
 
-| Target | URL | Branch |
-|--------|-----|--------|
-| production (latest) | `boostersite-29qprne2q-szymon-bazans-projects.vercel.app` | `main` |
-| preview | `boostersite-j14fahntx-szymon-bazans-projects.vercel.app` | `feat/payload-content-skill-clean` |
-
-Production alias: `https://boostersite-nine.vercel.app`
+For deployment commands, polling, build logs, and troubleshooting see `.opencode/skills/deploying-boostersite/SKILL.md`.
 
 ## Database (Neon)
 
@@ -109,4 +107,8 @@ Production alias: `https://boostersite-nine.vercel.app`
 
 The Vercel production `DATABASE_URI` is marked `sensitive` — the API returns `""` but the value IS set and injected at build/runtime. Do not confuse this with an empty value.
 
-To decrypt `.env.production` locally, add the private key to `.env.keys` (see command below).
+To decrypt `.env.production` locally, add the private key to `.env.keys`:
+
+```bash
+echo 'DOTENV_PRIVATE_KEY_PRODUCTION="<your-key-here>"' >> .env.keys
+```
