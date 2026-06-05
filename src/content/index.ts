@@ -234,12 +234,7 @@ function mapPayloadToSiteContent(
           id: t.sortOrder as string,
           name: t.name as string,
           role: t.role as string,
-          photo: (() => {
-            const p = t.photo as Record<string, unknown> | null;
-            if (!p) return "";
-            const card = (p.sizes as Record<string, unknown> | undefined)?.card as Record<string, unknown> | undefined;
-            return (card?.url as string) ?? (p.url as string) ?? "";
-          })(),
+          photo: ((t.photo as Record<string, unknown> | null)?.url as string) ?? "",
         })),
     },
     insights: {
