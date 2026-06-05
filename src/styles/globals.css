@@ -221,7 +221,13 @@ img {
   border: 1px solid currentColor;
   font-size: 13px;
   letter-spacing: -0.01em;
-  transition: background 0.25s, color 0.25s;
+  transition: background 0.25s, color 0.25s, opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+.nav.scrolled .nav-cta {
+  opacity: 1;
+  pointer-events: auto;
 }
 .nav-cta:hover {
   background: var(--accent);
