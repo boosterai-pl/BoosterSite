@@ -64,14 +64,14 @@ export function PipedriveLogo({ className }: { className?: string }) {
   );
 }
 
-// ─── Tilio ───────────────────────────────────────────────────────────────────
-// PNG from wojciechmatula.com
+// ─── Tillio ───────────────────────────────────────────────────────────────────
+// PNG from tillio.pl
 export function TilioLogo({ className }: { className?: string }) {
   return (
     <img
       className={className}
-      src="/assets/logos/tilio.png"
-      alt="Tilio"
+      src="/assets/logos/tillio.png"
+      alt="Tillio"
       style={{ height: "100%", width: "auto", filter: "brightness(0) invert(1)" }}
     />
   );
