@@ -3,11 +3,8 @@ import type { SiteContent } from "@/content/types";
 
 type Props = { content: SiteContent["speed"] };
 
-const lineDelays: CSSProperties[] = [
-  {} as CSSProperties,
-  { ["--reveal-delay" as keyof CSSProperties]: "0.1s" } as CSSProperties,
-  { ["--reveal-delay" as keyof CSSProperties]: "0.2s" } as CSSProperties,
-];
+const delay1: CSSProperties = { ["--reveal-delay" as keyof CSSProperties]: "0.1s" } as CSSProperties;
+const delay2: CSSProperties = { ["--reveal-delay" as keyof CSSProperties]: "0.2s" } as CSSProperties;
 
 export function Speed({ content }: Props) {
   return (
@@ -18,13 +15,13 @@ export function Speed({ content }: Props) {
         </div>
         <div className="speed">
           <h2 className="speed-headline">
-            <div data-reveal>{content.headlineLines[0]?.text}</div>
-            <div data-reveal style={lineDelays[1]}>
-              <span className="strike">12 months</span>{" "}
-              <span className="accent">we ship</span>
+            <div data-reveal>{content.headline.line1}</div>
+            <div data-reveal style={delay1}>
+              <span className="strike">{content.headline.strikeText}</span>{" "}
+              <span className="accent">{content.headline.accentText}</span>
             </div>
-            <div data-reveal style={lineDelays[2]}>
-              {content.headlineLines[2]?.text}
+            <div data-reveal style={delay2}>
+              {content.headline.line3}
             </div>
           </h2>
         </div>

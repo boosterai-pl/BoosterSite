@@ -81,16 +81,16 @@ function mapPayloadToSiteContent(
   type AnyArr = Record<string, unknown>[];
 
   const nav = h.nav as AnyArr | undefined;
-  const heroHeadlineLines = h.heroHeadlineLines as AnyArr | undefined;
+  const heroHeadline = h.heroHeadline as Record<string, unknown> | undefined;
   const heroMeta = h.heroMeta as AnyArr | undefined;
   const marquee = h.marquee as AnyArr | undefined;
   const manifestoEntries = h.manifestoEntries as AnyArr | undefined;
-  const speedHeadlineLines = h.speedHeadlineLines as AnyArr | undefined;
+  const speedHeadline = h.speedHeadline as Record<string, unknown> | undefined;
   const speedStats = h.speedStats as AnyArr | undefined;
   const processSteps = h.processSteps as AnyArr | undefined;
   const partnersItems = h.partnersItems as AnyArr | undefined;
   const insightsPosts = h.insightsPosts as AnyArr | undefined;
-  const ctaHeadlineLines = h.ctaHeadlineLines as AnyArr | undefined;
+  const ctaHeadline = h.ctaHeadline as Record<string, unknown> | undefined;
   const footerColumns = h.footerColumns as AnyArr | undefined;
   const footerBottom = h.footerBottom as AnyArr | undefined;
   const navCta = h.navCta as Record<string, unknown> | undefined;
@@ -121,10 +121,10 @@ function mapPayloadToSiteContent(
     hero: {
       eyebrow: (h.heroEyebrow as string) ?? "",
       establishedLabel: (h.heroEstablishedLabel as string) ?? "",
-      headlineLines: (heroHeadlineLines ?? []).map((l) => ({
-        text: l.text as string,
-        ...(l.accent ? { accent: l.accent as string } : {}),
-      })),
+      headline: {
+        text: (heroHeadline?.text as string) ?? "",
+        ...(heroHeadline?.accent ? { accent: heroHeadline.accent as string } : {}),
+      },
       lead: (h.heroLead as string) ?? "",
       primaryCta: {
         label: (heroPrimaryCta?.label as string) ?? "",
@@ -189,10 +189,12 @@ function mapPayloadToSiteContent(
     },
     speed: {
       eyebrow: (h.speedEyebrow as string) ?? "",
-      headlineLines: (speedHeadlineLines ?? []).map((l) => ({
-        text: l.text as string,
-        ...(l.accent ? { accent: l.accent as string } : {}),
-      })),
+      headline: {
+        line1: (speedHeadline?.line1 as string) ?? "",
+        strikeText: (speedHeadline?.strikeText as string) ?? "",
+        accentText: (speedHeadline?.accentText as string) ?? "",
+        line3: (speedHeadline?.line3 as string) ?? "",
+      },
       stats: (speedStats ?? []).map((s) => ({
         value: s.value as string,
         ...(s.suffix ? { suffix: s.suffix as string } : {}),
@@ -248,10 +250,10 @@ function mapPayloadToSiteContent(
     },
     cta: {
       eyebrow: (h.ctaEyebrow as string) ?? "",
-      headlineLines: (ctaHeadlineLines ?? []).map((l) => ({
-        text: l.text as string,
-        ...(l.accent ? { accent: l.accent as string } : {}),
-      })),
+      headline: {
+        text: (ctaHeadline?.text as string) ?? "",
+        ...(ctaHeadline?.accent ? { accent: ctaHeadline.accent as string } : {}),
+      },
       body: (h.ctaBody as string) ?? "",
       button: {
         label: (ctaButton?.label as string) ?? "",
