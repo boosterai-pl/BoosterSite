@@ -26,6 +26,7 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
         ? payload.find({
             collection: "services",
             where: { id: { in: servicesRelation.map((s) => s.id).join(",") } },
+            sort: "sortOrder",
             limit: 20,
             locale,
             fallbackLocale: "en",
@@ -35,6 +36,7 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
         ? payload.find({
             collection: "case-studies",
             where: { id: { in: casesRelation.map((c) => c.id).join(",") } },
+            sort: "sortOrder",
             limit: 20,
             locale,
             fallbackLocale: "en",

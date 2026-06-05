@@ -25,7 +25,7 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
   return (
     <nav className={classes.join(" ")}>
       <a href={logoHref} className="nav-logo">
-        <img src="/assets/booster-rocket.png" alt={`${brand} logo`} />
+        <img src="/assets/booster-rocket.png" alt={`${brand} logo`} className="nav-logo-img" />
         <span>{brand}</span>
       </a>
       <div className="nav-links">
