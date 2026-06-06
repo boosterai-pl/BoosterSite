@@ -427,8 +427,6 @@ export const site: SiteContent = {
           { label: "About", href: "#about" },
           { label: "Team", href: "#team" },
           { label: "Case studies", href: "#work" },
-          { label: "Blog", href: "/blog" },
-          { label: "Insights", href: "#insights" },
         ],
       },
       {
@@ -436,8 +434,6 @@ export const site: SiteContent = {
         links: [
           { label: "hello@boosterai.pl", href: "mailto:hello@boosterai.pl" },
           { label: "LinkedIn", href: "https://www.linkedin.com/company/boosterai-en/" },
-          { label: "GitHub", href: "#" },
-          { label: "X / Twitter", href: "#" },
         ],
       },
     ],
