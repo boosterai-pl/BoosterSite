@@ -7,7 +7,8 @@ export function LangSwitcher() {
   // Normalize: strip trailing /index that Next.js static build can expose
   const normalized = pathname.replace(/\/index$/, "") || "/";
   const isPolish = normalized === "/pl" || normalized.startsWith("/pl/");
-  const englishHref = isPolish ? normalized.replace(/^\/pl\/?/, "") || "/" : normalized;
+  const stripped = normalized.replace(/^\/pl(\/|$)/, "");
+  const englishHref = isPolish ? (stripped ? `/${stripped}` : "/") : normalized;
   const polishHref = isPolish ? normalized : `/pl${normalized === "/" ? "" : normalized}`;
 
   return (
