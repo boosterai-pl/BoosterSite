@@ -5,22 +5,26 @@ import {
   MondayLogo,
   ClickUpLogo,
   PipedriveLogo,
-  TilioLogo,
   ClaudeLogo,
   N8nLogo,
   OpenCodeLogo,
   CodexLogo,
+  RailwayLogo,
+  CloudflareLogo,
+  PlanetScaleLogo,
 } from "./BrandLogos";
 
 const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   MondayLogo,
   ClickUpLogo,
   PipedriveLogo,
-  TilioLogo,
   ClaudeLogo,
   N8nLogo,
   OpenCodeLogo,
   CodexLogo,
+  RailwayLogo,
+  CloudflareLogo,
+  PlanetScaleLogo,
 };
 
 function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {

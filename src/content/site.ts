@@ -26,20 +26,22 @@ export const site: SiteContent = {
     meta: [
       {
         label: "Partners",
-        value: "Monday · ClickUp · Pipedrive · Tillio",
+        value: "Monday · ClickUp · Pipedrive",
         logos: [
           { name: "Monday", component: "MondayLogo" },
           { name: "ClickUp", component: "ClickUpLogo" },
           { name: "Pipedrive", component: "PipedriveLogo" },
-          { name: "Tillio", component: "TilioLogo" },
         ],
       },
       {
         label: "Built with",
-        value: "Claude · n8n",
+        value: "Claude · n8n · Railway · Cloudflare · PlanetScale",
         logos: [
           { name: "Claude", component: "ClaudeLogo" },
           { name: "n8n", component: "N8nLogo" },
+          { name: "Railway", component: "RailwayLogo" },
+          { name: "Cloudflare", component: "CloudflareLogo" },
+          { name: "PlanetScale", component: "PlanetScaleLogo" },
         ],
       },
       { label: "Currently shipping", value: "OOH Manager · Legal Flow · Municipal App" },
@@ -115,8 +117,8 @@ export const site: SiteContent = {
         slug: "crm-implementation",
         title: "CRM Implementation & Automation",
         description:
-          "Boxed CRM stacks tuned to your sales motion. We configure, integrate and automate Monday, ClickUp, Pipedrive and Tillio — partner-grade.",
-        tags: ["Monday", "ClickUp", "Pipedrive", "Tillio"],
+          "Boxed CRM stacks tuned to your sales motion. We configure, integrate and automate Monday, ClickUp, and Pipedrive — partner-grade.",
+        tags: ["Monday", "ClickUp", "Pipedrive"],
       },
       {
         id: "04",
@@ -218,7 +220,6 @@ export const site: SiteContent = {
       { name: "Monday", role: "CRM Partner" },
       { name: "ClickUp", role: "CRM Partner" },
       { name: "Pipedrive", role: "CRM Partner" },
-      { name: "Tillio", role: "CRM Partner" },
       { name: "Open Mercato", role: "Implementation" },
     ],
   },
@@ -338,7 +339,7 @@ export const site: SiteContent = {
       slug: "crm-implementation",
       eyebrow: "03 / CRM Implementation & Automation",
       headline: { text: "Your sales motion,", accent: "automated." },
-      lead: "We implement and automate CRM platforms so your pipeline runs on autopilot and your team spends time selling — not wrestling with broken spreadsheets. As certified partners of Monday, ClickUp, Pipedrive, and Tillio, we deliver high-performance setups tailored exactly to your real business workflows.",
+      lead: "We implement and automate CRM platforms so your pipeline runs on autopilot and your team spends time selling — not wrestling with broken spreadsheets. As certified partners of Monday, ClickUp, and Pipedrive, we deliver high-performance setups tailored exactly to your real business workflows.",
       heroCta: {
         microCopy: "Stop losing deals to manual spreadsheet chaos.",
         label: "Automate your pipeline — Pick a time",
