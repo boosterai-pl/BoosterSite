@@ -202,20 +202,7 @@ export function CookieConsent({ locale = "pl" }: { locale?: Locale }) {
   /*  Render                                                           */
   /* ---------------------------------------------------------------- */
 
-  /* Floating reopen button (always visible when consent was given) */
-  if (view === "hidden" && !dismissing) {
-    if (!hasSavedConsent) return null;
-    return (
-      <button
-        type="button"
-        className="cookie-reopen mono"
-        onClick={reopen}
-        aria-label={tr.reopenLabel}
-      >
-        Cookies
-      </button>
-    );
-  }
+  if (view === "hidden" && !dismissing) return null;
 
   const boxClasses = [
     "cookie-box",
