@@ -64,7 +64,8 @@ export function useScrolledNav(): { scrolled: boolean; onLight: boolean } {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       const navH = 70;
-      const el = document.elementFromPoint(window.innerWidth / 2, navH);
+      const els = document.elementsFromPoint(window.innerWidth / 2, navH);
+      const el = els.find((e) => !e.closest("nav"));
       const lightSection =
         el && el instanceof Element ? el.closest(".block.light, .light-zone") : null;
       setOnLight(!!lightSection);

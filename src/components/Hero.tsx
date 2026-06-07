@@ -9,6 +9,7 @@ import {
   ClaudeLogo,
   N8nLogo,
   OpenCodeLogo,
+  CodexLogo,
 } from "./BrandLogos";
 
 const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -19,6 +20,7 @@ const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   ClaudeLogo,
   N8nLogo,
   OpenCodeLogo,
+  CodexLogo,
 };
 
 function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {
@@ -99,20 +101,41 @@ export function Hero({ content }: Props) {
           </div>
         </div>
 
-        <div className="hero-meta" data-reveal style={metaDelay}>
-          {content.meta.map((cell) => (
-            <div key={cell.label} className="hero-meta-cell">
-              <span>{cell.label}</span>
-              {cell.logos ? (
-                <MetaLogos logos={cell.logos} />
-              ) : (
-                <strong>{cell.value}</strong>
-              )}
+      </div>
+
+      <div className="hero-bottom" data-reveal style={metaDelay}>
+        <div className="hero-meta">
+          <div className="hero-meta-marquee">
+            <div className="hero-meta-track">
+              {[...content.meta, ...content.meta].map((cell, i) => {
+                const names = cell.value.split(" · ");
+                const logoMap = Object.fromEntries(
+                  (cell.logos ?? []).map((l) => [l.name, LOGO_MAP[l.component]])
+                );
+                return (
+                  <span key={i} className="hero-meta-tag">
+                    <span className="hero-meta-tag-label">{cell.label}</span>
+                    <span className="hero-meta-tag-sep">:</span>
+                    {names.map((name, j) => {
+                      const Logo = logoMap[name];
+                      return (
+                        <span key={j} className="hero-meta-tag-item">
+                          {Logo && <Logo className="hero-meta-tag-icon" />}
+                          <span className="hero-meta-tag-value">{name}</span>
+                          {j < names.length - 1 && (
+                            <span className="hero-meta-tag-dot">·</span>
+                          )}
+                        </span>
+                      );
+                    })}
+                  </span>
+                );
+              })}
             </div>
-          ))}
-          <div className="hero-meta-cell scroll-cell">
-            <span className="mono">↓ scroll</span>
           </div>
+        </div>
+        <div className="hero-scroll-row">
+          <span className="mono">↓ scroll</span>
         </div>
       </div>
     </section>

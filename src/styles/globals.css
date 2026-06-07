@@ -294,11 +294,10 @@ img {
 /* ===== Hero ===== */
 .hero {
   min-height: 100vh;
-  padding: 140px var(--pad-x) 80px;
+  padding: 140px var(--pad-x) 0;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow: hidden;
   background: var(--ink);
   border-bottom: 1px solid var(--line);
@@ -314,6 +313,14 @@ img {
   pointer-events: none;
 }
 .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+.hero-bottom {
   position: relative;
   z-index: 2;
   max-width: var(--container);
@@ -392,52 +399,77 @@ img {
 
 .hero-meta {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
   margin-top: 80px;
-  padding-top: 24px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
-  font-size: 12px;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
   color: var(--muted);
-  flex-wrap: wrap;
-  gap: 16px;
+  overflow: hidden;
 }
-.hero-meta-cell {
-  min-width: 160px;
+.hero-meta-marquee {
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
-.hero-meta-cell strong {
-  display: block;
-  color: var(--paper);
-  font-weight: 500;
-  font-size: 14px;
-  margin-top: 6px;
-}
-.hero-meta-cell.scroll-cell {
-  text-align: right;
-}
-.hero-meta-logos {
+.hero-meta-track {
   display: flex;
-  flex-wrap: wrap;
+  gap: 40px;
+  width: max-content;
+  animation: hero-meta-scroll 20s linear infinite;
+}
+.hero-meta-tag {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 6px;
+  gap: 8px;
+  white-space: nowrap;
 }
-.hero-meta-logo {
-  height: 18px;
+.hero-meta-tag-label {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.hero-meta-tag-sep {
+  color: var(--muted);
+  opacity: 0.4;
+  margin-right: 4px;
+}
+.hero-meta-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.hero-meta-tag-icon {
+  height: 14px;
   width: auto;
-  max-width: 90px;
-  opacity: 0.8;
+  flex-shrink: 0;
   color: var(--paper);
-  transition: opacity 0.2s ease;
-  object-fit: contain;
+  opacity: 0.85;
 }
-.hero-meta-logo:hover {
-  opacity: 1;
+.hero-meta-tag-value {
+  color: rgba(255,255,255,0.7);
 }
-/* SVG inline logos scale via viewBox; img logos need explicit height on the element */
-.hero-meta-logo img {
-  height: 18px;
-  width: auto;
+.hero-meta-tag-dot {
+  color: var(--muted);
+  margin: 0 3px;
+}
+.hero-scroll-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 3vh, 48px) 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-family: "Geist Mono", monospace;
+}
+@keyframes hero-meta-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ===== Marquee ===== */
