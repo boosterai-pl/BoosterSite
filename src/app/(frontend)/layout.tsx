@@ -63,7 +63,7 @@ export default function FrontendLayout({ children }: { children: ReactNode }) {
           }}
         />
         {children}
-        <CookieConsent />
+        <CookieConsent locale="en" />
         <Analytics />
       </body>
     </html>
