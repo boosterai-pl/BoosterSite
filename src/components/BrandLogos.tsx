@@ -168,6 +168,26 @@ export function OpenCodeLogo({ className }: { className?: string }) {
   );
 }
 
+// ─── Bielik ───────────────────────────────────────────────────────────────────
+// Eagle signet from official Bielik logo (Wikimedia Commons) — text stripped
+export function BielikLogo({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 579 370"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Bielik"
+      role="img"
+    >
+      <path
+        d="M40.234,29.037c0,0 106.756,21.501 163.599,32.95c22.899,4.612 44.676,13.65 64.112,26.607c42.101,28.067 117.178,78.118 142.029,94.686c2.168,1.445 4.827,1.956 7.377,1.416c2.549,-0.54 4.774,-2.085 6.17,-4.285c23.193,-36.545 114.495,-180.411 114.495,-180.411l0,71.503c0,18.384 -4.939,36.431 -14.3,52.252c-28.771,48.625 -90.926,153.672 -90.926,153.672l10.602,71.082l-45.145,0c0,0 -24.159,-24.159 -41.792,-41.792c-4.803,-4.803 -7.501,-11.317 -7.501,-18.109c0,-6.792 2.699,-13.306 7.501,-18.109c5.602,-5.602 11.401,-11.4 15.612,-15.611c1.041,-1.041 1.352,-2.607 0.789,-3.967c-0.564,-1.36 -1.891,-2.247 -3.363,-2.247c-20.755,0 -71.081,0 -71.081,0l-258.178,-219.637Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 // ─── OpenAI Codex ─────────────────────────────────────────────────────────────
 // Official icon from openai.com/codex — gear/cog mark, currentColor
 export function CodexLogo({ className }: { className?: string }) {

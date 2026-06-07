@@ -12,6 +12,7 @@ import {
   RailwayLogo,
   CloudflareLogo,
   PlanetScaleLogo,
+  BielikLogo,
 } from "./BrandLogos";
 
 const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -25,6 +26,7 @@ const LOGO_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   RailwayLogo,
   CloudflareLogo,
   PlanetScaleLogo,
+  BielikLogo,
 };
 
 function MetaLogos({ logos }: { logos: readonly HeroMetaLogo[] }) {
