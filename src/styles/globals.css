@@ -144,6 +144,20 @@ img {
 }
 
 /* ===== Nav ===== */
+@keyframes nav-bg-scroll {
+  from {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+  }
+  to {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(48px);
+    -webkit-backdrop-filter: blur(48px);
+    border-color: var(--line);
+  }
+}
 .nav {
   position: fixed;
   inset: 0 0 auto 0;
@@ -152,9 +166,10 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: backdrop-filter 0.3s, background 0.3s, color 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
-  background: rgba(10, 10, 10, 0.3);
+  animation: nav-bg-scroll linear both;
+  animation-timeline: scroll(root block);
+  animation-range: 0px 80px;
 }
 .nav.scrolled {
   backdrop-filter: blur(48px);
