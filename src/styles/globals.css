@@ -154,6 +154,7 @@ img {
   justify-content: space-between;
   transition: backdrop-filter 0.3s, background 0.3s, color 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
+  background: rgba(10, 10, 10, 0.3);
 }
 .nav.scrolled {
   backdrop-filter: blur(48px);
