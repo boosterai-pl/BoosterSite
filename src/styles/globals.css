@@ -1992,3 +1992,12 @@ html.js-reveal .word-reveal.visible > span {
     bottom: 12px;
   }
 }
+
+/* ── Careers page ────────────────────────────────────────── */
+.careers-page .practice-hero {
+  padding-bottom: 48px;
+}
+.careers-page section.block.practice-body {
+  padding-top: 48px;
+  padding-bottom: 56px;
+}

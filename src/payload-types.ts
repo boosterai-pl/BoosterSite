@@ -75,6 +75,7 @@ export interface Config {
     'case-studies': CaseStudy;
     'team-members': TeamMember;
     practices: Practice;
+    'job-roles': JobRole;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -90,6 +91,7 @@ export interface Config {
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     practices: PracticesSelect<false> | PracticesSelect<true>;
+    'job-roles': JobRolesSelect<false> | JobRolesSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -405,6 +407,46 @@ export interface Practice {
   createdAt: string;
 }
 /**
+ * Open job positions listed on the Careers page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-roles".
+ */
+export interface JobRole {
+  id: number;
+  /**
+   * Display order, e.g. "01", "02"
+   */
+  sortOrder: string;
+  /**
+   * Uncheck to hide this role from the Careers page.
+   */
+  isOpen?: boolean | null;
+  /**
+   * e.g. "Senior AI Engineer"
+   */
+  title: string;
+  /**
+   * e.g. "Engineering", "Sales"
+   */
+  department: string;
+  /**
+   * e.g. "Warsaw / Remote"
+   */
+  location: string;
+  employmentType: 'full-time' | 'part-time' | 'contract' | 'internship';
+  /**
+   * Short summary shown on the Careers page listing.
+   */
+  description: string;
+  /**
+   * Link to apply (form, email, etc.). If empty, defaults to hello@boosterai.pl.
+   */
+  applyUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * API keys control which collections, resources, tools, and prompts MCP clients can access
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -465,6 +507,24 @@ export interface PayloadMcpApiKey {
      * Allow clients to find practices.
      */
     find?: boolean | null;
+  };
+  jobRoles?: {
+    /**
+     * Allow clients to find job-roles.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create job-roles.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update job-roles.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete job-roles.
+     */
+    delete?: boolean | null;
   };
   homePage?: {
     /**
@@ -530,6 +590,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'practices';
         value: number | Practice;
+      } | null)
+    | ({
+        relationTo: 'job-roles';
+        value: number | JobRole;
       } | null)
     | ({
         relationTo: 'payload-mcp-api-keys';
@@ -788,6 +852,22 @@ export interface PracticesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-roles_select".
+ */
+export interface JobRolesSelect<T extends boolean = true> {
+  sortOrder?: T;
+  isOpen?: T;
+  title?: T;
+  department?: T;
+  location?: T;
+  employmentType?: T;
+  description?: T;
+  applyUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-mcp-api-keys_select".
  */
 export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
@@ -821,6 +901,14 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
     | T
     | {
         find?: T;
+      };
+  jobRoles?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
       };
   homePage?:
     | T

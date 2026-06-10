@@ -21,7 +21,7 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
     const casesRelation = home.casesItems as Array<{ id: string }> | null;
     const teamRelation = home.teamMembers as Array<{ id: string }> | null;
 
-    const [servicesResult, casesResult, teamResult, practicesResult] = await Promise.all([
+    const [servicesResult, casesResult, teamResult, practicesResult, jobRolesResult] = await Promise.all([
       servicesRelation && servicesRelation.length > 0
         ? payload.find({
             collection: "services",
@@ -58,6 +58,14 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
         locale,
         fallbackLocale: "en",
       }),
+      payload.find({
+        collection: "job-roles",
+        where: { isOpen: { equals: true } },
+        limit: 100,
+        sort: "sortOrder",
+        locale,
+        fallbackLocale: "en",
+      }),
     ]);
 
     return mapPayloadToSiteContent(
@@ -66,6 +74,7 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
       casesResult.docs as unknown as Record<string, unknown>[],
       teamResult.docs as unknown as Record<string, unknown>[],
       practicesResult.docs as unknown as Record<string, unknown>[],
+      jobRolesResult.docs as unknown as Record<string, unknown>[],
     );
   } catch {
     // Fall back to static data if Payload is unavailable (e.g., during initial build)
@@ -79,6 +88,7 @@ function mapPayloadToSiteContent(
   cases: Record<string, unknown>[],
   team: Record<string, unknown>[],
   practices: Record<string, unknown>[],
+  jobRoles: Record<string, unknown>[] = [],
 ): SiteContent {
   type AnyArr = Record<string, unknown>[];
 
@@ -320,6 +330,16 @@ function mapPayloadToSiteContent(
       headline: { text: "Free", accent: "consultation." },
       body: "30 minutes. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
     },
+    jobRoles: jobRoles.map((r) => ({
+      id: String(r.id),
+      sortOrder: (r.sortOrder as string) ?? "",
+      title: (r.title as string) ?? "",
+      department: (r.department as string) ?? "",
+      location: (r.location as string) ?? "",
+      employmentType: (r.employmentType as "full-time" | "part-time" | "contract" | "internship") ?? "full-time",
+      description: (r.description as string) ?? "",
+      applyUrl: (r.applyUrl as string) ?? "",
+    })),
   };
 }
 

@@ -428,6 +428,7 @@ export const site: SiteContent = {
           { label: "About", href: "#about" },
           { label: "Team", href: "#team" },
           { label: "Case studies", href: "#work" },
+          { label: "Careers", href: "/careers" },
         ],
       },
       {
@@ -444,4 +445,5 @@ export const site: SiteContent = {
       "Booster / AI Native Service Agency / v1.0",
     ],
   },
+  jobRoles: [],
 };

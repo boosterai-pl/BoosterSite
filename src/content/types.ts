@@ -138,6 +138,17 @@ export type BlogPost = {
   readonly content: string;
 };
 
+export type JobRole = {
+  readonly id: string;
+  readonly sortOrder: string;
+  readonly title: string;
+  readonly department: string;
+  readonly location: string;
+  readonly employmentType: "full-time" | "part-time" | "contract" | "internship";
+  readonly description: string;
+  readonly applyUrl: string;
+};
+
 export type BookingContent = {
   readonly calUrl: string;
   readonly eyebrow: string;
@@ -206,4 +217,5 @@ export type SiteContent = {
   };
   readonly practices: readonly PracticeContent[];
   readonly booking: BookingContent;
+  readonly jobRoles: readonly JobRole[];
 };

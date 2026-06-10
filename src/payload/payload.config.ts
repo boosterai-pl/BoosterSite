@@ -13,6 +13,7 @@ import { CaseStudies } from "./collections/CaseStudies.ts";
 import { TeamMembers } from "./collections/TeamMembers.ts";
 import { Posts } from "./collections/Posts.ts";
 import { Practices } from "./collections/Practices.ts";
+import { JobRoles } from "./collections/JobRoles.ts";
 import { HomePage } from "./globals/HomePage.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -44,7 +45,7 @@ export default buildConfig({
     defaultLocale: "en",
     fallback: true,
   },
-  collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers, Practices],
+  collections: [Users, Media, Posts, Services, CaseStudies, TeamMembers, Practices, JobRoles],
   globals: [HomePage],
   plugins: [
     vercelBlobStorage({
@@ -61,6 +62,7 @@ export default buildConfig({
         "case-studies": { enabled: { find: true, create: false, update: false, delete: false } },
         "team-members": { enabled: { find: true, create: false, update: false, delete: false } },
         practices: { enabled: { find: true, create: false, update: false, delete: false } },
+        "job-roles": { enabled: { find: true, create: true, update: true, delete: true } },
       },
       globals: {
         "home-page": { enabled: { find: true, update: false } },
