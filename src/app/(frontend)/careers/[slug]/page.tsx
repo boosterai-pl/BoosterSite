@@ -66,7 +66,7 @@ export default async function CareersRolePage({ params }: Props) {
           </div>
         </section>
 
-        <section className="block light practice-body">
+        <section className="block light practice-body blog-light">
           <div className="container-inner">
             <div
               className="blog-body"
