@@ -14,15 +14,7 @@ const nextConfig = {
       bodySizeLimit: "10mb",
     },
   },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "restrukturyzacja.boosterai.pl" }],
-        destination: "/restrukturyzacja",
-      },
-    ];
-  },
+
 };
 
 export default withNextIntl(withPayload(nextConfig));
