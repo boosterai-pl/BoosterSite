@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { loadSite, getPractice } from "@/content";
+import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
 export const revalidate = 3600;
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
 const SLUGS = [
   "crm-implementation",
@@ -21,19 +23,23 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const site = await loadSite();
+  const { locale, slug } = await params;
+  const site = await loadSite(toSiteLocale(locale));
   const practice = getPractice(slug, site);
   if (!practice) return {};
+
+  const t = await getTranslations({ locale, namespace: "practices" });
+  const prefix = localeHrefPrefix(locale);
+  const url = `https://boosterai.pl${prefix}/practices/${slug}`;
 
   const title = practice.headline.text.replace(/,$/, "") +
     (practice.headline.accent ? ` ${practice.headline.accent}` : "");
 
   return {
-    title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster — AI-Native Agency`,
+    title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | ${t("metaBrand")}`,
     description: practice.lead,
     alternates: {
-      canonical: `https://boosterai.pl/practices/${slug}`,
+      canonical: url,
       languages: {
         en: `https://boosterai.pl/practices/${slug}`,
         pl: `https://boosterai.pl/pl/practices/${slug}`,
@@ -44,17 +50,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster`,
       description: practice.lead,
       type: "website",
-      url: `https://boosterai.pl/practices/${slug}`,
+      url,
       siteName: "Booster",
     },
   };
 }
 
 export default async function PracticePage({ params }: Props) {
-  const { slug } = await params;
-  const site = await loadSite();
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const prefix = localeHrefPrefix(locale);
+  const site = await loadSite(toSiteLocale(locale));
   const practice = getPractice(slug, site);
   if (!practice) notFound();
+
+  const t = await getTranslations("practices");
 
   const jsonLdBreadcrumb = {
     "@context": "https://schema.org",
@@ -63,20 +73,20 @@ export default async function PracticePage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
-        item: "https://boosterai.pl",
+        name: t("breadcrumbHome"),
+        item: `https://boosterai.pl${prefix}`,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Services",
-        item: "https://boosterai.pl/#services",
+        name: t("breadcrumbServices"),
+        item: `https://boosterai.pl${prefix ? `${prefix}#services` : "/#services"}`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: (practice.eyebrow ?? "").split(" / ")[1] ?? practice.headline.text,
-        item: `https://boosterai.pl/practices/${slug}`,
+        item: `https://boosterai.pl${prefix}/practices/${slug}`,
       },
     ],
   };
@@ -89,7 +99,7 @@ export default async function PracticePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
       />
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/" />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
       <main>
         <section className="block light practice-hero">
           <div className="container-inner">

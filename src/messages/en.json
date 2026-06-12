@@ -1,0 +1,36 @@
+{
+  "layout": {
+    "title": "Booster — AI-Native Service Agency",
+    "description": "We build autonomous AI infrastructure for complex B2B operations. By replacing manual workarounds with custom platforms, we deliver end-to-end solutions in weeks, not quarters.",
+    "ogTitle": "Booster — AI-Native Service Agency",
+    "ogDescription": "Grow your revenue. Not your payroll. We build autonomous AI infrastructure for complex B2B operations — end-to-end solutions in weeks, not quarters.",
+    "jsonLdDescription": "AI-native service agency. CRM implementation, open-source ERP, B2B software and AI automation."
+  },
+  "practices": {
+    "metaBrand": "Booster — AI-Native Agency",
+    "breadcrumbHome": "Home",
+    "breadcrumbServices": "Services"
+  },
+  "careers": {
+    "metaTitle": "Careers | Booster — AI-Native Agency",
+    "metaDescription": "Join Booster AI. We're building the future of AI-native service delivery. Check back soon for open roles.",
+    "ogDescription": "Join Booster AI. We're building the future of AI-native service delivery.",
+    "eyebrow": "Company / Careers",
+    "headlineText": "Come build with",
+    "headlineAccent": "us.",
+    "lead": "We're an AI-native service agency based in Warsaw, working with ambitious B2B companies worldwide.",
+    "leadRoles": "{count, plural, =0 {No open roles right now — but check back soon.} one {We currently have # open position.} other {We currently have # open positions.}}",
+    "emptyTitle": "No open roles at the moment",
+    "emptyBody": "We're a small, focused team and we hire deliberately. When we do open a role, we'll list it here. In the meantime, feel free to reach out — we're always happy to meet talented people.",
+    "sayHello": "Say hello",
+    "viewRole": "View role",
+    "applyNow": "Apply now",
+    "roleMetaTitle": "{title} | Careers | Booster"
+  },
+  "employmentTypes": {
+    "full-time": "Full-time",
+    "part-time": "Part-time",
+    "contract": "Contract",
+    "internship": "Internship"
+  }
+}

@@ -1,4 +1,6 @@
+import { setRequestLocale } from "next-intl/server";
 import { loadSite } from "@/content";
+import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
@@ -16,18 +18,23 @@ import { SiteRuntime } from "@/components/SiteRuntime";
 
 export const revalidate = 60;
 
-export default async function PlPage() {
-  const site = await loadSite("pl");
+type Props = { params: Promise<{ locale: string }> };
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const prefix = localeHrefPrefix(locale);
+  const site = await loadSite(toSiteLocale(locale));
 
   return (
     <>
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/pl" />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "#top"} />
       <main>
         <Hero content={site.hero} />
         <Marquee items={site.marquee} />
         <Manifesto content={site.manifesto} />
-        <Services content={site.services} basePath="/pl/practices" />
+        <Services content={site.services} basePath={`${prefix}/practices`} />
         <Cases content={site.cases} />
         <Speed content={site.speed} />
         <Process content={site.process} />

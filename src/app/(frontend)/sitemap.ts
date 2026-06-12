@@ -40,6 +40,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
+      alternates: {
+        languages: {
+          en: "https://boosterai.pl/careers",
+          pl: "https://boosterai.pl/pl/careers",
+        },
+      },
+    },
+    {
+      url: "https://boosterai.pl/pl/careers",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+      alternates: {
+        languages: {
+          en: "https://boosterai.pl/careers",
+          pl: "https://boosterai.pl/pl/careers",
+        },
+      },
     },
   ];
 
@@ -105,12 +123,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const role of result.docs) {
       const r = role as unknown as Record<string, unknown>;
       if (!r.slug || !r.body) continue;
-      entries.push({
-        url: `https://boosterai.pl/careers/${r.slug as string}`,
-        lastModified: new Date(r.updatedAt as string),
-        changeFrequency: "weekly",
-        priority: 0.7,
-      });
+      const alternates = {
+        languages: {
+          en: `https://boosterai.pl/careers/${r.slug as string}`,
+          pl: `https://boosterai.pl/pl/careers/${r.slug as string}`,
+        },
+      };
+      entries.push(
+        {
+          url: `https://boosterai.pl/careers/${r.slug as string}`,
+          lastModified: new Date(r.updatedAt as string),
+          changeFrequency: "weekly",
+          priority: 0.7,
+          alternates,
+        },
+        {
+          url: `https://boosterai.pl/pl/careers/${r.slug as string}`,
+          lastModified: new Date(r.updatedAt as string),
+          changeFrequency: "weekly",
+          priority: 0.7,
+          alternates,
+        },
+      );
     }
   } catch {
     // If Payload unavailable during build, return base entries only
