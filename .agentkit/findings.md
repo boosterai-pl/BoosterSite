@@ -25,3 +25,16 @@ lint script 'next lint' fails (Invalid project directory .../lint) — removed i
 ```
 
 ---
+
+## loadSite silent static fallback masks DB failures
+**Type:** concern
+**Scope:** local
+**Context:** —
+**Captured:** 2026-06-12T10:35:04.791Z
+**Body:**
+```
+loadSite() catches ALL errors and silently falls back to static site.ts content. Pages deriving notFound() from its output can cache transient DB failures as 404s (hit on /careers/[slug]). Fixed there by querying Payload directly, but every other page silently serves stale static copy on DB failure with zero alerting. Consider: rethrow in prod + error monitoring, or distinguish fallback in the return type.
+
+```
+
+---
