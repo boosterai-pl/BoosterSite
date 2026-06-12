@@ -70,10 +70,9 @@ export default async function CareersRolePage({ params }: Props) {
           <div className="container-inner">
             <div
               className="blog-body"
-              data-reveal
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
-            <div className="practice-inline-cta" style={{ marginTop: "2.5rem" }} data-reveal>
+            <div className="practice-inline-cta" style={{ marginTop: "2.5rem" }}>
               <a
                 href={role.applyUrl || "mailto:hello@boosterai.pl"}
                 className="btn btn-primary"
