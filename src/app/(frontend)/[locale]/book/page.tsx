@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { loadSite } from "@/content";
+import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Booking } from "@/components/Booking";
 import { Footer } from "@/components/Footer";
@@ -7,6 +9,10 @@ import { SiteRuntime } from "@/components/SiteRuntime";
 
 export const revalidate = 3600;
 
+type Props = { params: Promise<{ locale: string }> };
+
+// The booking page is canonically English-only — the /pl variant
+// canonicalizes to the EN URL (no /pl/book existed before this refactor).
 export const metadata: Metadata = {
   title: "Book a consultation | Booster — AI-Native Agency",
   description:
@@ -43,8 +49,11 @@ const jsonLd = {
   isAccessibleForFree: true,
 };
 
-export default async function BookPage() {
-  const site = await loadSite();
+export default async function BookPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const prefix = localeHrefPrefix(locale);
+  const site = await loadSite(toSiteLocale(locale));
   return (
     <div className="booking-page">
       <script
@@ -53,7 +62,7 @@ export default async function BookPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/" />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
       <main>
         <Booking content={site.booking} />
       </main>

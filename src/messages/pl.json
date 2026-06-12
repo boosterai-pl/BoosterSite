@@ -1,0 +1,36 @@
+{
+  "layout": {
+    "title": "Booster — Agencja AI-Native",
+    "description": "Booster to agencja usług AI-native. Wdrażamy systemy CRM, dostarczamy oprogramowanie B2B i wdrażamy open-source ERP — kompleksowo, w tygodniach, nie kwartałach.",
+    "ogTitle": "Booster — Agencja AI-Native",
+    "ogDescription": "Budujemy to, co inni wyceniają na rok. Wdrożenie CRM, open-source ERP, oprogramowanie B2B i automatyzacja AI — w sześć tygodni.",
+    "jsonLdDescription": "Agencja usług AI-native. Wdrożenie CRM, open-source ERP, oprogramowanie B2B i automatyzacja AI."
+  },
+  "practices": {
+    "metaBrand": "Booster — Agencja AI-Native",
+    "breadcrumbHome": "Strona glowna",
+    "breadcrumbServices": "Uslugi"
+  },
+  "careers": {
+    "metaTitle": "Kariera | Booster — Agencja AI-Native",
+    "metaDescription": "Dołącz do Booster AI. Budujemy przyszłość usług AI-native.",
+    "ogDescription": "Dołącz do Booster AI. Budujemy przyszłość usług AI-native.",
+    "eyebrow": "Firma / Kariera",
+    "headlineText": "Buduj razem z",
+    "headlineAccent": "nami.",
+    "lead": "Jesteśmy agencją AI-native pracującą z ambitnymi firmami B2B.",
+    "leadRoles": "{count, plural, =0 {Obecnie nie mamy otwartych rekrutacji, ale zajrzyj wkrótce.} one {Obecnie mamy 1 otwartą rekrutację.} few {Obecnie mamy # otwarte rekrutacje.} many {Obecnie mamy # otwartych rekrutacji.} other {Obecnie mamy # otwartej rekrutacji.}}",
+    "emptyTitle": "Brak otwartych rekrutacji",
+    "emptyBody": "Jesteśmy małym, skupionym zespołem i rekrutujemy z rozmysłem. Gdy otworzymy rekrutację, znajdziesz ją tutaj. W międzyczasie napisz do nas, zawsze chętnie poznajemy zdolnych ludzi.",
+    "sayHello": "Napisz do nas",
+    "viewRole": "Zobacz ofertę",
+    "applyNow": "Aplikuj",
+    "roleMetaTitle": "{title} | Kariera | Booster"
+  },
+  "employmentTypes": {
+    "full-time": "Pełny etat",
+    "part-time": "Część etatu",
+    "contract": "Kontrakt",
+    "internship": "Staż"
+  }
+}

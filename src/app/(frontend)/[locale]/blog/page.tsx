@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { getPayloadClient } from "@/lib/payload";
+import { localeHrefPrefix } from "@/i18n/locale";
 import { BlogCard } from "@/components/BlogCard";
 
 export const revalidate = 3600;
 
 type Props = {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
@@ -31,7 +34,10 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   };
 }
 
-export default async function BlogPage({ searchParams }: Props) {
+export default async function BlogPage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const prefix = localeHrefPrefix(locale);
   const sp = await searchParams;
   const page = Math.max(1, Number(sp.page) || 1);
 
@@ -108,7 +114,7 @@ export default async function BlogPage({ searchParams }: Props) {
             {totalPages > 1 && (
               <nav className="blog-pagination" aria-label="Paginacja bloga">
                 {page > 1 && (
-                  <a href={`/blog${page === 2 ? "" : `?page=${page - 1}`}`}>
+                  <a href={`${prefix}/blog${page === 2 ? "" : `?page=${page - 1}`}`}>
                     ← Poprzednia
                   </a>
                 )}
@@ -116,7 +122,7 @@ export default async function BlogPage({ searchParams }: Props) {
                   Strona {page} z {totalPages}
                 </span>
                 {page < totalPages && (
-                  <a href={`/blog?page=${page + 1}`}>Nastepna →</a>
+                  <a href={`${prefix}/blog?page=${page + 1}`}>Nastepna →</a>
                 )}
               </nav>
             )}
