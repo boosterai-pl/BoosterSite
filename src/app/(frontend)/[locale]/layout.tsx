@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
@@ -91,7 +92,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             }),
           }}
         />
-        {children}
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <CookieConsent locale={locale === "pl" ? "pl" : "en"} />
         <Analytics />
       </body>
