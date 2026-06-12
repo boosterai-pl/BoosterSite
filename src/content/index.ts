@@ -332,12 +332,14 @@ function mapPayloadToSiteContent(
     },
     jobRoles: jobRoles.map((r) => ({
       id: String(r.id),
+      slug: (r.slug as string) ?? (r.id != null ? String(r.id) : ""),
       sortOrder: (r.sortOrder as string) ?? "",
       title: (r.title as string) ?? "",
       department: (r.department as string) ?? "",
       location: (r.location as string) ?? "",
       employmentType: (r.employmentType as "full-time" | "part-time" | "contract" | "internship") ?? "full-time",
       description: (r.description as string) ?? "",
+      ...(r.body != null ? { body: r.body } : {}),
       applyUrl: (r.applyUrl as string) ?? "",
     })),
   };

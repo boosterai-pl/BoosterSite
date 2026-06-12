@@ -423,6 +423,10 @@ export interface JobRole {
    */
   isOpen?: boolean | null;
   /**
+   * URL slug, e.g. "full-stack-engineer"
+   */
+  slug: string;
+  /**
    * e.g. "Senior AI Engineer"
    */
   title: string;
@@ -439,6 +443,24 @@ export interface JobRole {
    * Short summary shown on the Careers page listing.
    */
   description: string;
+  /**
+   * Full job posting shown on the role detail page.
+   */
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * Link to apply (form, email, etc.). If empty, defaults to hello@boosterai.pl.
    */
@@ -857,11 +879,13 @@ export interface PracticesSelect<T extends boolean = true> {
 export interface JobRolesSelect<T extends boolean = true> {
   sortOrder?: T;
   isOpen?: T;
+  slug?: T;
   title?: T;
   department?: T;
   location?: T;
   employmentType?: T;
   description?: T;
+  body?: T;
   applyUrl?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -140,12 +140,14 @@ export type BlogPost = {
 
 export type JobRole = {
   readonly id: string;
+  readonly slug: string;
   readonly sortOrder: string;
   readonly title: string;
   readonly department: string;
   readonly location: string;
   readonly employmentType: "full-time" | "part-time" | "contract" | "internship";
   readonly description: string;
+  readonly body?: unknown;
   readonly applyUrl: string;
 };
 

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { loadSite } from "@/content";
-import type { JobRole } from "@/content/types";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
+import { EMPLOYMENT_TYPE_LABELS } from "@/lib/job-roles";
 
 export const revalidate = 60;
 
@@ -20,13 +21,6 @@ export const metadata: Metadata = {
     url: "https://boosterai.pl/careers",
     siteName: "Booster",
   },
-};
-
-const EMPLOYMENT_TYPE_LABELS: Record<JobRole["employmentType"], string> = {
-  "full-time": "Full-time",
-  "part-time": "Part-time",
-  "contract": "Contract",
-  "internship": "Internship",
 };
 
 export default async function CareersPage() {
@@ -81,9 +75,20 @@ export default async function CareersPage() {
                       <span className="eyebrow light">{role.location}</span>
                       <span className="eyebrow light">{EMPLOYMENT_TYPE_LABELS[role.employmentType]}</span>
                     </div>
-                    <h2 className="h3">{role.title}</h2>
+                    <h2 className="h3">
+                      {role.slug && role.body ? (
+                        <Link href={`/careers/${role.slug}`}>{role.title}</Link>
+                      ) : (
+                        role.title
+                      )}
+                    </h2>
                     <p>{role.description}</p>
-                    <div className="practice-inline-cta" style={{ marginTop: "1.5rem" }}>
+                    <div className="practice-inline-cta" style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                      {role.slug && role.body ? (
+                        <Link href={`/careers/${role.slug}`} className="btn btn-ghost">
+                          View role <span className="arrow">→</span>
+                        </Link>
+                      ) : null}
                       <a
                         href={role.applyUrl || "mailto:hello@boosterai.pl"}
                         className="btn btn-primary"
