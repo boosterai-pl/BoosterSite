@@ -25,6 +25,14 @@ export const JobRoles: CollectionConfig = {
       admin: { description: "Uncheck to hide this role from the Careers page." },
     },
     {
+      name: "slug",
+      type: "text",
+      required: true,
+      unique: true,
+      index: true,
+      admin: { description: 'URL slug, e.g. "full-stack-engineer"' },
+    },
+    {
       name: "title",
       type: "text",
       required: true,
@@ -62,6 +70,12 @@ export const JobRoles: CollectionConfig = {
       required: true,
       localized: true,
       admin: { description: "Short summary shown on the Careers page listing." },
+    },
+    {
+      name: "body",
+      type: "richText",
+      localized: true,
+      admin: { description: "Full job posting shown on the role detail page." },
     },
     {
       name: "applyUrl",

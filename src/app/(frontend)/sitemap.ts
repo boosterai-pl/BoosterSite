@@ -35,6 +35,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: "https://boosterai.pl/careers",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
   ];
 
   for (const slug of practiceSlugs) {
@@ -82,6 +88,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(p.updatedAt as string),
         changeFrequency: "monthly",
         priority: 0.8,
+      });
+    }
+  } catch {
+    // If Payload unavailable during build, return base entries only
+  }
+
+  try {
+    const payload = await getPayloadClient();
+    const result = await payload.find({
+      collection: "job-roles",
+      where: { isOpen: { equals: true } },
+      limit: 1000,
+    });
+
+    for (const role of result.docs) {
+      const r = role as unknown as Record<string, unknown>;
+      if (!r.slug || !r.body) continue;
+      entries.push({
+        url: `https://boosterai.pl/careers/${r.slug as string}`,
+        lastModified: new Date(r.updatedAt as string),
+        changeFrequency: "weekly",
+        priority: 0.7,
       });
     }
   } catch {

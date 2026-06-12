@@ -1,6 +1,6 @@
 # AGENTS.md — BoosterSite
 
-Next.js 16 / React 19 marketing site for Booster AI agency. Single-page layout with no routing beyond `/`.
+Next.js 16 / React 19 marketing site for Booster AI agency. Routes: `/`, `/blog`, `/blog/[slug]`, `/careers`, `/careers/[slug]`, `/book`, `/practices/[slug]`, plus `/pl/*` locale variants.
 
 ## Commands
 
@@ -15,7 +15,7 @@ No test suite configured. Verification order: `lint → typecheck → build`.
 
 ## Architecture
 
-- **Single page**: `src/app/page.tsx` imports all section components and composes the page in one file.
+- **Home page**: `src/app/(frontend)/page.tsx` imports all section components and composes the landing page in one file. Other routes live under `src/app/(frontend)/`.
 - **Content layer**: All copy lives in `src/content/site.ts` as a typed `SiteContent` object. To change text, images, or links — edit `site.ts` only. Never hardcode strings in components.
 - **Content boundary**: `src/content/index.ts` exports `loadSite()`. This is the intended seam for a future CMS swap — keep components reading from it, not importing `site.ts` directly.
 - **Types**: `src/content/types.ts` is the schema. Extend it when adding new content fields; TypeScript strict mode will catch any mismatch.
@@ -62,6 +62,10 @@ Vercel deployments read env from the Vercel dashboard directly — dotenvx is no
 ### OpenCode + Payload MCP
 
 The `payload` MCP server has been removed. Payload content is now managed via the `managing-payload-content` skill (direct curl REST API calls). See `.opencode/skills/managing-payload-content/SKILL.md`.
+
+## Adding a job role
+
+Job postings live in the Payload `job-roles` collection (`src/payload/collections/JobRoles.ts`): `title`, `department`, `location`, `employmentType`, `description` (listing summary), `slug` (unique URL slug), and localized richText `body` (full posting). Publish via Payload admin or REST API. Roles with `slug` + `body` get a detail page at `/careers/[slug]`; roles without `body` appear only in the `/careers` listing.
 
 ## Payload CMS
 
