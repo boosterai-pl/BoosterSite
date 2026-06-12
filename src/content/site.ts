@@ -411,7 +411,7 @@ export const site: SiteContent = {
     body: "30 minutes. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
   },
   footer: {
-    intro: "AI-native service agency. Warsaw → worldwide.",
+    intro: "AI-native service agency. Wrocław → worldwide.",
     columns: [
       {
         heading: "Services",
@@ -441,7 +441,7 @@ export const site: SiteContent = {
     ],
     bottom: [
       "© 2026 Booster AI sp. z o.o.",
-      "Warsaw — Poland",
+      "Wrocław — Poland",
       "Booster / AI Native Service Agency / v1.0",
     ],
   },

@@ -86,7 +86,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               email: "hello@boosterai.pl",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Warsaw",
+                addressLocality: "Wrocław",
                 addressCountry: "PL",
               },
             }),
