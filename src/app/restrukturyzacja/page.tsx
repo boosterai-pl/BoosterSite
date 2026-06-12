@@ -242,7 +242,7 @@ export default function RestrukturyzacjaPage() {
               <div>
                 <span className="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
                 <h1>
-                  Automatyzacja, która <span className="accent">odciąża</span> kancelarię nie zastępuje prawnika.
+                  Automatyzacja, która <span className="accent">odciąża</span> kancelarię, nie zastępuje prawnika.
                 </h1>
                 <p className="lf-hero-sub">
                   Komunikacja z klientem, dokumentacja postępowania i pełna kontrola nad płynnością kancelarii w jednym
@@ -576,8 +576,8 @@ export default function RestrukturyzacjaPage() {
                 Trzy filary <span className="accent">nowoczesnej</span> kancelarii restrukturyzacyjnej
               </h2>
               <p>
-                Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Pełna kontrola nad płynnością
-                kancelarii. W jednym audytowalnym systemie bez silosów i ręcznej pracy.
+                Przejrzysta współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Pełna kontrola nad płynnością
+                kancelarii. Wszystko w jednym audytowalnym systemie, bez ręcznej pracy między etapami.
               </p>
             </div>
 
@@ -599,7 +599,7 @@ export default function RestrukturyzacjaPage() {
                   <li>Centralne repozytorium dokumentów z historią wersji i kontrolą dostępu</li>
                   <li>Bezpieczne przesyłanie plików w obie strony</li>
                   <li>Powiadomienia o terminach, decyzjach i dokumentach do podpisu</li>
-                  <li>Komunikacja zawsze w kontekście sprawy nigdy „w którym mailu to było"</li>
+                  <li>Komunikacja zawsze w kontekście sprawy, nigdy „w którym mailu to było"</li>
                   <li>Pełna ścieżka audytu: kto, kiedy, co przekazał</li>
                 </ul>
                 <div className="pillar-trust">Audytowalne · RODO · Kontrola dostępów</div>
@@ -669,10 +669,10 @@ export default function RestrukturyzacjaPage() {
                   minutach, w standardzie Twojej kancelarii.
                 </p>
                 <ul className="pillar-features">
-                  <li>Twoje wzorce, nie szablony „pudełkowe" pełna kontrola nad formatem i językiem</li>
+                  <li>Twoje wzorce, nie szablony „pudełkowe". Pełna kontrola nad formatem i językiem</li>
                   <li>Plany restrukturyzacyjne, propozycje układowe, ankiety, pisma procesowe</li>
                   <li>Drafty gotowe do recenzji prawnika, nie do pisania od zera</li>
-                  <li>Spójność w całej kancelarii eliminacja literówek i niespójnych klauzul</li>
+                  <li>Spójność w całej kancelarii: eliminacja literówek i niespójnych klauzul</li>
                   <li>Podpis elektroniczny i wersjonowanie wbudowane</li>
                   <li>Ścieżka audytu od draftu po podpisany oryginał</li>
                 </ul>
@@ -765,13 +765,13 @@ export default function RestrukturyzacjaPage() {
                 </p>
                 <p className="pillar-lead">
                   AI Windykator monitoruje wszystkie wystawione faktury, śledzi należności od klientów kancelarii i
-                  automatycznie inicjuje proces odzyskiwania zaległości zanim wpłyną na płynność firmy. To nie windykacja w
+                  automatycznie inicjuje proces odzyskiwania zaległości, zanim wpłyną na płynność firmy. To nie windykacja w
                   imieniu klienta. To kontrola własnych należności kancelarii, prowadzona w tle, bez angażowania prawnika.
                 </p>
                 <ul className="pillar-features">
                   <li>Pełny widok należności: kto, ile, jak długo zalega w jednym dashboardzie</li>
                   <li>Automatyczne wezwania do zapłaty w eskalacji ustalonej przez partnera kancelarii (e-mail, SMS, telefon)</li>
-                  <li>Klasyfikacja klientów według ryzyka opóźnienia system rozpoznaje niewypłacalność wcześniej</li>
+                  <li>Klasyfikacja klientów według ryzyka opóźnienia: system rozpoznaje zagrożenie wcześniej niż dłużnik</li>
                   <li>Wczesne alerty: faktura zagrożona zanim stanie się sprawą windykacyjną</li>
                   <li>Integracja z systemem fakturowania kancelarii oraz KSeF</li>
                   <li>Ślad audytowy każdej akcji windykacyjnej od pierwszego monitu po wezwanie formalne</li>
@@ -846,7 +846,7 @@ export default function RestrukturyzacjaPage() {
 
             <div className="pillars-roadmap" role="note">
               <span className="roadmap-pill">W przygotowaniu</span>
-              Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych monitoring obwieszczeń sądowych i automatyczne alerty w
+              Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych: monitoring obwieszczeń sądowych i automatyczne alerty w
               CRM.
             </div>
 
@@ -875,11 +875,11 @@ export default function RestrukturyzacjaPage() {
             <div className="ecosystem">
               <span className="eyebrow">Co wyróżnia to wdrożenie</span>
               <h2 style={{ marginTop: 24 }}>
-                Jeden zintegrowany <span className="serif">ekosystem</span>, nie zestaw skryptów
+                Jeden zintegrowany <span className="serif">system</span>, nie zestaw skryptów
               </h2>
               <blockquote>
-                CRM, SharePoint, API GUS/Regon, Mailerlite, SMS i poczta email działają razem automatycznie przekazując dane
-                przez cały cykl życia sprawy restrukturyzacyjnej. Żaden element nie działa w oderwaniu od pozostałych.
+                CRM, SharePoint, API GUS/Regon, Mailerlite, SMS i poczta e-mail przekazują dane automatycznie przez cały cykl
+                życia sprawy restrukturyzacyjnej. Każde narzędzie zna kontekst pozostałych.
                 <span style={{ display: "block", marginTop: 18 }}>Integracja z KRZ w przygotowaniu.</span>
               </blockquote>
               <div className="tags">
@@ -965,7 +965,7 @@ export default function RestrukturyzacjaPage() {
               {[
                 {
                   h: "Personalizacja pod procesy kancelarii",
-                  p: "LegalFlow dopasowuje się do Twojego flow nie na odwrót. Dokumenty, szablony i automatyzacje odzwierciedlają realne procesy Twojej kancelarii.",
+                  p: "LegalFlow dopasowuje się do Twojego flow, nie na odwrót. Dokumenty, szablony i automatyzacje odzwierciedlają realne procesy Twojej kancelarii.",
                 },
                 {
                   h: "Bezpieczeństwo danych klientów",
@@ -973,15 +973,15 @@ export default function RestrukturyzacjaPage() {
                 },
                 {
                   h: "Integracja z narzędziami, których już używasz",
-                  p: "LegalFlow łączy się z Twoim CRM, SharePoint, systemem płatności i pocztą. Jeden spójny ekosystem bez powielania pracy między systemami.",
+                  p: "LegalFlow łączy się z Twoim CRM, SharePoint, systemem płatności i pocztą. Jeden spójny obieg danych, bez powielania pracy między narzędziami.",
                 },
                 {
                   h: "Wdrożenie end-to-end",
-                  p: "Od onboardingu po archiwizację każdy etap sprawy jest w systemie. Żaden dokument, termin ani kontakt nie wypada między etapami.",
+                  p: "Od onboardingu po archiwizację, każdy etap sprawy jest w systemie. Żaden dokument, termin ani kontakt nie wypada między etapami.",
                 },
                 {
                   h: "Branżowe know-how",
-                  p: "System jest zbudowany z rozumieniem prawa restrukturyzacyjnego i insolvency workflow nie jako ogólna automatyzacja skrojona pod restrukturyzację.",
+                  p: "System jest zbudowany z rozumieniem prawa restrukturyzacyjnego i insolvency workflow, nie jako ogólna automatyzacja skrojona pod restrukturyzację.",
                 },
                 {
                   h: "Skalowanie bez nowych etatów",
@@ -1026,7 +1026,7 @@ export default function RestrukturyzacjaPage() {
                 </div>
                 <h3>Nawet –70% mniej czasu administracyjnego</h3>
                 <p>
-                  Generowanie dokumentów, kontakty z wierzycielami, monitoring terminów system wykonuje to automatycznie.
+                  Generowanie dokumentów, kontakty z wierzycielami, monitoring terminów: system wykonuje to automatycznie.
                   Zespół zajmuje się sprawami, nie obsługą procesu.
                 </p>
               </div>
@@ -1055,7 +1055,7 @@ export default function RestrukturyzacjaPage() {
                 </div>
                 <h3>Zero przeoczonych terminów</h3>
                 <p>
-                  Alerty o płatnościach, zadania windykacyjne, sprawozdania kwartalne LegalFlow pilnuje kalendarza sprawy na
+                  Alerty o płatnościach, zadania windykacyjne, sprawozdania kwartalne: LegalFlow pilnuje kalendarza sprawy na
                   każdym etapie postępowania.
                 </p>
               </div>
@@ -1110,7 +1110,7 @@ export default function RestrukturyzacjaPage() {
               </h2>
               <div className="final-cta-row">
                 <p>
-                  Umów 15-minutowe demo pokażemy system na żywo, bez slajdów i marketingu. Zobaczysz, co konkretnie zmienia
+                  Umów 15-minutowe demo. Pokażemy system na żywo, bez slajdów i marketingu. Zobaczysz, co konkretnie zmienia
                   się w codziennej pracy.
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -1144,11 +1144,11 @@ export default function RestrukturyzacjaPage() {
               {[
                 {
                   q: "Czy LegalFlow zastępuje mój obecny CRM?",
-                  a: "Nie. LegalFlow integruje się z CRM, którego już używasz (HubSpot, Pipedrive, monday.com i inne). Automatyzuje procesy na jego bazie nie wymaga migracji danych ani zmiany systemu.",
+                  a: "Nie. LegalFlow integruje się z CRM, którego już używasz (HubSpot, Pipedrive, monday.com i inne). Automatyzuje procesy na jego bazie, bez migracji danych ani zmiany systemu.",
                 },
                 {
                   q: "Jak długo trwa wdrożenie?",
-                  a: "Pierwsze moduły można uruchomić w ciągu kilku tygodni. Zakres i czas wdrożenia zależy od liczby modułów i specyfiki procesów kancelarii omawiamy to indywidualnie.",
+                  a: "Pierwsze moduły można uruchomić w ciągu kilku tygodni. Zakres i czas wdrożenia zależy od liczby modułów i specyfiki procesów kancelarii. Omawiamy to indywidualnie.",
                 },
                 {
                   q: "Czy system jest bezpieczny dla danych klientów kancelarii?",
@@ -1160,7 +1160,7 @@ export default function RestrukturyzacjaPage() {
                 },
                 {
                   q: "Kiedy pojawi się integracja z KRZ?",
-                  a: "Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu jako rozszerzenie filaru postępowania sądowego automatyczny monitoring obwieszczeń i alerty w CRM. Pojawi się w jednej z kolejnych wersji. Możesz zostawić kontakt poinformujemy o uruchomieniu.",
+                  a: "Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu jako rozszerzenie filaru postępowania sądowego: automatyczny monitoring obwieszczeń i alerty w CRM. Pojawi się w jednej z kolejnych wersji. Możesz zostawić kontakt, poinformujemy o uruchomieniu.",
                 },
               ].map((item) => (
                 <details className="faq-item" key={item.q}>
