@@ -75,11 +75,20 @@ export async function loadSite(locale: SiteLocale = "en"): Promise<SiteContent> 
       teamResult.docs as unknown as Record<string, unknown>[],
       practicesResult.docs as unknown as Record<string, unknown>[],
       jobRolesResult.docs as unknown as Record<string, unknown>[],
+      locale,
     );
   } catch {
     // Fall back to static data if Payload is unavailable (e.g., during initial build)
     return staticSite;
   }
+}
+
+// CMS hrefs are stored locale-agnostic (e.g. "/careers"). Internal root-relative
+// links must carry the /pl prefix on the Polish site so navigation stays in-locale.
+function localizeHref(href: string, locale: SiteLocale): string {
+  if (locale !== "pl") return href;
+  if (!href.startsWith("/") || href.startsWith("/pl/") || href === "/pl") return href;
+  return href === "/" ? "/pl" : `/pl${href}`;
 }
 
 function mapPayloadToSiteContent(
@@ -89,6 +98,7 @@ function mapPayloadToSiteContent(
   team: Record<string, unknown>[],
   practices: Record<string, unknown>[],
   jobRoles: Record<string, unknown>[] = [],
+  locale: SiteLocale = "en",
 ): SiteContent {
   type AnyArr = Record<string, unknown>[];
 
@@ -125,7 +135,7 @@ function mapPayloadToSiteContent(
       establishedLine: (h.establishedLine as string) ?? "",
       version: (h.version as string) ?? "",
     },
-    nav: (nav ?? []).map((n) => ({ label: n.label as string, href: n.href as string })),
+    nav: (nav ?? []).map((n) => ({ label: n.label as string, href: localizeHref(n.href as string, locale) })),
     navCta: {
       label: (navCta?.label as string) ?? "",
       href: navCtaHref,
@@ -283,7 +293,7 @@ function mapPayloadToSiteContent(
         heading: c.heading as string,
         links: ((c.links as AnyArr) ?? []).map((l) => ({
           label: l.label as string,
-          href: l.href as string,
+          href: localizeHref(l.href as string, locale),
         })),
       })),
       bottom: (footerBottom ?? []).map((b) => b.text as string),
