@@ -238,13 +238,13 @@ export default function RestrukturyzacjaPage() {
         <section className="hero">
           <div className="hero-grid-bg" aria-hidden="true" />
           <div className="container">
-            <div className="hero-grid">
+            <div className="lf-hero-grid">
               <div>
                 <span className="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
                 <h1>
                   Automatyzacja, która <span className="accent">odciąża</span> kancelarię nie zastępuje prawnika.
                 </h1>
-                <p className="hero-sub">
+                <p className="lf-hero-sub">
                   Komunikacja z klientem, dokumentacja postępowania i pełna kontrola nad płynnością kancelarii w jednym
                   audytowalnym systemie. Twój zespół skupia się na prawie, nie na administracji.
                 </p>

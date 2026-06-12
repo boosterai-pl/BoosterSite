@@ -264,6 +264,7 @@
     min-height: 100vh;
     padding: 140px var(--pad-x) 80px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     overflow: hidden;
     background: var(--ink);
@@ -284,14 +285,14 @@
     position: relative;
     z-index: 2;
   }
-  .lf .hero-grid {
+  .lf .lf-hero-grid {
     display: grid;
     gap: 64px;
     align-items: center;
     grid-template-columns: 1fr;
   }
   @media (min-width: 1000px) {
-    .lf .hero-grid { grid-template-columns: 1.05fr .95fr; gap: 80px; }
+    .lf .lf-hero-grid { grid-template-columns: 1.05fr .95fr; gap: 80px; }
   }
   .lf .hero h1 {
     margin: 0 0 28px;
@@ -305,12 +306,13 @@
     font-style: italic;
     font-weight: 400;
   }
-  .lf .hero-sub {
+  .lf .lf-hero-sub {
+    display: block;
     font-size: clamp(17px, 1.3vw, 20px);
     color: var(--muted);
     line-height: 1.5;
     max-width: 56ch;
-    margin-bottom: 40px;
+    margin: 0 0 40px;
   }
   .lf .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
   .lf .hero-trust {
