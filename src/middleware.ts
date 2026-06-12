@@ -6,11 +6,18 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
+  const { pathname } = request.nextUrl;
 
   // Route the LegalFlow subdomain directly to the /restrukturyzacja page,
   // bypassing locale routing entirely.
   if (host === "restrukturyzacja.boosterai.pl") {
     return NextResponse.rewrite(new URL("/restrukturyzacja", request.url));
+  }
+
+  // The /restrukturyzacja route is a standalone, non-localized page — skip
+  // next-intl locale routing so it is served as-is.
+  if (pathname === "/restrukturyzacja" || pathname.startsWith("/restrukturyzacja/")) {
+    return NextResponse.next();
   }
 
   return intlMiddleware(request);

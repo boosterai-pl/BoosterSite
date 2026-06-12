@@ -3,206 +3,181 @@
 import { useEffect, useRef, useState } from "react";
 import "./legalflow.css";
 
-const workerUrl = "https://clickup-lead-proxy.szymon-sidor.workers.dev";
+const WORKER_URL = "https://clickup-lead-proxy.szymon-sidor.workers.dev";
+const CAL_URL = "https://cal.com/szymon-bazan-iahn2z/30min";
 
 type FormState = "form" | "success";
 
-type LeadResponse = {
-  error?: string;
-};
+type LeadResponse = { error?: string };
 
 function isLeadResponse(value: unknown): value is LeadResponse {
-  return typeof value === "object" && value !== null && ("error" in value ? typeof (value as { error?: unknown }).error === "string" : true);
+  return typeof value === "object" && value !== null;
 }
 
 export default function RestrukturyzacjaPage() {
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const pillarsRef = useRef<HTMLElement>(null);
-  const lastFocusRef = useRef<HTMLElement | null>(null);
-  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [formState, setFormState] = useState<FormState>("form");
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [onLight, setOnLight] = useState(false);
   const year = new Date().getFullYear();
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  const rootRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const pillarsRef = useRef<HTMLElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const lastFocusRef = useRef<HTMLElement | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const openModal = (trigger?: HTMLElement | null) => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-
-    lastFocusRef.current = trigger ?? null;
-    setFormError(null);
-    setSubmitting(false);
-    setFormState("form");
-    setModalOpen(true);
-
-    if (phoneRef.current) {
-      phoneRef.current.value = "";
-      phoneRef.current.removeAttribute("aria-invalid");
-    }
-
-    if (nameRef.current) {
-      nameRef.current.value = "";
-    }
-  };
-
+  // Nav scrolled state + on-light detection over light sections
   useEffect(() => {
-    if (!pillarsRef.current) return;
+    const header = headerRef.current;
+    const root = rootRef.current;
+    if (!header || !root) return;
+    const lightSections = Array.from(root.querySelectorAll<HTMLElement>("section.light"));
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const navBottom = header.getBoundingClientRect().bottom;
+      const overLight = lightSections.some((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top <= navBottom && r.bottom >= navBottom;
+      });
+      setOnLight(overLight);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  // Pillars staggered entry animation
+  useEffect(() => {
+    const root = pillarsRef.current;
+    if (!root) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!("IntersectionObserver" in window)) return;
-
-    const pillars = Array.from(pillarsRef.current.querySelectorAll<HTMLElement>(".pillar"));
-    if (!pillars.length) return;
-
-    pillars.forEach((pillar, index) => {
-      pillar.style.opacity = "0";
-      pillar.style.transform = "translateY(18px)";
-      pillar.style.transition = `opacity .6s ease ${index * 120}ms, transform .6s ease ${index * 120}ms, box-shadow .3s ease, border-color .25s ease`;
+    const pillars = Array.from(root.querySelectorAll<HTMLElement>(".pillar"));
+    pillars.forEach((p, i) => {
+      p.style.opacity = "0";
+      p.style.transform = "translateY(18px)";
+      p.style.transition = `opacity .6s ease ${i * 120}ms, transform .6s ease ${i * 120}ms, box-shadow .3s ease, border-color .25s ease`;
     });
-
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const element = entry.target as HTMLElement;
-          element.style.opacity = "1";
-          element.style.transform = "translateY(0)";
-          observer.unobserve(element);
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target as HTMLElement;
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          io.unobserve(el);
         });
       },
       { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
     );
-
-    pillars.forEach((pillar) => observer.observe(pillar));
-
-    return () => observer.disconnect();
+    pillars.forEach((p) => io.observe(p));
+    return () => io.disconnect();
   }, []);
 
+  // Body scroll lock + focus when modal opens
   useEffect(() => {
     document.body.style.overflow = modalOpen ? "hidden" : "";
-
     if (modalOpen) {
-      window.setTimeout(() => {
-        phoneRef.current?.focus();
-      }, 80);
-    } else if (lastFocusRef.current) {
-      lastFocusRef.current.focus();
-      lastFocusRef.current = null;
+      const t = window.setTimeout(() => phoneRef.current?.focus(), 80);
+      return () => window.clearTimeout(t);
     }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return undefined;
   }, [modalOpen]);
 
+  // Escape to close modal
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setModalOpen(false);
-      }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && modalOpen) closeModal();
     };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalOpen]);
 
-    document.addEventListener("keydown", handleKeyDown);
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    },
+    [],
+  );
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  function openModal(e: React.MouseEvent<HTMLElement>) {
+    lastFocusRef.current = e.currentTarget;
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setFormState("form");
+    setFormError(null);
+    setSubmitting(false);
+    if (phoneRef.current) phoneRef.current.value = "";
+    if (nameRef.current) nameRef.current.value = "";
+    setModalOpen(true);
+  }
 
-  useEffect(() => {
-    return () => {
-      if (closeTimerRef.current) {
-        clearTimeout(closeTimerRef.current);
-      }
-      document.body.style.overflow = "";
-    };
-  }, []);
+  function closeModal() {
+    setModalOpen(false);
+    lastFocusRef.current?.focus();
+  }
 
-  async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormError(null);
     const phone = (phoneRef.current?.value ?? "").trim();
     const name = (nameRef.current?.value ?? "").trim();
-
-    setFormError(null);
-
-    if (!/^[\+\s0-9\-\(\)]{7,}$/.test(phone)) {
-      phoneRef.current?.setAttribute("aria-invalid", "true");
+    if (!/^[+\s0-9\-()]{7,}$/.test(phone)) {
       setFormError("Podaj prawidłowy numer telefonu.");
       phoneRef.current?.focus();
       return;
     }
-
-    phoneRef.current?.removeAttribute("aria-invalid");
     setSubmitting(true);
-
     try {
-      const response = await fetch(workerUrl, {
+      const res = await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone,
-          name,
-          source: "LegalFlow landing — Skontaktuj się",
-        }),
+        body: JSON.stringify({ phone, name, source: "LegalFlow landing — Skontaktuj się" }),
       });
-
-      if (!response.ok) {
-        let message = "Coś poszło nie tak. Spróbuj ponownie za chwilę.";
-
+      if (!res.ok) {
+        let msg = "Coś poszło nie tak. Spróbuj ponownie za chwilę.";
         try {
-          const data: unknown = await response.json();
+          const data: unknown = await res.json();
           if (isLeadResponse(data) && data.error === "Provide a valid email or phone") {
-            message = "Podaj prawidłowy numer telefonu.";
+            msg = "Podaj prawidłowy numer telefonu.";
           }
         } catch {
-          // ignore invalid error response payloads
+          /* ignore */
         }
-
-        throw new Error(message);
+        throw new Error(msg);
       }
-
       setFormState("success");
       setSubmitting(false);
-
-      if (closeTimerRef.current) {
-        clearTimeout(closeTimerRef.current);
-      }
-
-      closeTimerRef.current = setTimeout(() => {
-        setModalOpen(false);
-      }, 4000);
-    } catch (error) {
+      closeTimerRef.current = setTimeout(() => setModalOpen(false), 4000);
+    } catch (err) {
       setSubmitting(false);
-      setFormError(error instanceof Error ? error.message : "Nie udało się wysłać. Spróbuj ponownie.");
+      setFormError(err instanceof Error ? err.message : "Nie udało się wysłać. Spróbuj ponownie.");
     }
   }
 
+  const headerClass = `site-header${scrolled ? " scrolled" : ""}${onLight ? " on-light" : ""}`;
+
   return (
-    <div className="lf">
-      <header className="site-header" role="banner">
+    <div className="lf" ref={rootRef} id="top">
+      <header className={headerClass} role="banner" ref={headerRef}>
         <div className="container header-inner">
-          <a href="#top" className="logo" aria-label="LegalFlow — strona główna">
-            <span className="logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="7" cy="19" r="2" fill="white" />
-                <circle cx="18" cy="19" r="2" fill="white" />
-                <path d="M9 19h7" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </span>
+          <a href="#top" className="logo" aria-label="LegalFlow strona główna">
+            <img src="/assets/booster-rocket.png" alt="Booster AI" />
             <span className="logo-text">
-              Legal<span>Flo</span>
+              LegalFlow<span>.</span>
             </span>
           </a>
 
@@ -214,19 +189,17 @@ export default function RestrukturyzacjaPage() {
             <a href="#faq">FAQ</a>
           </nav>
 
-          <a className="btn btn-primary header-cta" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="header">
+          <a className="header-cta" href={CAL_URL} target="_blank" rel="noopener" data-cta="header">
+            <span className="dot" />
             Zobacz demo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
           </a>
 
           <button
             className="mobile-toggle"
-            onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
+            onClick={() => setMenuOpen((o) => !o)}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <line x1="4" y1="7" x2="20" y2="7" />
@@ -254,289 +227,309 @@ export default function RestrukturyzacjaPage() {
               FAQ
             </a>
           </nav>
-          <a className="btn btn-primary" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="mobile-menu" onClick={() => setMenuOpen(false)}>
+          <a className="btn btn-primary" href={CAL_URL} target="_blank" rel="noopener" data-cta="mobile-menu">
             Zobacz demo →
           </a>
         </div>
       </header>
 
-      <main id="top">
+      <main>
+        {/* HERO */}
         <section className="hero">
-          <div className="container hero-grid">
-            <div>
-              <span className="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
-              <h1>Automatyzacja, która odciąża kancelarię — nie zastępuje prawnika.</h1>
-              <p className="hero-sub">
-                Komunikacja z klientem, dokumentacja postępowania i pełna kontrola nad płynnością kancelarii — w jednym audytowalnym systemie. Twój zespół skupia się na prawie, nie na administracji.
-              </p>
-              <div className="hero-cta-row">
-                <a className="btn btn-primary btn-lg" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="hero">
-                  Zobacz demo
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </a>
-                <a className="btn btn-ghost btn-lg" href="#moduly" data-cta="hero-secondary">
-                  Poznaj moduły
-                </a>
-              </div>
-              <div className="hero-trust" aria-label="Zaufanie">
-                <span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>{" "}
-                  Wdrożenie end-to-end
-                </span>
-                <span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>{" "}
-                  Szkolenie zespołu w cenie
-                </span>
-                <span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>{" "}
-                  Integracja z Twoim CRM
-                </span>
-              </div>
-            </div>
-
-            <div className="hero-visual" aria-hidden="true">
-              <div className="hero-glow"></div>
-
-              <div className="hero-card hero-app">
-                <div className="hero-app-bar">
-                  <div className="hero-app-brand">
-                    <span className="hero-app-icon">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                        <circle cx="7" cy="19" r="2" fill="white" />
-                        <circle cx="18" cy="19" r="2" fill="white" />
-                        <path d="M9 19h7" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                    <span className="hero-app-name">LegalFlow</span>
-                  </div>
-                  <span className="hero-app-tab">Dashboard</span>
-                  <div className="hero-app-search">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <circle cx="11" cy="11" r="7" />
-                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
-                    <span>Szukaj sprawy…</span>
-                    <kbd>⌘K</kbd>
-                  </div>
-                  <span className="hero-app-bell">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                    </svg>
-                    <span className="hero-app-bell-dot"></span>
+          <div className="hero-grid-bg" aria-hidden="true" />
+          <div className="container">
+            <div className="hero-grid">
+              <div>
+                <span className="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
+                <h1>
+                  Automatyzacja, która <span className="accent">odciąża</span> kancelarię nie zastępuje prawnika.
+                </h1>
+                <p className="hero-sub">
+                  Komunikacja z klientem, dokumentacja postępowania i pełna kontrola nad płynnością kancelarii w jednym
+                  audytowalnym systemie. Twój zespół skupia się na prawie, nie na administracji.
+                </p>
+                <div className="hero-cta-row">
+                  <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="hero">
+                    Zobacz demo
+                    <span className="arrow">→</span>
+                  </a>
+                  <a className="btn btn-ghost btn-lg" href="#moduly" data-cta="hero-secondary">
+                    Poznaj moduły
+                  </a>
+                </div>
+                <div className="hero-trust" aria-label="Zaufanie">
+                  <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>{" "}
+                    Wdrożenie end-to-end
+                  </span>
+                  <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>{" "}
+                    Szkolenie zespołu w cenie
+                  </span>
+                  <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>{" "}
+                    Integracja z Twoim CRM
                   </span>
                 </div>
+              </div>
 
-                <div className="hero-greet">
-                  <div className="hero-greet-title">
-                    Dzień dobry, Anna <span className="hero-greet-wave">👋</span>
-                  </div>
-                  <div className="hero-greet-sub">
-                    Masz <strong>9 dokumentów</strong> do weryfikacji i <strong>4 terminy</strong> w tym tygodniu.
-                  </div>
-                </div>
+              <div className="hero-visual" aria-hidden="true">
+                <div className="hero-glow" />
 
-                <div className="hero-kpi-grid">
-                  <div className="kpi-tile">
-                    <div className="kpi-tile-head">
-                      <span className="kpi-tile-icon green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                <div className="hero-card hero-app">
+                  <div className="hero-app-bar">
+                    <div className="hero-app-brand">
+                      <span className="hero-app-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                          <circle cx="7" cy="19" r="2" fill="white" />
+                          <circle cx="18" cy="19" r="2" fill="white" />
+                          <path d="M9 19h7" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
                       </span>
-                      <span className="kpi-tile-lbl">Aktywne sprawy</span>
+                      <span className="hero-app-name">LegalFlow</span>
                     </div>
-                    <div className="kpi-tile-num">12</div>
-                    <div className="kpi-tile-delta">+3 w tym miesiącu</div>
+                    <span className="hero-app-tab">Dashboard</span>
+                    <div className="hero-app-search">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      </svg>
+                      <span>Szukaj sprawy…</span>
+                      <kbd>⌘K</kbd>
+                    </div>
+                    <span className="hero-app-bell">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                      </svg>
+                      <span className="hero-app-bell-dot" />
+                    </span>
                   </div>
-                  <div className="kpi-tile">
-                    <div className="kpi-tile-head">
-                      <span className="kpi-tile-icon amber">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+
+                  <div className="hero-greet">
+                    <div className="hero-greet-title">
+                      Dzień dobry, Anna <span className="hero-greet-wave">👋</span>
+                    </div>
+                    <div className="hero-greet-sub">
+                      Masz <strong>9 dokumentów</strong> do weryfikacji i <strong>4 terminy</strong> w tym tygodniu.
+                    </div>
+                  </div>
+
+                  <div className="hero-kpi-grid">
+                    <div className="kpi-tile">
+                      <div className="kpi-tile-head">
+                        <span className="kpi-tile-icon green">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                          </svg>
+                        </span>
+                        <span className="kpi-tile-lbl">Aktywne sprawy</span>
+                      </div>
+                      <div className="kpi-tile-num">12</div>
+                      <div className="kpi-tile-delta">+3 w tym miesiącu</div>
+                    </div>
+                    <div className="kpi-tile">
+                      <div className="kpi-tile-head">
+                        <span className="kpi-tile-icon amber">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                          </svg>
+                        </span>
+                        <span className="kpi-tile-lbl">Pilne terminy</span>
+                      </div>
+                      <div className="kpi-tile-num">4</div>
+                      <div className="kpi-tile-delta">2 w tym tygodniu</div>
+                    </div>
+                    <div className="kpi-tile">
+                      <div className="kpi-tile-head">
+                        <span className="kpi-tile-icon cyan">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                          </svg>
+                        </span>
+                        <span className="kpi-tile-lbl">Dokumenty AI</span>
+                      </div>
+                      <div className="kpi-tile-num">9</div>
+                      <div className="kpi-tile-delta">Średni czas: 2 min</div>
+                    </div>
+                  </div>
+
+                  <div className="hero-ai-rec">
+                    <div className="hero-ai-head">
+                      <span className="hero-ai-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                        Rekomendacja AI
+                      </span>
+                      <span className="hero-ai-time">Aktualizowane co 5 min</span>
+                    </div>
+                    <div className="hero-ai-body">
+                      <div className="hero-ai-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                           <line x1="12" y1="9" x2="12" y2="13" />
                           <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg>
-                      </span>
-                      <span className="kpi-tile-lbl">Pilne terminy</span>
-                    </div>
-                    <div className="kpi-tile-num">4</div>
-                    <div className="kpi-tile-delta">2 w tym tygodniu</div>
-                  </div>
-                  <div className="kpi-tile">
-                    <div className="kpi-tile-head">
-                      <span className="kpi-tile-icon cyan">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                        </svg>
-                      </span>
-                      <span className="kpi-tile-lbl">Dokumenty AI</span>
-                    </div>
-                    <div className="kpi-tile-num">9</div>
-                    <div className="kpi-tile-delta">Średni czas: 2 min</div>
-                  </div>
-                </div>
-
-                <div className="hero-ai-rec">
-                  <div className="hero-ai-head">
-                    <span className="hero-ai-badge">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                      </svg>
-                      Rekomendacja AI
-                    </span>
-                    <span className="hero-ai-time">Aktualizowane co 5 min</span>
-                  </div>
-                  <div className="hero-ai-body">
-                    <div className="hero-ai-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                        <line x1="12" y1="9" x2="12" y2="13" />
-                        <line x1="12" y1="17" x2="12.01" y2="17" />
-                      </svg>
-                    </div>
-                    <div className="hero-ai-text">
-                      <div className="hero-ai-title">
-                        Termin sądowy za 2 dni — <strong>ALFA TECH sp. z o.o.</strong>
                       </div>
-                      <div className="hero-ai-desc">Brakuje załącznika 3 (spis wierzytelności). AI może wygenerować projekt na podstawie danych z księgowości.</div>
-                      <div className="hero-ai-actions">
-                        <span className="hero-ai-cta">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                          </svg>
-                          Wygeneruj załącznik
-                        </span>
-                        <span className="hero-ai-link">Otwórz sprawę</span>
+                      <div className="hero-ai-text">
+                        <div className="hero-ai-title">
+                          Termin sądowy za 2 dni <strong>ALFA TECH sp. z o.o.</strong>
+                        </div>
+                        <div className="hero-ai-desc">
+                          Brakuje załącznika 3 (spis wierzytelności). AI może wygenerować projekt na podstawie danych z
+                          księgowości.
+                        </div>
+                        <div className="hero-ai-actions">
+                          <span className="hero-ai-cta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                            Wygeneruj załącznik
+                          </span>
+                          <span className="hero-ai-link">Otwórz sprawę</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="hero-card hero-table-card">
-                <div className="hero-table-head">
-                  <div>
-                    <div className="hero-table-eyebrow">Sprawy w toku</div>
-                    <div className="hero-table-title">Najnowsze aktualizacje</div>
+                <div className="hero-card hero-table-card">
+                  <div className="hero-table-head">
+                    <div>
+                      <div className="hero-table-eyebrow">Sprawy w toku</div>
+                      <div className="hero-table-title">Najnowsze aktualizacje</div>
+                    </div>
+                    <span className="hero-pill cyan">12</span>
                   </div>
-                  <span className="hero-pill cyan">12</span>
+                  <div className="hero-table-rows">
+                    <div className="t-row">
+                      <div className="t-row-body">
+                        <div className="t-company">ALFA TECH sp. z o.o.</div>
+                        <div className="t-meta">SP-324 · 47 wierzycieli</div>
+                      </div>
+                      <span className="t-stage navy">Głosowanie</span>
+                    </div>
+                    <div className="t-row">
+                      <div className="t-row-body">
+                        <div className="t-company">Nowak Logistyka</div>
+                        <div className="t-meta">SP-321 · 23 wierzycieli</div>
+                      </div>
+                      <span className="t-stage amber">Inwentaryzacja</span>
+                    </div>
+                    <div className="t-row">
+                      <div className="t-row-body">
+                        <div className="t-company">Meridian Bud sp. k.</div>
+                        <div className="t-meta">SP-318 · 18 wierzycieli</div>
+                      </div>
+                      <span className="t-stage cyan">Propozycje</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="hero-table-rows">
-                  <div className="t-row">
-                    <div className="t-row-body">
-                      <div className="t-company">ALFA TECH sp. z o.o.</div>
-                      <div className="t-meta">SP-324 · 47 wierzycieli</div>
-                    </div>
-                    <span className="t-stage navy">Głosowanie</span>
-                  </div>
-                  <div className="t-row">
-                    <div className="t-row-body">
-                      <div className="t-company">Nowak Logistyka</div>
-                      <div className="t-meta">SP-321 · 23 wierzycieli</div>
-                    </div>
-                    <span className="t-stage amber">Inwentaryzacja</span>
-                  </div>
-                  <div className="t-row">
-                    <div className="t-row-body">
-                      <div className="t-company">Meridian Bud sp. k.</div>
-                      <div className="t-meta">SP-318 · 18 wierzycieli</div>
-                    </div>
-                    <span className="t-stage cyan">Propozycje</span>
-                  </div>
-                </div>
-              </div>
 
-              <div className="hero-notif">
-                <span className="hero-notif-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                </span>
-                <div className="hero-notif-body">
-                  <div className="hero-notif-title">Plan układu gotowy</div>
-                  <div className="hero-notif-meta">Wymaga akceptacji prawnika</div>
+                <div className="hero-notif">
+                  <span className="hero-notif-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                  </span>
+                  <div className="hero-notif-body">
+                    <div className="hero-notif-title">Plan układu gotowy</div>
+                    <div className="hero-notif-meta">Wymaga akceptacji prawnika</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* INTRO STRIP */}
         <section className="intro-strip" aria-label="Wprowadzenie">
           <div className="container">
-            <p className="intro-strip-text">System dla kancelarii restrukturyzacyjnych, które chcą prowadzić więcej spraw — bez proporcjonalnego zwiększania pracy administracyjnej.</p>
+            <p className="intro-strip-text">
+              System dla kancelarii restrukturyzacyjnych, które chcą prowadzić <span className="serif">więcej spraw</span> bez
+              proporcjonalnego zwiększania pracy administracyjnej.
+            </p>
           </div>
         </section>
 
+        {/* INTEGRATIONS */}
         <section className="integrations" aria-label="Integracje">
-          <div className="container">
-            <h2>Łączymy się z narzędziami, których już używasz</h2>
-            <p className="integrations-sub">Twój CRM, SharePoint i narzędzia komunikacji zostają — LegalFlow działa razem z nimi, nie zamiast nich.</p>
-            <div className="logos-viewport">
-              <div className="logos-track" id="logos-track">
-                <div className="logo-item">
-                  <span>HubSpot</span>
-                </div>
-                <div className="logo-item">
-                  <span>ClickUp</span>
-                  <span className="badge">Verified Consultant</span>
-                </div>
-                <div className="logo-item">
-                  <span>Pipedrive</span>
-                  <span className="badge">Authorized Partner</span>
-                </div>
-                <div className="logo-item">
-                  <span>Microsoft Dynamics 365</span>
-                </div>
-                <div className="logo-item">
-                  <span>monday.com</span>
-                  <span className="badge">Certified Partner</span>
-                </div>
-                <div className="logo-item">
-                  <span>Tillio</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>HubSpot</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>ClickUp</span>
-                  <span className="badge">Verified Consultant</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>Pipedrive</span>
-                  <span className="badge">Authorized Partner</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>Microsoft Dynamics 365</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>monday.com</span>
-                  <span className="badge">Certified Partner</span>
-                </div>
-                <div className="logo-item" aria-hidden="true">
-                  <span>Tillio</span>
-                </div>
+          <div className="logos-viewport">
+            <div className="logos-track" id="logos-track">
+              <div className="logo-item">
+                <span>HubSpot</span>
+              </div>
+              <div className="logo-item">
+                <span>ClickUp</span>
+              </div>
+              <div className="logo-item">
+                <span>Pipedrive</span>
+              </div>
+              <div className="logo-item">
+                <span>Microsoft Dynamics 365</span>
+              </div>
+              <div className="logo-item">
+                <span>monday.com</span>
+              </div>
+              <div className="logo-item">
+                <span>Tillio</span>
+              </div>
+              <div className="logo-item">
+                <span>SharePoint</span>
+              </div>
+              <div className="logo-item">
+                <span>KSeF</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>HubSpot</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>ClickUp</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>Pipedrive</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>Microsoft Dynamics 365</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>monday.com</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>Tillio</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>SharePoint</span>
+              </div>
+              <div className="logo-item" aria-hidden="true">
+                <span>KSeF</span>
               </div>
             </div>
           </div>
         </section>
 
+        {/* METRICS */}
         <section>
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Zakres wdrożenia</span>
-              <h2>Pełny cykl życia sprawy — od leada do archiwizacji</h2>
-              <p>Pięć zintegrowanych modułów, które działają jako jeden system.</p>
+              <div>
+                <h2>
+                  Pełny cykl <span className="accent">życia sprawy</span> od leada do archiwizacji
+                </h2>
+                <p style={{ marginTop: 24 }}>Pięć zintegrowanych modułów, które działają jako jeden system.</p>
+              </div>
             </div>
 
             <div className="metrics-grid">
@@ -548,22 +541,22 @@ export default function RestrukturyzacjaPage() {
                 <div className="metric-num">
                   ~4 <small>min</small>
                 </div>
-                <div className="metric-lbl">średni czas reakcji na nowego leada — od formularza do rozmowy</div>
+                <div className="metric-lbl">średni czas reakcji na nowego leada od formularza do rozmowy</div>
               </div>
               <div className="metric-card">
                 <div className="metric-num">
                   Nawet&nbsp;–70<small>%</small>
                 </div>
-                <div className="metric-lbl">czasu administracyjnego — mniej powtarzalnej pracy biurowej w zespole</div>
+                <div className="metric-lbl">czasu administracyjnego mniej powtarzalnej pracy biurowej w zespole</div>
               </div>
               <div className="metric-card">
                 <div className="metric-num">0</div>
-                <div className="metric-lbl">przeoczonych terminów, dokumentów i kontaktów z wierzycielami — system pilnuje sam</div>
+                <div className="metric-lbl">przeoczonych terminów, dokumentów i kontaktów z wierzycielami system pilnuje sam</div>
               </div>
             </div>
 
             <div className="inline-cta">
-              <button type="button" className="btn btn-ghost btn-lg" data-modal-open="offer-modal" data-cta="after-scope-contact" onClick={(event) => openModal(event.currentTarget)}>
+              <button type="button" className="btn btn-ghost btn-lg" onClick={openModal} data-cta="after-scope-contact">
                 Skontaktuj się
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -574,27 +567,39 @@ export default function RestrukturyzacjaPage() {
           </div>
         </section>
 
-        <section ref={pillarsRef} className="pillars" id="moduly" aria-label="Trzy filary platformy LegalFlow">
+        {/* PILLARS */}
+        <section className="pillars light" id="moduly" aria-label="Trzy filary platformy LegalFlow" ref={pillarsRef}>
           <div className="container">
             <div className="section-head left">
               <span className="eyebrow">Platforma LegalFlow</span>
-              <h2>Trzy filary nowoczesnej kancelarii restrukturyzacyjnej</h2>
-              <p>Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Pełna kontrola nad płynnością kancelarii. W jednym audytowalnym systemie — bez silosów i ręcznej pracy.</p>
+              <h2>
+                Trzy filary <span className="accent">nowoczesnej</span> kancelarii restrukturyzacyjnej
+              </h2>
+              <p>
+                Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Pełna kontrola nad płynnością
+                kancelarii. W jednym audytowalnym systemie bez silosów i ręcznej pracy.
+              </p>
             </div>
 
             <article className="pillar">
-              <div className="pillar-num" aria-hidden="true">01</div>
+              <div className="pillar-num" aria-hidden="true">
+                01
+              </div>
               <div className="pillar-content">
                 <span className="pillar-eyebrow">Komunikacja klient ↔ kancelaria</span>
                 <h3>Strefa Klienta</h3>
                 <p className="pillar-headline">Klient zawsze wie, na jakim etapie jest jego sprawa.</p>
-                <p className="pillar-lead">Dedykowana, zabezpieczona przestrzeń, w której klient kancelarii widzi status postępowania, otrzymuje dokumenty i komunikuje się z prawnikiem — w jednym kanale, z pełną historią. To nie samoobsługa. To uporządkowana współpraca, w której nikt nie szuka maili.</p>
+                <p className="pillar-lead">
+                  Dedykowana, zabezpieczona przestrzeń, w której klient kancelarii widzi status postępowania, otrzymuje
+                  dokumenty i komunikuje się z prawnikiem w jednym kanale, z pełną historią. To nie samoobsługa. To
+                  uporządkowana współpraca, w której nikt nie szuka maili.
+                </p>
                 <ul className="pillar-features">
-                  <li>Status postępowania w czasie rzeczywistym — bez pytań „jak idzie sprawa?”</li>
+                  <li>Status postępowania w czasie rzeczywistym bez pytań „jak idzie sprawa?"</li>
                   <li>Centralne repozytorium dokumentów z historią wersji i kontrolą dostępu</li>
                   <li>Bezpieczne przesyłanie plików w obie strony</li>
                   <li>Powiadomienia o terminach, decyzjach i dokumentach do podpisu</li>
-                  <li>Komunikacja zawsze w kontekście sprawy — nigdy „w którym mailu to było”</li>
+                  <li>Komunikacja zawsze w kontekście sprawy nigdy „w którym mailu to było"</li>
                   <li>Pełna ścieżka audytu: kto, kiedy, co przekazał</li>
                 </ul>
                 <div className="pillar-trust">Audytowalne · RODO · Kontrola dostępów</div>
@@ -602,20 +607,20 @@ export default function RestrukturyzacjaPage() {
               <div className="pillar-visual" aria-hidden="true">
                 <div className="mini mini-portal">
                   <div className="mini-head">
-                    <span className="mini-title">Twoja sprawa — SR-184/25</span>
+                    <span className="mini-title">Twoja sprawa SR-184/25</span>
                     <span className="mini-pill">Aktywna</span>
                   </div>
                   <ol className="progress-stages">
                     <li className="stage done">
-                      <span className="stage-dot"></span>
+                      <span className="stage-dot" />
                       <span className="stage-label">Wniosek złożony</span>
                     </li>
                     <li className="stage active">
-                      <span className="stage-dot"></span>
+                      <span className="stage-dot" />
                       <span className="stage-label">Postępowanie układowe</span>
                     </li>
                     <li className="stage">
-                      <span className="stage-dot"></span>
+                      <span className="stage-dot" />
                       <span className="stage-label">Zatwierdzenie układu</span>
                     </li>
                   </ol>
@@ -628,7 +633,7 @@ export default function RestrukturyzacjaPage() {
                         </svg>
                       </span>
                       <div className="mini-row-body">
-                        <div className="mini-row-title">Plan układu — wersja 3</div>
+                        <div className="mini-row-title">Plan układu wersja 3</div>
                         <div className="mini-row-meta">Dodano 2h temu · Wymaga podpisu</div>
                       </div>
                       <span className="mini-badge attention">Do akcji</span>
@@ -651,17 +656,23 @@ export default function RestrukturyzacjaPage() {
             </article>
 
             <article className="pillar pillar-reverse">
-              <div className="pillar-num" aria-hidden="true">02</div>
+              <div className="pillar-num" aria-hidden="true">
+                02
+              </div>
               <div className="pillar-content">
                 <span className="pillar-eyebrow">Automatyzacja dokumentacji procesowej</span>
                 <h3>Generator Układów i Dokumentów</h3>
-                <p className="pillar-headline">Dokumentacja postępowania powstaje sama — na Twoich szablonach.</p>
-                <p className="pillar-lead">Kancelaria definiuje własne wzory pism, ankiet i planów. System wypełnia je danymi sprawy i generuje wersje robocze gotowe do akceptacji prawnika. Plan układu, propozycja układowa, wniosek do sądu, plan PZU — powstają w minutach, w standardzie Twojej kancelarii.</p>
+                <p className="pillar-headline">Dokumentacja postępowania powstaje sama na Twoich szablonach.</p>
+                <p className="pillar-lead">
+                  Kancelaria definiuje własne wzory pism, ankiet i planów. System wypełnia je danymi sprawy i generuje wersje
+                  robocze gotowe do akceptacji prawnika. Plan układu, propozycja układowa, wniosek do sądu, plan PZU powstają w
+                  minutach, w standardzie Twojej kancelarii.
+                </p>
                 <ul className="pillar-features">
-                  <li>Twoje wzorce, nie szablony „pudełkowe” — pełna kontrola nad formatem i językiem</li>
+                  <li>Twoje wzorce, nie szablony „pudełkowe" pełna kontrola nad formatem i językiem</li>
                   <li>Plany restrukturyzacyjne, propozycje układowe, ankiety, pisma procesowe</li>
                   <li>Drafty gotowe do recenzji prawnika, nie do pisania od zera</li>
-                  <li>Spójność w całej kancelarii — eliminacja literówek i niespójnych klauzul</li>
+                  <li>Spójność w całej kancelarii eliminacja literówek i niespójnych klauzul</li>
                   <li>Podpis elektroniczny i wersjonowanie wbudowane</li>
                   <li>Ścieżka audytu od draftu po podpisany oryginał</li>
                 </ul>
@@ -720,15 +731,15 @@ export default function RestrukturyzacjaPage() {
                   </div>
                   <div className="mini-list">
                     <div className="mini-row">
-                      <span className="mini-row-title">Plan układu — Nowak Logistyka</span>
+                      <span className="mini-row-title">Plan układu Nowak Logistyka</span>
                       <span className="mini-badge attention">Do akceptacji</span>
                     </div>
                     <div className="mini-row">
-                      <span className="mini-row-title">Test prywatnego wierzyciela — Polver</span>
+                      <span className="mini-row-title">Test prywatnego wierzyciela Polver</span>
                       <span className="mini-badge done">Podpisany</span>
                     </div>
                     <div className="mini-row">
-                      <span className="mini-row-title">Propozycje układowe — Meridian Bud</span>
+                      <span className="mini-row-title">Propozycje układowe Meridian Bud</span>
                       <span className="mini-badge draft">Draft</span>
                     </div>
                   </div>
@@ -737,24 +748,33 @@ export default function RestrukturyzacjaPage() {
             </article>
 
             <article className="pillar">
-              <div className="pillar-num" aria-hidden="true">03</div>
+              <div className="pillar-num" aria-hidden="true">
+                03
+              </div>
               <div className="pillar-content">
                 <span className="pillar-eyebrow">
                   Płynność finansowa kancelarii
                   <span className="status-live">
-                    <span className="status-dot"></span>Dostępne
+                    <span className="status-dot" />
+                    Dostępne
                   </span>
                 </span>
                 <h3>AI Windykator</h3>
-                <p className="pillar-headline">Twoja kancelaria zawsze wie, kto i ile jest jej winien — i działa, zanim faktura stanie się problemem.</p>
-                <p className="pillar-lead">AI Windykator monitoruje wszystkie wystawione faktury, śledzi należności od klientów kancelarii i automatycznie inicjuje proces odzyskiwania zaległości — zanim wpłyną na płynność firmy. To nie windykacja w imieniu klienta. To kontrola własnych należności kancelarii, prowadzona w tle, bez angażowania prawnika.</p>
+                <p className="pillar-headline">
+                  Twoja kancelaria zawsze wie, kto i ile jest jej winien i działa, zanim faktura stanie się problemem.
+                </p>
+                <p className="pillar-lead">
+                  AI Windykator monitoruje wszystkie wystawione faktury, śledzi należności od klientów kancelarii i
+                  automatycznie inicjuje proces odzyskiwania zaległości zanim wpłyną na płynność firmy. To nie windykacja w
+                  imieniu klienta. To kontrola własnych należności kancelarii, prowadzona w tle, bez angażowania prawnika.
+                </p>
                 <ul className="pillar-features">
-                  <li>Pełny widok należności: kto, ile, jak długo zalega — w jednym dashboardzie</li>
+                  <li>Pełny widok należności: kto, ile, jak długo zalega w jednym dashboardzie</li>
                   <li>Automatyczne wezwania do zapłaty w eskalacji ustalonej przez partnera kancelarii (e-mail, SMS, telefon)</li>
-                  <li>Klasyfikacja klientów według ryzyka opóźnienia — system rozpoznaje niewypłacalność wcześniej</li>
+                  <li>Klasyfikacja klientów według ryzyka opóźnienia system rozpoznaje niewypłacalność wcześniej</li>
                   <li>Wczesne alerty: faktura zagrożona zanim stanie się sprawą windykacyjną</li>
                   <li>Integracja z systemem fakturowania kancelarii oraz KSeF</li>
-                  <li>Ślad audytowy każdej akcji windykacyjnej — od pierwszego monitu po wezwanie formalne</li>
+                  <li>Ślad audytowy każdej akcji windykacyjnej od pierwszego monitu po wezwanie formalne</li>
                 </ul>
                 <div className="pillar-trust">KSeF · Auto-wezwania · Pełen audyt operacji</div>
               </div>
@@ -799,23 +819,23 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                   <div className="cfo-alerts">
                     <div className="cfo-alert">
-                      <span className="alert-dot success"></span>
+                      <span className="alert-dot success" />
                       <div className="alert-body">
-                        <div className="alert-title">FV/2025/0167 — Spłacone</div>
+                        <div className="alert-title">FV/2025/0167 Spłacone</div>
                         <div className="alert-meta">8 200 zł · po 2. monicie e-mail</div>
                       </div>
                     </div>
                     <div className="cfo-alert">
-                      <span className="alert-dot warning"></span>
+                      <span className="alert-dot warning" />
                       <div className="alert-body">
-                        <div className="alert-title">FV/2025/0184 — Wezwanie 1</div>
+                        <div className="alert-title">FV/2025/0184 Wezwanie 1</div>
                         <div className="alert-meta">4 500 zł · 12 dni opóźnienia</div>
                       </div>
                     </div>
                     <div className="cfo-alert">
-                      <span className="alert-dot danger"></span>
+                      <span className="alert-dot danger" />
                       <div className="alert-body">
-                        <div className="alert-title">FV/2025/0152 — Eskalacja: wezwanie formalne</div>
+                        <div className="alert-title">FV/2025/0152 Eskalacja: wezwanie formalne</div>
                         <div className="alert-meta">15 760 zł · 38 dni · ryzyko wysokie</div>
                       </div>
                     </div>
@@ -826,13 +846,14 @@ export default function RestrukturyzacjaPage() {
 
             <div className="pillars-roadmap" role="note">
               <span className="roadmap-pill">W przygotowaniu</span>
-              Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych — monitoring obwieszczeń sądowych i automatyczne alerty w CRM.
+              Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych monitoring obwieszczeń sądowych i automatyczne alerty w
+              CRM.
             </div>
 
             <div className="pillars-cta">
               <h3>Sprawdź, jak te trzy filary działają na realnej sprawie z Twojej kancelarii.</h3>
               <div className="pillars-cta-row">
-                <a className="btn btn-primary btn-lg" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="pillars-demo">
+                <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="pillars-demo">
                   Zobacz demo
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <polygon points="5 3 19 12 5 21 5 3" />
@@ -848,16 +869,18 @@ export default function RestrukturyzacjaPage() {
           </div>
         </section>
 
-        <section>
+        {/* ECOSYSTEM */}
+        <section className="ecosystem-wrap">
           <div className="container">
             <div className="ecosystem">
-              <span className="eyebrow" style={{ background: "rgba(255,255,255,.1)", color: "#99d9ff" }}>
-                Co wyróżnia to wdrożenie
-              </span>
-              <h2>Jeden zintegrowany ekosystem, nie zestaw skryptów</h2>
+              <span className="eyebrow">Co wyróżnia to wdrożenie</span>
+              <h2 style={{ marginTop: 24 }}>
+                Jeden zintegrowany <span className="serif">ekosystem</span>, nie zestaw skryptów
+              </h2>
               <blockquote>
-                CRM, SharePoint, API GUS/Regon, Mailerlite, SMS i poczta email działają razem — automatycznie przekazując dane przez cały cykl życia sprawy restrukturyzacyjnej. Żaden element nie działa w oderwaniu od pozostałych.
-                <span style={{ display: "block", marginTop: "14px", fontSize: ".92em", opacity: 0.75 }}>Integracja z KRZ — w przygotowaniu.</span>
+                CRM, SharePoint, API GUS/Regon, Mailerlite, SMS i poczta email działają razem automatycznie przekazując dane
+                przez cały cykl życia sprawy restrukturyzacyjnej. Żaden element nie działa w oderwaniu od pozostałych.
+                <span style={{ display: "block", marginTop: 18 }}>Integracja z KRZ w przygotowaniu.</span>
               </blockquote>
               <div className="tags">
                 <span>CRM</span>
@@ -871,33 +894,50 @@ export default function RestrukturyzacjaPage() {
           </div>
         </section>
 
-        <section id="jak-to-dziala">
+        {/* HOW IT WORKS */}
+        <section id="jak-to-dziala" className="light">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Jak to działa</span>
-              <h2>Cztery kroki od pierwszego kontaktu do zatwierdzonego układu</h2>
+              <div>
+                <h2>
+                  Cztery kroki od pierwszego <span className="accent">kontaktu</span> do zatwierdzonego układu
+                </h2>
+              </div>
             </div>
             <div className="steps steps-4">
               <div className="step">
                 <h4>Onboarding klienta</h4>
-                <p>Klient trafia do Strefy Klienta. Widzi status sprawy, ankietę restrukturyzacyjną i pierwsze dokumenty — w jednym, zabezpieczonym kanale.</p>
+                <p>
+                  Klient trafia do Strefy Klienta. Widzi status sprawy, ankietę restrukturyzacyjną i pierwsze dokumenty w
+                  jednym, zabezpieczonym kanale.
+                </p>
               </div>
               <div className="step">
                 <h4>Generowanie dokumentacji</h4>
-                <p>Plan układu, propozycje układowe, pisma procesowe — automatyczne drafty na Twoich szablonach. Prawnik recenzuje, nie pisze od zera.</p>
+                <p>
+                  Plan układu, propozycje układowe, pisma procesowe automatyczne drafty na Twoich szablonach. Prawnik
+                  recenzuje, nie pisze od zera.
+                </p>
               </div>
               <div className="step">
                 <h4>Postępowanie sądowe</h4>
-                <p>Obsługa wniosków, korespondencji z wierzycielami i terminów procesowych w systemie. Klient widzi każdy kluczowy ruch.</p>
+                <p>
+                  Obsługa wniosków, korespondencji z wierzycielami i terminów procesowych w systemie. Klient widzi każdy
+                  kluczowy ruch.
+                </p>
               </div>
               <div className="step">
                 <h4>Płynność kancelarii</h4>
-                <p>AI Windykator pilnuje należności od klientów kancelarii, klasyfikuje ryzyko i automatycznie eskaluje opóźnione faktury — bez angażowania prawnika.</p>
+                <p>
+                  AI Windykator pilnuje należności od klientów kancelarii, klasyfikuje ryzyko i automatycznie eskaluje
+                  opóźnione faktury bez angażowania prawnika.
+                </p>
               </div>
             </div>
 
             <div className="inline-cta">
-              <a className="btn btn-primary btn-lg" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="after-how-demo">
+              <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="after-how-demo">
                 Zobacz demo
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polygon points="5 3 19 12 5 21 5 3" />
@@ -908,90 +948,72 @@ export default function RestrukturyzacjaPage() {
           </div>
         </section>
 
-        <section id="dlaczego" style={{ background: "var(--navy-50)" }}>
+        {/* WHY */}
+        <section id="dlaczego">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Dlaczego LegalFlow</span>
-              <h2>Co odróżnia LegalFlow od ogólnych narzędzi automatyzacji</h2>
-              <p>Sześć rzeczy, które robią różnicę w realnej pracy kancelarii restrukturyzacyjnej.</p>
+              <div>
+                <h2>
+                  Co odróżnia LegalFlow od <span className="accent">ogólnych</span> narzędzi automatyzacji
+                </h2>
+                <p style={{ marginTop: 24 }}>Sześć rzeczy, które robią różnicę w realnej pracy kancelarii restrukturyzacyjnej.</p>
+              </div>
             </div>
 
             <div className="why-grid">
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Personalizacja pod procesy kancelarii</h4>
-                  <p>LegalFlow dopasowuje się do Twojego flow — nie na odwrót. Dokumenty, szablony i automatyzacje odzwierciedlają realne procesy Twojej kancelarii.</p>
+              {[
+                {
+                  h: "Personalizacja pod procesy kancelarii",
+                  p: "LegalFlow dopasowuje się do Twojego flow nie na odwrót. Dokumenty, szablony i automatyzacje odzwierciedlają realne procesy Twojej kancelarii.",
+                },
+                {
+                  h: "Bezpieczeństwo danych klientów",
+                  p: "Dane sprawy, dokumenty i korespondencja są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego. Pełna kontrola dostępów i audytowalność.",
+                },
+                {
+                  h: "Integracja z narzędziami, których już używasz",
+                  p: "LegalFlow łączy się z Twoim CRM, SharePoint, systemem płatności i pocztą. Jeden spójny ekosystem bez powielania pracy między systemami.",
+                },
+                {
+                  h: "Wdrożenie end-to-end",
+                  p: "Od onboardingu po archiwizację każdy etap sprawy jest w systemie. Żaden dokument, termin ani kontakt nie wypada między etapami.",
+                },
+                {
+                  h: "Branżowe know-how",
+                  p: "System jest zbudowany z rozumieniem prawa restrukturyzacyjnego i insolvency workflow nie jako ogólna automatyzacja skrojona pod restrukturyzację.",
+                },
+                {
+                  h: "Skalowanie bez nowych etatów",
+                  p: "Więcej spraw, ten sam zespół. Automatyzacja administracji pozwala kancelarii rosnąć bez proporcjonalnego wzrostu kosztów operacyjnych.",
+                },
+              ].map((item) => (
+                <div className="why-item" key={item.h}>
+                  <span className="why-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4>{item.h}</h4>
+                    <p>{item.p}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Bezpieczeństwo danych klientów</h4>
-                  <p>Dane sprawy, dokumenty i korespondencja są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego. Pełna kontrola dostępów i audytowalność.</p>
-                </div>
-              </div>
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Integracja z narzędziami, których już używasz</h4>
-                  <p>LegalFlow łączy się z Twoim CRM, SharePoint, systemem płatności i pocztą. Jeden spójny ekosystem — bez powielania pracy między systemami.</p>
-                </div>
-              </div>
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Wdrożenie end-to-end</h4>
-                  <p>Od onboardingu po archiwizację — każdy etap sprawy jest w systemie. Żaden dokument, termin ani kontakt nie wypada między etapami.</p>
-                </div>
-              </div>
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Branżowe know-how</h4>
-                  <p>System jest zbudowany z rozumieniem prawa restrukturyzacyjnego i insolvency workflow — nie jako ogólna automatyzacja skrojona pod restrukturyzację.</p>
-                </div>
-              </div>
-              <div className="why-item">
-                <span className="why-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h4>Skalowanie bez nowych etatów</h4>
-                  <p>Więcej spraw, ten sam zespół. Automatyzacja administracji pozwala kancelarii rosnąć bez proporcjonalnego wzrostu kosztów operacyjnych.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="benefits" id="korzysci">
+        {/* BENEFITS */}
+        <section className="benefits light" id="korzysci">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Korzyści biznesowe</span>
-              <h2>Konkretne zmiany w codziennej pracy kancelarii</h2>
+              <div>
+                <h2>
+                  Konkretne zmiany w <span className="accent">codziennej</span> pracy kancelarii
+                </h2>
+              </div>
             </div>
 
             <div className="benefits-grid">
@@ -1003,7 +1025,10 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                 </div>
                 <h3>Nawet –70% mniej czasu administracyjnego</h3>
-                <p>Generowanie dokumentów, kontakty z wierzycielami, monitoring terminów — system wykonuje to automatycznie. Zespół zajmuje się sprawami, nie obsługą procesu.</p>
+                <p>
+                  Generowanie dokumentów, kontakty z wierzycielami, monitoring terminów system wykonuje to automatycznie.
+                  Zespół zajmuje się sprawami, nie obsługą procesu.
+                </p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon" aria-hidden="true">
@@ -1015,7 +1040,10 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                 </div>
                 <h3>Więcej spraw bez nowych etatów</h3>
-                <p>Automatyzacja administracji pozwala obsługiwać większą liczbę postępowań przy tym samym zespole. Wzrost skali bez proporcjonalnego wzrostu kosztów.</p>
+                <p>
+                  Automatyzacja administracji pozwala obsługiwać większą liczbę postępowań przy tym samym zespole. Wzrost
+                  skali bez proporcjonalnego wzrostu kosztów.
+                </p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon" aria-hidden="true">
@@ -1026,7 +1054,10 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                 </div>
                 <h3>Zero przeoczonych terminów</h3>
-                <p>Alerty o płatnościach, zadania windykacyjne, sprawozdania kwartalne — LegalFlow pilnuje kalendarza sprawy na każdym etapie postępowania.</p>
+                <p>
+                  Alerty o płatnościach, zadania windykacyjne, sprawozdania kwartalne LegalFlow pilnuje kalendarza sprawy na
+                  każdym etapie postępowania.
+                </p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon" aria-hidden="true">
@@ -1035,7 +1066,10 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                 </div>
                 <h3>Porządek w dokumentacji każdej sprawy</h3>
-                <p>Każda sprawa ma kompletną teczkę w SharePoint. Dokumenty odkładają się automatycznie — bez ręcznego porządkowania i szukania plików.</p>
+                <p>
+                  Każda sprawa ma kompletną teczkę w SharePoint. Dokumenty odkładają się automatycznie bez ręcznego
+                  porządkowania i szukania plików.
+                </p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon" aria-hidden="true">
@@ -1045,7 +1079,10 @@ export default function RestrukturyzacjaPage() {
                   </svg>
                 </div>
                 <h3>Automatyczny kontakt z wierzycielami i dłużnikiem</h3>
-                <p>Wiadomości powitalne, propozycje układowe, przypomnienia o płatnościach — wysyłane automatycznie, na właściwym etapie, do właściwych stron.</p>
+                <p>
+                  Wiadomości powitalne, propozycje układowe, przypomnienia o płatnościach wysyłane automatycznie, na właściwym
+                  etapie, do właściwych stron.
+                </p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon" aria-hidden="true">
@@ -1063,118 +1100,101 @@ export default function RestrukturyzacjaPage() {
           </div>
         </section>
 
-        <section>
-          <div className="container">
-            <div className="final-cta">
-              <span className="eyebrow" style={{ background: "rgba(255,255,255,.1)", color: "#99d9ff" }}>
-                Następny krok
-              </span>
-              <h2>Sprawdź, jak LegalFlow działa na realnych sprawach z Twojej kancelarii.</h2>
-              <p>Umów 15-minutowe demo — pokażemy system na żywo, bez slajdów i marketingu. Zobaczysz, co konkretnie zmienia się w codziennej pracy.</p>
+        {/* FINAL CTA */}
+        <section className="final-cta-section">
+          <div className="final-cta">
+            <div className="final-cta-inner">
+              <span className="eyebrow">Następny krok</span>
+              <h2>
+                Sprawdź, jak LegalFlow działa na <span className="serif">realnych</span> sprawach z Twojej kancelarii.
+              </h2>
               <div className="final-cta-row">
-                <a className="btn btn-primary btn-lg" href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="final-demo">
-                  Zobacz demo
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </a>
-                <a className="btn btn-secondary-final btn-lg" href="mailto:kontakt@boosterai.pl" data-cta="final-contact">
-                  Skontaktuj się
-                </a>
+                <p>
+                  Umów 15-minutowe demo pokażemy system na żywo, bez slajdów i marketingu. Zobaczysz, co konkretnie zmienia
+                  się w codziennej pracy.
+                </p>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="final-demo">
+                    Zobacz demo
+                    <span className="arrow">→</span>
+                  </a>
+                  <a className="btn btn-secondary-final btn-lg" href="mailto:kontakt@boosterai.pl" data-cta="final-contact">
+                    Skontaktuj się
+                  </a>
+                </div>
               </div>
-              <span className="small">15-minutowe demo · bez przygotowania · pokazujemy działający system.</span>
+              <span className="small">15-minutowe demo · bez przygotowania · pokazujemy działający system</span>
             </div>
           </div>
         </section>
 
+        {/* FAQ */}
         <section className="faq" id="faq">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">FAQ</span>
-              <h2>Najczęstsze pytania</h2>
+              <div>
+                <h2>
+                  Najczęstsze <span className="accent">pytania</span>
+                </h2>
+              </div>
             </div>
 
             <div className="faq-list">
-              <details className="faq-item">
-                <summary>
-                  <span>Czy LegalFlow zastępuje mój obecny CRM?</span>
-                  <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </summary>
-                <div className="faq-content">
-                  <p>Nie. LegalFlow integruje się z CRM, którego już używasz (HubSpot, Pipedrive, monday.com i inne). Automatyzuje procesy na jego bazie — nie wymaga migracji danych ani zmiany systemu.</p>
-                </div>
-              </details>
-
-              <details className="faq-item">
-                <summary>
-                  <span>Jak długo trwa wdrożenie?</span>
-                  <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </summary>
-                <div className="faq-content">
-                  <p>Pierwsze moduły można uruchomić w ciągu kilku tygodni. Zakres i czas wdrożenia zależy od liczby modułów i specyfiki procesów kancelarii — omawiamy to indywidualnie.</p>
-                </div>
-              </details>
-
-              <details className="faq-item">
-                <summary>
-                  <span>Czy system jest bezpieczny dla danych klientów kancelarii?</span>
-                  <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </summary>
-                <div className="faq-content">
-                  <p>Tak. Dane są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego, z kontrolą dostępów i pełną audytowalnością operacji.</p>
-                </div>
-              </details>
-
-              <details className="faq-item">
-                <summary>
-                  <span>Czy mogę wdrożyć tylko wybrane moduły?</span>
-                  <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </summary>
-                <div className="faq-content">
-                  <p>Tak. Każdy moduł działa niezależnie, choć integrują się ze sobą. Możesz zacząć od jednego modułu i rozszerzać system wraz z rozwojem kancelarii.</p>
-                </div>
-              </details>
-
-              <details className="faq-item">
-                <summary>
-                  <span>Kiedy pojawi się integracja z KRZ?</span>
-                  <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </summary>
-                <div className="faq-content">
-                  <p>Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu jako rozszerzenie filaru postępowania sądowego — automatyczny monitoring obwieszczeń i alerty w CRM. Pojawi się w jednej z kolejnych wersji. Możesz zostawić kontakt — poinformujemy o uruchomieniu.</p>
-                </div>
-              </details>
+              {[
+                {
+                  q: "Czy LegalFlow zastępuje mój obecny CRM?",
+                  a: "Nie. LegalFlow integruje się z CRM, którego już używasz (HubSpot, Pipedrive, monday.com i inne). Automatyzuje procesy na jego bazie nie wymaga migracji danych ani zmiany systemu.",
+                },
+                {
+                  q: "Jak długo trwa wdrożenie?",
+                  a: "Pierwsze moduły można uruchomić w ciągu kilku tygodni. Zakres i czas wdrożenia zależy od liczby modułów i specyfiki procesów kancelarii omawiamy to indywidualnie.",
+                },
+                {
+                  q: "Czy system jest bezpieczny dla danych klientów kancelarii?",
+                  a: "Tak. Dane są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego, z kontrolą dostępów i pełną audytowalnością operacji.",
+                },
+                {
+                  q: "Czy mogę wdrożyć tylko wybrane moduły?",
+                  a: "Tak. Każdy moduł działa niezależnie, choć integrują się ze sobą. Możesz zacząć od jednego modułu i rozszerzać system wraz z rozwojem kancelarii.",
+                },
+                {
+                  q: "Kiedy pojawi się integracja z KRZ?",
+                  a: "Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu jako rozszerzenie filaru postępowania sądowego automatyczny monitoring obwieszczeń i alerty w CRM. Pojawi się w jednej z kolejnych wersji. Możesz zostawić kontakt poinformujemy o uruchomieniu.",
+                },
+              ].map((item) => (
+                <details className="faq-item" key={item.q}>
+                  <summary>
+                    <span>{item.q}</span>
+                    <svg className="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </summary>
+                  <div className="faq-content">
+                    <p>{item.a}</p>
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </section>
       </main>
 
+      {/* OFFER MODAL */}
       <div
         className="modal-backdrop"
         id="offer-modal"
         data-open={String(modalOpen)}
-        aria-hidden={!modalOpen}
         role="dialog"
         aria-modal="true"
         aria-labelledby="offer-modal-title"
-        onClick={(event) => {
-          if (event.target === event.currentTarget) {
-            closeModal();
-          }
+        aria-hidden={!modalOpen}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closeModal();
         }}
       >
         <div className="modal" data-state={formState}>
-          <button type="button" className="modal-close" onClick={closeModal} aria-label="Zamknij okno">
+          <button type="button" className="modal-close" aria-label="Zamknij okno" onClick={closeModal}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <line x1="6" y1="6" x2="18" y2="18" />
               <line x1="6" y1="18" x2="18" y2="6" />
@@ -1190,9 +1210,28 @@ export default function RestrukturyzacjaPage() {
           </div>
 
           <h3 id="offer-modal-title">Skontaktuj się z nami</h3>
-          <p className="modal-lead">Podaj numer telefonu, a odezwiemy się w ciągu 1 dnia roboczego. Krótko omówimy, jak LegalFlow może wesprzeć Twoją kancelarię.</p>
+          <p className="modal-lead">
+            Podaj numer telefonu, a odezwiemy się w ciągu 1 dnia roboczego. Krótko omówimy, jak LegalFlow może wesprzeć Twoją
+            kancelarię.
+          </p>
 
-          <form id="offer-form" onSubmit={handleFormSubmit} noValidate>
+          <form id="offer-form" onSubmit={handleSubmit} noValidate>
+            {formError && (
+              <div
+                className="form-error"
+                role="alert"
+                style={{
+                  color: "#ffb4bd",
+                  background: "rgba(239,68,68,.12)",
+                  padding: "10px 14px",
+                  borderRadius: 8,
+                  fontSize: ".88rem",
+                  marginBottom: 12,
+                }}
+              >
+                {formError}
+              </div>
+            )}
             <div className="form-field">
               <label htmlFor="offer-phone">Numer telefonu</label>
               <input
@@ -1205,7 +1244,6 @@ export default function RestrukturyzacjaPage() {
                 inputMode="tel"
                 placeholder="+48 600 000 000"
                 pattern="^[\+\s0-9\-\(\)]{7,}$"
-                aria-invalid={formError ? true : undefined}
               />
             </div>
             <div className="form-field">
@@ -1213,17 +1251,12 @@ export default function RestrukturyzacjaPage() {
               <input ref={nameRef} type="text" id="offer-name" name="name" autoComplete="given-name" placeholder="Jak mamy się zwracać" />
             </div>
             <div className="form-consent">
-              Klikając „Skontaktuj się” wyrażasz zgodę na kontakt w sprawie LegalFlow. Szczegóły w{" "}
+              Klikając „Skontaktuj się" wyrażasz zgodę na kontakt w sprawie LegalFlow. Szczegóły w{" "}
               <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
                 polityce prywatności
               </a>
               .
             </div>
-            {formError && (
-              <p role="alert" style={{ color: "red", fontSize: ".85rem", marginBottom: "8px" }}>
-                {formError}
-              </p>
-            )}
             <button type="submit" className="btn btn-primary btn-lg" data-cta="offer-submit" disabled={submitting}>
               {submitting ? "Wysyłam…" : "Skontaktuj się"}
               {!submitting && (
@@ -1246,52 +1279,40 @@ export default function RestrukturyzacjaPage() {
         </div>
       </div>
 
+      {/* FOOTER */}
       <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="logo" style={{ color: "white" }}>
-                <span className="logo-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="7" cy="19" r="2" fill="white" />
-                    <circle cx="18" cy="19" r="2" fill="white" />
-                    <path d="M9 19h7" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                </span>
-                <span className="logo-text" style={{ color: "white" }}>
-                  Legal<span style={{ color: "#66d0ff" }}>Flo</span>
-                </span>
-              </div>
-              <p style={{ marginTop: "16px", color: "#9ab3d6", maxWidth: "36ch", fontSize: ".92rem" }}>Automatyzacja kancelarii restrukturyzacyjnej — od leada do archiwizacji. LegalFlow by Booster AI.</p>
-            </div>
-            <div>
-              <h4>Nawigacja</h4>
-              <a href="#moduly">Moduły</a>
-              <a href="#jak-to-dziala">Jak to działa</a>
-              <a href="#dlaczego">Dlaczego LegalFlow</a>
-              <a href="#korzysci">Korzyści</a>
-              <a href="#faq">FAQ</a>
-            </div>
-            <div>
-              <h4>Kontakt</h4>
-              <a href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="footer-demo">
-                Zobacz demo
-              </a>
-              <a href="mailto:kontakt@boosterai.pl" data-cta="footer-contact">
-                Skontaktuj się
-              </a>
-              <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
-                Polityka prywatności
-              </a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>
-              © {year} Booster AI. Wszelkie prawa zastrzeżone.
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <img src="/assets/booster-rocket.png" alt="Booster AI" />
+            <span className="logo-text">
+              LegalFlow<span>.</span>
             </span>
-            <span className="brand-note">LegalFlow by Booster AI</span>
+            <p>Automatyzacja kancelarii restrukturyzacyjnej od leada do archiwizacji. LegalFlow by Booster AI.</p>
           </div>
+          <div>
+            <h4>Nawigacja</h4>
+            <a href="#moduly">Moduły</a>
+            <a href="#jak-to-dziala">Jak to działa</a>
+            <a href="#dlaczego">Dlaczego LegalFlow</a>
+            <a href="#korzysci">Korzyści</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <a href={CAL_URL} target="_blank" rel="noopener" data-cta="footer-demo">
+              Zobacz demo
+            </a>
+            <a href="mailto:kontakt@boosterai.pl" data-cta="footer-contact">
+              Skontaktuj się
+            </a>
+            <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
+              Polityka prywatności
+            </a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© {year} Booster AI. Wszelkie prawa zastrzeżone.</span>
+          <span className="brand-note">LegalFlow by Booster AI</span>
         </div>
       </footer>
     </div>
