@@ -6,3 +6,10 @@ export const EMPLOYMENT_TYPE_LABELS: Record<JobRole["employmentType"], string> =
   "contract": "Contract",
   "internship": "Internship",
 };
+
+export const EMPLOYMENT_TYPE_LABELS_PL: Record<JobRole["employmentType"], string> = {
+  "full-time": "Pełny etat",
+  "part-time": "Część etatu",
+  "contract": "Kontrakt",
+  "internship": "Staż",
+};

@@ -4,15 +4,15 @@ import { loadSite } from "@/content";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
-import { EMPLOYMENT_TYPE_LABELS } from "@/lib/job-roles";
+import { EMPLOYMENT_TYPE_LABELS_PL } from "@/lib/job-roles";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Careers | Booster — AI-Native Agency",
-  description: "Join Booster AI. We're building the future of AI-native service delivery. Check back soon for open roles.",
+  title: "Kariera | Booster — Agencja AI-Native",
+  description: "Dołącz do Booster AI. Budujemy przyszłość usług AI-native.",
   alternates: {
-    canonical: "https://boosterai.pl/careers",
+    canonical: "https://boosterai.pl/pl/careers",
     languages: {
       en: "https://boosterai.pl/careers",
       pl: "https://boosterai.pl/pl/careers",
@@ -20,37 +20,37 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Careers | Booster — AI-Native Agency",
-    description: "Join Booster AI. We're building the future of AI-native service delivery.",
+    title: "Kariera | Booster — Agencja AI-Native",
+    description: "Dołącz do Booster AI. Budujemy przyszłość usług AI-native.",
     type: "website",
-    url: "https://boosterai.pl/careers",
+    url: "https://boosterai.pl/pl/careers",
     siteName: "Booster",
   },
 };
 
-export default async function CareersPage() {
-  const site = await loadSite();
+export default async function PlCareersPage() {
+  const site = await loadSite("pl");
   const roles = site.jobRoles;
 
   return (
     <div className="careers-page">
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/" />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/pl" />
       <main>
         <section className="block light practice-hero">
           <div className="container-inner">
             <div data-reveal>
-              <span className="eyebrow light">Company / Careers</span>
+              <span className="eyebrow light">Firma / Kariera</span>
             </div>
             <h1 className="h1" data-reveal>
-              Come build with{" "}
-              <span className="accent-serif">us.</span>
+              Buduj razem z{" "}
+              <span className="accent-serif">nami.</span>
             </h1>
             <p className="lead practice-lead" data-reveal>
-              We&apos;re an AI-native service agency based in Warsaw, working with ambitious B2B companies worldwide.
+              Jesteśmy agencją AI-native pracującą z ambitnymi firmami B2B.
               {roles.length === 0
-                ? " No open roles right now — but check back soon."
-                : ` We currently have ${roles.length} open position${roles.length > 1 ? "s" : ""}.`}
+                ? " Obecnie nie mamy otwartych rekrutacji, ale zajrzyj wkrótce."
+                : ` Obecnie mamy ${roles.length === 1 ? "1 otwartą rekrutację" : `${roles.length} otwarte rekrutacje`}.`}
             </p>
           </div>
         </section>
@@ -59,15 +59,15 @@ export default async function CareersPage() {
           <div className="container-inner">
             {roles.length === 0 ? (
               <div className="practice-section" data-reveal>
-                <h2 className="h3">No open roles at the moment</h2>
+                <h2 className="h3">Brak otwartych rekrutacji</h2>
                 <p>
-                  We&apos;re a small, focused team and we hire deliberately. When we do open a role,
-                  we&apos;ll list it here. In the meantime, feel free to reach out — we&apos;re always
-                  happy to meet talented people.
+                  Jesteśmy małym, skupionym zespołem i rekrutujemy z rozmysłem. Gdy otworzymy
+                  rekrutację, znajdziesz ją tutaj. W międzyczasie napisz do nas, zawsze chętnie
+                  poznajemy zdolnych ludzi.
                 </p>
                 <div className="practice-inline-cta" style={{ marginTop: "2rem" }}>
                   <a href="mailto:hello@boosterai.pl" className="btn btn-primary">
-                    Say hello <span className="arrow">→</span>
+                    Napisz do nas <span className="arrow">→</span>
                   </a>
                 </div>
               </div>
@@ -78,11 +78,11 @@ export default async function CareersPage() {
                     <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "0.5rem" }}>
                       <span className="eyebrow light">{role.department}</span>
                       <span className="eyebrow light">{role.location}</span>
-                      <span className="eyebrow light">{EMPLOYMENT_TYPE_LABELS[role.employmentType]}</span>
+                      <span className="eyebrow light">{EMPLOYMENT_TYPE_LABELS_PL[role.employmentType]}</span>
                     </div>
                     <h2 className="h3">
                       {role.slug && role.body ? (
-                        <Link href={`/careers/${role.slug}`}>{role.title}</Link>
+                        <Link href={`/pl/careers/${role.slug}`}>{role.title}</Link>
                       ) : (
                         role.title
                       )}
@@ -90,8 +90,8 @@ export default async function CareersPage() {
                     <p>{role.description}</p>
                     <div className="practice-inline-cta" style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                       {role.slug && role.body ? (
-                        <Link href={`/careers/${role.slug}`} className="btn btn-ghost">
-                          View role <span className="arrow">→</span>
+                        <Link href={`/pl/careers/${role.slug}`} className="btn btn-ghost">
+                          Zobacz ofertę <span className="arrow">→</span>
                         </Link>
                       ) : null}
                       <a
@@ -99,7 +99,7 @@ export default async function CareersPage() {
                         className="btn btn-primary"
                         {...(role.applyUrl?.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       >
-                        Apply now <span className="arrow">→</span>
+                        Aplikuj <span className="arrow">→</span>
                       </a>
                     </div>
                   </div>

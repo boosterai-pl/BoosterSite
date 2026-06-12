@@ -6,14 +6,14 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 import { lexicalToHtml } from "@/lib/lexical-html";
-import { EMPLOYMENT_TYPE_LABELS } from "@/lib/job-roles";
+import { EMPLOYMENT_TYPE_LABELS_PL } from "@/lib/job-roles";
 
 export const revalidate = 60;
 
 type Props = { params: Promise<{ slug: string }> };
 
 async function getRole(slug: string): Promise<JobRole | undefined> {
-  const site = await loadSite();
+  const site = await loadSite("pl");
   return site.jobRoles.find((r) => r.slug === slug);
 }
 
@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const role = await getRole(slug);
   if (!role || !role.body) return {};
 
-  const title = `${role.title} | Careers | Booster`;
-  const url = `https://boosterai.pl/careers/${role.slug}`;
+  const title = `${role.title} | Kariera | Booster`;
+  const url = `https://boosterai.pl/pl/careers/${role.slug}`;
 
   return {
     title,
@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: url,
       languages: {
-        en: url,
-        pl: `https://boosterai.pl/pl/careers/${role.slug}`,
-        "x-default": url,
+        en: `https://boosterai.pl/careers/${role.slug}`,
+        pl: url,
+        "x-default": `https://boosterai.pl/careers/${role.slug}`,
       },
     },
     openGraph: {
@@ -46,9 +46,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CareersRolePage({ params }: Props) {
+export default async function PlCareersRolePage({ params }: Props) {
   const { slug } = await params;
-  const site = await loadSite();
+  const site = await loadSite("pl");
   const role = site.jobRoles.find((r) => r.slug === slug);
   if (!role || !role.body) notFound();
 
@@ -57,18 +57,18 @@ export default async function CareersRolePage({ params }: Props) {
   return (
     <div className="careers-page">
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/" />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref="/pl" />
       <main>
         <section className="block light practice-hero">
           <div className="container-inner">
             <div data-reveal>
-              <span className="eyebrow light">Company / Careers</span>
+              <span className="eyebrow light">Firma / Kariera</span>
             </div>
             <h1 className="h1" data-reveal>
               {role.title}
             </h1>
             <p className="lead practice-lead" data-reveal>
-              {role.department} · {role.location} · {EMPLOYMENT_TYPE_LABELS[role.employmentType]}
+              {role.department} · {role.location} · {EMPLOYMENT_TYPE_LABELS_PL[role.employmentType]}
             </p>
           </div>
         </section>
@@ -85,7 +85,7 @@ export default async function CareersRolePage({ params }: Props) {
                 className="btn btn-primary"
                 {...(role.applyUrl?.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
-                Apply now <span className="arrow">→</span>
+                Aplikuj <span className="arrow">→</span>
               </a>
             </div>
           </div>
