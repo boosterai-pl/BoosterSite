@@ -234,7 +234,7 @@ export const site: SiteContent = {
       { id: "02", name: "Andrzej Chmielewski", role: "Brand · Operations", photo: "/assets/team/andrzej.jpg" },
       { id: "03", name: "Wojciech Kozak", role: "Engineering · Products", photo: "/assets/team/wojtek.jpg" },
       { id: "04", name: "Grzegorz Jaworek", role: "Head of Delivery", photo: "/assets/team/grzegorz-jaworek.jpg" },
-      { id: "05", name: "Wiktor Weremczuk", role: "Engineering · Web", photo: "/assets/team/wiktor.jpg" },
+      { id: "05", name: "Wiktor Weremczuk", role: "Engineering · Web", photo: "" },
     ],
   },
   insights: {
