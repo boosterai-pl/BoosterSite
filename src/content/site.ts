@@ -232,8 +232,8 @@ export const site: SiteContent = {
     members: [
       { id: "01", name: "Szymon Bazan", role: "Founder · Sales", photo: "/assets/team/szymon-bazan.jpg" },
       { id: "02", name: "Andrzej Chmielewski", role: "Brand · Operations", photo: "/assets/team/andrzej.jpg" },
-      { id: "03", name: "Wojciech Kozak", role: "Engineering · Products", photo: "/assets/team/wojtek.jpg" },
-      { id: "04", name: "Grzegorz Jaworek", role: "Head of Delivery", photo: "/assets/team/grzegorz-jaworek.jpg" },
+      { id: "03", name: "Grzegorz Jaworek", role: "Head of Delivery", photo: "/assets/team/grzegorz-jaworek.jpg" },
+      { id: "04", name: "Wojciech Kozak", role: "Engineering · Products", photo: "/assets/team/wojtek.jpg" },
       { id: "05", name: "Wiktor Weremczuk", role: "Engineering · Web", photo: "/assets/team/wiktor.jpg" },
     ],
   },

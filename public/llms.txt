@@ -31,8 +31,8 @@
 
 - [Szymon Bazan](https://boosterai.pl/#about): Founder and Sales
 - [Andrzej Chmielewski](https://boosterai.pl/#about): Brand and Operations
-- [Wojciech Kozak](https://boosterai.pl/#about): Engineering and Products
 - [Grzegorz Jaworek](https://boosterai.pl/#about): Head of Delivery
+- [Wojciech Kozak](https://boosterai.pl/#about): Engineering and Products
 - [Wiktor Weremczuk](https://boosterai.pl/#about): Engineering and Web
 
 ## Optional
