@@ -7,7 +7,6 @@ import { Booking } from "@/components/Booking";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
-export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -53,7 +52,7 @@ export default async function BookPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const prefix = localeHrefPrefix(locale);
-  const site = await loadSite(toSiteLocale(locale));
+  const site = loadSite(toSiteLocale(locale));
   return (
     <div className="booking-page">
       <script

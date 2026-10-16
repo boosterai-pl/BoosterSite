@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { loadSite } from "@/content";
+import { getJobRoles, loadSite } from "@/content";
 import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
-export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -44,8 +43,8 @@ export default async function CareersPage({ params }: Props) {
   const prefix = localeHrefPrefix(locale);
   const t = await getTranslations("careers");
   const tTypes = await getTranslations("employmentTypes");
-  const site = await loadSite(toSiteLocale(locale));
-  const roles = site.jobRoles;
+  const site = loadSite(toSiteLocale(locale));
+  const roles = getJobRoles(toSiteLocale(locale));
 
   return (
     <div className="careers-page">
@@ -82,14 +81,14 @@ export default async function CareersPage({ params }: Props) {
             ) : (
               <div data-reveal-stagger>
                 {roles.map((role) => (
-                  <div className="practice-section" key={role.id} style={{ borderTop: "1px solid var(--line)", paddingTop: "2rem", marginTop: "2rem" }}>
+                  <div className="practice-section" key={role.slug} style={{ borderTop: "1px solid var(--line)", paddingTop: "2rem", marginTop: "2rem" }}>
                     <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "0.5rem" }}>
                       <span className="eyebrow light">{role.department}</span>
                       <span className="eyebrow light">{role.location}</span>
                       <span className="eyebrow light">{tTypes(role.employmentType)}</span>
                     </div>
                     <h2 className="h3">
-                      {role.slug && role.body ? (
+                      {role.bodyHtml ? (
                         <Link href={`${prefix}/careers/${role.slug}`}>{role.title}</Link>
                       ) : (
                         role.title
@@ -97,7 +96,7 @@ export default async function CareersPage({ params }: Props) {
                     </h2>
                     <p>{role.description}</p>
                     <div className="practice-inline-cta" style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                      {role.slug && role.body ? (
+                      {role.bodyHtml ? (
                         <Link href={`${prefix}/careers/${role.slug}`} className="btn btn-ghost">
                           {t("viewRole")} <span className="arrow">→</span>
                         </Link>

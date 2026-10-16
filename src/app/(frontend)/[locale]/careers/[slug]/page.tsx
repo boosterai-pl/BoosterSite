@@ -1,52 +1,32 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { loadSite } from "@/content";
-import type { JobRole } from "@/content/types";
+import { getJobRole, getJobRoles, loadSite } from "@/content";
 import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
-import { lexicalToHtml } from "@/lib/lexical-html";
-import { getPayloadClient } from "@/lib/payload";
-
-export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
-// Queries Payload directly instead of going through loadSite():
-// loadSite() silently falls back to static content (zero job roles) on
-// transient DB errors, which this page would turn into a 404 that ISR
-// then caches. A direct query throws on real errors (500, not cached)
-// and only returns undefined when the role genuinely doesn't exist.
-async function getRole(locale: string, slug: string): Promise<JobRole | undefined> {
-  const payload = await getPayloadClient();
-  const result = await payload.find({
-    collection: "job-roles",
-    where: { slug: { equals: slug }, isOpen: { equals: true } },
-    locale: toSiteLocale(locale) === "pl" ? "pl" : "en",
-    limit: 1,
-  });
-  const doc = result.docs[0] as unknown as Record<string, unknown> | undefined;
-  if (!doc) return undefined;
-  return {
-    id: String(doc.id),
-    slug: String(doc.slug ?? doc.id),
-    sortOrder: (doc.sortOrder as string) ?? "",
-    title: (doc.title as string) ?? "",
-    department: (doc.department as string) ?? "",
-    location: (doc.location as string) ?? "",
-    employmentType: (doc.employmentType as JobRole["employmentType"]) ?? "full-time",
-    description: (doc.description as string) ?? "",
-    ...(doc.body != null ? { body: doc.body } : {}),
-    applyUrl: (doc.applyUrl as string) ?? "",
-  };
+// Only roles with a markdown body get a detail page; everything is
+// prerendered at build time and unknown slugs return 404.
+export const dynamicParams = false;
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Array<{ slug: string }>> {
+  return getJobRoles(toSiteLocale(params.locale))
+    .filter((role) => role.bodyHtml)
+    .map((role) => ({ slug: role.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const role = await getRole(locale, slug);
-  if (!role || !role.body) return {};
+  const role = getJobRole(toSiteLocale(locale), slug);
+  if (!role || !role.bodyHtml) return {};
 
   const t = await getTranslations({ locale, namespace: "careers" });
   const prefix = localeHrefPrefix(locale);
@@ -80,13 +60,9 @@ export default async function CareersRolePage({ params }: Props) {
   const prefix = localeHrefPrefix(locale);
   const t = await getTranslations("careers");
   const tTypes = await getTranslations("employmentTypes");
-  const [site, role] = await Promise.all([
-    loadSite(toSiteLocale(locale)),
-    getRole(locale, slug),
-  ]);
-  if (!role || !role.body) notFound();
-
-  const htmlContent = lexicalToHtml(role.body);
+  const site = loadSite(toSiteLocale(locale));
+  const role = getJobRole(toSiteLocale(locale), slug);
+  if (!role || !role.bodyHtml) notFound();
 
   return (
     <div className="careers-page">
@@ -111,7 +87,7 @@ export default async function CareersRolePage({ params }: Props) {
           <div className="container-inner">
             <div
               className="blog-body"
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
+              dangerouslySetInnerHTML={{ __html: role.bodyHtml }}
             />
             <div className="practice-inline-cta" style={{ marginTop: "2.5rem" }}>
               <a

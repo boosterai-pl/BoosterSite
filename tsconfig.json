@@ -26,9 +26,6 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "@payload-config": [
-        "./src/payload/payload.config.ts"
       ]
     }
   },
@@ -41,6 +38,6 @@
   ],
   "exclude": [
     "node_modules",
-    "scripts"
+    ".payload-export"
   ]
 }

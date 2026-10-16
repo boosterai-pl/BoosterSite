@@ -1,5 +1,16 @@
-// Content schema. Mirrors what a CMS (Sanity, Contentful, Payload) would expose.
-// Swap the local data modules with CMS-fetched objects of the same shape.
+// Content schema for everything rendered on the site.
+// Source files (src/content/home/*, services/*, team.ts, case-studies.ts,
+// careers/*.md, blog/*.md) are typed with the *Entry / HomeCopy types below.
+// loadSite() in ./index.ts assembles them into the per-locale SiteContent
+// object that pages and components read.
+
+export type Locale = "en" | "pl";
+
+/** One value per site language. Both are required. */
+export type Localized<T> = {
+  readonly en: T;
+  readonly pl: T;
+};
 
 export type SiteMeta = {
   readonly brand: string;
@@ -132,22 +143,31 @@ export type FooterColumn = {
 export type BlogPost = {
   readonly slug: string;
   readonly title: string;
+  /** Publication date, ISO format (YYYY-MM-DD). */
   readonly date: string;
+  /** Short summary for the blog listing and the meta description. */
   readonly description: string;
   readonly author: string;
+  readonly tags: readonly string[];
+  readonly seoTitle?: string;
+  readonly seoDescription?: string;
+  /** Rendered HTML of the markdown body. */
   readonly content: string;
+  readonly wordCount: number;
 };
 
+export type EmploymentType = "full-time" | "part-time" | "contract" | "internship";
+
 export type JobRole = {
-  readonly id: string;
   readonly slug: string;
-  readonly sortOrder: string;
   readonly title: string;
   readonly department: string;
   readonly location: string;
-  readonly employmentType: "full-time" | "part-time" | "contract" | "internship";
+  readonly employmentType: EmploymentType;
+  /** Short summary shown on the /careers listing. */
   readonly description: string;
-  readonly body?: unknown;
+  /** Rendered HTML of the markdown body. Empty when the role has no detail page. */
+  readonly bodyHtml: string;
   readonly applyUrl: string;
 };
 
@@ -219,5 +239,51 @@ export type SiteContent = {
   };
   readonly practices: readonly PracticeContent[];
   readonly booking: BookingContent;
-  readonly jobRoles: readonly JobRole[];
+};
+
+// ---------------------------------------------------------------------------
+// Source-file types (what you edit in src/content/)
+// ---------------------------------------------------------------------------
+
+type Section = {
+  readonly eyebrow: string;
+  readonly headline: HeadlineLine;
+};
+
+/** Everything in src/content/home/en.ts and src/content/home/pl.ts. */
+export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices"> & {
+  readonly services: Section;
+  readonly cases: Section & { readonly cta?: SectionCta };
+  readonly team: Section;
+};
+
+export type ServiceCard = {
+  readonly title: string;
+  readonly description: string;
+  readonly tags: readonly string[];
+};
+
+export type PracticePage = Omit<PracticeContent, "slug">;
+
+/** One file per service in src/content/services/<slug>.ts. */
+export type ServiceEntry = {
+  /** URL slug of the detail page: /practices/<slug>. */
+  readonly slug: string;
+  readonly en: { readonly card: ServiceCard; readonly page: PracticePage };
+  readonly pl: { readonly card: ServiceCard; readonly page: PracticePage };
+};
+
+/** One item in src/content/case-studies.ts. */
+export type CaseStudyEntry = Localized<{
+  readonly title: string;
+  readonly description: string;
+  readonly tags: readonly string[];
+}>;
+
+/** One item in src/content/team.ts. */
+export type TeamMemberEntry = {
+  readonly name: string;
+  /** Path under public/, e.g. "/assets/team/jan-kowalski.jpg". */
+  readonly photo: string;
+  readonly role: Localized<string>;
 };

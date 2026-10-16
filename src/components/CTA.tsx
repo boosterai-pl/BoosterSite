@@ -6,12 +6,9 @@ type Props = { content: SiteContent["cta"] };
 
 export function CTA({ content }: Props) {
   const lines = content.headline.text.split("\n");
-  let runningDelay = 0;
-  const lineDelays = lines.map((line) => {
-    const start = runningDelay;
-    runningDelay = start + line.split(" ").length * 0.06 + 0.1;
-    return start;
-  });
+  const lineDelays = lines.map((_, idx) =>
+    lines.slice(0, idx).reduce((delay, line) => delay + line.split(" ").length * 0.06 + 0.1, 0),
+  );
 
   const heroStyle: CSSProperties = { marginTop: 32 };
 
