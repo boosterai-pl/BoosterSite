@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { getPayloadClient } from "@/lib/payload";
-import { localeHrefPrefix } from "@/i18n/locale";
+import { getBlogPosts } from "@/content";
+import { localeHrefPrefix, toSiteLocale } from "@/i18n/locale";
 import { BlogCard } from "@/components/BlogCard";
 
-export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -41,32 +40,9 @@ export default async function BlogPage({ params, searchParams }: Props) {
   const sp = await searchParams;
   const page = Math.max(1, Number(sp.page) || 1);
 
-  let posts: Array<{ id: string; slug: string; title: string; publishedAt: string; excerpt: string }> = [];
-  let totalPages = 1;
-
-  try {
-    const payload = await getPayloadClient();
-    const result = await payload.find({
-      collection: "posts",
-      where: { _status: { equals: "published" } },
-      sort: "-publishedAt",
-      limit: POSTS_PER_PAGE,
-      page,
-    });
-    posts = result.docs.map((p: unknown) => {
-      const doc = p as Record<string, unknown>;
-      return {
-        id: doc.id as string,
-        slug: doc.slug as string,
-        title: doc.title as string,
-        publishedAt: doc.publishedAt as string,
-        excerpt: doc.excerpt as string,
-      };
-    });
-    totalPages = result.totalPages;
-  } catch {
-    // No posts available — show empty state
-  }
+  const allPosts = getBlogPosts(toSiteLocale(locale));
+  const totalPages = Math.max(1, Math.ceil(allPosts.length / POSTS_PER_PAGE));
+  const posts = allPosts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -100,13 +76,9 @@ export default async function BlogPage({ params, searchParams }: Props) {
               <div className="blog-grid" data-reveal-stagger>
                 {posts.map((post) => (
                   <BlogCard
-                    key={post.id}
-                    post={{
-                      slug: post.slug,
-                      title: post.title,
-                      date: post.publishedAt,
-                      description: post.excerpt,
-                    }}
+                    key={post.slug}
+                    post={post}
+                    prefix={prefix}
                   />
                 ))}
               </div>

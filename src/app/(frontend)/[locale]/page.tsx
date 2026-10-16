@@ -16,7 +16,6 @@ import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
-export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,7 +23,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const prefix = localeHrefPrefix(locale);
-  const site = await loadSite(toSiteLocale(locale));
+  const site = loadSite(toSiteLocale(locale));
 
   return (
     <>

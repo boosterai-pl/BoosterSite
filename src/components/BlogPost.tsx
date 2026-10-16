@@ -1,8 +1,12 @@
 import type { BlogPost as BlogPostType } from "@/content/types";
 
-type Props = { post: BlogPostType };
+type Props = {
+  post: BlogPostType;
+  /** Locale URL prefix: "" for English, "/pl" for Polish. */
+  prefix?: string;
+};
 
-export function BlogPost({ post }: Props) {
+export function BlogPost({ post, prefix = "" }: Props) {
   const formatted = new Date(post.date).toLocaleDateString("pl-PL", {
     year: "numeric",
     month: "long",
@@ -13,9 +17,9 @@ export function BlogPost({ post }: Props) {
     <article className="blog-article">
       <div className="blog-article-header">
         <nav className="blog-breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
+          <a href={prefix || "/"}>Home</a>
           <span aria-hidden="true">/</span>
-          <a href="/blog">Blog</a>
+          <a href={`${prefix}/blog`}>Blog</a>
           <span aria-hidden="true">/</span>
           <span>{post.title}</span>
         </nav>
@@ -26,7 +30,7 @@ export function BlogPost({ post }: Props) {
         className="blog-body"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
-      <a href="/blog" className="blog-back">
+      <a href={`${prefix}/blog`} className="blog-back">
         ← Wróć do bloga
       </a>
     </article>

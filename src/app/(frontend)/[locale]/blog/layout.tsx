@@ -12,7 +12,7 @@ type Props = {
 export default async function BlogLayout({ children, params }: Props) {
   const { locale } = await params;
   const prefix = localeHrefPrefix(locale);
-  const site = await loadSite(toSiteLocale(locale));
+  const site = loadSite(toSiteLocale(locale));
   const homeLinks = site.nav.map((link) => ({
     ...link,
     href: link.href.startsWith("#") ? `${prefix || ""}/${link.href}` : link.href,

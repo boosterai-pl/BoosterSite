@@ -107,9 +107,10 @@ export function CookieConsent({ locale = "pl" }: { locale?: Locale }) {
   const [transitioning, setTransitioning] = useState(false);
   const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /* On mount: check localStorage */
+  /* On mount: check localStorage (not available during server render) */
   useEffect(() => {
     const saved = readConsent();
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (saved) {
       setAnalytics(saved.analytics);
       setMarketing(saved.marketing);
@@ -119,6 +120,7 @@ export function CookieConsent({ locale = "pl" }: { locale?: Locale }) {
     } else {
       setView("banner");
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   /* Cleanup timer on unmount */

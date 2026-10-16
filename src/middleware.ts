@@ -24,9 +24,9 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Exclude Payload admin + REST API, /api/og, Next internals, metadata
-  // files (sitemap.xml, robots.txt) and any path containing a file extension.
+  // Exclude /api/og, Next internals, metadata files (sitemap.xml,
+  // robots.txt) and any path containing a file extension.
   matcher: [
-    "/((?!api|admin|_next|_vercel|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
+    "/((?!api|_next|_vercel|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
   ],
 };

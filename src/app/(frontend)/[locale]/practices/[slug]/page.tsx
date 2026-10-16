@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { loadSite, getPractice } from "@/content";
+import { loadSite, getPractice, getPracticeSlugs } from "@/content";
 import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
-export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
-const SLUGS = [
-  "crm-implementation",
-  "open-source-erp",
-  "b2b-software",
-  "ai-automation",
-] as const;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return SLUGS.map((slug) => ({ slug }));
+  return getPracticeSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const site = await loadSite(toSiteLocale(locale));
+  const site = loadSite(toSiteLocale(locale));
   const practice = getPractice(slug, site);
   if (!practice) return {};
 
@@ -60,7 +54,7 @@ export default async function PracticePage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const prefix = localeHrefPrefix(locale);
-  const site = await loadSite(toSiteLocale(locale));
+  const site = loadSite(toSiteLocale(locale));
   const practice = getPractice(slug, site);
   if (!practice) notFound();
 

@@ -595,11 +595,11 @@ export default function RestrukturyzacjaPage() {
                   uporządkowana współpraca, w której nikt nie szuka maili.
                 </p>
                 <ul className="pillar-features">
-                  <li>Status postępowania w czasie rzeczywistym bez pytań „jak idzie sprawa?"</li>
+                  <li>Status postępowania w czasie rzeczywistym bez pytań „jak idzie sprawa?&quot;</li>
                   <li>Centralne repozytorium dokumentów z historią wersji i kontrolą dostępu</li>
                   <li>Bezpieczne przesyłanie plików w obie strony</li>
                   <li>Powiadomienia o terminach, decyzjach i dokumentach do podpisu</li>
-                  <li>Komunikacja zawsze w kontekście sprawy, nigdy „w którym mailu to było"</li>
+                  <li>Komunikacja zawsze w kontekście sprawy, nigdy „w którym mailu to było&quot;</li>
                   <li>Pełna ścieżka audytu: kto, kiedy, co przekazał</li>
                 </ul>
                 <div className="pillar-trust">Audytowalne · RODO · Kontrola dostępów</div>
@@ -669,7 +669,7 @@ export default function RestrukturyzacjaPage() {
                   minutach, w standardzie Twojej kancelarii.
                 </p>
                 <ul className="pillar-features">
-                  <li>Twoje wzorce, nie szablony „pudełkowe". Pełna kontrola nad formatem i językiem</li>
+                  <li>Twoje wzorce, nie szablony „pudełkowe&quot;. Pełna kontrola nad formatem i językiem</li>
                   <li>Plany restrukturyzacyjne, propozycje układowe, ankiety, pisma procesowe</li>
                   <li>Drafty gotowe do recenzji prawnika, nie do pisania od zera</li>
                   <li>Spójność w całej kancelarii: eliminacja literówek i niespójnych klauzul</li>
@@ -1251,7 +1251,7 @@ export default function RestrukturyzacjaPage() {
               <input ref={nameRef} type="text" id="offer-name" name="name" autoComplete="given-name" placeholder="Jak mamy się zwracać" />
             </div>
             <div className="form-consent">
-              Klikając „Skontaktuj się" wyrażasz zgodę na kontakt w sprawie LegalFlow. Szczegóły w{" "}
+              Klikając „Skontaktuj się&quot; wyrażasz zgodę na kontakt w sprawie LegalFlow. Szczegóły w{" "}
               <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
                 polityce prywatności
               </a>

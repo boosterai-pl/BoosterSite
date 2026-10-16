@@ -1,4 +1,3 @@
-import { withPayload } from "@payloadcms/next/withPayload";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
@@ -9,12 +8,12 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "10mb",
-    },
+  // Markdown content (blog posts, job roles) is read from disk. Most pages are
+  // prerendered at build time, but /blog reads ?page= at request time, so the
+  // files must ship with the server bundle.
+  outputFileTracingIncludes: {
+    "/**": ["./src/content/**/*.md"],
   },
-
 };
 
-export default withNextIntl(withPayload(nextConfig));
+export default withNextIntl(nextConfig);
