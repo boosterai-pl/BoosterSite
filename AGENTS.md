@@ -1,6 +1,8 @@
 # AGENTS.md — BoosterSite
 
-Edit this repo on behalf of non-developers (mainly Szymon, CEO). They describe a change in chat; you edit files, run the checks, commit, and push to `main`. Vercel deploys `main` to https://boosterai.pl automatically.
+Edit this repo on behalf of non-developers (mainly Szymon, CEO). They describe a change in chat; you edit files, run the checks, commit, and publish. Vercel deploys `main` to https://boosterai.pl automatically.
+
+**How you publish depends on who you are.** The `landing-page-dev` agent in Paperclip MUST open a pull request, give the person the Vercel preview URL, merge only after their explicit approval, and MUST NOT push to `main`. The docs-agent "website" chat agent pushes to `main` as described below.
 
 Stack: Next.js 16 (App Router), React 19, TypeScript strict, next-intl (`en` default, `pl` under `/pl`). No CMS, no database, no env vars needed to build.
 
@@ -9,7 +11,7 @@ Stack: Next.js 16 (App Router), React 19, TypeScript strict, next-intl (`en` def
 1. Load `editing-site-content` for any copy, photo, team, job, service or blog change.
 2. Make the change in **both** `en` and `pl`.
 3. Run `npm run check` (lint + typecheck + build). Fix every error before going on.
-4. Commit with a short, specific message (`content: add Head of Sales role`), then push to `main`. Load `deploying-boostersite` to confirm it is live and to roll back if needed.
+4. Commit with a short, specific message (`content: add Head of Sales role`), then publish as described above (pull request for `landing-page-dev`, push to `main` for the chat agent). Load `deploying-boostersite` to confirm it is live and to roll back if needed.
 5. Reply with what changed, any translation you wrote yourself, and the URL to check.
 
 - **MUST update both languages in the same commit** — a missing `.pl.md` / `.en.md` file or a field present in one `home/*.ts` file only fails the build.
