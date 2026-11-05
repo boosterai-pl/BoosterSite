@@ -28,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://boosterai.pl/hyperos",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: "https://boosterai.pl/blog",
       lastModified: new Date(),
       changeFrequency: "daily",
