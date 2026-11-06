@@ -6,7 +6,7 @@ employmentType: full-time
 description: "Weź odpowiedzialność za delivery end-to-end: od podpisanej umowy do działającego systemu u klienta. Wejdź do zespołu założycielskiego AI-native agencji, gdzie sprzedaż idzie szybciej niż możliwości realizacji i pomóż nam to zmienić."
 applyUrl: "mailto:szymon@boosterai.pl?subject=Head%20of%20Delivery%20-%20Founding%20member"
 order: 1
-open: true
+open: false
 ---
 ## Kim jesteśmy
 
