@@ -248,6 +248,52 @@ export const homePl: HomeCopy = {
     ],
   },
   booking: {
+    points: [
+      "Bezpłatna rozmowa, bez zobowiązań",
+      "Sześciotygodniowy plan ze stałą ceną",
+      "Pierwsza wersja demonstracyjna w ciągu dwóch tygodni",
+    ],
+    trustLabel: "Pracujemy na narzędziach, które znasz",
+    starters: {
+      title: "Nie wiesz, od czego zacząć rozmowę?",
+      items: [
+        "Mamy proces, który zjada czas zespołu i chcemy go zautomatyzować.",
+        "Potrzebujemy wdrożyć albo uporządkować CRM (Monday, ClickUp, Pipedrive).",
+        "Chcemy zbudować własne oprogramowanie B2B albo moduł do istniejącego systemu.",
+        "Interesuje nas AI w firmie, ale nie wiemy, gdzie ma największy sens.",
+      ],
+    },
+    steps: {
+      title: "Od formularza do planu",
+      items: [
+        { title: "Wypełniasz formularz", body: "Zajmuje to minutę. Wystarczy e-mail, telefon i kilka słów o sprawie." },
+        { title: "Konsultacja", body: "Dzwonimy w ciągu jednego dnia roboczego i przez 30 minut rozmawiamy o Twoim procesie." },
+        { title: "Plan z ceną", body: "Wracamy z sześciotygodniowym planem, stałą ceną i pierwszą wersją demonstracyjną w ciągu dwóch tygodni." },
+      ],
+    },
+    outcomes: {
+      title: "Co zostaje u Ciebie po konsultacji",
+      items: [
+        { title: "Plan działania", body: "Co budujemy, w jakiej kolejności i co będzie gotowe po każdym tygodniu." },
+        { title: "Cena pierwszego etapu", body: "Stała kwota, bez niespodzianek w trakcie." },
+        { title: "Decyzja po Twojej stronie", body: "Plan zostaje u Ciebie niezależnie od tego, czy zaczniemy współpracę." },
+      ],
+    },
+    team: {
+      title: "Z kim porozmawiasz",
+      body: "Rozmowę prowadzi zespół, który potem buduje rozwiązanie. Bez pośredników i sprzedawców.",
+    },
+    faq: {
+      title: "Zanim wyślesz formularz",
+      items: [
+        { q: "Czy konsultacja jest płatna?", a: "Nie. Rozmowa trwa 30 minut, jest bezpłatna i do niczego nie zobowiązuje." },
+        { q: "Kiedy się odezwiecie?", a: "W ciągu jednego dnia roboczego od wysłania formularza." },
+        { q: "Dlaczego potrzebujecie numeru telefonu?", a: "Konsultacja odbywa się telefonicznie. E-mail służy do potwierdzenia i podsumowania rozmowy." },
+        { q: "Co mam wpisać w polu „Czego dotyczy sprawa?”", a: "Kilka zdań o tym, co chcesz zautomatyzować lub zbudować. Nie musisz mieć gotowej specyfikacji." },
+        { q: "Co dzieje się z moimi danymi?", a: "Używamy ich tylko do odpowiedzi na Twoje zapytanie. Szczegóły są w polityce prywatności." },
+      ],
+    },
+    finalCta: { title: "Zacznijmy od jednego telefonu", label: "Wypełnij formularz" },
     form: {
       emailLabel: "E-mail",
       phoneLabel: "Telefon",
@@ -273,6 +319,14 @@ export const homePl: HomeCopy = {
       successEcho: "Odpowiemy na adres",
       successTitle: "Mamy Twoje zgłoszenie",
       successBody: "Odezwiemy się w ciągu jednego dnia roboczego.",
+      requiredNote: "Pola oznaczone * są wymagane, bez nich nie wyślemy zgłoszenia.",
+      formTitle: "Wypełnij formularz",
+      hints: {
+        email: "Na ten adres wyślemy potwierdzenie i podsumowanie rozmowy.",
+        phone: "Zadzwonimy w dzień roboczy. Wybierz kierunkowy i wpisz numer bez prefiksu.",
+        topic: "Opisz krótko, co chcesz zautomatyzować lub zbudować. Wystarczy kilka zdań.",
+        consent: "Zaznacz zgodę, żeby wysłać zgłoszenie. Dane wykorzystamy tylko do odpowiedzi na to zapytanie.",
+      },
     },
     eyebrow: "Porozmawiajmy",
     headline: { text: "Bezpłatna", accent: "konsultacja." },

@@ -234,6 +234,52 @@ export const homeEn: HomeCopy = {
     ],
   },
   booking: {
+    points: [
+      "A free call with no strings attached",
+      "A six-week plan with a fixed price",
+      "A first demo within two weeks",
+    ],
+    trustLabel: "We work with tools you already know",
+    starters: {
+      title: "Not sure how to start the conversation?",
+      items: [
+        "We have a process that eats our team's time and we want to automate it.",
+        "We need to implement or clean up our CRM (Monday, ClickUp, Pipedrive).",
+        "We want to build custom B2B software or a module for an existing system.",
+        "We are interested in AI in the company but do not know where it matters most.",
+      ],
+    },
+    steps: {
+      title: "From the form to a plan",
+      items: [
+        { title: "You fill in the form", body: "It takes a minute. An email, a phone number and a few words about your case." },
+        { title: "Consultation", body: "We call within one business day and spend 30 minutes on your process." },
+        { title: "A plan with a price", body: "We come back with a six-week plan, a fixed price and a first demo within two weeks." },
+      ],
+    },
+    outcomes: {
+      title: "What you keep after the consultation",
+      items: [
+        { title: "An action plan", body: "What we build, in what order and what is ready after each week." },
+        { title: "The price of the first stage", body: "A fixed amount, no surprises along the way." },
+        { title: "The decision is yours", body: "You keep the plan whether or not we start working together." },
+      ],
+    },
+    team: {
+      title: "Who you will talk to",
+      body: "The call is led by the team that then builds the solution. No middlemen, no sales reps.",
+    },
+    faq: {
+      title: "Before you send the form",
+      items: [
+        { q: "Is the consultation paid?", a: "No. The call lasts 30 minutes, it is free and does not commit you to anything." },
+        { q: "When will you get back to me?", a: "Within one business day of sending the form." },
+        { q: "Why do you need my phone number?", a: "The consultation is a phone call. Your email is used for the confirmation and the summary." },
+        { q: "What should I write in \"What is this about?\"", a: "A few sentences about what you want to automate or build. You do not need a ready specification." },
+        { q: "What happens to my data?", a: "We use it only to answer your enquiry. Details are in the privacy policy." },
+      ],
+    },
+    finalCta: { title: "Let's start with one call", label: "Fill in the form" },
     form: {
       emailLabel: "Email",
       phoneLabel: "Phone",
@@ -259,6 +305,14 @@ export const homeEn: HomeCopy = {
       successEcho: "We will reply to",
       successTitle: "We got your enquiry",
       successBody: "We will get back to you within one business day.",
+      requiredNote: "Fields marked * are required, we cannot send the enquiry without them.",
+      formTitle: "Fill in the form",
+      hints: {
+        email: "We will send a confirmation and a summary of the call to this address.",
+        phone: "We will call on a business day. Pick the country code and enter the number without it.",
+        topic: "Briefly describe what you want to automate or build. A few sentences is enough.",
+        consent: "Tick the consent to send the enquiry. We use your data only to answer this request.",
+      },
     },
     eyebrow: "Let's talk",
     headline: { text: "Free", accent: "consultation." },

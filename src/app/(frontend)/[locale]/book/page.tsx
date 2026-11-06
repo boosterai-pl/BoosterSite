@@ -69,7 +69,7 @@ export default async function BookPage({ params }: Props) {
       <SiteRuntime />
       <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
       <main>
-        <Booking content={site.booking} />
+        <Booking content={site.booking} members={site.team.members} />
       </main>
       <Footer brand={site.meta.brand} content={site.footer} />
     </div>

@@ -196,9 +196,33 @@ export type ContactFormCopy = {
   readonly successEcho: string;
   readonly successTitle: string;
   readonly successBody: string;
+  readonly requiredNote: string;
+  readonly formTitle: string;
+  readonly hints: {
+    readonly email: string;
+    readonly phone: string;
+    readonly topic: string;
+    readonly consent: string;
+  };
 };
 
-export type BookingContent = {
+export type BookingStep = { readonly title: string; readonly body: string };
+
+export type BookingExtras = {
+  readonly points: readonly string[];
+  readonly trustLabel: string;
+  readonly starters: { readonly title: string; readonly items: readonly string[] };
+  readonly steps: { readonly title: string; readonly items: readonly BookingStep[] };
+  readonly outcomes: { readonly title: string; readonly items: readonly BookingStep[] };
+  readonly team: { readonly title: string; readonly body: string };
+  readonly faq: {
+    readonly title: string;
+    readonly items: readonly { readonly q: string; readonly a: string }[];
+  };
+  readonly finalCta: { readonly title: string; readonly label: string };
+};
+
+export type BookingContent = BookingExtras & {
   readonly form: ContactFormCopy;
   readonly eyebrow: string;
   readonly headline: HeadlineLine;
