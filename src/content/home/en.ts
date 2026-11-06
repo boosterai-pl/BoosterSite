@@ -239,9 +239,16 @@ export const homeEn: HomeCopy = {
       "A six-week plan with a fixed price",
       "A first demo within two weeks",
     ],
+    stats: [
+      { value: "30 min", label: "free call" },
+      { value: "6 wks", label: "plan with a fixed price" },
+      { value: "2 wks", label: "to the first demo" },
+    ],
     trustLabel: "We work with tools you already know",
     starters: {
-      title: "Not sure how to start the conversation?",
+      eyebrow: "Example topics",
+      headline: { text: "Not sure where", accent: "to start?" },
+      hint: "Describe it in the form",
       items: [
         "We have a process that eats our team's time and we want to automate it.",
         "We need to implement or clean up our CRM (Monday, ClickUp, Pipedrive).",
@@ -250,7 +257,8 @@ export const homeEn: HomeCopy = {
       ],
     },
     steps: {
-      title: "From the form to a plan",
+      eyebrow: "How it works",
+      headline: { text: "From the form", accent: "to a plan." },
       imageAlt: "Szymon Bazan working at a laptop",
       items: [
         { title: "You fill in the form", body: "It takes a minute. An email, a phone number and a few words about your case." },
@@ -259,7 +267,8 @@ export const homeEn: HomeCopy = {
       ],
     },
     outcomes: {
-      title: "What you keep after the consultation",
+      eyebrow: "After the call",
+      headline: { text: "What you", accent: "keep." },
       items: [
         { title: "An action plan", body: "What we build, in what order and what is ready after each week." },
         { title: "The price of the first stage", body: "A fixed amount, no surprises along the way." },
@@ -267,11 +276,13 @@ export const homeEn: HomeCopy = {
       ],
     },
     team: {
-      title: "Who you will talk to",
+      eyebrow: "Team",
+      headline: { text: "Who you will", accent: "talk to." },
       body: "The call is led by the team that then builds the solution. No middlemen, no sales reps.",
     },
     faq: {
-      title: "Before you send the form",
+      eyebrow: "FAQ",
+      headline: { text: "Before you send", accent: "the form." },
       items: [
         { q: "Is the consultation paid?", a: "No. The call lasts 30 minutes, it is free and does not commit you to anything." },
         { q: "When will you get back to me?", a: "Within one business day of sending the form." },
@@ -280,7 +291,12 @@ export const homeEn: HomeCopy = {
         { q: "What happens to my data?", a: "We use it only to answer your enquiry. Details are in the privacy policy." },
       ],
     },
-    finalCta: { title: "Let's start with one call", label: "Fill in the form" },
+    finalCta: {
+      eyebrow: "Next step",
+      headline: { text: "Let's start with", accent: "one call." },
+      body: "Filling in the form takes a minute. We get back to you within one business day.",
+      label: "Fill in the form",
+    },
     form: {
       emailLabel: "Email",
       phoneLabel: "Phone",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { BookingContent, SiteContent } from "@/content/types";
+import type { BookingContent, BookingSection, SiteContent } from "@/content/types";
 import { ContactForm } from "@/components/ContactForm";
 import { ClickUpLogo, MondayLogo, PipedriveLogo, TilioLogo } from "@/components/BrandLogos";
 
@@ -7,13 +7,31 @@ type Props = { content: BookingContent; members: SiteContent["team"]["members"] 
 
 const TEAM_ON_CALL = 3;
 
+function SectionTitle({ section, light = true }: { section: BookingSection; light?: boolean }) {
+  return (
+    <div className="booking-head">
+      <span className={light ? "eyebrow light" : "eyebrow"}>{section.eyebrow}</span>
+      <h2 className="h2">
+        {section.headline.text}
+        {section.headline.accent ? (
+          <>
+            {" "}
+            <span className="serif booking-accent">{section.headline.accent}</span>
+          </>
+        ) : null}
+      </h2>
+    </div>
+  );
+}
+
 export function Booking({ content, members }: Props) {
   return (
     <>
       <section className="block light booking">
+        <div className="booking-glow" aria-hidden="true" />
         <div className="container-inner booking-hero">
           <div className="booking-intro">
-            <span className="eyebrow">{content.eyebrow}</span>
+            <span className="eyebrow light">{content.eyebrow}</span>
             <h1 className="h1">
               {content.headline.text}
               {content.headline.accent ? (
@@ -29,6 +47,14 @@ export function Booking({ content, members }: Props) {
                 <li key={point}>{point}</li>
               ))}
             </ul>
+            <dl className="booking-stats">
+              {content.stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt>{stat.value}</dt>
+                  <dd>{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
             <div className="booking-trust">
               <span className="mono">{content.trustLabel}</span>
               <div className="booking-trust-logos">
@@ -50,46 +76,57 @@ export function Booking({ content, members }: Props) {
 
       <section className="block light booking-section">
         <div className="container-inner">
-          <h2 className="h2">{content.starters.title}</h2>
+          <SectionTitle section={content.starters} />
           <ul className="booking-starters">
-            {content.starters.items.map((item) => (
-              <li key={item}>{item}</li>
+            {content.starters.items.map((item, i) => (
+              <li key={item}>
+                <a href="#formularz" className="booking-starter">
+                  <span className="mono booking-starter-n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="booking-starter-text">{item}</span>
+                  <span className="booking-starter-hint">
+                    {content.starters.hint} <span className="arrow">→</span>
+                  </span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="block light booking-section">
+      <section className="block booking-section booking-dark">
         <div className="container-inner">
-          <h2 className="h2">{content.steps.title}</h2>
+          <SectionTitle section={content.steps} light={false} />
           <div className="booking-steps-wrap">
-          <Image
-            src="/assets/booking-work.jpg"
-            alt={content.steps.imageAlt}
-            width={1000}
-            height={1000}
-            sizes="(max-width: 900px) 100vw, 380px"
-            className="booking-steps-photo"
-          />
-          <ol className="booking-steps">
-            {content.steps.items.map((step, i) => (
-              <li key={step.title}>
-                <span className="mono booking-step-n">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="h3">{step.title}</h3>
-                <p>{step.body}</p>
-              </li>
-            ))}
-          </ol>
+            <Image
+              src="/assets/booking-work.jpg"
+              alt={content.steps.imageAlt}
+              width={1000}
+              height={1000}
+              sizes="(max-width: 900px) 100vw, 440px"
+              className="booking-steps-photo"
+            />
+            <ol className="booking-steps">
+              {content.steps.items.map((step, i) => (
+                <li key={step.title}>
+                  <span className="booking-step-n">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="h3">{step.title}</h3>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
       <section className="block light booking-section">
         <div className="container-inner">
-          <h2 className="h2">{content.outcomes.title}</h2>
+          <SectionTitle section={content.outcomes} />
           <div className="booking-outcomes">
-            {content.outcomes.items.map((item) => (
+            {content.outcomes.items.map((item, i) => (
               <div key={item.title} className="booking-outcome">
+                <span className="mono booking-outcome-n">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="h3">{item.title}</h3>
                 <p>{item.body}</p>
               </div>
@@ -100,13 +137,22 @@ export function Booking({ content, members }: Props) {
 
       <section className="block light booking-section">
         <div className="container-inner">
-          <h2 className="h2">{content.team.title}</h2>
+          <SectionTitle section={content.team} />
           <p className="lead booking-lead">{content.team.body}</p>
           <div className="booking-team">
             {members.slice(0, TEAM_ON_CALL).map((member) => (
               <div key={member.id} className="booking-person">
                 {member.photo ? (
-                  <Image src={member.id === members[0]?.id ? "/assets/szymon-bazan-portrait.jpg" : member.photo} alt={member.name} width={240} height={240} className="booking-person-photo" />
+                  <div className="booking-person-frame">
+                    <Image
+                      src={member.id === members[0]?.id ? "/assets/szymon-bazan-portrait.jpg" : member.photo}
+                      alt={member.name}
+                      width={480}
+                      height={600}
+                      sizes="(max-width: 900px) 100vw, 33vw"
+                      className="booking-person-photo"
+                    />
+                  </div>
                 ) : null}
                 <h3 className="h3">{member.name}</h3>
                 <p className="role">{member.role}</p>
@@ -117,8 +163,8 @@ export function Booking({ content, members }: Props) {
       </section>
 
       <section className="block light booking-section">
-        <div className="container-inner">
-          <h2 className="h2">{content.faq.title}</h2>
+        <div className="container-inner booking-faq-wrap">
+          <SectionTitle section={content.faq} />
           <div className="booking-faq">
             {content.faq.items.map((item) => (
               <details key={item.q}>
@@ -130,12 +176,24 @@ export function Booking({ content, members }: Props) {
         </div>
       </section>
 
-      <section className="block light booking-section booking-final">
-        <div className="container-inner">
-          <h2 className="h2">{content.finalCta.title}</h2>
-          <a href="#formularz" className="btn btn-primary">
-            {content.finalCta.label} <span className="arrow">→</span>
-          </a>
+      <section className="cta booking-final">
+        <div className="cta-inner">
+          <span className="eyebrow cta-eyebrow">{content.finalCta.eyebrow}</span>
+          <h2>
+            {content.finalCta.headline.text}
+            {content.finalCta.headline.accent ? (
+              <>
+                {" "}
+                <span className="serif">{content.finalCta.headline.accent}</span>
+              </>
+            ) : null}
+          </h2>
+          <div className="cta-row">
+            <p>{content.finalCta.body}</p>
+            <a href="#formularz" className="btn btn-primary">
+              {content.finalCta.label} <span className="arrow">→</span>
+            </a>
+          </div>
         </div>
       </section>
     </>

@@ -253,9 +253,16 @@ export const homePl: HomeCopy = {
       "Sześciotygodniowy plan ze stałą ceną",
       "Pierwsza wersja demonstracyjna w ciągu dwóch tygodni",
     ],
+    stats: [
+      { value: "30 min", label: "bezpłatnej rozmowy" },
+      { value: "6 tyg.", label: "plan ze stałą ceną" },
+      { value: "2 tyg.", label: "do pierwszej wersji demo" },
+    ],
     trustLabel: "Pracujemy na narzędziach, które znasz",
     starters: {
-      title: "Nie wiesz, od czego zacząć rozmowę?",
+      eyebrow: "Przykładowe tematy",
+      headline: { text: "Nie wiesz, od czego", accent: "zacząć?" },
+      hint: "Opisz to w formularzu",
       items: [
         "Mamy proces, który zjada czas zespołu i chcemy go zautomatyzować.",
         "Potrzebujemy wdrożyć albo uporządkować CRM (Monday, ClickUp, Pipedrive).",
@@ -264,7 +271,8 @@ export const homePl: HomeCopy = {
       ],
     },
     steps: {
-      title: "Od formularza do planu",
+      eyebrow: "Jak to działa",
+      headline: { text: "Od formularza", accent: "do planu." },
       imageAlt: "Szymon Bazan pracuje przy laptopie",
       items: [
         { title: "Wypełniasz formularz", body: "Zajmuje to minutę. Wystarczy e-mail, telefon i kilka słów o sprawie." },
@@ -273,7 +281,8 @@ export const homePl: HomeCopy = {
       ],
     },
     outcomes: {
-      title: "Co zostaje u Ciebie po konsultacji",
+      eyebrow: "Po rozmowie",
+      headline: { text: "Co zostaje", accent: "u Ciebie." },
       items: [
         { title: "Plan działania", body: "Co budujemy, w jakiej kolejności i co będzie gotowe po każdym tygodniu." },
         { title: "Cena pierwszego etapu", body: "Stała kwota, bez niespodzianek w trakcie." },
@@ -281,11 +290,13 @@ export const homePl: HomeCopy = {
       ],
     },
     team: {
-      title: "Z kim porozmawiasz",
+      eyebrow: "Zespół",
+      headline: { text: "Z kim", accent: "porozmawiasz." },
       body: "Rozmowę prowadzi zespół, który potem buduje rozwiązanie. Bez pośredników i sprzedawców.",
     },
     faq: {
-      title: "Zanim wyślesz formularz",
+      eyebrow: "FAQ",
+      headline: { text: "Zanim wyślesz", accent: "formularz." },
       items: [
         { q: "Czy konsultacja jest płatna?", a: "Nie. Rozmowa trwa 30 minut, jest bezpłatna i do niczego nie zobowiązuje." },
         { q: "Kiedy się odezwiecie?", a: "W ciągu jednego dnia roboczego od wysłania formularza." },
@@ -294,7 +305,12 @@ export const homePl: HomeCopy = {
         { q: "Co dzieje się z moimi danymi?", a: "Używamy ich tylko do odpowiedzi na Twoje zapytanie. Szczegóły są w polityce prywatności." },
       ],
     },
-    finalCta: { title: "Zacznijmy od jednego telefonu", label: "Wypełnij formularz" },
+    finalCta: {
+      eyebrow: "Następny krok",
+      headline: { text: "Zacznijmy od", accent: "jednego telefonu." },
+      body: "Wypełnienie formularza zajmuje minutę. Odezwiemy się w ciągu jednego dnia roboczego.",
+      label: "Wypełnij formularz",
+    },
     form: {
       emailLabel: "E-mail",
       phoneLabel: "Telefon",

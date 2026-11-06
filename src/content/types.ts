@@ -208,18 +208,20 @@ export type ContactFormCopy = {
 
 export type BookingStep = { readonly title: string; readonly body: string };
 
+export type BookingSection = { readonly eyebrow: string; readonly headline: HeadlineLine };
+
 export type BookingExtras = {
   readonly points: readonly string[];
+  readonly stats: readonly { readonly value: string; readonly label: string }[];
   readonly trustLabel: string;
-  readonly starters: { readonly title: string; readonly items: readonly string[] };
-  readonly steps: { readonly title: string; readonly imageAlt: string; readonly items: readonly BookingStep[] };
-  readonly outcomes: { readonly title: string; readonly items: readonly BookingStep[] };
-  readonly team: { readonly title: string; readonly body: string };
-  readonly faq: {
-    readonly title: string;
+  readonly starters: BookingSection & { readonly items: readonly string[]; readonly hint: string };
+  readonly steps: BookingSection & { readonly imageAlt: string; readonly items: readonly BookingStep[] };
+  readonly outcomes: BookingSection & { readonly items: readonly BookingStep[] };
+  readonly team: BookingSection & { readonly body: string };
+  readonly faq: BookingSection & {
     readonly items: readonly { readonly q: string; readonly a: string }[];
   };
-  readonly finalCta: { readonly title: string; readonly label: string };
+  readonly finalCta: BookingSection & { readonly body: string; readonly label: string };
 };
 
 export type BookingContent = BookingExtras & {
