@@ -6,7 +6,7 @@ employmentType: full-time
 description: "Take end-to-end ownership of delivery, from signed contract to a working system at the client's. Join the founding team of an AI-native agency where sales is outpacing delivery capacity, and help us fix that."
 applyUrl: "mailto:szymon@boosterai.pl?subject=Head%20of%20Delivery%20-%20Founding%20member"
 order: 1
-open: true
+open: false
 ---
 ## Who we are
 
