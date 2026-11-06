@@ -70,6 +70,12 @@ export default async function LocaleLayout({ children, params }: Props) {
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
           rel="stylesheet"
         />
+        <script
+          defer
+          data-website-id="dfid_tg468q8wxZ0nWQgvnEQNn"
+          data-domain="boosterai.pl"
+          src="https://datafa.st/js/script.js"
+        />
       </head>
       <body suppressHydrationWarning>
         <script
