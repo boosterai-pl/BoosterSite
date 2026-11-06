@@ -228,7 +228,7 @@ export const homeEn: HomeCopy = {
       },
     ],
     bottom: [
-      "© 2026 Booster AI sp. z o.o.",
+      "© 2026 Sales Booster sp. z o.o.",
       "Wrocław, Poland",
       "Booster / AI Native Service Agency / v1.0",
     ],
@@ -251,6 +251,7 @@ export const homeEn: HomeCopy = {
     },
     steps: {
       title: "From the form to a plan",
+      imageAlt: "Szymon Bazan working at a laptop",
       items: [
         { title: "You fill in the form", body: "It takes a minute. An email, a phone number and a few words about your case." },
         { title: "Consultation", body: "We call within one business day and spend 30 minutes on your process." },

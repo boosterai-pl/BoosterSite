@@ -242,7 +242,7 @@ export const homePl: HomeCopy = {
       },
     ],
     bottom: [
-      "© 2026 Booster AI sp. z o.o.",
+      "© 2026 Sales Booster sp. z o.o.",
       "Wrocław, Polska",
       "Booster / Agencja AI Native / v1.0",
     ],
@@ -265,6 +265,7 @@ export const homePl: HomeCopy = {
     },
     steps: {
       title: "Od formularza do planu",
+      imageAlt: "Szymon Bazan pracuje przy laptopie",
       items: [
         { title: "Wypełniasz formularz", body: "Zajmuje to minutę. Wystarczy e-mail, telefon i kilka słów o sprawie." },
         { title: "Konsultacja", body: "Dzwonimy w ciągu jednego dnia roboczego i przez 30 minut rozmawiamy o Twoim procesie." },

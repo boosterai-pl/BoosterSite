@@ -212,7 +212,7 @@ export type BookingExtras = {
   readonly points: readonly string[];
   readonly trustLabel: string;
   readonly starters: { readonly title: string; readonly items: readonly string[] };
-  readonly steps: { readonly title: string; readonly items: readonly BookingStep[] };
+  readonly steps: { readonly title: string; readonly imageAlt: string; readonly items: readonly BookingStep[] };
   readonly outcomes: { readonly title: string; readonly items: readonly BookingStep[] };
   readonly team: { readonly title: string; readonly body: string };
   readonly faq: {

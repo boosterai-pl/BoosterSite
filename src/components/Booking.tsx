@@ -62,6 +62,15 @@ export function Booking({ content, members }: Props) {
       <section className="block light booking-section">
         <div className="container-inner">
           <h2 className="h2">{content.steps.title}</h2>
+          <div className="booking-steps-wrap">
+          <Image
+            src="/assets/booking-work.jpg"
+            alt={content.steps.imageAlt}
+            width={1000}
+            height={1000}
+            sizes="(max-width: 900px) 100vw, 380px"
+            className="booking-steps-photo"
+          />
           <ol className="booking-steps">
             {content.steps.items.map((step, i) => (
               <li key={step.title}>
@@ -71,6 +80,7 @@ export function Booking({ content, members }: Props) {
               </li>
             ))}
           </ol>
+          </div>
         </div>
       </section>
 
@@ -96,7 +106,7 @@ export function Booking({ content, members }: Props) {
             {members.slice(0, TEAM_ON_CALL).map((member) => (
               <div key={member.id} className="booking-person">
                 {member.photo ? (
-                  <Image src={member.photo} alt={member.name} width={240} height={240} className="booking-person-photo" />
+                  <Image src={member.id === members[0]?.id ? "/assets/szymon-bazan-portrait.jpg" : member.photo} alt={member.name} width={240} height={240} className="booking-person-photo" />
                 ) : null}
                 <h3 className="h3">{member.name}</h3>
                 <p className="role">{member.role}</p>

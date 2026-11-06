@@ -2272,3 +2272,29 @@ html.js-reveal .word-reveal.visible > span {
   max-width: 120px;
   object-fit: contain;
 }
+.booking-steps-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  margin-top: 2rem;
+}
+.booking-steps-wrap .booking-steps {
+  margin: 0;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.booking-steps-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+@media (max-width: 900px) {
+  .booking-steps-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+.booking-person:first-child .booking-person-photo {
+  object-position: 55% 20%;
+}
