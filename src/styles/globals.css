@@ -2050,7 +2050,7 @@ html.js-reveal .word-reveal.visible > span {
   gap: 10px;
   align-items: flex-start;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 .contact-form__consent input {
   margin-top: 3px;
@@ -2075,7 +2075,7 @@ html.js-reveal .word-reveal.visible > span {
 .contact-form__note {
   margin: -8px 0 0;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 .contact-form__error {
   padding: 12px 16px;
@@ -2140,7 +2140,7 @@ html.js-reveal .word-reveal.visible > span {
   margin-top: 2.5rem;
   display: grid;
   gap: 14px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 .booking-trust-logos {
   display: flex;
@@ -2164,9 +2164,9 @@ html.js-reveal .word-reveal.visible > span {
 .booking-required {
   margin: 8px 0 0;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
-.booking-section {
+section.block.booking-section {
   padding-top: 72px;
   padding-bottom: 72px;
   border-top: 1px solid var(--line-dark);
@@ -2195,7 +2195,7 @@ html.js-reveal .word-reveal.visible > span {
 .booking-steps p,
 .booking-outcome p {
   margin-top: 8px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 .booking-outcome {
   padding: 24px;
@@ -2213,7 +2213,7 @@ html.js-reveal .word-reveal.visible > span {
   margin-bottom: 14px;
 }
 .booking-person .role {
-  color: var(--muted);
+  color: var(--muted-dark);
   font-size: 14px;
 }
 .booking-faq {
@@ -2240,7 +2240,7 @@ html.js-reveal .word-reveal.visible > span {
 }
 .booking-faq p {
   margin: 10px 0 0;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 .booking-final .btn {
   margin-top: 1.5rem;
@@ -2252,7 +2252,7 @@ html.js-reveal .word-reveal.visible > span {
   display: block;
   font-size: 13px;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 @media (max-width: 900px) {
   .booking-hero,
@@ -2297,4 +2297,35 @@ html.js-reveal .word-reveal.visible > span {
 }
 .booking-person:first-child .booking-person-photo {
   object-position: 55% 20%;
+}
+.booking-page .h2 {
+  font-weight: 500;
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.booking-page section.block.booking {
+  padding-top: 140px;
+  padding-bottom: 96px;
+}
+/* Tillio ships as a white logo for dark sections; show it dark here. */
+.booking-trust-logos img.booking-logo {
+  filter: brightness(0) !important;
+  opacity: 0.85;
+}
+.contact-form__consent span {
+  display: block;
+}
+.contact-form__consent .contact-form__hint {
+  margin-top: 4px;
+}
+@media (max-width: 900px) {
+  .booking-page section.block.booking {
+    padding-top: 110px;
+    padding-bottom: 64px;
+  }
+  .booking-page section.block.booking-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
 }
