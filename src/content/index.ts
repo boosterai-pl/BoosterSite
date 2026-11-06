@@ -13,6 +13,7 @@
 import type {
   BlogPost,
   EmploymentType,
+  HomeCopy,
   JobRole,
   Locale,
   PracticeContent,
@@ -49,8 +50,26 @@ function localizeHref(href: string, locale: SiteLocale): string {
   return href === "/" ? "/pl" : `/pl${href}`;
 }
 
+// Applies localizeHref to every `href` string in a content tree (CTAs, practice pages, ...).
+function localizeHrefs<T>(value: T, locale: SiteLocale): T {
+  if (Array.isArray(value)) return value.map((v) => localizeHrefs(v, locale)) as T;
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [
+        k,
+        k === "href" && typeof v === "string" ? localizeHref(v, locale) : localizeHrefs(v, locale),
+      ]),
+    ) as T;
+  }
+  return value;
+}
+
 export function loadSite(locale: SiteLocale = "en"): SiteContent {
   const copy = home[locale];
+  return localizeHrefs(buildSite(copy, locale), locale);
+}
+
+function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
   return {
     ...copy,
     nav: copy.nav.map((link) => ({ ...link, href: localizeHref(link.href, locale) })),

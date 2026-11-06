@@ -16,7 +16,7 @@ export const openSourceErp: ServiceEntry = {
       heroCta: {
         microCopy: "Stop paying six-figure bills for software user licenses.",
         label: "Drop per-seat pricing. Pick a time",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -39,7 +39,7 @@ export const openSourceErp: ServiceEntry = {
       cta: {
         microCopy: "Take full ownership of your enterprise software.",
         label: "Book a consultation with our Founder",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },
@@ -56,7 +56,7 @@ export const openSourceErp: ServiceEntry = {
       heroCta: {
         microCopy: "Przestań płacić sześciocyfrowe rachunki za licencje użytkowników oprogramowania.",
         label: "Porzuć ceny za stanowisko. Wybierz termin",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -79,7 +79,7 @@ export const openSourceErp: ServiceEntry = {
       cta: {
         microCopy: "Przejmij pełną kontrolę nad swoim oprogramowaniem dla przedsiębiorstw.",
         label: "Umów się na konsultację z naszym założycielem",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },

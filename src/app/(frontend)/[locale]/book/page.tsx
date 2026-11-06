@@ -10,24 +10,30 @@ import { SiteRuntime } from "@/components/SiteRuntime";
 
 type Props = { params: Promise<{ locale: string }> };
 
-// The booking page is canonically English-only — the /pl variant
-// canonicalizes to the EN URL (no /pl/book existed before this refactor).
-export const metadata: Metadata = {
-  title: "Book a consultation | Booster — AI-Native Agency",
-  description:
-    "Book a free 30-minute call with Booster. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
-  alternates: {
-    canonical: "https://boosterai.pl/book",
-  },
-  openGraph: {
+const COPY = {
+  en: {
     title: "Book a consultation | Booster — AI-Native Agency",
     description:
-      "Book a free 30-minute call with Booster. We come back with a plan, a price and a demo in two weeks.",
-    type: "website",
-    url: "https://boosterai.pl/book",
-    siteName: "Booster",
+      "Book a free 30-minute call with Booster. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
   },
-};
+  pl: {
+    title: "Umów konsultację | Booster — Agencja AI Native",
+    description:
+      "Umów bezpłatną 30-minutową rozmowę z Booster. Wracamy z sześciotygodniowym planem, stałą ceną i pierwszą wersją demonstracyjną w ciągu dwóch tygodni.",
+  },
+} as const;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = COPY[toSiteLocale(locale)];
+  const url = `https://boosterai.pl${localeHrefPrefix(locale)}/book`;
+  return {
+    title: copy.title,
+    description: copy.description,
+    alternates: { canonical: url },
+    openGraph: { title: copy.title, description: copy.description, type: "website", url, siteName: "Booster" },
+  };
+}
 
 const jsonLd = {
   "@context": "https://schema.org",

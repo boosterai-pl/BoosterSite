@@ -1,4 +1,5 @@
 import type { BookingContent } from "@/content/types";
+import { ContactForm } from "@/components/ContactForm";
 
 type Props = { content: BookingContent };
 
@@ -17,14 +18,7 @@ export function Booking({ content }: Props) {
           ) : null}
         </h1>
         <p className="lead booking-lead">{content.body}</p>
-        <a
-          href={content.calUrl}
-          className="btn btn-primary booking-cta"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Book a free consultation <span className="arrow">→</span>
-        </a>
+        <ContactForm copy={content.form} source="boosterai.pl — formularz /book" />
       </div>
     </section>
   );

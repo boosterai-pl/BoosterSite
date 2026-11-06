@@ -171,8 +171,29 @@ export type JobRole = {
   readonly applyUrl: string;
 };
 
+export type ContactFormCopy = {
+  readonly emailLabel: string;
+  readonly phoneLabel: string;
+  readonly topicLabel: string;
+  readonly topicPlaceholder: string;
+  readonly consent: string;
+  readonly privacyLabel: string;
+  readonly privacyHref: string;
+  readonly honeypotLabel: string;
+  readonly submit: string;
+  readonly submitting: string;
+  readonly footnote: string;
+  readonly invalidEmail: string;
+  readonly invalidPhone: string;
+  readonly missingTopic: string;
+  readonly missingConsent: string;
+  readonly error: string;
+  readonly successTitle: string;
+  readonly successBody: string;
+};
+
 export type BookingContent = {
-  readonly calUrl: string;
+  readonly form: ContactFormCopy;
   readonly eyebrow: string;
   readonly headline: HeadlineLine;
   readonly body: string;

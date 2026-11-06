@@ -20,7 +20,7 @@ export const homePl: HomeCopy = {
   ],
   navCta: {
     label: "Umów się na bezpłatną konsultację AI",
-    href: "https://cal.com/szymon-bazan-iahn2z",
+    href: "/book",
   },
   hero: {
     eyebrow: "AI Native / Agencja Usługowa",
@@ -29,7 +29,7 @@ export const homePl: HomeCopy = {
     lead: "Budujemy autonomiczną infrastrukturę AI dla złożonych operacji B2B. Zastępując ręczne prowizorki dedykowanymi platformami, dostarczamy kompleksowe rozwiązania w ciągu tygodni, a nie kwartałów.",
     primaryCta: {
       label: "Umów się na bezpłatną konsultację",
-      href: "https://cal.com/szymon-bazan-iahn2z",
+      href: "/book",
     },
     secondaryCta: { label: "Zobacz, co robimy", href: "#services" },
     meta: [
@@ -209,7 +209,7 @@ export const homePl: HomeCopy = {
     body: "Umów się na 30-minutową konsultację. Wracamy z sześciotygodniowym planem, stałą ceną i pierwszą wersją demonstracyjną w ciągu dwóch tygodni.",
     button: {
       label: "Umów się na bezpłatną konsultację",
-      href: "https://cal.com/szymon-bazan-iahn2z",
+      href: "/book",
     },
   },
   footer: {
@@ -248,9 +248,28 @@ export const homePl: HomeCopy = {
     ],
   },
   booking: {
-    calUrl: "https://cal.com/szymon-bazan-iahn2z",
-    eyebrow: "Let's talk",
-    headline: { text: "Free", accent: "consultation." },
-    body: "30 minutes. We come back with a six-week plan, a fixed price and a first demo in two weeks.",
+    form: {
+      emailLabel: "E-mail",
+      phoneLabel: "Telefon",
+      topicLabel: "Czego dotyczy sprawa?",
+      topicPlaceholder: "Kilka słów o Twoim projekcie lub problemie",
+      consent: "Wyrażam zgodę na kontakt i przetwarzanie moich danych w celu obsługi zapytania.",
+      privacyLabel: "Polityka prywatności",
+      privacyHref: "https://boosterai.pl/privacy-policy/",
+      honeypotLabel: "Nie wypełniaj tego pola",
+      submit: "Umów bezpłatną konsultację",
+      submitting: "Wysyłanie…",
+      footnote: "Bez zobowiązań.",
+      invalidEmail: "Podaj prawidłowy adres e-mail.",
+      invalidPhone: "Podaj prawidłowy numer telefonu.",
+      missingTopic: "Napisz w kilku słowach, czego dotyczy sprawa.",
+      missingConsent: "Zgoda jest wymagana, żeby wysłać formularz.",
+      error: "Zgłoszenie nie doszło. Wpisane dane zostały w formularzu, spróbuj ponownie.",
+      successTitle: "Mamy Twoje zgłoszenie",
+      successBody: "Odezwiemy się w ciągu jednego dnia roboczego.",
+    },
+    eyebrow: "Porozmawiajmy",
+    headline: { text: "Bezpłatna", accent: "konsultacja." },
+    body: "30 minut rozmowy. Wracamy z sześciotygodniowym planem, stałą ceną i pierwszą wersją demonstracyjną w ciągu dwóch tygodni.",
   },
 };

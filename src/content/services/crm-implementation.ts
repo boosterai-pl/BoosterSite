@@ -16,7 +16,7 @@ export const crmImplementation: ServiceEntry = {
       heroCta: {
         microCopy: "Stop losing deals to manual spreadsheet chaos.",
         label: "Automate your pipeline. Pick a time",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -39,7 +39,7 @@ export const crmImplementation: ServiceEntry = {
       cta: {
         microCopy: "Build a CRM stack your sales team will actually enjoy using.",
         label: "Book a scoping call with our Founder",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },
@@ -56,7 +56,7 @@ export const crmImplementation: ServiceEntry = {
       heroCta: {
         microCopy: "Przestań tracić transakcje z powodu ręcznego chaosu w arkuszach kalkulacyjnych.",
         label: "Zautomatyzuj swój potok. Wybierz termin",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -79,7 +79,7 @@ export const crmImplementation: ServiceEntry = {
       cta: {
         microCopy: "Zbuduj stos CRM, z którego Twój zespół sprzedaży naprawdę będzie zadowolony.",
         label: "Umów się na rozmowę z naszym założycielem",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },

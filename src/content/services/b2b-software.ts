@@ -16,7 +16,7 @@ export const b2bSoftware: ServiceEntry = {
       heroCta: {
         microCopy: "Bypass the 12-month corporate software drag.",
         label: "Skip the roadmap. Pick a time",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -39,7 +39,7 @@ export const b2bSoftware: ServiceEntry = {
       cta: {
         microCopy: "Ready to build software you actually own?",
         label: "Book your scoping call with our Founder",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },
@@ -59,7 +59,7 @@ export const b2bSoftware: ServiceEntry = {
       heroCta: {
         microCopy: "Omiń 12-miesięczne korporacyjne obciążenie oprogramowaniem.",
         label: "Pomiń plan rozwoju. Wybierz termin",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
       sections: [
         {
@@ -82,7 +82,7 @@ export const b2bSoftware: ServiceEntry = {
       cta: {
         microCopy: "Gotowy na budowanie oprogramowania, którego naprawdę jesteś właścicielem?",
         label: "Umów się na rozmowę z naszym założycielem",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        href: "/book",
       },
     },
   },
