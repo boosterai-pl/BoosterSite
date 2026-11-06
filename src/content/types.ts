@@ -185,9 +185,15 @@ export type ContactFormCopy = {
   readonly footnote: string;
   readonly invalidEmail: string;
   readonly invalidPhone: string;
-  readonly missingTopic: string;
+  readonly requiredField: string;
   readonly missingConsent: string;
-  readonly error: string;
+  readonly sent: string;
+  readonly errorTitle: string;
+  readonly errorBody: string;
+  readonly mailtoLabel: string;
+  readonly mailtoAddress: string;
+  readonly mailtoSubject: string;
+  readonly successEcho: string;
   readonly successTitle: string;
   readonly successBody: string;
 };

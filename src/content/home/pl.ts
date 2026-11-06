@@ -20,7 +20,7 @@ export const homePl: HomeCopy = {
   ],
   navCta: {
     label: "Umów się na bezpłatną konsultację AI",
-    href: "/book",
+    href: "/book?z=nav",
   },
   hero: {
     eyebrow: "AI Native / Agencja Usługowa",
@@ -29,7 +29,7 @@ export const homePl: HomeCopy = {
     lead: "Budujemy autonomiczną infrastrukturę AI dla złożonych operacji B2B. Zastępując ręczne prowizorki dedykowanymi platformami, dostarczamy kompleksowe rozwiązania w ciągu tygodni, a nie kwartałów.",
     primaryCta: {
       label: "Umów się na bezpłatną konsultację",
-      href: "/book",
+      href: "/book?z=hero",
     },
     secondaryCta: { label: "Zobacz, co robimy", href: "#services" },
     meta: [
@@ -209,7 +209,7 @@ export const homePl: HomeCopy = {
     body: "Umów się na 30-minutową konsultację. Wracamy z sześciotygodniowym planem, stałą ceną i pierwszą wersją demonstracyjną w ciągu dwóch tygodni.",
     button: {
       label: "Umów się na bezpłatną konsultację",
-      href: "/book",
+      href: "/book?z=cta",
     },
   },
   footer: {
@@ -262,9 +262,15 @@ export const homePl: HomeCopy = {
       footnote: "Bez zobowiązań.",
       invalidEmail: "Podaj prawidłowy adres e-mail.",
       invalidPhone: "Podaj prawidłowy numer telefonu.",
-      missingTopic: "Napisz w kilku słowach, czego dotyczy sprawa.",
+      requiredField: "To pole jest wymagane.",
       missingConsent: "Zgoda jest wymagana, żeby wysłać formularz.",
-      error: "Zgłoszenie nie doszło. Wpisane dane zostały w formularzu, spróbuj ponownie.",
+      sent: "Wysłane",
+      errorTitle: "Zgłoszenie nie doszło.",
+      errorBody: "Wpisane dane zostały w formularzu. Spróbuj jeszcze raz za chwilę albo napisz do nas bezpośrednio:",
+      mailtoLabel: "Wyślij mailem",
+      mailtoAddress: "hello@boosterai.pl",
+      mailtoSubject: "Bezpłatna konsultacja — zgłoszenie",
+      successEcho: "Odpowiemy na adres",
       successTitle: "Mamy Twoje zgłoszenie",
       successBody: "Odezwiemy się w ciągu jednego dnia roboczego.",
     },

@@ -29,6 +29,7 @@ export default function RestrukturyzacjaPage() {
   const phoneRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
+  const sourceRef = useRef<string>("");
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Nav scrolled state + on-light detection over light sections
@@ -112,6 +113,7 @@ export default function RestrukturyzacjaPage() {
 
   function openModal(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
+    sourceRef.current = e.currentTarget.dataset.cta ?? "";
     lastFocusRef.current = e.currentTarget;
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -166,7 +168,7 @@ export default function RestrukturyzacjaPage() {
       const res = await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, phone, name, message: topic, source: "LegalFlow landing — Skontaktuj się" }),
+        body: JSON.stringify({ email, phone, name, message: topic, source: `LegalFlow landing — formularz${sourceRef.current ? ` (${sourceRef.current})` : ""}` }),
       });
       if (!res.ok) {
         let msg = "Coś poszło nie tak. Spróbuj ponownie za chwilę.";

@@ -13,7 +13,7 @@ export const aiAutomation: ServiceEntry = {
       eyebrow: "01 / AI Automation Studio",
       headline: { text: "Automation that stops your margins from", accent: "shrinking." },
       lead: "We build custom process automations powered by Claude, n8n, and Python to freeze your operational overhead. From turning messy client data into structured document drafts to building internal sales copilots, we systematically replace manual spreadsheet workarounds. Every deployment is measured against real ROI and engineered to pay for itself inside 90 days.",
-      heroCta: { label: "Find your 90-day payback slot", href: "/book" },
+      heroCta: { label: "Find your 90-day payback slot", href: "/book?z=ai-automation-hero" },
       sections: [
         {
           title: "What we do",
@@ -35,7 +35,7 @@ export const aiAutomation: ServiceEntry = {
       cta: {
         microCopy: "Zero license fees. 100% your code.",
         label: "Get your custom stack",
-        href: "/book",
+        href: "/book?z=ai-automation-sekcja",
       },
     },
   },
@@ -51,7 +51,7 @@ export const aiAutomation: ServiceEntry = {
       lead: "Budujemy niestandardowe automatyzacje procesów oparte na Claude, n8n i Python, aby zatrzymać wzrost kosztów operacyjnych. Od przekształcania nieuporządkowanych danych klientów w ustrukturyzowane projekty dokumentów po budowanie wewnętrznych pilotów sprzedaży, systematycznie zastępujemy ręczne obejścia arkuszy kalkulacyjnych. Każde wdrożenie jest mierzone pod kątem rzeczywistego zwrotu z inwestycji i zaprojektowane tak, aby zwróciło się w ciągu 90 dni.",
       heroCta: {
         label: "Zarezerwuj termin. Zwrot w 90 dni",
-        href: "/book",
+        href: "/book?z=ai-automation-hero",
       },
       sections: [
         {
@@ -74,7 +74,7 @@ export const aiAutomation: ServiceEntry = {
       cta: {
         microCopy: "Zero opłat licencyjnych. 100% Twój kod.",
         label: "Zbuduj swój dedykowany stack",
-        href: "/book",
+        href: "/book?z=ai-automation-sekcja",
       },
     },
   },

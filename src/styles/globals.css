@@ -2087,3 +2087,17 @@ html.js-reveal .word-reveal.visible > span {
 .contact-form--sent {
   gap: 8px;
 }
+.contact-form__field-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-style: normal;
+  color: #b3261e;
+}
+.contact-form [data-invalid="true"] input:not([type="checkbox"]),
+.contact-form [data-invalid="true"] textarea {
+  border-color: #b3261e;
+}
+.contact-form__error a {
+  text-decoration: underline;
+}
