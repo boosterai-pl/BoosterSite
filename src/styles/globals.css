@@ -13,7 +13,7 @@
   --accent: #0047ff;
   --accent-soft: rgba(0, 71, 255, 0.12);
   --radius: 14px;
-  --container: 1440px;
+  --container: 1180px;
   --pad-x: clamp(20px, 4vw, 56px);
   --reveal-dur: 0.9s;
   --reveal-translate: 28px;
@@ -149,7 +149,7 @@ img {
   inset: 0 0 auto 0;
   z-index: 100;
   /* Logo and links line up with the page content column. */
-  padding: 14px max(var(--pad-x), calc((100% - var(--nav-container, var(--container))) / 2));
+  padding: 14px max(var(--pad-x), calc((100% - var(--container)) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -579,7 +579,7 @@ img {
 /* ===== Section base ===== */
 section.block {
   position: relative;
-  padding: clamp(80px, 12vw, 180px) var(--pad-x);
+  padding: clamp(64px, 7vw, 96px) var(--pad-x);
   border-bottom: 1px solid var(--line);
 }
 section.block.light {
@@ -2563,14 +2563,11 @@ html.js-reveal .word-reveal.visible > span {
   padding-bottom: 88px;
 }
 /* Narrower column than the rest of the site, so lines and cards don't stretch on wide screens. */
-.home-page {
-  --nav-container: 1180px;
-}
 .home-page section.block.home-section .container-inner {
   max-width: 1180px;
 }
 /* Keep the call button visible from the start, so the right edge of the nav lines up with the content. */
-.home-page .nav-cta {
+.nav .nav-cta {
   opacity: 1;
   pointer-events: auto;
 }
@@ -3144,14 +3141,14 @@ html.js-reveal .word-reveal.visible > span {
   position: relative;
 }
 
-/* Home nav: logo and links on the left, language switch next to the call button on the right. */
-.home-page .nav {
+/* Nav: logo and links on the left, language switch next to the call button on the right. */
+.nav {
   justify-content: flex-start;
 }
-.home-page .nav-links {
+.nav-links {
   margin-left: 56px;
 }
-.home-page .nav .lang-switcher {
+.nav .lang-switcher {
   margin-left: auto;
   margin-right: 20px;
 }
