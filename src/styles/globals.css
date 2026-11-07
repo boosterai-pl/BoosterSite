@@ -4047,3 +4047,50 @@ h3,
     grid-template-columns: 1fr;
   }
 }
+
+/* Subpage hero: one vertical rhythm. Label, heading, lead and button are spaced evenly, the heading
+   lines sit a little looser, and the note above the button stays close to it. */
+.practice-hero .container-inner > div:first-child {
+  margin-bottom: 24px;
+}
+.practice-hero .h1 {
+  line-height: 1.04;
+}
+.practice-hero .h1 .accent-serif {
+  display: block;
+  margin-top: 4px;
+}
+.practice-hero .practice-lead {
+  margin-top: 28px;
+  max-width: 60ch;
+  line-height: 1.55;
+}
+.practice-hero .practice-hero-cta {
+  margin-top: 36px;
+}
+.practice-hero .practice-hero-cta .section-cta-micro {
+  max-width: none;
+  margin-bottom: 14px;
+}
+.pp-title {
+  margin-bottom: 36px;
+}
+.pp-card h3,
+.pp-proof-card h3,
+.pp-steps h3 {
+  margin-bottom: 0;
+}
+.pp-card p,
+.pp-steps p,
+.pp-proof-card p {
+  margin-top: 12px;
+}
+.pp-sections .practice-section h2 {
+  margin-bottom: 12px;
+}
+@media (max-width: 700px) {
+  .practice-page .practice-hero {
+    padding-top: 128px;
+    padding-bottom: 56px;
+  }
+}
