@@ -19,6 +19,11 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // /hyperos is a standalone, non-localized case study page.
+  if (pathname === "/hyperos") {
+    return NextResponse.next();
+  }
+
   return intlMiddleware(request);
 }
 
