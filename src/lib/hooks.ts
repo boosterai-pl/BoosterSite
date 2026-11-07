@@ -342,3 +342,28 @@ export function useDatafastGoals(): void {
     return () => document.removeEventListener("click", handler, { capture: true });
   }, []);
 }
+
+const AD_PARAM_RE = /^(utm_[a-z_]+|gclid|gbraid|wbraid|fbclid)$/i;
+
+/** Carries ad click parameters (utm_*, gclid, fbclid) from the landing URL onto internal links, so they reach /book. */
+export function usePreserveAdParams(): void {
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      const anchor = (e.target as HTMLElement).closest("a");
+      const href = anchor?.getAttribute("href");
+      if (!anchor || !href) return;
+      try {
+        const carry = [...new URLSearchParams(window.location.search)].filter(([k]) => AD_PARAM_RE.test(k));
+        if (carry.length === 0) return;
+        const url = new URL(href, window.location.href);
+        if (url.origin !== window.location.origin) return;
+        for (const [k, v] of carry) if (!url.searchParams.has(k)) url.searchParams.set(k, v);
+        anchor.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
+      } catch {
+        /* never break a link */
+      }
+    }
+    document.addEventListener("click", handler, { capture: true });
+    return () => document.removeEventListener("click", handler, { capture: true });
+  }, []);
+}

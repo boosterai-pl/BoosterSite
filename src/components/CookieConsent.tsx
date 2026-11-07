@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { initGA4 } from "@/lib/analytics";
+import { CONSENT_STORAGE_KEY, initMetaPixel, revokeMetaPixel, updateGoogleConsent } from "@/lib/ads";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -15,7 +16,7 @@ type ConsentState = {
 
 type View = "banner" | "settings" | "hidden";
 
-const STORAGE_KEY = "booster-cookie-consent";
+const STORAGE_KEY = CONSENT_STORAGE_KEY;
 const EXIT_DURATION = 350; // ms — matches CSS animation
 
 /* ------------------------------------------------------------------ */
@@ -42,14 +43,15 @@ function writeConsent(state: ConsentState): void {
 /* ------------------------------------------------------------------ */
 
 function loadConsentScripts(consent: ConsentState): void {
+  updateGoogleConsent(consent.analytics, consent.marketing);
+
   if (consent.analytics) {
     const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
     if (gaId) initGA4(gaId);
   }
 
-  if (consent.marketing) {
-    // TODO: inject Facebook Pixel / Google Ads when ready
-  }
+  if (consent.marketing) initMetaPixel();
+  else revokeMetaPixel();
 }
 
 /* ------------------------------------------------------------------ */
@@ -174,6 +176,7 @@ export function CookieConsent({ locale = "pl" }: { locale?: Locale }) {
     setAnalytics(false);
     setMarketing(false);
     setHasSavedConsent(true);
+    loadConsentScripts(state);
     dismiss();
   }, [dismiss]);
 

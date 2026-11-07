@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ContactFormCopy } from "@/content/types";
+import { trackLeadConversion } from "@/lib/ads";
 
 type Props = { copy: ContactFormCopy; source: string; defaultDialCode?: string };
 type Field = "email" | "phone" | "topic" | "consent";
@@ -90,6 +91,7 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
       setEcho(email);
       setStatus("sent");
       track("form_success");
+      trackLeadConversion();
     } catch (err) {
       setStatus("idle");
       setFailed(true);

@@ -40,23 +40,26 @@ export function initGA4(id: string): void {
 
   measurementId = id;
 
-  // dataLayer + gtag shim
+  // dataLayer + gtag shim; the layout head already defines them for the Google Ads tag.
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    // eslint-disable-next-line prefer-rest-params
-    window.dataLayer.push(arguments);
-  } as GtagFn;
-
-  window.gtag("js", new Date());
+  if (!window.gtag) {
+    window.gtag = function gtag(...args: unknown[]) {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
+    } as GtagFn;
+    window.gtag("js", new Date());
+  }
   window.gtag("config", measurementId, {
     send_page_view: true,
   });
 
-  // Inject script tag
-  const script = document.createElement("script");
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-  script.async = true;
-  document.head.appendChild(script);
+  // gtag.js is already loaded by the layout head (for the Google Ads tag); a second copy is not needed.
+  if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+    const script = document.createElement("script");
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    script.async = true;
+    document.head.appendChild(script);
+  }
 
   ga4Loaded = true;
 }
