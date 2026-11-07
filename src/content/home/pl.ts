@@ -22,7 +22,7 @@ export const homePl: HomeCopy = {
   home: {
     hero: {
       eyebrow: "Transformacja AI od A do Z",
-      headline: { text: "Firma kilka razy większa.", accent: "Tym samym zespołem." },
+      headline: { text: "Boostujemy firmy z AI.", accent: "Od pierwszego procesu do całej firmy." },
       lead: "Stawiamy AI w centrum Twojej firmy. Porządkujemy procesy, automatyzujemy powtarzalną pracę i budujemy nowe usługi, żeby firma mogła rosnąć szybciej, niż rośnie zespół. Prowadzimy przez całą transformację, etapami i ze stałą ceną każdego etapu.",
       primaryCta: { label: "Umów bezpłatną rozmowę", href: "/book?z=hero" },
       secondaryCta: { label: "Zobacz, jak to wygląda w praktyce", href: "#work" },

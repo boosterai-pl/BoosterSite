@@ -22,7 +22,7 @@ export const homeEn: HomeCopy = {
   home: {
     hero: {
       eyebrow: "AI transformation, end to end",
-      headline: { text: "A company several times bigger.", accent: "With the same team." },
+      headline: { text: "We boost companies with AI.", accent: "From the first process to the whole company." },
       lead: "We put AI at the centre of your company. We bring order to processes, automate repetitive work and build new services, so the business can grow faster than the headcount. We take you through the whole transformation, in stages, with a fixed price for each stage.",
       primaryCta: { label: "Book a free call", href: "/book?z=hero" },
       secondaryCta: { label: "See what it looks like in practice", href: "#work" },
