@@ -8,10 +8,9 @@ export default function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
   const { pathname } = request.nextUrl;
 
-  // Route the LegalFlow subdomain directly to the /restrukturyzacja page,
-  // bypassing locale routing entirely.
+  // The LegalFlow subdomain now lives at legal-flow.pl.
   if (host === "restrukturyzacja.boosterai.pl") {
-    return NextResponse.rewrite(new URL("/restrukturyzacja", request.url));
+    return NextResponse.redirect("https://legal-flow.pl", 308);
   }
 
   // The /restrukturyzacja route is a standalone, non-localized page — skip

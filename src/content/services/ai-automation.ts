@@ -24,10 +24,6 @@ export const aiAutomation: ServiceEntry = {
           body: "We start with a process audit, not a slide deck, but a live working session. We find the problem areas, clean your messy data first, and build directly on your production servers. A working version is ready within weeks, so your team can test it with real data from day one while we track time saved and reduce errors.",
         },
         {
-          title: "Proof it works",
-          body: "Kancelaria Jabłońska eliminated hours of daily spreadsheet chaos by connecting n8n, Claude, and Python into a single automation layer. Document tracking, removing duplicate records, and case routing now run smoothly in the background, paying for the system within the very first month.",
-        },
-        {
           title: "What you get",
           body: "Full Control: Custom workflows built on your own servers or cloud with zero license fees and no platform lock-in. System Integration: Clean connections with your existing tools: email, CRM, ERP, and data storage. Human Oversight: A simple dashboard built for your team to monitor the system and approve actions. 100% Code Ownership: You own the code completely, we train your team, and we track your real ROI from day one.",
         },
@@ -61,10 +57,6 @@ export const aiAutomation: ServiceEntry = {
         {
           title: "Jak to działa",
           body: "Zaczynamy od audytu procesu, a nie od prezentacji slajdów, tylko od sesji roboczej na żywo. Znajdujemy problematyczne obszary, najpierw czyścimy Twoje nieuporządkowane dane, a następnie budujemy bezpośrednio na Twoich serwerach produkcyjnych. Działająca wersja jest gotowa w ciągu kilku tygodni, więc Twój zespół może ją testować z rzeczywistymi danymi od pierwszego dnia, podczas gdy my śledzimy zaoszczędzony czas i redukujemy błędy.",
-        },
-        {
-          title: "Dowód, że to działa",
-          body: "Kancelaria Jabłońska wyeliminowała godziny codziennego chaosu w arkuszach kalkulacyjnych, łącząc n8n, Claude i Python w jedną warstwę automatyzacji. Śledzenie dokumentów, usuwanie zduplikowanych rekordów i routing spraw działają teraz płynnie w tle, spłacając system w ciągu pierwszego miesiąca.",
         },
         {
           title: "Co otrzymujesz",

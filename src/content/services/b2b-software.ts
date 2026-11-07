@@ -29,7 +29,7 @@ export const b2bSoftware: ServiceEntry = {
         },
         {
           title: "Proof it works",
-          body: "OOH Manager: Automated 7 out of 9 sales steps for a media network with 40,000+ billboard locations. Smashed proposal creation times from 7 days of digging through 5 separate Excels down to 30 minutes. Shipped in 6 weeks. Legal Flow: Automates high-stakes document workflows for restructuring proceedings, transforming 1-hour audio interviews into fully structured legal drafts. Municipal Application: A license-free, open-source B2G product line for Polish local governments, built to eliminate expensive vendor lock-in.",
+          body: "Sales proposals for a large media company: preparing an offer used to mean collecting data by hand from many places, now it is automated. LegalFlow: Automates high-stakes document workflows for restructuring proceedings, transforming 1-hour audio interviews into fully structured legal drafts. Municipal Application: A license-free, open-source B2G product line for Polish local governments, built to eliminate expensive vendor lock-in.",
         },
         {
           title: "What you get",
@@ -46,7 +46,7 @@ export const b2bSoftware: ServiceEntry = {
   pl: {
     card: {
       title: "Kompleksowe oprogramowanie B2B",
-      description: "Produkty niestandardowe budowane od podstaw. OOH Manager, Legal Flow do restrukturyzacji i aplikacje dla samorządów: pełen stos, Twoja własność intelektualna.",
+      description: "Produkty niestandardowe budowane od podstaw. LegalFlow do restrukturyzacji i aplikacje dla samorządów: pełen stos, Twoja własność intelektualna.",
       tags: ["React", "Node", "TypeScript", "Postgres", "Agenci AI", "Chmura"],
     },
     page: {
@@ -72,7 +72,7 @@ export const b2bSoftware: ServiceEntry = {
         },
         {
           title: "Dowód, że to działa",
-          body: "OOH Manager: Zautomatyzowane 7 z 9 kroków sprzedaży dla sieci medialnej z ponad 40 000 lokalizacji billboardów. Zredukowano czas tworzenia propozycji z 7 dni przeszukiwania 5 oddzielnych arkuszy Excel do 30 minut. Wdrożono w 6 tygodni. Legal Flow: Automatyzuje przepływy pracy z dokumentami wysokiej stawki dla postępowań restrukturyzacyjnych, przekształcając godzinne wywiady audio w w pełni ustrukturyzowane projekty prawne. Aplikacja dla Samorządów: Linia produktów B2G open-source bez licencji dla polskich samorządów lokalnych, zbudowana w celu wyeliminowania kosztownej blokady ze strony dostawcy.",
+          body: "Oferty handlowe dla dużej firmy z branży mediowej: przygotowanie oferty wymagało ręcznego zbierania danych z wielu miejsc, teraz jest zautomatyzowane. LegalFlow: Automatyzuje przepływy pracy z dokumentami wysokiej stawki dla postępowań restrukturyzacyjnych, przekształcając godzinne wywiady audio w w pełni ustrukturyzowane projekty prawne. Aplikacja dla Samorządów: Linia produktów B2G open-source bez licencji dla polskich samorządów lokalnych, zbudowana w celu wyeliminowania kosztownej blokady ze strony dostawcy.",
         },
         {
           title: "Co otrzymujesz",
