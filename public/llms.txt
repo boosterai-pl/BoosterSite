@@ -1,6 +1,6 @@
-# Booster — company transformation with AI
+# Booster — AI transformation, end to end
 
-> Booster helps mid-sized B2B companies (50–300 people) move from scattered AI use, where every employee has their own chatbot, to one system the whole company works on: shared data, ordered processes and AI agents working on company data. We build on Open Mercato, an open-source framework for business systems, and work in stages with a fixed price for each stage. The code and the data stay with the client. Based in Wrocław, Poland.
+> Booster takes mid-sized B2B companies (50–300 people) through the whole AI transformation, from start to finish. We put AI at the centre of the company: ordered processes, shared data, automated repetitive work and new services, so the company can grow much faster than its team. We build on Open Mercato, an open-source framework for business systems, and work in stages with a fixed price for each stage. The code and the data stay with the client. Based in Wrocław, Poland.
 
 - After the first call the client gets a staged plan with the price of the first stage
 - No per-user fees; the code is open, so another team could continue without us
