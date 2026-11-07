@@ -14,58 +14,19 @@ export type Localized<T> = {
 
 export type SiteMeta = {
   readonly brand: string;
-  readonly tagline: string;
   readonly contactEmail: string;
-  readonly establishedLine: string;
-  readonly version: string;
 };
 
 export type NavLink = {
   readonly label: string;
   readonly href: string;
-};
-
-export type SpeedHeadline = {
-  readonly line1: string;
-  readonly strikeText: string;
-  readonly accentText: string;
-  readonly line3: string;
-};
-
-export type HeroContent = {
-  readonly eyebrow: string;
-  readonly establishedLabel: string;
-  readonly headline: HeadlineLine;
-  readonly lead: string;
-  readonly primaryCta: { readonly label: string; readonly href: string };
-  readonly secondaryCta: { readonly label: string; readonly href: string };
-  readonly meta: readonly HeroMetaCell[];
+  // Shown as a dropdown under the link on hover / focus.
+  readonly children?: readonly { readonly label: string; readonly href: string }[];
 };
 
 export type HeadlineLine = {
   readonly text: string;
   readonly accent?: string;
-};
-
-export type HeroMetaLogo = {
-  readonly name: string;
-  readonly component: string; // key matching BrandLogos export
-};
-
-export type HeroMetaCell = {
-  readonly label: string;
-  readonly value: string;
-  readonly logos?: readonly HeroMetaLogo[];
-};
-
-export type MarqueeItem = {
-  readonly label: string;
-};
-
-export type ManifestoEntry = {
-  readonly id: string;
-  readonly title: string;
-  readonly body: string;
 };
 
 export type Service = {
@@ -97,42 +58,96 @@ export type PracticeContent = {
   readonly cta: SectionCta;
 };
 
-export type CaseStudy = {
-  readonly id: string;
-  readonly title: string;
-  readonly description: string;
-  readonly tags: readonly string[];
-};
-
-export type Stat = {
-  readonly value: string;
-  readonly suffix?: string;
-  readonly label: string;
-};
-
-export type ProcessStep = {
-  readonly id: string;
-  readonly title: string;
-  readonly description: string;
-};
-
-export type Partner = {
-  readonly name: string;
-  readonly role: string;
-};
-
 export type TeamMember = {
   readonly id: string;
   readonly name: string;
   readonly role: string;
+  /** One plain sentence about what the person does day to day. */
+  readonly bio: string;
   readonly photo: string;
+  /** Full LinkedIn profile URL, shown as a link under the person. */
+  readonly linkedin?: string;
 };
 
-export type Insight = {
+/** One case on the home page ("Realizacje"). Optional parts are simply not rendered. */
+export type CaseStudy = {
   readonly id: string;
-  readonly category: string;
-  readonly date: string;
+  /** Small label above the title, e.g. "Nasz produkt", "Wdrożenie u klienta". */
+  readonly kind: string;
   readonly title: string;
+  /** Type of company: industry and size. */
+  readonly company: string;
+  /** One or two sentences: what we did. */
+  readonly summary: string;
+  /** Results shown large. `label` is optional for short qualitative results. */
+  readonly metrics: readonly { readonly value: string; readonly label?: string }[];
+  /** Screens of the product, with links (used by the featured card). */
+  readonly products?: readonly {
+    readonly title: string;
+    readonly text: string;
+    readonly image: { readonly src: string; readonly alt: string };
+    readonly link: { readonly label: string; readonly href: string };
+  }[];
+  readonly link?: { readonly label: string; readonly href: string };
+  /** The large card at the top of the section. */
+  readonly featured?: boolean;
+};
+export type TitledText = { readonly title: string; readonly body: string };
+
+type HomeSection = {
+  readonly eyebrow: string;
+  readonly headline: HeadlineLine;
+};
+
+/** Copy of the home page sections, in display order. */
+export type HomeLanding = {
+  readonly hero: {
+    readonly eyebrow: string;
+    readonly headline: HeadlineLine;
+    readonly lead: string;
+    readonly primaryCta: { readonly label: string; readonly href: string };
+    readonly secondaryCta: { readonly label: string; readonly href: string };
+    /** Illustrative growth chart next to the headline (no real data, no numbers). */
+    readonly chart: {
+      readonly title: string;
+      readonly legend: { readonly scale: string; readonly team: string };
+      readonly steps: readonly { readonly title: string; readonly note?: string }[];
+    };
+  };
+  /** Short "talk to us" strips shown between sections, in this order: after stages, cases, process and data. */
+  readonly contactStrips: readonly { readonly text: string; readonly label: string; readonly href: string }[];
+  /** Three short, true facts under the hero. */
+  readonly facts: readonly { readonly value: string; readonly label: string }[];
+  readonly pain: HomeSection & { readonly items: readonly string[]; readonly closing: string };
+  readonly stages: HomeSection & {
+    readonly items: readonly (TitledText & { readonly note?: string })[];
+    readonly footnote: string;
+  };
+  readonly cases: HomeSection & {
+  };
+  readonly foundation: HomeSection & {
+    readonly body: string;
+    readonly points: readonly TitledText[];
+    readonly partners: { readonly intro: string; readonly tools: readonly string[] };
+  };
+  readonly process: HomeSection & {
+    readonly steps: readonly TitledText[];
+    readonly principlesTitle: string;
+    readonly principles: readonly string[];
+  };
+  readonly data: HomeSection & {
+    readonly lead: string;
+    readonly points: readonly TitledText[];
+    readonly modelsLabel: string;
+  };
+  readonly notFor: HomeSection & { readonly items: readonly string[]; readonly closing: string };
+  readonly team: HomeSection & { readonly body: string };
+  readonly services: HomeSection & { readonly body: string };
+  readonly faq: HomeSection & { readonly items: readonly { readonly q: string; readonly a: string }[] };
+  readonly cta: HomeSection & {
+    readonly body: string;
+    readonly button: { readonly label: string; readonly href: string };
+  };
 };
 
 export type FooterColumn = {
@@ -171,8 +186,69 @@ export type JobRole = {
   readonly applyUrl: string;
 };
 
-export type BookingContent = {
-  readonly calUrl: string;
+export type ContactFormCopy = {
+  readonly emailLabel: string;
+  readonly phoneLabel: string;
+  readonly topicLabel: string;
+  readonly topicPlaceholder: string;
+  readonly consent: string;
+  readonly privacyLabel: string;
+  readonly privacyHref: string;
+  readonly honeypotLabel: string;
+  readonly submit: string;
+  readonly submitting: string;
+  readonly footnote: string;
+  readonly invalidEmail: string;
+  readonly invalidPhone: string;
+  readonly requiredField: string;
+  readonly missingConsent: string;
+  readonly sent: string;
+  readonly errorTitle: string;
+  readonly errorBody: string;
+  readonly mailtoLabel: string;
+  readonly mailtoAddress: string;
+  readonly mailtoSubject: string;
+  readonly successEcho: string;
+  readonly successTitle: string;
+  readonly successBody: string;
+  readonly requiredNote: string;
+  readonly formTitle: string;
+  readonly hints: {
+    readonly email: string;
+    readonly phone: string;
+    readonly topic: string;
+    readonly consent: string;
+  };
+};
+
+export type BookingStep = { readonly title: string; readonly body: string };
+
+export type BookingSection = { readonly eyebrow: string; readonly headline: HeadlineLine };
+
+export type BookingExtras = {
+  readonly points: readonly string[];
+  /** Small LegalFlow case next to the form. */
+  readonly proof: {
+    readonly kind: string;
+    readonly title: string;
+    readonly body: string;
+    readonly link: { readonly label: string; readonly href: string };
+  };
+  /** Alternative to leaving a phone number: pick a slot in the calendar. */
+  readonly calendar: { readonly text: string; readonly label: string; readonly href: string };
+  readonly trustLabel: string;
+  readonly starters: BookingSection & { readonly items: readonly string[]; readonly hint: string };
+  readonly steps: BookingSection & { readonly imageAlt: string; readonly items: readonly BookingStep[] };
+  readonly outcomes: BookingSection & { readonly items: readonly BookingStep[] };
+  readonly team: BookingSection & { readonly body: string };
+  readonly faq: BookingSection & {
+    readonly items: readonly { readonly q: string; readonly a: string }[];
+  };
+  readonly finalCta: BookingSection & { readonly body: string; readonly label: string };
+};
+
+export type BookingContent = BookingExtras & {
+  readonly form: ContactFormCopy;
   readonly eyebrow: string;
   readonly headline: HeadlineLine;
   readonly body: string;
@@ -182,62 +258,18 @@ export type SiteContent = {
   readonly meta: SiteMeta;
   readonly nav: readonly NavLink[];
   readonly navCta: { readonly label: string; readonly href: string };
-  readonly hero: HeroContent;
-  readonly marquee: readonly MarqueeItem[];
-  readonly manifesto: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly entries: readonly ManifestoEntry[];
-    readonly cta?: SectionCta;
-  };
-  readonly services: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly items: readonly Service[];
-  };
-  readonly cases: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly items: readonly CaseStudy[];
-    readonly cta?: SectionCta;
-  };
-  readonly speed: {
-    readonly eyebrow: string;
-    readonly headline: SpeedHeadline;
-    readonly stats: readonly Stat[];
-  };
-  readonly process: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly steps: readonly ProcessStep[];
-    readonly cta?: SectionCta;
-  };
-  readonly partners: {
-    readonly eyebrow: string;
-    readonly items: readonly Partner[];
-  };
-  readonly team: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly members: readonly TeamMember[];
-  };
-  readonly insights: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly posts: readonly Insight[];
-  };
-  readonly cta: {
-    readonly eyebrow: string;
-    readonly headline: HeadlineLine;
-    readonly body: string;
-    readonly button: { readonly label: string; readonly href: string };
-  };
+  readonly home: HomeLanding;
+  readonly services: readonly Service[];
+  readonly cases: readonly CaseStudy[];
+  readonly team: readonly TeamMember[];
   readonly footer: {
     readonly intro: string;
     readonly columns: readonly FooterColumn[];
     readonly bottom: readonly string[];
   };
   readonly practices: readonly PracticeContent[];
+  /** The /work/legalflow page. */
+  readonly legalflow: PracticePage;
   readonly booking: BookingContent;
 };
 
@@ -245,17 +277,8 @@ export type SiteContent = {
 // Source-file types (what you edit in src/content/)
 // ---------------------------------------------------------------------------
 
-type Section = {
-  readonly eyebrow: string;
-  readonly headline: HeadlineLine;
-};
-
 /** Everything in src/content/home/en.ts and src/content/home/pl.ts. */
-export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices"> & {
-  readonly services: Section;
-  readonly cases: Section & { readonly cta?: SectionCta };
-  readonly team: Section;
-};
+export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices" | "legalflow">;
 
 export type ServiceCard = {
   readonly title: string;
@@ -274,16 +297,15 @@ export type ServiceEntry = {
 };
 
 /** One item in src/content/case-studies.ts. */
-export type CaseStudyEntry = Localized<{
-  readonly title: string;
-  readonly description: string;
-  readonly tags: readonly string[];
-}>;
+export type CaseStudyEntry = Localized<Omit<CaseStudy, "id" | "featured">> & { readonly featured?: boolean };
 
 /** One item in src/content/team.ts. */
 export type TeamMemberEntry = {
   readonly name: string;
   /** Path under public/, e.g. "/assets/team/jan-kowalski.jpg". */
   readonly photo: string;
+  /** Full LinkedIn profile URL, shown as a link under the person. */
+  readonly linkedin?: string;
   readonly role: Localized<string>;
+  readonly bio: Localized<string>;
 };

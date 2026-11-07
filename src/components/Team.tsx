@@ -2,41 +2,31 @@ import Image from "next/image";
 import type { SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
 
-type Props = { content: SiteContent["team"] };
+type Props = { content: SiteContent["home"]["team"]; members: SiteContent["team"] };
 
-function MemberCard({ member }: { member: SiteContent["team"]["members"][number] }) {
+export function Team({ content, members }: Props) {
   return (
-    <div className="team-card">
-      <div className="team-photo">
-        {member.photo ? (
-          <Image
-            src={member.photo}
-            alt={member.name}
-            width={400}
-            height={400}
-            sizes="(max-width: 768px) 50vw, 20vw"
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          />
-        ) : null}
-      </div>
-      <div className="team-card-info">
-        <div className="team-card-index mono">{member.id}</div>
-        <h4>{member.name}</h4>
-        <div className="role">{member.role}</div>
-      </div>
-    </div>
-  );
-}
-
-export function Team({ content }: Props) {
-  return (
-    <section className="block light" id="team">
+    <section className="block light home-section" id="team">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
-
-        <div className="team-grid" data-reveal-stagger>
-          {content.members.map((member) => (
-            <MemberCard key={member.id} member={member} />
+        <p className="lead home-lead" data-reveal>
+          {content.body}
+        </p>
+        <div className="people" data-reveal-stagger>
+          {members.map((member) => (
+            <div className="person" key={member.id}>
+              <div className="person-photo">
+                <Image src={member.photo} alt={member.name} width={480} height={480} sizes="(max-width: 700px) 50vw, 20vw" />
+              </div>
+              <h3>{member.name}</h3>
+              <p className="person-role mono">{member.role}</p>
+              <p className="person-bio">{member.bio}</p>
+              {member.linkedin ? (
+                <a href={member.linkedin} className="person-linkedin" target="_blank" rel="noopener noreferrer">
+                  LinkedIn <span className="arrow">↗</span>
+                </a>
+              ) : null}
+            </div>
           ))}
         </div>
       </div>

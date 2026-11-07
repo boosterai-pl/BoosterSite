@@ -2,7 +2,6 @@
 
 import {
   useReveal,
-  useCursorBlob,
   useClickTracking,
   useSectionTracking,
   useEngagementTime,
@@ -13,6 +12,5 @@ export function SiteRuntime() {
   useClickTracking();
   useSectionTracking();
   useEngagementTime();
-  const blobRef = useCursorBlob(true);
-  return <div ref={blobRef} className="cursor-blob" aria-hidden />;
+  return null;
 }

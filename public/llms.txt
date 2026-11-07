@@ -1,41 +1,37 @@
-# Booster — AI-Native Service Agency
+# Booster — AI transformation, end to end
 
-> Booster is an AI-native service agency based in Warsaw, Poland. We build autonomous AI infrastructure for complex B2B operations — CRM implementation, open-source ERP, custom B2B software, and AI automation. End-to-end solutions shipped in six weeks, not twelve months.
+> Booster takes mid-sized B2B companies (50–300 people) through the whole AI transformation, from start to finish. We put AI at the centre of the company: ordered processes, shared data, automated repetitive work and new services, so the company can grow much faster than its team. We build on Open Mercato, an open-source framework for business systems, and work in stages with a fixed price for each stage. The code and the data stay with the client. Based in Wrocław, Poland.
 
-- Founded in 2025, Warsaw-based, serving clients worldwide
-- Four-person engineering team with 10x velocity via AI-native tooling (Claude, n8n, Python)
-- Certified CRM partners: Monday, ClickUp, Pipedrive, Tilio
-- Open-source ERP deployment via Open Mercato — zero license fees, zero vendor lock-in
+- After the first call the client gets a staged plan with the price of the first stage
+- No per-user fees; the code is open, so another team could continue without us
+- Systems run on the client's servers or in the cloud, on leading AI models or on open models such as Bielik
+- We also implement on Monday, ClickUp and Pipedrive
 - Contact: hello@boosterai.pl
-- Book a free 30-min consultation: https://cal.com/szymon-bazan-iahn2z
+- Book a free call: https://boosterai.pl/en/book (Polish: https://boosterai.pl/pl/book)
 
 ## Services
 
-- [AI Automation Studio](https://boosterai.pl/practices/ai-automation): Process automations powered by Claude, n8n and Python. Document workflows, internal copilots, measurable ROI in 90 days.
-- [End-to-end B2B Software](https://boosterai.pl/practices/b2b-software): Custom products built ground-up (React, Node, Python). Full stack, cloud-native, 100% your IP. Shipped in weeks, not months.
-- [CRM Implementation & Automation](https://boosterai.pl/practices/crm-implementation): Boxed CRM stacks for Monday, ClickUp, Pipedrive, Tilio — configured, integrated, and automated for your sales motion.
-- [Open-source ERP & CRM](https://boosterai.pl/practices/open-source-erp): Open Mercato deployed on your infrastructure — enterprise power with zero per-seat pricing and full code ownership.
+- [AI automation](https://boosterai.pl/en/practices/ai-automation): Automating repetitive processes on the company's own data, data first, AI second.
+- [Custom B2B software](https://boosterai.pl/en/practices/b2b-software): Software built for one company's process, with the code owned by the client.
+- [CRM implementation](https://boosterai.pl/en/practices/crm-implementation): CRM set up around how the sales team actually works.
+- [ERP and CRM on Open Mercato](https://boosterai.pl/en/practices/open-source-erp): An open-source company system without per-user fees.
 
-## Case Studies
+## Work
 
-- [Sales proposal automation](https://boosterai.pl/#work): A large media company. We automated the preparation of sales proposals, which used to mean collecting data by hand from many places.
-- [Legal Flow — Restructuring](https://boosterai.pl/#work): AI engine transforms 1-hour audio client interviews into fully structured legal drafts, saving hundreds of billable hours per case.
-- [Municipal Application](https://boosterai.pl/#work): License-free, open-source B2G product line for Polish local governments, replacing expensive vendor lock-in with weeks-not-quarters deployment.
-
-## Process
-
-- [How We Work](https://boosterai.pl/#process): Four-stage delivery in six weeks — Map (strategic workshop and roadmap), Cleanse (data structuring and deduplication), Deploy (production-first from week three), Own (full code handover with zero lock-in).
+- [LegalFlow](https://boosterai.pl/en/work/legalflow): Our own platform for Polish restructuring law firms, in production. Up to 70% less administrative work.
+- [Certificates for posted workers](https://boosterai.pl/en#work): A group of four construction companies. Monthly certificate data for about 300 workers is now one click plus checking exceptions; 99.8% match with manual work on historical data.
+- [AI agent that finds new clients](https://boosterai.pl/en#work): An engineering contractor. An AI agent suggests potential clients to the sales team.
+- [Sales proposal automation](https://boosterai.pl/en#work): A large media company. Preparing sales proposals is automated.
 
 ## Team
 
-- [Szymon Bazan](https://boosterai.pl/#about): Founder and Sales
-- [Andrzej Chmielewski](https://boosterai.pl/#about): Brand and Operations
-- [Grzegorz Jaworek](https://boosterai.pl/#about): Head of Delivery
-- [Wojciech Kozak](https://boosterai.pl/#about): Engineering and Products
-- [Wiktor Weremczuk](https://boosterai.pl/#about): Engineering and Web
+- [Szymon Bazan](https://boosterai.pl/en#team): Founder, CEO
+- [Andrzej Chmielewski](https://boosterai.pl/en#team): Co-founder, CTO
+- [Grzegorz Jaworek](https://boosterai.pl/en#team): Head of Delivery
+- [Wojciech Kozak](https://boosterai.pl/en#team): Full-stack engineer
+- [Wiktor Weremczuk](https://boosterai.pl/en#team): Head of DACH
 
 ## Optional
 
 - [LinkedIn](https://www.linkedin.com/company/boosterai-en/): Company LinkedIn page
-- [Blog](https://boosterai.pl/blog): Field notes from the build — insights on AI-native delivery, open-source ERP, and B2B operations
-- [Book a Consultation](https://boosterai.pl/book): Free 30-minute consultation with the Founder — we come back with a six-week plan, a fixed price, and a first demo in two weeks
+- [Polish version](https://boosterai.pl/pl): The full site in Polish

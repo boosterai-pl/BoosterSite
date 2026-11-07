@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { loadSite, getPractice, getPracticeSlugs } from "@/content";
-import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
+import { toSiteLocale, localeHrefPrefix, localeAlternates } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
@@ -33,12 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | ${t("metaBrand")}`,
     description: practice.lead,
     alternates: {
-      canonical: url,
-      languages: {
-        en: `https://boosterai.pl/practices/${slug}`,
-        pl: `https://boosterai.pl/pl/practices/${slug}`,
-        "x-default": `https://boosterai.pl/practices/${slug}`,
-      },
+      ...localeAlternates(locale, `/practices/${slug}`),
     },
     openGraph: {
       title: `${(practice.eyebrow ?? "").split(" / ")[1] ?? title} | Booster`,
@@ -74,7 +69,7 @@ export default async function PracticePage({ params }: Props) {
         "@type": "ListItem",
         position: 2,
         name: t("breadcrumbServices"),
-        item: `https://boosterai.pl${prefix ? `${prefix}#services` : "/#services"}`,
+        item: `https://boosterai.pl${prefix}#services`,
       },
       {
         "@type": "ListItem",
@@ -93,7 +88,7 @@ export default async function PracticePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
       />
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix} />
       <main>
         <section className="block light practice-hero">
           <div className="container-inner">

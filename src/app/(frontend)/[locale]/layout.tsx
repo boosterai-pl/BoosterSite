@@ -5,6 +5,7 @@ import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { localeAlternates } from "@/i18n/locale";
 import "@/styles/globals.css";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
@@ -25,21 +26,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "layout" });
-  const canonical =
-    locale === "pl" ? "https://boosterai.pl/pl" : "https://boosterai.pl";
 
   return {
     title: t("title"),
     description: t("description"),
     metadataBase: new URL("https://boosterai.pl"),
-    alternates: {
-      canonical,
-      languages: {
-        en: "https://boosterai.pl",
-        pl: "https://boosterai.pl/pl",
-        "x-default": "https://boosterai.pl",
-      },
-    },
+    alternates: localeAlternates(locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),

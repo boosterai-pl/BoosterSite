@@ -1659,7 +1659,8 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .lf .form-field input {
+  .lf .form-field input,
+  .lf .form-field textarea {
     width: 100%; padding: 14px 16px;
     background: var(--ink);
     border: 1px solid var(--line);
@@ -1667,13 +1668,15 @@
     font-size: 15px; font-family: "Geist", sans-serif; color: var(--paper);
     transition: border-color .15s, box-shadow .15s, background .15s;
   }
-  .lf .form-field input:focus {
+  .lf .form-field input:focus,
+  .lf .form-field textarea:focus {
     outline: none;
     border-color: var(--accent);
     background: var(--ink-2);
     box-shadow: 0 0 0 3px var(--accent-soft);
   }
-  .lf .form-field input::placeholder { color: rgba(255,255,255,.3); }
+  .lf .form-field textarea { resize: vertical; }
+  .lf .form-field input::placeholder, .lf .form-field textarea::placeholder { color: rgba(255,255,255,.3); }
   .lf .form-consent {
     font-size: 12px;
     color: var(--muted);

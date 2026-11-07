@@ -2,20 +2,21 @@ import { setRequestLocale } from "next-intl/server";
 import { loadSite } from "@/content";
 import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
-import { Manifesto } from "@/components/Manifesto";
-import { Services } from "@/components/Services";
+import { HomeHero } from "@/components/HomeHero";
+import { Pain } from "@/components/Pain";
+import { Stages } from "@/components/Stages";
 import { Cases } from "@/components/Cases";
-import { Speed } from "@/components/Speed";
+import { Foundation } from "@/components/Foundation";
 import { Process } from "@/components/Process";
-import { Partners } from "@/components/Partners";
+import { DataControl } from "@/components/DataControl";
+import { NotFor } from "@/components/NotFor";
 import { Team } from "@/components/Team";
-// import { Insights } from "@/components/Insights"; // TODO: restore when insights section is ready
+import { Services } from "@/components/Services";
+import { Faq } from "@/components/Faq";
 import { CTA } from "@/components/CTA";
+import { InlineCta } from "@/components/InlineCta";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
-
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,25 +25,31 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
   const prefix = localeHrefPrefix(locale);
   const site = loadSite(toSiteLocale(locale));
+  const { home } = site;
 
   return (
-    <>
+    <div className="home-page">
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "#top"} />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix} />
       <main>
-        <Hero content={site.hero} />
-        <Marquee items={site.marquee} />
-        <Manifesto content={site.manifesto} />
-        <Services content={site.services} basePath={`${prefix}/practices`} />
-        <Cases content={site.cases} />
-        <Speed content={site.speed} />
-        <Process content={site.process} />
-        <Partners content={site.partners} />
-        <Team content={site.team} />
-        {/* <Insights content={site.insights} /> */}
-        <CTA content={site.cta} />
+        <HomeHero content={home.hero} facts={home.facts} />
+        <Pain content={home.pain} />
+        <Stages content={home.stages} />
+        <InlineCta content={home.contactStrips[0]} />
+        <Cases content={home.cases} items={site.cases} />
+        <InlineCta content={home.contactStrips[1]} />
+        <Foundation content={home.foundation} />
+        <Process content={home.process} />
+        <InlineCta content={home.contactStrips[2]} />
+        <DataControl content={home.data} />
+        <InlineCta content={home.contactStrips[3]} />
+        <NotFor content={home.notFor} />
+        <Team content={home.team} members={site.team} />
+        <Services content={home.services} items={site.services} basePath={`${prefix}/practices`} />
+        <Faq content={home.faq} />
+        <CTA content={home.cta} />
       </main>
       <Footer brand={site.meta.brand} content={site.footer} />
-    </>
+    </div>
   );
 }
