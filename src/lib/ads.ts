@@ -8,8 +8,8 @@ export const GOOGLE_ADS_ID = "AW-18511091888";
 export const GOOGLE_ADS_FORM_CONVERSION = `${GOOGLE_ADS_ID}/2WFYCNCCkbQdELCx4_pE`;
 export const CONSENT_STORAGE_KEY = "booster-cookie-consent";
 
-// Set in Vercel. Empty = Meta Pixel stays off (no script, no events).
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
+// "Booster AI - Pixel". A pixel ID is public. NEXT_PUBLIC_META_PIXEL_ID overrides it; set it empty to turn the pixel off.
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "1871005757257441";
 
 type Fbq = {
   (...args: unknown[]): void;
