@@ -33,7 +33,7 @@ export const b2bSoftware: ServiceEntry = {
         },
         {
           title: "What we have built",
-          body: "LegalFlow is our own platform for Polish restructuring law firms, running in production. It prepares case documentation from the firm's templates, handles communication with creditors and tracks deadlines. A one-hour client conversation becomes a structured draft. Firms get up to 70% less administrative work and handle more cases with the same team. We have also built a prototype application for local governments.",
+          body: "LegalFlow is a platform for Polish restructuring law firms, running in production. It prepares case documentation from the firm's templates, handles communication with creditors and tracks deadlines. A one-hour client conversation becomes a structured draft. Firms get up to 70% less administrative work and handle more cases with the same team. We have also built a prototype application for local governments.",
         },
         {
           title: "Who this is for",
@@ -80,7 +80,7 @@ export const b2bSoftware: ServiceEntry = {
         },
         {
           title: "Co zbudowaliśmy",
-          body: "LegalFlow to nasza własna platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Przygotowuje dokumentację spraw na wzorach kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Godzinną rozmowę z klientem zamienia w uporządkowany projekt dokumentu. Kancelarie mają do 70% mniej pracy administracyjnej i prowadzą więcej spraw tym samym zespołem. Zbudowaliśmy też prototyp aplikacji dla samorządów.",
+          body: "LegalFlow to platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Przygotowuje dokumentację spraw na wzorach kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Godzinną rozmowę z klientem zamienia w uporządkowany projekt dokumentu. Kancelarie mają do 70% mniej pracy administracyjnej i prowadzą więcej spraw tym samym zespołem. Zbudowaliśmy też prototyp aplikacji dla samorządów.",
         },
         {
           title: "Dla kogo to jest",

@@ -245,9 +245,9 @@ export const homeEn: HomeCopy = {
       "No ready-made specification needed",
     ],
     proof: {
-      kind: "Our product",
+      kind: "Case study",
       title: "LegalFlow",
-      body: "Up to 70% less administrative work in Polish restructuring law firms. We built it and run it ourselves.",
+      body: "Up to 70% less administrative work in Polish restructuring law firms.",
       link: { label: "More about LegalFlow", href: "/work/legalflow" },
     },
     calendar: {

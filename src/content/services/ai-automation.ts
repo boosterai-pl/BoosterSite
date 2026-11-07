@@ -33,7 +33,7 @@ export const aiAutomation: ServiceEntry = {
         },
         {
           title: "Examples from our work",
-          body: "LegalFlow is our own platform for Polish restructuring law firms, running in production. It prepares case documentation from the firm's templates, handles communication with creditors and tracks deadlines. A one-hour conversation with a client becomes a structured draft, and the assistant works by text, dictation and phone. Firms get up to 70% less administrative work and take on more cases with the same team. A large media company: we automated the preparation of sales offers, which used to require collecting data by hand from many places.",
+          body: "LegalFlow is a platform for Polish restructuring law firms, running in production. It prepares case documentation from the firm's templates, handles communication with creditors and tracks deadlines. A one-hour conversation with a client becomes a structured draft, and the assistant works by text, dictation and phone. Firms get up to 70% less administrative work and take on more cases with the same team. A large media company: we automated the preparation of sales offers, which used to require collecting data by hand from many places.",
         },
         {
           title: "When we are not a good fit",
@@ -77,7 +77,7 @@ export const aiAutomation: ServiceEntry = {
         },
         {
           title: "Przykłady z naszej pracy",
-          body: "LegalFlow to nasza własna platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Przygotowuje dokumentację spraw na wzorach kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Godzinną rozmowę z klientem zamienia w uporządkowany projekt dokumentu, a asystent działa tekstowo, przez dyktowanie i przez telefon. Kancelarie mają do 70% mniej pracy administracyjnej i prowadzą więcej spraw tym samym zespołem. Duża firma z branży mediowej: zautomatyzowaliśmy przygotowywanie ofert handlowych, które wcześniej wymagało ręcznego zbierania danych z wielu miejsc.",
+          body: "LegalFlow to platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Przygotowuje dokumentację spraw na wzorach kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Godzinną rozmowę z klientem zamienia w uporządkowany projekt dokumentu, a asystent działa tekstowo, przez dyktowanie i przez telefon. Kancelarie mają do 70% mniej pracy administracyjnej i prowadzą więcej spraw tym samym zespołem. Duża firma z branży mediowej: zautomatyzowaliśmy przygotowywanie ofert handlowych, które wcześniej wymagało ręcznego zbierania danych z wielu miejsc.",
         },
         {
           title: "Kiedy nie jesteśmy dobrym wyborem",

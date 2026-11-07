@@ -8,7 +8,7 @@ import { SiteRuntime } from "@/components/SiteRuntime";
 
 type Props = { params: Promise<{ locale: string }> };
 
-// LegalFlow, our own product, shown as a case study. Uses the practice page layout.
+// LegalFlow, shown as a case study. Uses the practice page layout.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const page = loadSite(toSiteLocale(locale)).legalflow;

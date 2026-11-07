@@ -1,12 +1,12 @@
-// The /work/legalflow page: our own product, linked from the LegalFlow card in "Realizacje".
+// The /work/legalflow page, linked from the LegalFlow card in "Realizacje".
 // Same shape as a practice page. Only facts confirmed by Szymon; no LegalFlow prices.
 import type { Localized, PracticePage } from "./types";
 
 export const legalflow: Localized<PracticePage> = {
   en: {
     eyebrow: "Work / LegalFlow",
-    headline: { text: "LegalFlow. Our own product,", accent: "running in law firms." },
-    lead: "A platform for Polish restructuring law firms. We built it at Booster and we run it ourselves. Firms using it handle more cases with the same team.",
+    headline: { text: "LegalFlow. A platform that works", accent: "in law firms." },
+    lead: "A platform for Polish restructuring law firms, running in production. Firms using it handle more cases with the same team.",
     heroCta: { label: "Visit the LegalFlow site", href: "https://legal-flow.pl" },
     sections: [
       {
@@ -23,8 +23,8 @@ export const legalflow: Localized<PracticePage> = {
   },
   pl: {
     eyebrow: "Realizacje / LegalFlow",
-    headline: { text: "LegalFlow. Nasz własny produkt,", accent: "który działa w kancelariach." },
-    lead: "Platforma dla kancelarii restrukturyzacyjnych. Zbudowaliśmy ją w Boosterze i sami ją utrzymujemy. Kancelarie prowadzą na niej więcej spraw tym samym zespołem.",
+    headline: { text: "LegalFlow. Platforma, która działa", accent: "w kancelariach." },
+    lead: "Platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Kancelarie prowadzą na niej więcej spraw tym samym zespołem.",
     heroCta: { label: "Zobacz stronę LegalFlow", href: "https://legal-flow.pl" },
     sections: [
       {

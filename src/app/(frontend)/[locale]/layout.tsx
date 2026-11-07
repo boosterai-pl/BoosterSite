@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { localeAlternates } from "@/i18n/locale";
 import "@/styles/globals.css";
 import { CookieConsent } from "@/components/CookieConsent";
+import { AliveSync } from "@/components/AliveSync";
 import { Analytics } from "@vercel/analytics/next";
 
 type Props = {
@@ -91,6 +92,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           }}
         />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <AliveSync />
         <CookieConsent locale={locale === "pl" ? "pl" : "en"} />
         <Analytics />
       </body>

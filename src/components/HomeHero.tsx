@@ -26,7 +26,7 @@ export function HomeHero({ content, facts }: Props) {
               {content.lead}
             </p>
             <div className="hero-actions" data-reveal>
-              <a href={content.primaryCta.href} className="btn btn-primary btn-alive">
+              <a href={content.primaryCta.href} className="btn btn-primary">
                 {content.primaryCta.label} <span className="arrow">→</span>
               </a>
               <a href={content.secondaryCta.href} className="btn btn-quiet">

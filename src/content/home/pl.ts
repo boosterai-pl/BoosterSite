@@ -245,9 +245,9 @@ export const homePl: HomeCopy = {
       "Nie potrzebujesz gotowej specyfikacji",
     ],
     proof: {
-      kind: "Nasz produkt",
+      kind: "Realizacja",
       title: "LegalFlow",
-      body: "Do 70% mniej pracy administracyjnej w kancelariach restrukturyzacyjnych. Zbudowaliśmy go i sami utrzymujemy.",
+      body: "Do 70% mniej pracy administracyjnej w kancelariach restrukturyzacyjnych.",
       link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
     },
     calendar: {

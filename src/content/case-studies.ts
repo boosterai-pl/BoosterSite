@@ -7,7 +7,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
   {
     featured: true,
     pl: {
-      kind: "Nasz produkt",
+      kind: "Platforma dla kancelarii",
       title: "LegalFlow",
       company: "Platforma dla kancelarii restrukturyzacyjnych.",
       summary: "Dokumenty sprawy z szablonów kancelarii, komunikacja z wierzycielami i pilnowanie terminów w jednym systemie. Asystent AI rozmawia z klientem i sam uzupełnia sprawę.",
@@ -23,13 +23,13 @@ export const caseStudies: readonly CaseStudyEntry[] = [
           title: "Asystent AI",
           text: "Rozmawia z klientem kancelarii tekstem, głosem i przez telefon, a dane zapisuje w sprawie.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "Rozmowa z Asystentem AI LegalFlow" },
-          link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/#produkt" },
+          link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/asystentka" },
         },
       ],
       link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
     },
     en: {
-      kind: "Our product",
+      kind: "Platform for law firms",
       title: "LegalFlow",
       company: "A platform for restructuring law firms in Poland.",
       summary: "Case documents from the firm's own templates, communication with creditors and deadline tracking in one system. An AI assistant talks to the client and fills in the case.",
@@ -45,7 +45,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
           title: "AI assistant",
           text: "Talks to the firm's clients by text, voice and phone, and saves the data in the case.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "A conversation with the LegalFlow AI assistant" },
-          link: { label: "See the assistant", href: "https://legal-flow.pl/#produkt" },
+          link: { label: "See the assistant", href: "https://legal-flow.pl/asystentka" },
         },
       ],
       link: { label: "More about LegalFlow", href: "/work/legalflow" },

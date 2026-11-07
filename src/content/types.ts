@@ -72,7 +72,7 @@ export type TeamMember = {
 /** One case on the home page ("Realizacje"). Optional parts are simply not rendered. */
 export type CaseStudy = {
   readonly id: string;
-  /** Small label above the title, e.g. "Nasz produkt", "Wdrożenie u klienta". */
+  /** Small label above the title, e.g. "Wdrożenie u klienta". */
   readonly kind: string;
   readonly title: string;
   /** Type of company: industry and size. */
