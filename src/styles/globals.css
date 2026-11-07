@@ -3825,3 +3825,225 @@ h3,
 .home-page .section-head .accent-serif {
   display: block;
 }
+
+/* ===== Practice and work subpages: content blocks (PracticeLayout) ===== */
+.pp-block {
+  padding-top: 88px;
+  padding-bottom: 88px;
+  border-top: 1px solid var(--line-dark);
+}
+.pp-tint {
+  background: #fff;
+}
+.pp-title {
+  font-weight: 500;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 24ch;
+  margin-bottom: 40px;
+}
+.pp-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 64px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-dark);
+}
+.pp-facts dt {
+  font-size: clamp(30px, 3.4vw, 52px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+.pp-facts dd {
+  margin: 10px 0 0;
+  color: var(--muted-dark);
+  max-width: 32ch;
+}
+.pp-problem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.pp-problem-list li {
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid var(--line-dark);
+  border-radius: 16px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.pp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.pp-card {
+  padding-top: 20px;
+  border-top: 2px solid var(--accent);
+}
+.pp-card p,
+.pp-steps p,
+.pp-proof-card p {
+  margin-top: 10px;
+  color: var(--muted-dark);
+  line-height: 1.6;
+}
+.pp-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.pp-shot {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--line-dark);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.pp-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--line-dark);
+}
+.pp-shot figcaption {
+  padding: 16px 20px;
+  color: var(--muted-dark);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pp-shot figcaption a {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.pp-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+.pp-step-num {
+  display: block;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.pp-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 64px;
+}
+.pp-sections .practice-section {
+  margin: 0;
+}
+.pp-block.practice-body {
+  padding-top: 88px;
+}
+.pp-proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.pp-proof-card {
+  padding: 28px;
+  border: 1px solid var(--line-dark);
+  border-radius: 16px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pp-proof-card .case-link {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.pp-metric {
+  margin-top: 12px;
+}
+.pp-metric strong {
+  display: block;
+  font-size: clamp(28px, 2.8vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  line-height: 1.05;
+}
+.pp-faq-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+  align-items: start;
+}
+.pp-faq details {
+  border-bottom: 1px solid var(--line-dark);
+  padding: 20px 0;
+}
+.pp-faq summary {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.pp-faq summary::-webkit-details-marker {
+  display: none;
+}
+.pp-faq summary::after {
+  content: "+";
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+}
+.pp-faq details[open] summary::after {
+  content: "−";
+}
+.pp-faq details p {
+  margin-top: 12px;
+  color: var(--muted-dark);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+.pp-cta {
+  margin-top: 0;
+}
+@media (max-width: 900px) {
+  .pp-block {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .pp-facts,
+  .pp-cards,
+  .pp-problem-list,
+  .pp-gallery,
+  .pp-sections,
+  .pp-proof,
+  .pp-faq-wrap {
+    grid-template-columns: 1fr;
+  }
+  .pp-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pp-facts {
+    margin-top: 40px;
+    gap: 20px;
+  }
+}
+@media (max-width: 560px) {
+  .pp-steps {
+    grid-template-columns: 1fr;
+  }
+}

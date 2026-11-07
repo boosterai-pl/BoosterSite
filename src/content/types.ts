@@ -51,13 +51,47 @@ export type SectionCta = {
   readonly href: string;
 };
 
+/** A titled list of cards (title + body), used for "what it does" and "how we work" blocks. */
+export type PracticeCards = {
+  readonly title: string;
+  readonly items: readonly { readonly title: string; readonly body: string }[];
+};
+
 export type PracticeContent = {
   readonly slug: string;
   readonly eyebrow: string;
   readonly headline: HeadlineLine;
   readonly lead: string;
   readonly heroCta?: SectionCta;
+  /** Short true facts under the hero, shown large. Only real numbers. */
+  readonly facts?: readonly { readonly value: string; readonly label: string }[];
+  /** Pain points, written as short scenes from the client's company. */
+  readonly problems?: { readonly title: string; readonly items: readonly string[] };
+  /** What we build or what the product does, as a card grid. */
+  readonly features?: PracticeCards;
+  /** Real screenshots with captions. */
+  readonly gallery?: readonly {
+    readonly src: string;
+    readonly alt: string;
+    readonly caption: string;
+    readonly link?: { readonly label: string; readonly href: string };
+  }[];
+  /** How we work, as numbered steps. */
+  readonly steps?: PracticeCards;
+  /** Plain text sections (what you own, who it is for, ...). */
   readonly sections: readonly PracticeSection[];
+  /** Short cases with one result each. */
+  readonly proof?: {
+    readonly title: string;
+    readonly items: readonly {
+      readonly kind: string;
+      readonly title: string;
+      readonly body: string;
+      readonly metric?: { readonly value: string; readonly label: string };
+      readonly link?: { readonly label: string; readonly href: string };
+    }[];
+  };
+  readonly faq?: { readonly title: string; readonly items: readonly { readonly q: string; readonly a: string }[] };
   readonly cta: SectionCta;
 };
 

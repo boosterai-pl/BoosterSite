@@ -6,6 +6,7 @@ import { toSiteLocale, localeHrefPrefix, localeAlternates } from "@/i18n/locale"
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
+import { PracticeLayout } from "@/components/PracticeLayout";
 
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -89,66 +90,7 @@ export default async function PracticePage({ params }: Props) {
       />
       <SiteRuntime />
       <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix} />
-      <main>
-        <section className="block light practice-hero">
-          <div className="container-inner">
-            <div data-reveal>
-              <span className="eyebrow light">{practice.eyebrow}</span>
-            </div>
-            <h1 className="h1" data-reveal>
-              {practice.headline.text}
-              {practice.headline.accent ? (
-                <>
-                  {" "}
-                  <span className="accent-serif">{practice.headline.accent}</span>
-                </>
-              ) : null}
-            </h1>
-            <p className="lead practice-lead" data-reveal>{practice.lead}</p>
-            {practice.heroCta ? (
-              <div className="practice-hero-cta" data-reveal>
-                {practice.heroCta.microCopy ? (
-                  <p className="section-cta-micro">{practice.heroCta.microCopy}</p>
-                ) : null}
-                <a
-                  href={practice.heroCta.href}
-                  className="btn btn-primary"
-                  {...(practice.heroCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {practice.heroCta.label}
-                  <span className="arrow">→</span>
-                </a>
-              </div>
-            ) : null}
-          </div>
-        </section>
-
-        <section className="block light practice-body">
-          <div className="container-inner" data-reveal-stagger>
-            {practice.sections.map((section, idx) => (
-              <div className="practice-section" key={section.title}>
-                <h2 className="h3">{section.title}</h2>
-                <p>{section.body}</p>
-                {idx === practice.sections.length - 1 ? (
-                  <div className="practice-inline-cta" data-reveal>
-                    {practice.cta.microCopy ? (
-                      <p className="section-cta-micro">{practice.cta.microCopy}</p>
-                    ) : null}
-                    <a
-                      href={practice.cta.href}
-                      className="btn btn-primary"
-                      {...(practice.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    >
-                      {practice.cta.label}
-                      <span className="arrow">→</span>
-                    </a>
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
+      <PracticeLayout page={practice} />
       <Footer brand={site.meta.brand} content={site.footer} />
     </div>
   );
