@@ -21,9 +21,9 @@ export const homeEn: HomeCopy = {
   },
   home: {
     hero: {
-      eyebrow: "Company transformation with AI",
-      headline: { text: "Your people already use AI.", accent: "Everyone in their own way." },
-      lead: "We help you turn scattered chats and spreadsheets into one system the whole company works on. In stages, with a fixed price for each stage. The code and the data stay with you.",
+      eyebrow: "AI transformation, end to end",
+      headline: { text: "A company several times bigger.", accent: "With the same team." },
+      lead: "We put AI at the centre of your company. We bring order to processes, automate repetitive work and build new services, so the business can grow faster than the headcount. We take you through the whole transformation, in stages, with a fixed price for each stage.",
       primaryCta: { label: "Book a free call", href: "/book?z=hero" },
       secondaryCta: { label: "See what it looks like in practice", href: "#work" },
       photo: {
@@ -39,35 +39,35 @@ export const homeEn: HomeCopy = {
     ],
     pain: {
       eyebrow: "Sound familiar?",
-      headline: { text: "The company keeps growing.", accent: "The work is still manual." },
+      headline: { text: "The company grows.", accent: "So does the manual work." },
       items: [
-        "Everyone on the team has their own ChatGPT. Nobody knows what goes into it.",
+        "Every new client means another person to hire.",
         "A proposal takes days because the data sits in a dozen spreadsheets.",
         "There is one person without whom some things simply stop.",
         "A report takes two days and nobody fully trusts it anyway.",
-        "Every new client means more manual work.",
+        "People use AI, but each in their own way. The company as a whole gets nothing from it.",
       ],
-      closing: "One more tool won't fix this. The company needs one engine that everyone works on.",
+      closing: "One more tool won't fix this. The company has to be organised with AI at its centre, not bolted on the side.",
     },
     stages: {
       eyebrow: "Where your company is",
-      headline: { text: "From browser chats", accent: "to one engine." },
+      headline: { text: "From first experiments with AI", accent: "to a company that runs on it." },
       items: [
         {
-          title: "Everyone on their own",
-          body: "AI in employees' browsers, knowledge in people's heads and in spreadsheets. Nobody controls where company data ends up.",
+          title: "First experiments",
+          body: "People try AI on their own accounts. Knowledge lives in heads and spreadsheets, and processes work the same as before AI.",
           note: "Most companies are here today",
         },
         {
-          title: "Shared data",
-          body: "One source of truth and orderly processes. Clear rules for what AI may and may not do.",
+          title: "An organised company",
+          body: "Shared data and orderly processes. It is clear what people do, what AI does and where the one source of truth is.",
         },
         {
-          title: "One engine",
-          body: "Processes run in one shared system. AI agents do the repetitive work on company data, and people handle what needs a decision.",
+          title: "AI at the centre",
+          body: "AI agents do the repetitive work on company data, while people make decisions and build new services. More clients no longer mean more hires.",
         },
       ],
-      footnote: "You don't have to do it all at once. We start with the process that hurts most today.",
+      footnote: "We take you through the whole journey, end to end. We start with the process that hurts most today.",
     },
     cases: {
       eyebrow: "Work",

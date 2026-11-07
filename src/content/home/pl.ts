@@ -21,9 +21,9 @@ export const homePl: HomeCopy = {
   },
   home: {
     hero: {
-      eyebrow: "Transformacja firmy z AI",
-      headline: { text: "Twoi ludzie już używają AI.", accent: "Każdy po swojemu." },
-      lead: "Pomagamy zamienić rozproszone czaty i Excele w jeden system, na którym pracuje cała firma. Etapami, ze stałą ceną każdego etapu. Kod i dane zostają u Ciebie.",
+      eyebrow: "Transformacja AI od A do Z",
+      headline: { text: "Firma kilka razy większa.", accent: "Tym samym zespołem." },
+      lead: "Stawiamy AI w centrum Twojej firmy. Porządkujemy procesy, automatyzujemy powtarzalną pracę i budujemy nowe usługi, żeby firma mogła rosnąć szybciej, niż rośnie zespół. Prowadzimy przez całą transformację, etapami i ze stałą ceną każdego etapu.",
       primaryCta: { label: "Umów bezpłatną rozmowę", href: "/book?z=hero" },
       secondaryCta: { label: "Zobacz, jak to wygląda w praktyce", href: "#work" },
       photo: {
@@ -39,35 +39,35 @@ export const homePl: HomeCopy = {
     ],
     pain: {
       eyebrow: "Poznajesz to?",
-      headline: { text: "Firma rośnie,", accent: "a praca dalej jest ręczna." },
+      headline: { text: "Firma rośnie,", accent: "a razem z nią ręczna robota." },
       items: [
-        "Każdy w zespole ma swojego ChatGPT. Nikt nie wie, co tam trafia.",
+        "Każdy nowy klient oznacza kolejną osobę do zatrudnienia.",
         "Oferta powstaje kilka dni, bo dane są porozrzucane po Excelach.",
         "Jest jedna osoba, bez której pewne rzeczy stają.",
         "Raport robi się dwa dni, a i tak nikt mu do końca nie ufa.",
-        "Każdy nowy klient to więcej ręcznej roboty.",
+        "Ludzie używają AI, ale każdy po swojemu. Firma jako całość nic z tego nie ma.",
       ],
-      closing: "Jedno nowe narzędzie tego nie zmieni. Firma potrzebuje jednego silnika, na którym pracują wszyscy.",
+      closing: "Jedno nowe narzędzie tego nie zmieni. Firmę trzeba poukładać tak, żeby AI było jej centrum, a nie dodatkiem.",
     },
     stages: {
       eyebrow: "Gdzie jest Twoja firma",
-      headline: { text: "Od czatów w przeglądarce", accent: "do jednego silnika." },
+      headline: { text: "Od pierwszych prób z AI", accent: "do firmy, która na nim działa." },
       items: [
         {
-          title: "Każdy po swojemu",
-          body: "AI w przeglądarkach pracowników, wiedza w głowach i w Excelach. Nikt nie kontroluje, gdzie trafiają dane firmy.",
+          title: "Pierwsze próby",
+          body: "Ludzie testują AI na własnych kontach. Wiedza siedzi w głowach i w Excelach, a procesy działają tak samo jak przed AI.",
           note: "Tu jest dziś większość firm",
         },
         {
-          title: "Wspólne dane",
-          body: "Jedno źródło prawdy i uporządkowane procesy. Wiadomo, co AI może robić, a czego nie.",
+          title: "Poukładana firma",
+          body: "Wspólne dane i uporządkowane procesy. Wiadomo, co robi człowiek, co robi AI i gdzie jest jedno źródło prawdy.",
         },
         {
-          title: "Jeden silnik",
-          body: "Procesy działają we wspólnym systemie. Agenci AI wykonują powtarzalną pracę na danych firmy, a ludzie zajmują się tym, co wymaga decyzji.",
+          title: "AI w centrum firmy",
+          body: "Agenci AI wykonują powtarzalną pracę na danych firmy, a ludzie podejmują decyzje i budują nowe usługi. Kolejni klienci nie wymagają kolejnych etatów.",
         },
       ],
-      footnote: "Nie musisz przechodzić wszystkiego naraz. Zaczynamy od procesu, który dziś najbardziej boli.",
+      footnote: "Przeprowadzamy przez całą tę drogę, od A do Z. Zaczynamy od procesu, który dziś najbardziej boli.",
     },
     cases: {
       eyebrow: "Realizacje",
