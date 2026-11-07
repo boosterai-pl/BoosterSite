@@ -4094,3 +4094,165 @@ h3,
     padding-bottom: 56px;
   }
 }
+
+/* Booking: several real results instead of one project. */
+.booking-proof-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin: 14px 0 0;
+}
+.booking-proof-list dt {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--accent);
+}
+.booking-proof-list dd {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--muted-dark);
+}
+/* Tools we also implement on: plain name pills, all the same size (no mixed logos). */
+.booking-tools {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.booking-tools li {
+  padding: 8px 16px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+/* "The plan after the call": example layout of the plan, in place of a photo. */
+.booking-plan {
+  margin: 0;
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--accent);
+  border-radius: 20px;
+}
+.booking-plan-title {
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.booking-plan ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.booking-plan li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 2px 8px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line-dark);
+}
+.booking-plan-n {
+  grid-row: span 2;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  padding-top: 2px;
+}
+.booking-plan-name {
+  font-weight: 500;
+}
+.booking-plan-note {
+  font-size: 13.5px;
+  color: var(--muted-dark);
+}
+.booking-plan figcaption {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--muted-dark);
+}
+
+/* Highlighted feature with a demo phone line (LegalFlow voice assistant). */
+.pp-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 56px;
+  align-items: center;
+}
+.pp-callout .eyebrow {
+  margin-bottom: 20px;
+}
+.pp-callout .pp-title {
+  margin-bottom: 20px;
+}
+.pp-callout-body {
+  color: var(--muted-dark);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+.pp-callout-points {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.pp-callout-points li {
+  padding-left: 22px;
+  position: relative;
+  line-height: 1.5;
+}
+.pp-callout-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.pp-phone {
+  padding: 32px;
+  background: var(--paper);
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--accent);
+  border-radius: 20px;
+}
+.pp-phone-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.pp-phone-number {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.pp-phone p {
+  margin-top: 12px;
+  color: var(--muted-dark);
+  line-height: 1.5;
+}
+.pp-phone .case-link {
+  display: inline-block;
+  margin-top: 16px;
+}
+@media (max-width: 900px) {
+  .pp-callout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

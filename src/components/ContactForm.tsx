@@ -132,14 +132,12 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
 
       <label className="contact-form__field" data-invalid={errors.email ? "true" : undefined}>
         <span>{copy.emailLabel} <b className="contact-form__req" aria-hidden="true">*</b></span>
-        <small className="contact-form__hint">{copy.hints.email}</small>
         <input type="email" name="email" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-required="true" />
         {errors.email ? <em className="contact-form__field-error">{errors.email}</em> : null}
       </label>
 
       <label className="contact-form__field" data-invalid={errors.phone ? "true" : undefined}>
         <span>{copy.phoneLabel} <b className="contact-form__req" aria-hidden="true">*</b></span>
-        <small className="contact-form__hint">{copy.hints.phone}</small>
         <div className="contact-form__phone">
           <select name="dial" defaultValue={defaultDialCode} aria-label="Country code">
             {DIAL_CODES.map((code) => (
@@ -155,7 +153,6 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
 
       <label className="contact-form__field" data-invalid={errors.topic ? "true" : undefined}>
         <span>{copy.topicLabel} <b className="contact-form__req" aria-hidden="true">*</b></span>
-        <small className="contact-form__hint">{copy.hints.topic}</small>
         <textarea name="topic" rows={4} placeholder={copy.topicPlaceholder} aria-invalid={Boolean(errors.topic)} />
         {errors.topic ? <em className="contact-form__field-error">{errors.topic}</em> : null}
       </label>
@@ -167,7 +164,6 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
           <a href={copy.privacyHref} target="_blank" rel="noopener noreferrer">
             {copy.privacyLabel}
           </a>
-          <small className="contact-form__hint">{copy.hints.consent}</small>
           {errors.consent ? <em className="contact-form__field-error">{errors.consent}</em> : null}
         </span>
       </label>

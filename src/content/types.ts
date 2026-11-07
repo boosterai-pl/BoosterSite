@@ -76,6 +76,15 @@ export type PracticeContent = {
     readonly caption: string;
     readonly link?: { readonly label: string; readonly href: string };
   }[];
+  /** A highlighted feature with a phone number to try it (e.g. a voice assistant demo line). */
+  readonly callout?: {
+    readonly eyebrow: string;
+    readonly title: string;
+    readonly body: string;
+    readonly points: readonly string[];
+    readonly phone: { readonly label: string; readonly display: string; readonly href: string; readonly note: string };
+    readonly link: { readonly label: string; readonly href: string };
+  };
   /** How we work, as numbered steps. */
   readonly steps?: PracticeCards;
   /** Plain text sections (what you own, who it is for, ...). */
@@ -271,14 +280,7 @@ export type ContactFormCopy = {
   readonly successEcho: string;
   readonly successTitle: string;
   readonly successBody: string;
-  readonly requiredNote: string;
   readonly formTitle: string;
-  readonly hints: {
-    readonly email: string;
-    readonly phone: string;
-    readonly topic: string;
-    readonly consent: string;
-  };
 };
 
 export type BookingStep = { readonly title: string; readonly body: string };
@@ -290,11 +292,10 @@ export type BookingSection = {
 
 export type BookingExtras = {
   readonly points: readonly string[];
-  /** Small LegalFlow case next to the form. */
+  /** A few real results next to the form (not just one project). */
   readonly proof: {
     readonly kind: string;
-    readonly title: string;
-    readonly body: string;
+    readonly items: readonly { readonly value: string; readonly label: string }[];
     readonly link: { readonly label: string; readonly href: string };
   };
   /** Alternative to leaving a phone number: pick a slot in the calendar. */
@@ -304,12 +305,19 @@ export type BookingExtras = {
     readonly href: string;
   };
   readonly trustLabel: string;
+  /** Tools we also implement on, shown as plain name pills. */
+  readonly trustTools: readonly string[];
   readonly starters: BookingSection & {
     readonly items: readonly string[];
     readonly hint: string;
   };
   readonly steps: BookingSection & {
-    readonly imageAlt: string;
+    /** Example layout of the plan the client gets after the call (no prices, no invented data). */
+    readonly plan: {
+      readonly title: string;
+      readonly caption: string;
+      readonly items: readonly { readonly title: string; readonly note: string }[];
+    };
     readonly items: readonly BookingStep[];
   };
   readonly outcomes: BookingSection & {

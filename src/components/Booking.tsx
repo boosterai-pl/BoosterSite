@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { BookingContent, BookingSection, SiteContent } from "@/content/types";
 import { ContactForm } from "@/components/ContactForm";
-import { ClickUpLogo, MondayLogo, PipedriveLogo, TilioLogo } from "@/components/BrandLogos";
 
 type Props = { content: BookingContent; members: SiteContent["team"] };
 
@@ -49,26 +48,30 @@ export function Booking({ content, members }: Props) {
             </ul>
             <aside className="booking-proof">
               <span className="mono booking-proof-kind">{content.proof.kind}</span>
-              <h2 className="h3">{content.proof.title}</h2>
-              <p>{content.proof.body}</p>
+              <dl className="booking-proof-list">
+                {content.proof.items.map((item) => (
+                  <div key={item.value}>
+                    <dt>{item.value}</dt>
+                    <dd>{item.label}</dd>
+                  </div>
+                ))}
+              </dl>
               <a href={content.proof.link.href}>
                 {content.proof.link.label} <span className="arrow">→</span>
               </a>
             </aside>
             <div className="booking-trust">
               <span className="mono">{content.trustLabel}</span>
-              <div className="booking-trust-logos">
-                <MondayLogo className="booking-logo" />
-                <ClickUpLogo className="booking-logo" />
-                <PipedriveLogo className="booking-logo" />
-                <TilioLogo className="booking-logo" />
-              </div>
+              <ul className="booking-tools">
+                {content.trustTools.map((tool) => (
+                  <li key={tool}>{tool}</li>
+                ))}
+              </ul>
             </div>
           </div>
 
           <div className="booking-card" id="formularz">
             <h2 className="h3">{content.form.formTitle}</h2>
-            <p className="booking-required">{content.form.requiredNote}</p>
             <ContactForm copy={content.form} source="boosterai.pl — formularz /book" />
             <p className="booking-calendar">
               {content.calendar.text}{" "}
@@ -103,14 +106,19 @@ export function Booking({ content, members }: Props) {
         <div className="container-inner">
           <SectionTitle section={content.steps} />
           <div className="booking-steps-wrap">
-            <Image
-              src="/assets/booking-work.jpg"
-              alt={content.steps.imageAlt}
-              width={1000}
-              height={1000}
-              sizes="(max-width: 900px) 100vw, 440px"
-              className="booking-steps-photo"
-            />
+            <figure className="booking-plan">
+              <p className="booking-plan-title">{content.steps.plan.title}</p>
+              <ol>
+                {content.steps.plan.items.map((item, i) => (
+                  <li key={item.title}>
+                    <span className="booking-plan-n">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="booking-plan-name">{item.title}</span>
+                    <span className="booking-plan-note">{item.note}</span>
+                  </li>
+                ))}
+              </ol>
+              <figcaption>{content.steps.plan.caption}</figcaption>
+            </figure>
             <ol className="booking-steps">
               {content.steps.items.map((step, i) => (
                 <li key={step.title}>

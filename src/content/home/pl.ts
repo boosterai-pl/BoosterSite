@@ -246,17 +246,22 @@ export const homePl: HomeCopy = {
       "Nie potrzebujesz gotowej specyfikacji",
     ],
     proof: {
-      kind: "Realizacja",
-      title: "LegalFlow",
-      body: "Do 70% mniej pracy administracyjnej w kancelariach restrukturyzacyjnych.",
-      link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
+      kind: "Efekty z naszych wdrożeń",
+      items: [
+        { value: "do 70%", label: "mniej pracy administracyjnej w kancelariach" },
+        { value: "3 dni → 30 min", label: "comiesięczne zaświadczenia w grupie budowlanej" },
+        { value: "99,8%", label: "zgodności automatu z ręczną pracą księgowej" },
+        { value: "Trafne leady", label: "dla działu sprzedaży firmy inżynieryjnej, według klienta" },
+      ],
+      link: { label: "Zobacz realizacje", href: "/#work" },
     },
     calendar: {
       text: "Nie chcesz zostawiać numeru?",
       label: "Wybierz termin w kalendarzu",
       href: "https://cal.com/szymon-bazan-iahn2z/30min",
     },
-    trustLabel: "Wdrażamy też na Monday, ClickUp i Pipedrive",
+    trustLabel: "Wdrażamy też na narzędziach, które już znasz",
+    trustTools: ["Monday", "ClickUp", "Pipedrive", "Tillio"],
     starters: {
       eyebrow: "Z czym przychodzą firmy",
       headline: { text: "Nie wiesz, jak to", accent: "nazwać?" },
@@ -271,7 +276,16 @@ export const homePl: HomeCopy = {
     steps: {
       eyebrow: "Co dalej",
       headline: { text: "Od formularza", accent: "do planu." },
-      imageAlt: "Szymon Bazan pracuje przy laptopie",
+      plan: {
+        title: "Plan po rozmowie",
+        caption: "Przykładowy układ planu. Etapy i ich kolejność ustalamy dla Twojej firmy.",
+        items: [
+          { title: "Warsztat i mapa procesu", note: "cena znana przed startem" },
+          { title: "Porządek w danych", note: "wycena po pierwszym etapie" },
+          { title: "Wdrożenie pierwszego procesu", note: "na Twoich danych" },
+          { title: "Kolejne procesy", note: "decydujesz po każdym etapie" },
+        ],
+      },
       items: [
         { title: "Piszesz kilka zdań", body: "Co dziś nie działa albo zajmuje za dużo czasu. Specyfikacja nie jest potrzebna." },
         { title: "Rozmawiamy", body: "Pół godziny przez telefon albo w terminie z kalendarza. O procesie i o tym, co ma się zmienić." },
@@ -347,14 +361,7 @@ export const homePl: HomeCopy = {
       successEcho: "Odpowiemy na adres",
       successTitle: "Dziękujemy, mamy Twoje zgłoszenie",
       successBody: "Odezwiemy się, żeby umówić rozmowę.",
-      requiredNote: "Pola z gwiazdką (*) są wymagane.",
       formTitle: "Umów rozmowę",
-      hints: {
-        email: "Tu wyślemy potwierdzenie terminu.",
-        phone: "Zadzwonimy w dzień roboczy. Wybierz kierunkowy i wpisz numer.",
-        topic: "Kilka zdań wystarczy. Nie musisz znać rozwiązania.",
-        consent: "Bez tej zgody nie możemy odpowiedzieć na zgłoszenie.",
-      },
     },
   },
 };

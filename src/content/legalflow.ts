@@ -46,7 +46,7 @@ export const legalflow: Localized<PracticePage> = {
         },
         {
           title: "AI assistant",
-          body: "Talks to the firm's clients by text, dictation and phone, and saves what it learns in the case.",
+          body: "Talks to the firm's clients by text, dictation and phone, also after hours, and saves what it learns in the case.",
         },
         {
           title: "Everything in one place",
@@ -68,6 +68,24 @@ export const legalflow: Localized<PracticePage> = {
         link: { label: "See the assistant", href: "https://legal-flow.pl/asystentka" },
       },
     ],
+    callout: {
+      eyebrow: "Digital law firm assistant",
+      title: "An assistant that answers the phone when nobody in the firm can",
+      body: "After hours, at weekends, during a hearing. The assistant picks up, holds the first conversation with a business owner in debt, checks how urgent the case is and leaves the lawyer a ready note in LegalFlow. In the morning the lawyer sees a list of cases, not a list of missed calls.",
+      points: [
+        "Runs the first interview using the firm's own list of questions.",
+        "Spots urgent cases, such as a frozen account or an auction, and passes them to a person straight away.",
+        "Saves the case with its urgency and a note, and arranges a call with the lawyer.",
+        "Always introduces itself as an AI assistant and gives no legal advice. Decisions stay with the lawyer.",
+      ],
+      phone: {
+        label: "Demo line",
+        display: "+48 71 300 15 02",
+        href: "tel:+48713001502",
+        note: "Call and play a client. The assistant answers in Polish on a sample law firm. Standard call rates apply.",
+      },
+      link: { label: "More about the assistant", href: "https://legal-flow.pl/asystentka" },
+    },
     sections: [
       {
         title: "The result",
@@ -122,7 +140,7 @@ export const legalflow: Localized<PracticePage> = {
         },
         {
           title: "Asystent AI",
-          body: "Rozmawia z klientami kancelarii tekstem, dyktowaniem i przez telefon, a to, czego się dowie, zapisuje w sprawie.",
+          body: "Rozmawia z klientami kancelarii tekstem, dyktowaniem i przez telefon, także po godzinach, a to, czego się dowie, zapisuje w sprawie.",
         },
         {
           title: "Wszystko w jednym miejscu",
@@ -144,6 +162,24 @@ export const legalflow: Localized<PracticePage> = {
         link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/asystentka" },
       },
     ],
+    callout: {
+      eyebrow: "Cyfrowa Asystentka Kancelarii",
+      title: "Asystentka, która odbiera telefon, gdy w kancelarii nikt nie może",
+      body: "Po godzinach, w weekend, w czasie rozprawy. Asystentka odbiera, przeprowadza pierwszą rozmowę z przedsiębiorcą w długach, ocenia, czy sprawa jest pilna, i zostawia prawnikowi gotową notatkę w LegalFlow. Rano prawnik widzi listę spraw, a nie listę nieodebranych połączeń.",
+      points: [
+        "Prowadzi pierwszy wywiad według listy pytań kancelarii.",
+        "Wyłapuje pilne sprawy, na przykład zajęte konto albo licytację, i od razu przekazuje je człowiekowi.",
+        "Zapisuje sprawę z pilnością i notatką, a potem umawia rozmowę z doradcą.",
+        "Zawsze przedstawia się jako asystent AI i nie udziela porad prawnych. Decyzje zostają po stronie prawnika.",
+      ],
+      phone: {
+        label: "Linia demo",
+        display: "71 300 15 02",
+        href: "tel:+48713001502",
+        note: "Zadzwoń i zagraj klienta, a asystentka poprowadzi resztę. Linia działa na przykładowej kancelarii. Opłata jak za zwykłe połączenie krajowe.",
+      },
+      link: { label: "Więcej o asystentce", href: "https://legal-flow.pl/asystentka" },
+    },
     sections: [
       {
         title: "Efekt",

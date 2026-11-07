@@ -112,6 +112,33 @@ export function PracticeLayout({ page }: Props) {
         </section>
       ) : null}
 
+      {page.callout ? (
+        <section className="block light pp-block pp-tint">
+          <div className="container-inner pp-callout" data-reveal>
+            <div>
+              <span className="eyebrow light">{page.callout.eyebrow}</span>
+              <h2 className="pp-title">{page.callout.title}</h2>
+              <p className="pp-callout-body">{page.callout.body}</p>
+              <ul className="pp-callout-points">
+                {page.callout.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="pp-phone">
+              <span className="mono pp-phone-label">{page.callout.phone.label}</span>
+              <a href={page.callout.phone.href} className="pp-phone-number">
+                {page.callout.phone.display}
+              </a>
+              <p>{page.callout.phone.note}</p>
+              <a href={page.callout.link.href} className="case-link" {...external(page.callout.link.href)}>
+                {page.callout.link.label} <span className="arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {page.steps ? (
         <section className="block light pp-block pp-tint">
           <div className="container-inner">

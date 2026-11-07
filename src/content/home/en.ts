@@ -246,17 +246,22 @@ export const homeEn: HomeCopy = {
       "No ready-made specification needed",
     ],
     proof: {
-      kind: "Case study",
-      title: "LegalFlow",
-      body: "Up to 70% less administrative work in Polish restructuring law firms.",
-      link: { label: "More about LegalFlow", href: "/work/legalflow" },
+      kind: "Results from our projects",
+      items: [
+        { value: "up to 70%", label: "less administrative work in law firms" },
+        { value: "3 days → 30 min", label: "monthly certificates in a construction group" },
+        { value: "99.8%", label: "match between the automation and the accountant's manual work" },
+        { value: "Relevant leads", label: "for an engineering contractor's sales team, in the client's words" },
+      ],
+      link: { label: "See our work", href: "/#work" },
     },
     calendar: {
       text: "Rather not leave your number?",
       label: "Pick a time in the calendar",
       href: "https://cal.com/szymon-bazan-iahn2z/30min",
     },
-    trustLabel: "We also implement on Monday, ClickUp and Pipedrive",
+    trustLabel: "We also implement on tools you may already use",
+    trustTools: ["Monday", "ClickUp", "Pipedrive", "Tillio"],
     starters: {
       eyebrow: "What companies come to us with",
       headline: { text: "Not sure how to", accent: "put it?" },
@@ -271,7 +276,16 @@ export const homeEn: HomeCopy = {
     steps: {
       eyebrow: "What happens next",
       headline: { text: "From the form", accent: "to a plan." },
-      imageAlt: "Szymon Bazan working at a laptop",
+      plan: {
+        title: "The plan after the call",
+        caption: "An example layout. The stages and their order are set for your company.",
+        items: [
+          { title: "Workshop and process map", note: "price known before we start" },
+          { title: "Putting the data in order", note: "priced after the first stage" },
+          { title: "First process implemented", note: "on your data" },
+          { title: "Next processes", note: "you decide after each stage" },
+        ],
+      },
       items: [
         { title: "You write a few sentences", body: "What doesn't work today or takes too long. No specification needed." },
         { title: "We talk", body: "Half an hour by phone or at a time you pick in the calendar. About the process and what should change." },
@@ -347,14 +361,7 @@ export const homeEn: HomeCopy = {
       successEcho: "We'll reply to",
       successTitle: "Thank you, we have your request",
       successBody: "We'll get back to you to set up the call.",
-      requiredNote: "Fields marked with * are required.",
       formTitle: "Book a call",
-      hints: {
-        email: "We'll send the confirmation here.",
-        phone: "We call on business days. Pick the country code and enter your number.",
-        topic: "A few sentences are enough. You don't need to know the solution.",
-        consent: "We can't reply to your request without this consent.",
-      },
     },
   },
 };

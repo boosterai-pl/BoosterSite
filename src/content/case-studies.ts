@@ -21,7 +21,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
         },
         {
           title: "Asystent AI",
-          text: "Rozmawia z klientem kancelarii tekstem, głosem i przez telefon, a dane zapisuje w sprawie.",
+          text: "Odbiera telefon, gdy w kancelarii nikt nie może, i zapisuje sprawę w systemie. Zadzwoń na linię demo: 71 300 15 02.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "Rozmowa z Asystentem AI LegalFlow" },
           link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/asystentka" },
         },
@@ -43,7 +43,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
         },
         {
           title: "AI assistant",
-          text: "Talks to the firm's clients by text, voice and phone, and saves the data in the case.",
+          text: "Answers the phone when nobody in the firm can and saves the case in the system. Demo line (in Polish): +48 71 300 15 02.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "A conversation with the LegalFlow AI assistant" },
           link: { label: "See the assistant", href: "https://legal-flow.pl/asystentka" },
         },
