@@ -3686,3 +3686,22 @@ li.growth-step .growth-note {
 p {
   text-wrap: pretty;
 }
+.home-page .section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-page #faq .section-head {
+  align-items: flex-start;
+  text-align: left;
+}
+.home-page #faq .section-head .h1 {
+  margin-left: 0;
+}
+.home-page .not-for-list {
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-page .foundation-intro {
+  justify-content: center;
+}
