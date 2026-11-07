@@ -1,4 +1,5 @@
 // Service "open-source-erp": the card in the home page Services section and the page at /practices/open-source-erp.
+// No invented numbers: the facts here are terms of the offer (no per-user fees, open code), not results.
 import type { ServiceEntry } from "../types";
 
 export const openSourceErp: ServiceEntry = {
@@ -6,80 +7,262 @@ export const openSourceErp: ServiceEntry = {
   en: {
     card: {
       title: "Open-source ERP & CRM",
-      description: "Enterprise-grade systems, none of the license tax. We deploy and customize open-source platforms like Open Mercato on your own infrastructure — self-hosted, no lock-in, and extended by us as you grow.",
-      tags: ["Open Mercato", "ERP", "No lock-in", "Self-hosted"],
+      description: "One system for sales, warehouse, documents and customers, built on Open Mercato. No per-user fees, and the code and data stay with your company.",
+      tags: ["Open Mercato", "ERP", "CRM", "Open source"],
     },
     page: {
-      eyebrow: "04 / Enterprise software, zero license fees.",
-      headline: { text: "Enterprise power.", accent: "Zero user-seat pricing." },
-      lead: "We deploy Open Mercato, a flexible, open-source ERP and CRM ecosystem, directly on your own secure infrastructure. You get the full power of enterprise software without vendor lock-in, expensive per-seat subscriptions, or slow corporate procurement cycles.",
+      eyebrow: "04 / Open-source ERP & CRM",
+      headline: { text: "One system for the whole company.", accent: "No per-user fees." },
+      lead: "We implement Open Mercato, an open framework for business systems that covers CRM, sales, warehouse and documents. It becomes one engine for your company: shared data, ordered processes and a place where AI agents can work on real company information. It runs on your servers or in your cloud. You know the price of the first stage before we start.",
       heroCta: {
-        microCopy: "Stop paying six-figure bills for software user licenses.",
-        label: "Drop per-seat pricing. Pick a time",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        microCopy: "After the first call you get a plan of stages and the price of the first one.",
+        label: "Book a call",
+        href: "/book?z=open-source-erp-hero",
+      },
+      facts: [
+        { value: "0 per-user fees", label: "a new person on the team does not mean a new licence" },
+        { value: "Your code", label: "full source code and documentation stay with your company" },
+        { value: "Your servers", label: "or your cloud. You decide where the system runs" },
+      ],
+      problems: {
+        title: "Sound familiar?",
+        items: [
+          "Sales works in one program, the warehouse in another, and documents live on shared drives.",
+          "Every new person on the team means another licence.",
+          "Any change to the system needs the vendor, their schedule and their price list.",
+          "The same customer is in three places, and each record is a little different.",
+          "The board report is built by hand from several spreadsheet exports.",
+          "The ready-made system needs more and more workarounds, because your company works its own way.",
+        ],
+      },
+      features: {
+        title: "What the system covers",
+        items: [
+          {
+            title: "CRM and sales",
+            body: "Customers, contacts, sales opportunities and offers in one place, with the full history of each relationship.",
+          },
+          {
+            title: "Warehouse and products",
+            body: "Products, stock levels and availability, connected to sales, so offers are based on what you actually have.",
+          },
+          {
+            title: "Documents",
+            body: "Offers, contracts and other documents created from the data already in the system, not retyped from spreadsheets.",
+          },
+          {
+            title: "Modules made to measure",
+            body: "We add what your company needs and no ready-made system offers. The code is open, so nothing is blocked by a vendor.",
+          },
+          {
+            title: "Connections to your tools",
+            body: "Accounting, email, e-commerce and other programs you keep using exchange data with the system.",
+          },
+          {
+            title: "AI agents on company data",
+            body: "Once the data is in one place, agents can prepare offers, summaries and reminders based on real information.",
+          },
+        ],
+      },
+      steps: {
+        title: "How we work",
+        items: [
+          {
+            title: "We map",
+            body: "In a workshop we go through how information flows between departments and agree which modules you need first. You get a plan of stages with the price of the first one.",
+          },
+          {
+            title: "We put the data in order",
+            body: "We clean and structure your records before anything is moved from the old systems.",
+          },
+          {
+            title: "We implement",
+            body: "Stage by stage, on your data. Each stage is a working part of the system that your team starts using.",
+          },
+          {
+            title: "We maintain and extend",
+            body: "New modules, integrations and AI agents working on the data that is already in one place.",
+          },
+        ],
       },
       sections: [
         {
-          title: "What we do",
-          body: "We tailor and scale Open Mercato to fit your exact business operations. This covers CRM, inventory, invoicing, and procurement modules, whatever your team needs. Since the system is open-source, every custom feature belongs entirely to you. No user limits, no hidden fees, no surprise renewals.",
+          title: "What you get and what you own",
+          body: "A working Open Mercato system on your infrastructure, adapted to your processes. Your historical data cleaned and moved from the old tools. Full source code and documentation. You pay for implementation stages, hosting and, if you choose, our maintenance. There are no fees per user.",
         },
         {
-          title: "How it works",
-          body: "We start by mapping your data flows and isolating your bottlenecks. Before moving anything, we clean and structure your messy historical data so nothing gets lost. Then, we deploy Open Mercato directly onto your secure servers, customizing workflows like approval chains or deep integrations straight into your own codebase.",
+          title: "Why it does not depend on us",
+          body: "Open Mercato is open source. If we were gone tomorrow, another team could take over the code and keep developing your system. Accounts, the repository and servers are set up in your company's name from day one.",
         },
         {
-          title: "Who it's for",
-          body: "Mid-market enterprises tired of paying huge annual bills just for CRM and ERP user seats. Organisations that demand absolute control over their sensitive business data and secure infrastructure. Teams that want to update their software instantly without waiting for slow corporate vendor approvals.",
+          title: "Who this is for",
+          body: "B2B companies with 50 to 300 people that have outgrown a set of disconnected tools and want control over their data and costs. Especially where sales, warehouse and documents are closely linked and a ready-made CRM needs more and more workarounds.",
         },
         {
-          title: "What you get",
-          body: "Production-Ready ERP/CRM: A secure Open Mercato ecosystem running live on your cloud or hardware. Clean Data Migration: Your historical business records cleaned, structured, and safely moved from legacy systems. 100% Code Ownership: Full source code control with zero platform lock-in and no ongoing subscription renewals. Custom Extensions: Tailored workflows and modules built exactly for your team's daily operations.",
+          title: "When a ready-made tool is enough",
+          body: "If one ready-made tool covers what you need, we will say so. We also implement Monday, ClickUp, Pipedrive and Tillio, and we can start there and move to Open Mercato only when the company outgrows them.",
         },
       ],
+      faq: {
+        title: "Questions we hear most often",
+        items: [
+          {
+            q: "What is Open Mercato?",
+            a: "Open source code for building company systems: CRM, sales, warehouse and documents. We don't start from scratch. We start from proven modules and adapt them to your company.",
+          },
+          {
+            q: "Can we move data from our current system?",
+            a: "Yes. We put the data in order first and then move it. We agree the scope in the workshop.",
+          },
+          {
+            q: "Where does the system run?",
+            a: "On your servers or in your cloud. You decide.",
+          },
+          {
+            q: "How much does it cost?",
+            a: "You pay for implementation stages, hosting and, if you want, maintenance. After the workshop you know the price of the first stage before we start. There are no per-user fees.",
+          },
+          {
+            q: "What if we stop working together?",
+            a: "The system stays yours. The code is open and documented, so another team can continue the work.",
+          },
+        ],
+      },
       cta: {
-        microCopy: "Take full ownership of your enterprise software.",
-        label: "Book a consultation with our Founder",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        microCopy: "You know the price of each stage before we start it.",
+        label: "Book a call about Open Mercato",
+        href: "/book?z=open-source-erp-sekcja",
       },
     },
   },
   pl: {
     card: {
-      title: "ERP i CRM Open Source",
-      description: "Przedsiębiorstwo bez podatku licencyjnego. Wdrażamy Open Mercato w Twojej infrastrukturze. Jest w pełni konfigurowalny, należy do Ciebie i może być przez nas rozwijany.",
-      tags: ["Open Mercato", "ERP", "Brak blokady", "Własny hosting"],
+      title: "ERP i CRM na otwartym kodzie",
+      description: "Jeden system dla sprzedaży, magazynu, dokumentów i klientów, zbudowany na Open Mercato. Bez opłat za użytkownika, a kod i dane zostają w Twojej firmie.",
+      tags: ["Open Mercato", "ERP", "CRM", "Otwarty kod"],
     },
     page: {
-      eyebrow: "04 / Oprogramowanie dla przedsiębiorstw, zero opłat licencyjnych.",
-      headline: { text: "Moc przedsiębiorstwa.", accent: "Zero cen za stanowisko użytkownika." },
-      lead: "Wdrażamy Open Mercato, elastyczny ekosystem ERP i CRM open-source, bezpośrednio w Twojej własnej bezpiecznej infrastrukturze. Otrzymujesz pełną moc oprogramowania dla przedsiębiorstw bez blokady ze strony dostawcy, drogich subskrypcji za stanowisko i powolnych korporacyjnych cykli zakupów.",
+      eyebrow: "04 / ERP i CRM na otwartym kodzie",
+      headline: { text: "Jeden system dla całej firmy.", accent: "Bez opłat za użytkownika." },
+      lead: "Wdrażamy Open Mercato, otwartą podstawę dla systemów firmowych, która obejmuje CRM, sprzedaż, magazyn i dokumenty. Staje się jednym silnikiem Twojej firmy: wspólne dane, uporządkowane procesy i miejsce, w którym agenci AI pracują na prawdziwych informacjach firmy. Działa na Twoich serwerach lub w Twojej chmurze. Cenę pierwszego etapu znasz, zanim zaczniemy.",
       heroCta: {
-        microCopy: "Przestań płacić sześciocyfrowe rachunki za licencje użytkowników oprogramowania.",
-        label: "Porzuć ceny za stanowisko. Wybierz termin",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        microCopy: "Po pierwszej rozmowie dostajesz plan etapów z ceną pierwszego z nich.",
+        label: "Umów rozmowę",
+        href: "/book?z=open-source-erp-hero",
+      },
+      facts: [
+        { value: "0 zł", label: "opłat za użytkownika. Nowa osoba w zespole to nie nowa licencja" },
+        { value: "Kod i dane", label: "pełny kod źródłowy i dokumentacja zostają w Twojej firmie" },
+        { value: "Twoje serwery", label: "albo Twoja chmura. Ty decydujesz, gdzie działa system" },
+      ],
+      problems: {
+        title: "Brzmi znajomo?",
+        items: [
+          "Sprzedaż pracuje w jednym programie, magazyn w drugim, a dokumenty leżą na dyskach.",
+          "Każda nowa osoba w zespole to kolejna licencja.",
+          "Każda zmiana w systemie wymaga dostawcy, jego terminów i jego cennika.",
+          "Ten sam klient jest w trzech miejscach i w każdym wygląda trochę inaczej.",
+          "Raport dla zarządu powstaje ręcznie, z kilku eksportów do Excela.",
+          "Gotowy system wymaga coraz więcej obejść, bo Twoja firma działa po swojemu.",
+        ],
+      },
+      features: {
+        title: "Co obejmuje system",
+        items: [
+          {
+            title: "CRM i sprzedaż",
+            body: "Klienci, kontakty, szanse sprzedaży i oferty w jednym miejscu, z pełną historią każdej relacji.",
+          },
+          {
+            title: "Magazyn i produkty",
+            body: "Produkty, stany i dostępność połączone ze sprzedażą, więc oferta opiera się na tym, co naprawdę masz.",
+          },
+          {
+            title: "Dokumenty",
+            body: "Oferty, umowy i inne dokumenty powstają z danych, które już są w systemie, a nie są przepisywane z arkuszy.",
+          },
+          {
+            title: "Moduły na miarę",
+            body: "Dokładamy to, czego potrzebuje Twoja firma, a czego nie ma żaden gotowy system. Kod jest otwarty, więc nic nie blokuje dostawca.",
+          },
+          {
+            title: "Połączenia z Twoimi narzędziami",
+            body: "Księgowość, poczta, sklep internetowy i inne programy, z których dalej korzystasz, wymieniają dane z systemem.",
+          },
+          {
+            title: "Agenci AI na danych firmy",
+            body: "Gdy dane są w jednym miejscu, agenci mogą przygotowywać oferty, zestawienia i przypomnienia na prawdziwych informacjach.",
+          },
+        ],
+      },
+      steps: {
+        title: "Jak pracujemy",
+        items: [
+          {
+            title: "Mapujemy",
+            body: "Na warsztacie przechodzimy przez to, jak informacje płyną między działami, i ustalamy, od których modułów zacząć. Dostajesz plan etapów z ceną pierwszego.",
+          },
+          {
+            title: "Porządkujemy dane",
+            body: "Czyścimy i układamy dane, zanim cokolwiek przeniesiemy ze starych systemów.",
+          },
+          {
+            title: "Wdrażamy",
+            body: "Etap po etapie, na Twoich danych. Każdy etap to działająca część systemu, z której zespół zaczyna korzystać.",
+          },
+          {
+            title: "Rozwijamy",
+            body: "Dokładamy moduły, połączenia z innymi narzędziami i agentów AI, którzy pracują na danych zebranych już w jednym miejscu.",
+          },
+        ],
       },
       sections: [
         {
-          title: "Co robimy",
-          body: "Dostosowujemy i skalujemy Open Mercato, aby pasował do Twoich dokładnych operacji biznesowych. Obejmuje to moduły CRM, zapasów, fakturowania i zaopatrzenia, czegokolwiek potrzebuje Twój zespół. Ponieważ system jest open-source, każda niestandardowa funkcja należy w całości do Ciebie. Brak limitów użytkowników, brak ukrytych opłat, brak zaskakujących odnowień.",
+          title: "Co dostajesz i co należy do Ciebie",
+          body: "Działający system Open Mercato na Twojej infrastrukturze, dopasowany do Twoich procesów. Dane historyczne uporządkowane i przeniesione ze starych narzędzi. Pełny kod źródłowy i dokumentację. Płacisz za etapy wdrożenia, serwery i, jeśli zechcesz, za nasze utrzymanie. Nie ma opłat za użytkownika.",
         },
         {
-          title: "Jak to działa",
-          body: "Zaczynamy od mapowania Twoich przepływów danych i izolowania Twoich wąskich gardeł. Przed przeniesieniem czegokolwiek czyścimy i strukturyzujemy Twoje nieuporządkowane dane historyczne, aby nic nie zostało utracone. Następnie wdrażamy Open Mercato bezpośrednio na Twoich bezpiecznych serwerach, dostosowując przepływy pracy, takie jak łańcuchy zatwierdzeń lub głębokie integracje, bezpośrednio do Twojej własnej bazy kodu.",
+          title: "Dlaczego nie jesteś od nas zależny",
+          body: "Open Mercato to otwarty kod. Gdyby nas zabrakło, inny zespół może przejąć kod i dalej rozwijać Twój system. Konta, repozytorium i serwery od początku są zakładane na Twoją firmę.",
         },
         {
           title: "Dla kogo to jest",
-          body: "Przedsiębiorstwa ze średniego segmentu rynku zmęczone płaceniem ogromnych rocznych rachunków tylko za stanowiska użytkowników CRM i ERP. Organizacje, które wymagają absolutnej kontroli nad swoimi wrażliwymi danymi biznesowymi i bezpieczną infrastrukturą. Zespoły, które chcą natychmiast aktualizować swoje oprogramowanie bez czekania na powolne korporacyjne zatwierdzenia dostawców.",
+          body: "Dla firm B2B zatrudniających od 50 do 300 osób, które wyrosły z zestawu niepołączonych narzędzi i chcą mieć kontrolę nad danymi i kosztami. Szczególnie tam, gdzie sprzedaż, magazyn i dokumenty są ze sobą mocno powiązane, a gotowy CRM wymaga coraz więcej obejść.",
         },
         {
-          title: "Co otrzymujesz",
-          body: "ERP/CRM gotowy do produkcji: Bezpieczny ekosystem Open Mercato działający na Twojej chmurze lub sprzęcie. Czysta migracja danych: Twoje historyczne dane biznesowe wyczyszczone, ustrukturyzowane i bezpiecznie przeniesione ze starszych systemów. 100% własności kodu: Pełna kontrola nad kodem źródłowym bez blokady platformy i bez stałych odnowień subskrypcji. Niestandardowe rozszerzenia: Dostosowane przepływy pracy i moduły zbudowane dokładnie dla codziennych operacji Twojego zespołu.",
+          title: "Kiedy wystarczy gotowe narzędzie",
+          body: "Jeśli wystarczy Ci jedno gotowe narzędzie, powiemy to wprost. Wdrażamy też Monday, ClickUp, Pipedrive i Tillio. Możemy zacząć od nich i przejść na Open Mercato dopiero wtedy, gdy firma z nich wyrośnie.",
         },
       ],
+      faq: {
+        title: "Najczęstsze pytania",
+        items: [
+          {
+            q: "Czym jest Open Mercato?",
+            a: "To otwarty kod do budowy systemów firmowych: CRM, sprzedaży, magazynu i dokumentów. Nie zaczynamy od zera, tylko od sprawdzonych modułów, które dopasowujemy do Twojej firmy.",
+          },
+          {
+            q: "Czy możemy przenieść dane z obecnego systemu?",
+            a: "Tak. Najpierw porządkujemy dane, potem je przenosimy. Zakres ustalamy na warsztacie.",
+          },
+          {
+            q: "Gdzie działa system?",
+            a: "Na Twoich serwerach albo w Twojej chmurze. Decydujesz Ty.",
+          },
+          {
+            q: "Ile to kosztuje?",
+            a: "Płacisz za etapy wdrożenia, serwery i, jeśli chcesz, za utrzymanie. Po warsztacie znasz cenę pierwszego etapu, zanim zaczniemy. Nie ma opłat za użytkownika.",
+          },
+          {
+            q: "Co, jeśli przestaniemy współpracować?",
+            a: "System zostaje Twój. Kod jest otwarty i opisany, więc inny zespół może kontynuować prace.",
+          },
+        ],
+      },
       cta: {
-        microCopy: "Przejmij pełną kontrolę nad swoim oprogramowaniem dla przedsiębiorstw.",
-        label: "Umów się na konsultację z naszym założycielem",
-        href: "https://cal.com/szymon-bazan-iahn2z",
+        microCopy: "Cenę każdego etapu znasz, zanim go zaczniemy.",
+        label: "Umów rozmowę o Open Mercato",
+        href: "/book?z=open-source-erp-sekcja",
       },
     },
   },

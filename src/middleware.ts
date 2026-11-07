@@ -2,6 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { type NextFetchEvent, type NextRequest, NextResponse } from "next/server";
 import { trackAICrawlerRequest } from "@datafast/ai-crawl";
 import { routing } from "@/i18n/routing";
+import { legalFlowHref } from "@/content/links";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -19,7 +20,7 @@ export default function middleware(request: NextRequest, event: NextFetchEvent) 
 
   // The LegalFlow subdomain now lives at legal-flow.pl.
   if (host === "restrukturyzacja.boosterai.pl") {
-    return NextResponse.redirect("https://legal-flow.pl", 308);
+    return NextResponse.redirect(legalFlowHref("/", "restrukturyzacja-subdomain", "pl"), 308);
   }
 
   // Crawler-facing files (robots.txt, sitemap.xml, llms.txt, ...) pass through the matcher only

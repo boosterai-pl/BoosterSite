@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getJobRole, getJobRoles, loadSite } from "@/content";
-import { toSiteLocale, localeHrefPrefix } from "@/i18n/locale";
+import { toSiteLocale, localeHrefPrefix, localeAlternates } from "@/i18n/locale";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
@@ -37,12 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description: role.description,
     alternates: {
-      canonical: url,
-      languages: {
-        en: `https://boosterai.pl/careers/${role.slug}`,
-        pl: `https://boosterai.pl/pl/careers/${role.slug}`,
-        "x-default": `https://boosterai.pl/careers/${role.slug}`,
-      },
+      ...localeAlternates(locale, `/careers/${role.slug}`),
     },
     openGraph: {
       title,
@@ -67,7 +62,7 @@ export default async function CareersRolePage({ params }: Props) {
   return (
     <div className="careers-page">
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix} />
       <main>
         <section className="block light practice-hero">
           <div className="container-inner">

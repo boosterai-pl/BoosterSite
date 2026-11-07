@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getBlogPosts } from "@/content";
-import { localeHrefPrefix, toSiteLocale } from "@/i18n/locale";
+import { localeHrefPrefix, localeUrl, toSiteLocale } from "@/i18n/locale";
 import { BlogCard } from "@/components/BlogCard";
 
 
@@ -12,7 +12,8 @@ type Props = {
 
 const POSTS_PER_PAGE = 10;
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const sp = await searchParams;
   const page = Number(sp.page) || 1;
   const suffix = page > 1 ? ` — strona ${page}` : "";
@@ -21,14 +22,14 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     description:
       "Praktyczne artykuly o automatyzacji AI, wdrozeniach CRM i budowaniu oprogramowania B2B. Field notes z agencji Booster.",
     alternates: {
-      canonical: `https://boosterai.pl/blog${page > 1 ? `?page=${page}` : ""}`,
+      canonical: `${localeUrl(locale, "/blog")}${page > 1 ? `?page=${page}` : ""}`,
     },
     openGraph: {
       title: `Blog${suffix} | Booster — AI-Native Agency`,
       description:
         "Praktyczne artykuly o automatyzacji AI, wdrozeniach CRM i budowaniu oprogramowania B2B.",
       type: "website",
-      url: `https://boosterai.pl/blog${page > 1 ? `?page=${page}` : ""}`,
+      url: `${localeUrl(locale, "/blog")}${page > 1 ? `?page=${page}` : ""}`,
     },
   };
 }
@@ -48,8 +49,8 @@ export default async function BlogPage({ params, searchParams }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://boosterai.pl" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://boosterai.pl/blog" },
+      { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(locale) },
+      { "@type": "ListItem", position: 2, name: "Blog", item: localeUrl(locale, "/blog") },
     ],
   };
 

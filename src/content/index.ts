@@ -3,8 +3,9 @@
 //
 //   home/en.ts, home/pl.ts      home page copy, nav, footer, booking
 //   services/<slug>.ts          service card + /practices/<slug> page
-//   case-studies.ts             "Work" section on the home page
-//   team.ts                     "Team" section on the home page
+//   case-studies.ts             "Realizacje" (cases) section on the home page
+//   team.ts                     team section on the home page and /book
+//   legalflow.ts                the /work/legalflow page
 //   careers/<slug>.<locale>.md  job roles (/careers, /careers/<slug>)
 //   blog/<slug>.<locale>.md     blog posts (/blog, /blog/<slug>)
 //
@@ -13,6 +14,7 @@
 import type {
   BlogPost,
   EmploymentType,
+  HomeCopy,
   JobRole,
   Locale,
   PracticeContent,
@@ -23,6 +25,7 @@ import { homePl } from "./home/pl";
 import { services } from "./services";
 import { caseStudies } from "./case-studies";
 import { team } from "./team";
+import { legalflow } from "./legalflow";
 import {
   countWords,
   optionalBoolean,
@@ -42,38 +45,53 @@ const home = { en: homeEn, pl: homePl } as const;
 const toId = (index: number): string => String(index + 1).padStart(2, "0");
 
 // Internal links are written without a locale prefix (e.g. "/careers").
-// On the Polish site they need the /pl prefix so navigation stays in-locale.
+// Every page lives under /en or /pl, so the prefix is added here.
 function localizeHref(href: string, locale: SiteLocale): string {
-  if (locale !== "pl") return href;
-  if (!href.startsWith("/") || href.startsWith("/pl/") || href === "/pl") return href;
-  return href === "/" ? "/pl" : `/pl${href}`;
+  if (!href.startsWith("/") || href.startsWith("//")) return href;
+  if (/^\/(en|pl)(\/|$|#|\?)/.test(href)) return href;
+  if (href === "/") return `/${locale}`;
+  return href.startsWith("/#") || href.startsWith("/?") ? `/${locale}${href.slice(1)}` : `/${locale}${href}`;
+}
+
+// Polish typography: a one-letter word (a, i, o, u, w, z) must not be left at the end of a line,
+// so the space after it becomes a non-breaking space.
+const ORPHAN = /(^|[\s(„"])([aiouwzAIOUWZ]) (?=\S)/g;
+function keepOrphans(text: string): string {
+  // Run twice so that pairs like "a w " are both caught.
+  const kept = text.replace(ORPHAN, "$1$2\u00a0").replace(ORPHAN, "$1$2\u00a0");
+  // Longer texts: keep the last two words together, so one word never ends up alone on the last line.
+  return kept.split(" ").length > 2 ? kept.replace(/ (\S{1,18})$/, "\u00a0$1") : kept;
+}
+
+// Applies localizeHref to every `href` string in a content tree (CTAs, practice pages, ...),
+// and in Polish keeps one-letter words with the next word.
+function localizeHrefs<T>(value: T, locale: SiteLocale): T {
+  if (typeof value === "string") return (locale === "pl" ? keepOrphans(value) : value) as T;
+  if (Array.isArray(value)) return value.map((v) => localizeHrefs(v, locale)) as T;
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [
+        k,
+        k === "href" && typeof v === "string" ? localizeHref(v, locale) : localizeHrefs(v, locale),
+      ]),
+    ) as T;
+  }
+  return value;
 }
 
 export function loadSite(locale: SiteLocale = "en"): SiteContent {
   const copy = home[locale];
+  return localizeHrefs(buildSite(copy, locale), locale);
+}
+
+function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
   return {
     ...copy,
-    nav: copy.nav.map((link) => ({ ...link, href: localizeHref(link.href, locale) })),
-    services: {
-      ...copy.services,
-      items: services.map((s, i) => ({ id: toId(i), slug: s.slug, ...s[locale].card })),
-    },
-    cases: {
-      ...copy.cases,
-      items: caseStudies.map((c, i) => ({ id: toId(i), ...c[locale] })),
-    },
-    team: {
-      ...copy.team,
-      members: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], photo: m.photo })),
-    },
-    footer: {
-      ...copy.footer,
-      columns: copy.footer.columns.map((col) => ({
-        ...col,
-        links: col.links.map((link) => ({ ...link, href: localizeHref(link.href, locale) })),
-      })),
-    },
+    services: services.map((s, i) => ({ id: toId(i), slug: s.slug, ...s[locale].card })),
+    cases: caseStudies.map((c, i) => ({ id: toId(i), featured: c.featured, example: c.example, ...c[locale] })),
+    team: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], bio: m.bio[locale], photo: m.photo, linkedin: m.linkedin })),
     practices: services.map((s) => ({ slug: s.slug, ...s[locale].page })),
+    legalflow: legalflow[locale],
   };
 }
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getBlogPost, getBlogPosts } from "@/content";
-import { localeHrefPrefix, toSiteLocale } from "@/i18n/locale";
+import { localeHrefPrefix, localeUrl, toSiteLocale } from "@/i18n/locale";
 import { BlogPost } from "@/components/BlogPost";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = post.seoTitle ?? post.title;
   const description = post.seoDescription ?? post.description;
-  const canonicalUrl = `https://boosterai.pl/blog/${post.slug}`;
+  const canonicalUrl = localeUrl(locale, `/blog/${post.slug}`);
 
   return {
     title: `${title} | Booster`,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: "article",
-      url: `https://boosterai.pl/blog/${post.slug}`,
+      url: canonicalUrl,
       publishedTime: post.date,
       images: [
         {

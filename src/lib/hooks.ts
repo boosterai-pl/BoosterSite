@@ -78,51 +78,6 @@ export function useScrolledNav(): { scrolled: boolean; onLight: boolean } {
   return { scrolled, onLight };
 }
 
-export function useCursorBlob(enabled: boolean) {
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!enabled) return;
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let tx = x;
-    let ty = y;
-    let raf = 0;
-
-    const move = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-    };
-    const tick = () => {
-      x += (tx - x) * 0.12;
-      y += (ty - y) * 0.12;
-      el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("mousemove", move);
-    raf = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      cancelAnimationFrame(raf);
-    };
-  }, [enabled]);
-
-  return ref;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Analytics: click delegation                                        */
-/* ------------------------------------------------------------------ */
-
-/**
- * Single global click listener that captures all trackable interactions.
- * Runs in SiteRuntime so Server Components stay untouched.
- */
 export function useClickTracking(): void {
   // Track last nav click timestamp to distinguish scroll vs nav arrivals
   const lastNavClick = useRef(0);
@@ -327,5 +282,63 @@ export function useEngagementTime(): void {
       io.disconnect();
       window.removeEventListener("beforeunload", sendEngagement);
     };
+  }, []);
+}
+
+/**
+ * Datafast goals for clicks (the form goals are sent by ContactForm). See docs/customer-journeys.md.
+ * cta_click: a link to the form, with the button id from ?z=; legalflow_click: a link to legal-flow.pl;
+ * calendar_click: the calendar link on /book; phone_click and email_click: tel: and mailto: links.
+ * On the home page also scroll_to_<section>, once per visit, when a section comes into view.
+ */
+const SCROLL_GOAL_SECTIONS = ["pain", "stages", "work", "foundation", "process", "data", "not-for", "team", "faq", "contact"];
+
+export function useDatafastGoals(): void {
+  useEffect(() => {
+    if (!/^\/(pl|en)\/?$/.test(window.location.pathname) || !("IntersectionObserver" in window)) return;
+    const seen = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.id;
+          if (!entry.isIntersecting || seen.has(id)) continue;
+          seen.add(id);
+          observer.unobserve(entry.target);
+          window.datafast?.(`scroll_to_${id.replace(/-/g, "_")}`);
+        }
+      },
+      // Counts once the section reaches the upper 60% of the screen; works for sections taller than the screen too.
+      { rootMargin: "0px 0px -40% 0px" },
+    );
+    for (const id of SCROLL_GOAL_SECTIONS) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      const anchor = (e.target as HTMLElement).closest("a");
+      const href = anchor?.getAttribute("href");
+      if (!anchor || !href || !window.datafast) return;
+      const page = window.location.pathname;
+      try {
+        if (href.startsWith("tel:")) return window.datafast("phone_click", { page });
+        if (href.startsWith("mailto:")) return window.datafast("email_click", { page });
+        const url = new URL(href, window.location.href);
+        if (url.hostname === "cal.com") return window.datafast("calendar_click", { page });
+        if (url.hostname.endsWith("legal-flow.pl")) {
+          return window.datafast("legalflow_click", { placement: url.searchParams.get("utm_campaign") ?? "other", page });
+        }
+        if (url.origin === window.location.origin && /^\/(pl|en)\/book\/?$/.test(url.pathname) && page !== url.pathname) {
+          return window.datafast("cta_click", { button: url.searchParams.get("z") ?? "none", page });
+        }
+      } catch {
+        /* tracking must never break a link */
+      }
+    }
+    document.addEventListener("click", handler, { capture: true });
+    return () => document.removeEventListener("click", handler, { capture: true });
   }, []);
 }
