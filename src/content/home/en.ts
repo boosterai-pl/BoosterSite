@@ -341,7 +341,9 @@ export const homeEn: HomeCopy = {
       topicLabel: "What is this about?",
       topicPlaceholder: "E.g. we build proposals by hand from several spreadsheets and it takes days",
       consent:
-        "I agree to be contacted about my request. The data controller is Sales Booster Sp. z o.o., based in Wrocław, Poland.",
+        "I agree to be contacted by email and phone about my request, using the details given above. The data controller is Sales Booster Sp. z o.o., based in Wrocław, Poland.",
+      marketingConsent:
+        "I would like to receive news about services, updates and events from Sales Booster Sp. z o.o., including a newsletter. I can withdraw this consent at any time.",
       privacyLabel: "Privacy policy",
       privacyHref: "https://boosterai.pl/privacy-policy/",
       honeypotLabel: "Leave this field empty",

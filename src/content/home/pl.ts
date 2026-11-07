@@ -341,7 +341,9 @@ export const homePl: HomeCopy = {
       topicLabel: "Czego dotyczy sprawa?",
       topicPlaceholder: "Np. oferty robimy ręcznie z kilku Exceli i trwa to kilka dni",
       consent:
-        "Zgadzam się na kontakt w sprawie mojego zgłoszenia. Administratorem danych jest Sales Booster Sp. z o.o. z siedzibą we Wrocławiu.",
+        "Zgadzam się na kontakt mailowy i telefoniczny w sprawie mojego zgłoszenia, na podany wyżej adres e-mail i numer telefonu. Administratorem danych jest Sales Booster Sp. z o.o. z siedzibą we Wrocławiu.",
+      marketingConsent:
+        "Chcę otrzymywać od Sales Booster Sp. z o.o. informacje o usługach, nowościach i wydarzeniach, także w newsletterze. Zgodę mogę wycofać w każdej chwili.",
       privacyLabel: "Polityka prywatności",
       privacyHref: "https://boosterai.pl/privacy-policy/",
       honeypotLabel: "Nie wypełniaj tego pola",

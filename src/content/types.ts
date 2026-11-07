@@ -261,6 +261,8 @@ export type ContactFormCopy = {
   readonly topicLabel: string;
   readonly topicPlaceholder: string;
   readonly consent: string;
+  /** Optional second checkbox: consent to marketing messages (newsletter, news about services). */
+  readonly marketingConsent: string;
   readonly privacyLabel: string;
   readonly privacyHref: string;
   readonly honeypotLabel: string;

@@ -17,6 +17,7 @@ type Body = {
   topic?: unknown;
   source?: unknown;
   website?: unknown;
+  marketing?: unknown;
 };
 
 const text = (value: unknown, max: number): string =>
@@ -54,6 +55,7 @@ export async function POST(request: Request) {
     `**Telefon:** ${phone}`,
     name ? `**Imię:** ${name}` : null,
     `**Źródło:** ${source}`,
+    `**Zgoda marketingowa:** ${body.marketing === true ? "tak" : "nie"}`,
     "",
     "**Czego dotyczy sprawa:**",
     topic,

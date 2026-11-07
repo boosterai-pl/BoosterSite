@@ -82,6 +82,7 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
           topic,
           website: String(form.get("website") ?? ""),
           source: `${source}${sourceId ? ` (${sourceId})` : ""}`,
+          marketing: form.get("marketing") === "on",
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
@@ -166,6 +167,11 @@ export function ContactForm({ copy, source, defaultDialCode = "+48" }: Props) {
           </a>
           {errors.consent ? <em className="contact-form__field-error">{errors.consent}</em> : null}
         </span>
+      </label>
+
+      <label className="contact-form__consent">
+        <input type="checkbox" name="marketing" />
+        <span>{copy.marketingConsent}</span>
       </label>
 
       <label className="contact-form__trap" aria-hidden="true">
