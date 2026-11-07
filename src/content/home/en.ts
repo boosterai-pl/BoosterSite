@@ -33,10 +33,29 @@ export const homeEn: HomeCopy = {
       lead: "We put AI at the centre of your company. We bring order to processes, automate repetitive work and build new services, so the business can grow faster than the headcount. We take you through the whole transformation, in stages, with a fixed price for each stage.",
       primaryCta: { label: "Book a free call", href: "/book?z=hero" },
       secondaryCta: { label: "See what it looks like in practice", href: "#work" },
-      photo: {
-        src: "/assets/hero-team.jpg",
-        alt: "The Booster team",
-        caption: "The Booster team",
+      chart: {
+        title: "How a company grows with AI at its centre",
+        legend: { scale: "Company scale", team: "Team" },
+        steps: [
+          {
+            title: "First experiments",
+            text: "People try AI on their own accounts. Every new client means more manual work and more people to hire.",
+            note: "Most companies are here today",
+          },
+          {
+            title: "Data in order",
+            text: "Shared data and clear processes. It is clear what people do, what AI does and where the one source of truth is.",
+          },
+          {
+            title: "First processes on AI",
+            text: "AI agents take over the repetitive work. The same team handles more orders.",
+          },
+          {
+            title: "AI at the centre",
+            text: "The company grows faster than the team. People make decisions and build new services.",
+          },
+        ],
+        caption: "Illustration only, not data from a specific project.",
       },
     },
     facts: [

@@ -107,7 +107,13 @@ export type HomeLanding = {
     readonly lead: string;
     readonly primaryCta: { readonly label: string; readonly href: string };
     readonly secondaryCta: { readonly label: string; readonly href: string };
-    readonly photo: { readonly src: string; readonly alt: string; readonly caption: string };
+    /** Illustrative growth chart next to the headline (no real data, labelled as such). */
+    readonly chart: {
+      readonly title: string;
+      readonly legend: { readonly scale: string; readonly team: string };
+      readonly steps: readonly { readonly title: string; readonly text: string; readonly note?: string }[];
+      readonly caption: string;
+    };
   };
   /** Three short, true facts under the hero. */
   readonly facts: readonly { readonly value: string; readonly label: string }[];

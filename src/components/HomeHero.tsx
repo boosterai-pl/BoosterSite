@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { GrowthChart } from "@/components/GrowthChart";
 import type { SiteContent } from "@/content/types";
 
 type Props = { content: SiteContent["home"]["hero"]; facts: SiteContent["home"]["facts"] };
@@ -34,17 +34,7 @@ export function HomeHero({ content, facts }: Props) {
               </a>
             </div>
           </div>
-          <figure className="home-hero-photo" data-reveal>
-            <Image
-              src={content.photo.src}
-              alt={content.photo.alt}
-              width={1000}
-              height={1000}
-              sizes="(max-width: 900px) 100vw, 40vw"
-              priority
-            />
-            <figcaption>{content.photo.caption}</figcaption>
-          </figure>
+          <GrowthChart content={content.chart} />
         </div>
 
         <dl className="home-facts" data-reveal-stagger>

@@ -33,10 +33,29 @@ export const homePl: HomeCopy = {
       lead: "Stawiamy AI w centrum Twojej firmy. Porządkujemy procesy, automatyzujemy powtarzalną pracę i budujemy nowe usługi, żeby firma mogła rosnąć szybciej, niż rośnie zespół. Prowadzimy przez całą transformację, etapami i ze stałą ceną każdego etapu.",
       primaryCta: { label: "Umów bezpłatną rozmowę", href: "/book?z=hero" },
       secondaryCta: { label: "Zobacz, jak to wygląda w praktyce", href: "#work" },
-      photo: {
-        src: "/assets/hero-team.jpg",
-        alt: "Zespół Boostera",
-        caption: "Zespół Boostera",
+      chart: {
+        title: "Jak rośnie firma z AI w centrum",
+        legend: { scale: "Skala firmy", team: "Zespół" },
+        steps: [
+          {
+            title: "Pierwsze próby",
+            text: "Ludzie testują AI na własnych kontach. Każdy nowy klient to więcej ręcznej pracy i kolejne osoby do zatrudnienia.",
+            note: "Tu jest dziś większość firm",
+          },
+          {
+            title: "Porządek w danych",
+            text: "Wspólne dane i jasne procesy. Wiadomo, co robi człowiek, a co AI, i gdzie jest jedno źródło prawdy.",
+          },
+          {
+            title: "Pierwsze procesy na AI",
+            text: "Powtarzalną pracę przejmują agenci AI. Ten sam zespół obsługuje więcej zleceń.",
+          },
+          {
+            title: "AI w centrum firmy",
+            text: "Firma rośnie szybciej niż zespół. Ludzie podejmują decyzje i budują nowe usługi.",
+          },
+        ],
+        caption: "Ilustracja poglądowa, nie dane z konkretnego wdrożenia.",
       },
     },
     facts: [
