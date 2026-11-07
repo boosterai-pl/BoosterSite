@@ -144,23 +144,28 @@ export const caseStudies: readonly CaseStudyEntry[] = [
     },
   },
   {
-    example: true,
     pl: {
-      kind: "Przykład zastosowania",
+      kind: "Custom ERP system",
       title: "Opcje na salach w jednym kalendarzu, a nie w mailach",
       company: "Agencje eventowe, obiekty konferencyjne i hotele.",
       summary:
         "Opcje na sale zakłada się dziś telefonicznie, a terminy żyją w prywatnych Excelach. Łączymy obiekty, opcje i oferty w jednym systemie: każda opcja ma datę ważności, zajęty termin ma kolejkę chętnych, a klient wybiera obiekt przez link zamiast z PDF-a.",
-      metrics: [],
+      metrics: [
+        { value: "Jeden kalendarz", label: "opcji na wszystkie obiekty, z datą ważności każdej" },
+        { value: "Oferta jako link", label: "klient wybiera obiekt bez PDF-ów i wątków maili" },
+      ],
       link: { label: "Porozmawiajmy o Twoim procesie", href: "/book?z=usecase-eventy" },
     },
     en: {
-      kind: "Use case",
+      kind: "Custom ERP system",
       title: "Venue options in one calendar, not in email threads",
       company: "Event agencies, conference venues and hotels.",
       summary:
         "Today, options on rooms are placed by phone and the dates live in private spreadsheets. We put venues, options and offers in one system: every option has an expiry date, a taken date has a waiting queue, and the client picks a venue through a link instead of a PDF.",
-      metrics: [],
+      metrics: [
+        { value: "One calendar", label: "of options across all venues, each with an expiry date" },
+        { value: "Offer as a link", label: "the client picks a venue without PDFs or email threads" },
+      ],
       link: { label: "Talk to us about your process", href: "/book?z=usecase-events" },
     },
   },

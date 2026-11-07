@@ -4294,3 +4294,8 @@ h3,
 .cta h2 .word-reveal:has(> .serif) {
   display: block;
 }
+
+/* Realizacje: if the last card would sit alone in its row, it takes the full width (same card style). */
+.cases .case:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+}
