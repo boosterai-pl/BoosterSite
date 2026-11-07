@@ -50,8 +50,8 @@ export function Booking({ content, members }: Props) {
               <span className="mono booking-proof-kind">{content.proof.kind}</span>
               <h2 className="h3">{content.proof.title}</h2>
               <p>{content.proof.body}</p>
-              <a href={content.proof.link.href} target="_blank" rel="noopener noreferrer">
-                {content.proof.link.label} <span className="arrow">↗</span>
+              <a href={content.proof.link.href}>
+                {content.proof.link.label} <span className="arrow">→</span>
               </a>
             </aside>
             <div className="booking-trust">

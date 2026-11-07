@@ -5,6 +5,7 @@
 //   services/<slug>.ts          service card + /practices/<slug> page
 //   case-studies.ts             "Realizacje" (cases) section on the home page
 //   team.ts                     team section on the home page and /book
+//   legalflow.ts                the /work/legalflow page
 //   careers/<slug>.<locale>.md  job roles (/careers, /careers/<slug>)
 //   blog/<slug>.<locale>.md     blog posts (/blog, /blog/<slug>)
 //
@@ -24,6 +25,7 @@ import { homePl } from "./home/pl";
 import { services } from "./services";
 import { caseStudies } from "./case-studies";
 import { team } from "./team";
+import { legalflow } from "./legalflow";
 import {
   countWords,
   optionalBoolean,
@@ -77,6 +79,7 @@ function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
     cases: caseStudies.map((c, i) => ({ id: toId(i), featured: c.featured, ...c[locale] })),
     team: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], bio: m.bio[locale], photo: m.photo })),
     practices: services.map((s) => ({ slug: s.slug, ...s[locale].page })),
+    legalflow: legalflow[locale],
   };
 }
 

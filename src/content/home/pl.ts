@@ -12,7 +12,6 @@ export const homePl: HomeCopy = {
   nav: [
     { label: "Jak pracujemy", href: "#process" },
     { label: "Realizacje", href: "#work" },
-    { label: "LegalFlow", href: "https://legal-flow.pl" },
     { label: "O nas", href: "#team" },
     { label: "Kariera", href: "/careers" },
   ],
@@ -193,7 +192,7 @@ export const homePl: HomeCopy = {
         links: [
           { label: "Jak pracujemy", href: "/#process" },
           { label: "Realizacje", href: "/#work" },
-          { label: "LegalFlow", href: "https://legal-flow.pl" },
+          { label: "LegalFlow", href: "/work/legalflow" },
           { label: "Zespół", href: "/#team" },
           { label: "Kariera", href: "/careers" },
         ],
@@ -222,7 +221,7 @@ export const homePl: HomeCopy = {
       kind: "Nasz produkt",
       title: "LegalFlow",
       body: "Do 70% mniej pracy administracyjnej w kancelariach restrukturyzacyjnych. Zbudowaliśmy go i sami utrzymujemy.",
-      link: { label: "Zobacz LegalFlow", href: "https://legal-flow.pl" },
+      link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
     },
     calendar: {
       text: "Nie chcesz zostawiać numeru?",

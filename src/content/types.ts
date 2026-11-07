@@ -261,6 +261,8 @@ export type SiteContent = {
     readonly bottom: readonly string[];
   };
   readonly practices: readonly PracticeContent[];
+  /** The /work/legalflow page. */
+  readonly legalflow: PracticePage;
   readonly booking: BookingContent;
 };
 
@@ -269,7 +271,7 @@ export type SiteContent = {
 // ---------------------------------------------------------------------------
 
 /** Everything in src/content/home/en.ts and src/content/home/pl.ts. */
-export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices">;
+export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices" | "legalflow">;
 
 export type ServiceCard = {
   readonly title: string;

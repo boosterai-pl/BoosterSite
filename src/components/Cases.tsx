@@ -49,8 +49,8 @@ function CaseCard({ item, labels }: { item: CaseStudy; labels: Props["content"][
       ) : null}
       {item.when ? <p className="case-when mono">{item.when}</p> : null}
       {item.link ? (
-        <a href={item.link.href} className="case-link" target="_blank" rel="noopener noreferrer">
-          {item.link.label} <span className="arrow">↗</span>
+        <a href={item.link.href} className="case-link">
+          {item.link.label} <span className="arrow">→</span>
         </a>
       ) : null}
     </article>

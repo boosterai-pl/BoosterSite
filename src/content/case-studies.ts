@@ -13,7 +13,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
       before: "In a restructuring firm much of the day goes into case paperwork, letters to creditors and watching court deadlines.",
       did: "LegalFlow generates case documents from the firm's own templates, handles communication with creditors and tracks deadlines. It turns an hour-long client interview into a structured draft. The assistant works by text, dictation and phone.",
       after: "Up to 70% less administrative work. The firm handles more cases with the same team.",
-      link: { label: "See LegalFlow", href: "https://legal-flow.pl" },
+      link: { label: "More about LegalFlow", href: "/work/legalflow" },
     },
     pl: {
       kind: "Nasz produkt",
@@ -22,7 +22,7 @@ export const caseStudies: readonly CaseStudyEntry[] = [
       before: "W kancelarii restrukturyzacyjnej duża część dnia idzie na dokumenty sprawy, korespondencję z wierzycielami i pilnowanie terminów.",
       did: "LegalFlow generuje dokumentację sprawy z szablonów kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Z godzinnej rozmowy z klientem robi uporządkowany szkic dokumentu. Asystent działa tekstem, dyktowaniem i przez telefon.",
       after: "Do 70% mniej pracy administracyjnej. Kancelaria prowadzi więcej spraw tym samym zespołem.",
-      link: { label: "Zobacz LegalFlow", href: "https://legal-flow.pl" },
+      link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
     },
   },
   {

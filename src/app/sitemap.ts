@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...both("/book", "monthly", 0.9),
     ...both("/blog", "daily", 0.9),
     ...both("/careers", "weekly", 0.7),
+    ...both("/work/legalflow", "monthly", 0.8),
   ];
 
   for (const slug of getPracticeSlugs()) {

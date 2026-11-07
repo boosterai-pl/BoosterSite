@@ -12,7 +12,6 @@ export const homeEn: HomeCopy = {
   nav: [
     { label: "How we work", href: "#process" },
     { label: "Work", href: "#work" },
-    { label: "LegalFlow", href: "https://legal-flow.pl" },
     { label: "About", href: "#team" },
     { label: "Careers", href: "/careers" },
   ],
@@ -193,7 +192,7 @@ export const homeEn: HomeCopy = {
         links: [
           { label: "How we work", href: "/#process" },
           { label: "Work", href: "/#work" },
-          { label: "LegalFlow", href: "https://legal-flow.pl" },
+          { label: "LegalFlow", href: "/work/legalflow" },
           { label: "Team", href: "/#team" },
           { label: "Careers", href: "/careers" },
         ],
@@ -222,7 +221,7 @@ export const homeEn: HomeCopy = {
       kind: "Our product",
       title: "LegalFlow",
       body: "Up to 70% less administrative work in Polish restructuring law firms. We built it and run it ourselves.",
-      link: { label: "See LegalFlow", href: "https://legal-flow.pl" },
+      link: { label: "More about LegalFlow", href: "/work/legalflow" },
     },
     calendar: {
       text: "Rather not leave your number?",

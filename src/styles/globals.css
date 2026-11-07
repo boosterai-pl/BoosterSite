@@ -3020,3 +3020,12 @@ html.js-reveal .word-reveal.visible > span {
     grid-template-columns: 1fr;
   }
 }
+.btn-quiet-light {
+  border-color: var(--line-dark);
+  color: var(--ink);
+}
+.btn-quiet-light:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}

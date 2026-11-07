@@ -18,7 +18,7 @@
 
 ## Work
 
-- [LegalFlow](https://legal-flow.pl): Our own platform for Polish restructuring law firms, in production. Up to 70% less administrative work.
+- [LegalFlow](https://boosterai.pl/en/work/legalflow): Our own platform for Polish restructuring law firms, in production. Up to 70% less administrative work.
 - [Certificates for posted workers](https://boosterai.pl/en#work): A group of four construction companies. Monthly certificate data for about 300 workers is now one click plus checking exceptions; 99.8% match with manual work on historical data.
 - [AI agent that finds new clients](https://boosterai.pl/en#work): An engineering contractor. An AI agent suggests potential clients to the sales team.
 - [Sales proposal automation](https://boosterai.pl/en#work): A large media company. Preparing sales proposals is automated.
