@@ -2,7 +2,7 @@ import type { BlogPost as BlogPostType } from "@/content/types";
 
 type Props = {
   post: BlogPostType;
-  /** Locale URL prefix: "" for English, "/pl" for Polish. */
+  /** Locale URL prefix: "/en" or "/pl". */
   prefix?: string;
 };
 
@@ -17,7 +17,7 @@ export function BlogPost({ post, prefix = "" }: Props) {
     <article className="blog-article">
       <div className="blog-article-header">
         <nav className="blog-breadcrumb" aria-label="Breadcrumb">
-          <a href={prefix || "/"}>Home</a>
+          <a href={prefix}>Home</a>
           <span aria-hidden="true">/</span>
           <a href={`${prefix}/blog`}>Blog</a>
           <span aria-hidden="true">/</span>

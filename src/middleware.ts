@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "@/i18n/routing";
+import { legalFlowHref } from "@/content/links";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -10,7 +11,7 @@ export default function middleware(request: NextRequest) {
 
   // The LegalFlow subdomain now lives at legal-flow.pl.
   if (host === "restrukturyzacja.boosterai.pl") {
-    return NextResponse.redirect("https://legal-flow.pl", 308);
+    return NextResponse.redirect(legalFlowHref("/", "restrukturyzacja-subdomain", "pl"), 308);
   }
 
   // The /restrukturyzacja route is a standalone, non-localized page — skip

@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./legalflow.css";
 
-const WORKER_URL = "https://clickup-lead-proxy.szymon-sidor.workers.dev";
-const CAL_URL = "https://cal.com/szymon-bazan-iahn2z/30min";
 
 type FormState = "form" | "success";
 
@@ -30,6 +28,7 @@ export default function RestrukturyzacjaPage() {
   const phoneRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
+  const sourceRef = useRef<string>("");
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Nav scrolled state + on-light detection over light sections
@@ -112,6 +111,8 @@ export default function RestrukturyzacjaPage() {
   );
 
   function openModal(e: React.MouseEvent<HTMLElement>) {
+    e.preventDefault();
+    sourceRef.current = e.currentTarget.dataset.cta ?? "";
     lastFocusRef.current = e.currentTarget;
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -120,8 +121,7 @@ export default function RestrukturyzacjaPage() {
     setFormState("form");
     setFormError(null);
     setSubmitting(false);
-    if (phoneRef.current) phoneRef.current.value = "";
-    if (nameRef.current) nameRef.current.value = "";
+    (document.getElementById("offer-form") as HTMLFormElement | null)?.reset();
     setModalOpen(true);
   }
 
@@ -133,26 +133,48 @@ export default function RestrukturyzacjaPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormError(null);
+    const form = e.currentTarget;
+    const field = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null);
+    const email = (field("email")?.value ?? "").trim();
     const phone = (phoneRef.current?.value ?? "").trim();
     const name = (nameRef.current?.value ?? "").trim();
+    const topic = (field("topic")?.value ?? "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFormError("Podaj prawidłowy adres e-mail.");
+      field("email")?.focus();
+      return;
+    }
     if (!/^[+\s0-9\-()]{7,}$/.test(phone)) {
       setFormError("Podaj prawidłowy numer telefonu.");
       phoneRef.current?.focus();
       return;
     }
+    if (!topic) {
+      setFormError("Napisz w kilku słowach, czego dotyczy sprawa.");
+      field("topic")?.focus();
+      return;
+    }
+    if (!(field("consent") as HTMLInputElement | null)?.checked) {
+      setFormError("Zgoda jest wymagana, żeby wysłać formularz.");
+      return;
+    }
+    if (field("website")?.value) {
+      setFormState("success");
+      return;
+    }
     setSubmitting(true);
     try {
-      const res = await fetch(WORKER_URL, {
+      const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, name, source: "LegalFlow landing — Skontaktuj się" }),
+        body: JSON.stringify({ email, phone, name, topic, source: `LegalFlow landing — formularz${sourceRef.current ? ` (${sourceRef.current})` : ""}` }),
       });
       if (!res.ok) {
         let msg = "Coś poszło nie tak. Spróbuj ponownie za chwilę.";
         try {
           const data: unknown = await res.json();
-          if (isLeadResponse(data) && data.error === "Provide a valid email or phone") {
-            msg = "Podaj prawidłowy numer telefonu.";
+          if (isLeadResponse(data) && data.error === "Invalid input") {
+            msg = "Sprawdź e-mail, numer telefonu i opis sprawy.";
           }
         } catch {
           /* ignore */
@@ -189,7 +211,7 @@ export default function RestrukturyzacjaPage() {
             <a href="#faq">FAQ</a>
           </nav>
 
-          <a className="header-cta" href={CAL_URL} target="_blank" rel="noopener" data-cta="header">
+          <a className="header-cta" href="#offer-form" onClick={openModal} data-cta="header">
             <span className="dot" />
             Zobacz demo
           </a>
@@ -227,7 +249,7 @@ export default function RestrukturyzacjaPage() {
               FAQ
             </a>
           </nav>
-          <a className="btn btn-primary" href={CAL_URL} target="_blank" rel="noopener" data-cta="mobile-menu">
+          <a className="btn btn-primary" href="#offer-form" onClick={openModal} data-cta="mobile-menu">
             Zobacz demo →
           </a>
         </div>
@@ -249,7 +271,7 @@ export default function RestrukturyzacjaPage() {
                   audytowalnym systemie. Twój zespół skupia się na prawie, nie na administracji.
                 </p>
                 <div className="hero-cta-row">
-                  <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="hero">
+                  <a className="btn btn-primary btn-lg" href="#offer-form" onClick={openModal} data-cta="hero">
                     Zobacz demo
                     <span className="arrow">→</span>
                   </a>
@@ -853,7 +875,7 @@ export default function RestrukturyzacjaPage() {
             <div className="pillars-cta">
               <h3>Sprawdź, jak te trzy filary działają na realnej sprawie z Twojej kancelarii.</h3>
               <div className="pillars-cta-row">
-                <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="pillars-demo">
+                <a className="btn btn-primary btn-lg" href="#offer-form" onClick={openModal} data-cta="pillars-demo">
                   Zobacz demo
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <polygon points="5 3 19 12 5 21 5 3" />
@@ -937,7 +959,7 @@ export default function RestrukturyzacjaPage() {
             </div>
 
             <div className="inline-cta">
-              <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="after-how-demo">
+              <a className="btn btn-primary btn-lg" href="#offer-form" onClick={openModal} data-cta="after-how-demo">
                 Zobacz demo
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polygon points="5 3 19 12 5 21 5 3" />
@@ -1114,7 +1136,7 @@ export default function RestrukturyzacjaPage() {
                   się w codziennej pracy.
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                  <a className="btn btn-primary btn-lg" href={CAL_URL} target="_blank" rel="noopener" data-cta="final-demo">
+                  <a className="btn btn-primary btn-lg" href="#offer-form" onClick={openModal} data-cta="final-demo">
                     Zobacz demo
                     <span className="arrow">→</span>
                   </a>
@@ -1233,7 +1255,11 @@ export default function RestrukturyzacjaPage() {
               </div>
             )}
             <div className="form-field">
-              <label htmlFor="offer-phone">Numer telefonu</label>
+              <label htmlFor="offer-email">E-mail</label>
+              <input type="email" id="offer-email" name="email" required autoComplete="email" placeholder="jan@kancelaria.pl" />
+            </div>
+            <div className="form-field">
+              <label htmlFor="offer-phone">Telefon</label>
               <input
                 ref={phoneRef}
                 type="tel"
@@ -1250,15 +1276,23 @@ export default function RestrukturyzacjaPage() {
               <label htmlFor="offer-name">Imię (opcjonalnie)</label>
               <input ref={nameRef} type="text" id="offer-name" name="name" autoComplete="given-name" placeholder="Jak mamy się zwracać" />
             </div>
-            <div className="form-consent">
-              Klikając „Skontaktuj się&quot; wyrażasz zgodę na kontakt w sprawie LegalFlow. Szczegóły w{" "}
-              <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
-                polityce prywatności
-              </a>
-              .
+            <div className="form-field">
+              <label htmlFor="offer-topic">Czego dotyczy sprawa?</label>
+              <textarea id="offer-topic" name="topic" rows={3} required placeholder="Kilka słów o Twojej kancelarii lub problemie" />
             </div>
+            <label className="form-consent">
+              <input type="checkbox" name="consent" />{" "}
+              Wyrażam zgodę na kontakt i przetwarzanie moich danych w celu obsługi zapytania.{" "}
+              <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">
+                Polityka prywatności
+              </a>
+            </label>
+            <label aria-hidden="true" style={{ position: "absolute", left: -9999, height: 0, overflow: "hidden" }}>
+              Nie wypełniaj tego pola
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+            </label>
             <button type="submit" className="btn btn-primary btn-lg" data-cta="offer-submit" disabled={submitting}>
-              {submitting ? "Wysyłam…" : "Skontaktuj się"}
+              {submitting ? "Wysyłam…" : "Umów bezpłatną konsultację"}
               {!submitting && (
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12" />
@@ -1299,7 +1333,7 @@ export default function RestrukturyzacjaPage() {
           </div>
           <div>
             <h4>Kontakt</h4>
-            <a href={CAL_URL} target="_blank" rel="noopener" data-cta="footer-demo">
+            <a href="#offer-form" onClick={openModal} data-cta="footer-demo">
               Zobacz demo
             </a>
             <a href="mailto:kontakt@boosterai.pl" data-cta="footer-contact">

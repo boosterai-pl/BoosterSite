@@ -15,8 +15,7 @@ type Props = {
 export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
   const { scrolled, onLight } = useScrolledNav();
   const pathname = usePathname();
-  const isPolish = pathname === "/pl" || pathname.startsWith("/pl/");
-  const homePath = isPolish ? "/pl" : "/";
+  const homePath = pathname === "/pl" || pathname.startsWith("/pl/") ? "/pl" : "/en";
 
   const classes = ["nav"];
   if (scrolled) classes.push("scrolled");
@@ -33,10 +32,27 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
           const resolved = link.href.startsWith("#") && pathname !== homePath
             ? `${homePath}${link.href}`
             : link.href;
+          if (!link.children?.length) {
+            return (
+              <a key={link.href + link.label} href={resolved}>
+                {link.label}
+              </a>
+            );
+          }
           return (
-            <a key={link.href + link.label} href={resolved}>
-              {link.label}
-            </a>
+            <div key={link.href + link.label} className="nav-drop">
+              <a href={resolved} aria-haspopup="true">
+                {link.label}
+                <span className="nav-drop-caret" aria-hidden="true" />
+              </a>
+              <div className="nav-drop-menu">
+                {link.children.map((child) => (
+                  <a key={child.href} href={child.href}>
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           );
         })}
       </div>
@@ -46,7 +62,9 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
         className="nav-cta"
         {...(cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        <span className="dot" />
+        <span className="dot">
+          <img src="/assets/booster-sygnet.png" alt="" aria-hidden="true" className="dot-rocket" />
+        </span>
         {cta.label}
       </a>
     </nav>
