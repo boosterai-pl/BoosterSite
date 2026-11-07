@@ -165,7 +165,7 @@ img {
   color: var(--ink);
 }
 .nav.on-light.scrolled {
-  background: rgba(245, 243, 238, 0.75);
+  background: rgba(245, 243, 238, 0.94);
   border-color: var(--line-dark);
 }
 .nav-logo {
@@ -2649,6 +2649,7 @@ html.js-reveal .word-reveal.visible > span {
 }
 .home-hero-title {
   margin-top: 24px;
+  font-size: clamp(38px, 4.4vw, 68px);
 }
 .home-hero-lead {
   margin: 28px 0 36px;
