@@ -58,7 +58,7 @@ export const homePl: HomeCopy = {
       },
       {
         label: "Aktualnie wdrażamy",
-        value: "Platforma sprzedaży nośników reklamowych · LegalFlow · Lead Booster",
+        value: "Automatyzacja ofert handlowych · LegalFlow · Lead Booster",
       },
     ],
   },
