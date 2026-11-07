@@ -13,9 +13,9 @@ const MODEL_LOGOS = [
 
 export function DataControl({ content }: Props) {
   return (
-    <section className="block home-section" id="data">
+    <section className="block light home-section" id="data">
       <div className="container-inner">
-        <SectionHead eyebrow={content.eyebrow} headline={content.headline} />
+        <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <p className="lead home-lead" data-reveal>
           {content.lead}
         </p>

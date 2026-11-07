@@ -5,12 +5,13 @@ type Props = { content: SiteContent["home"]["hero"]; facts: SiteContent["home"][
 
 export function HomeHero({ content, facts }: Props) {
   return (
-    <section className="block home-section home-hero" id="top">
+    <section className="block light home-section home-hero" id="top">
+      <div className="home-glow" aria-hidden="true" />
       <div className="container-inner">
         <div className="home-hero-grid">
           <div className="home-hero-text">
             <div data-reveal>
-              <span className="eyebrow">{content.eyebrow}</span>
+              <span className="eyebrow light">{content.eyebrow}</span>
             </div>
             <h1 className="h1 home-hero-title" data-reveal>
               {content.headline.text}

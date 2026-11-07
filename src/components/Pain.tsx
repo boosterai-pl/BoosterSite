@@ -5,7 +5,7 @@ type Props = { content: SiteContent["home"]["pain"] };
 
 export function Pain({ content }: Props) {
   return (
-    <section className="block light home-section" id="pain">
+    <section className="block light home-section home-tint" id="pain">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <ul className="pain-list" data-reveal-stagger>

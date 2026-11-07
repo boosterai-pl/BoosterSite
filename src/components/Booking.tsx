@@ -28,6 +28,7 @@ export function Booking({ content, members }: Props) {
   return (
     <>
       <section className="block light booking">
+        <div className="home-glow" aria-hidden="true" />
         <div className="container-inner booking-hero">
           <div className="booking-intro">
             <span className="eyebrow light">{content.eyebrow}</span>

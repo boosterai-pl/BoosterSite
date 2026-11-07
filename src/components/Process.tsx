@@ -5,7 +5,7 @@ type Props = { content: SiteContent["home"]["process"] };
 
 export function Process({ content }: Props) {
   return (
-    <section className="block light home-section" id="process">
+    <section className="block light home-section home-tint" id="process">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <ol className="process-steps" data-reveal-stagger>

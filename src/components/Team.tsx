@@ -6,7 +6,7 @@ type Props = { content: SiteContent["home"]["team"]; members: SiteContent["team"
 
 export function Team({ content, members }: Props) {
   return (
-    <section className="block light home-section home-tint" id="team">
+    <section className="block light home-section" id="team">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <p className="lead home-lead" data-reveal>

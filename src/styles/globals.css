@@ -2505,8 +2505,35 @@ html.js-reveal .word-reveal.visible > span {
   background: var(--ink);
   color: var(--paper);
 }
+/* Alternate sections are white so the paper ones and the cards stand apart. */
 .home-page section.block.home-section.home-tint {
-  background: var(--paper-2);
+  --card-bg: var(--paper);
+  background: #fff;
+}
+.home-page section.block.home-section.home-hero {
+  position: relative;
+  overflow: hidden;
+}
+.home-glow {
+  position: absolute;
+  top: -260px;
+  left: -200px;
+  width: 820px;
+  height: 820px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 71, 255, 0.14) 0%, rgba(0, 71, 255, 0) 65%);
+  pointer-events: none;
+}
+.home-hero-grid {
+  position: relative;
+}
+/* Cards: white with a thin blue top edge, like the /book form card. */
+.pain-list li,
+.stage,
+.case,
+.principles,
+.service-link {
+  border-top: 3px solid var(--accent);
 }
 .home-page .section-head {
   margin-bottom: 56px;
@@ -2560,6 +2587,7 @@ html.js-reveal .word-reveal.visible > span {
   max-width: 54ch;
 }
 .home-hero-photo img {
+  box-shadow: 0 40px 80px -40px rgba(10, 14, 60, 0.35);
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 5;
@@ -3028,4 +3056,12 @@ html.js-reveal .word-reveal.visible > span {
   background: var(--ink);
   border-color: var(--ink);
   color: #fff;
+}
+
+.booking-page section.block.booking {
+  position: relative;
+  overflow: hidden;
+}
+.booking-hero {
+  position: relative;
 }

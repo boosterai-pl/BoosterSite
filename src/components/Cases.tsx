@@ -59,7 +59,7 @@ function CaseCard({ item, labels }: { item: CaseStudy; labels: Props["content"][
 
 export function Cases({ content, items }: Props) {
   return (
-    <section className="block light home-section" id="work">
+    <section className="block light home-section home-tint" id="work">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <div className="cases" data-reveal-stagger>

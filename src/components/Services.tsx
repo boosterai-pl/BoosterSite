@@ -5,9 +5,9 @@ type Props = { content: SiteContent["home"]["services"]; items: SiteContent["ser
 
 export function Services({ content, items, basePath }: Props) {
   return (
-    <section className="block home-section" id="services">
+    <section className="block light home-section home-tint" id="services">
       <div className="container-inner">
-        <SectionHead eyebrow={content.eyebrow} headline={content.headline} />
+        <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <p className="lead home-lead" data-reveal>
           {content.body}
         </p>

@@ -5,7 +5,7 @@ type Props = { content: SiteContent["home"]["notFor"] };
 
 export function NotFor({ content }: Props) {
   return (
-    <section className="block light home-section" id="not-for">
+    <section className="block light home-section home-tint" id="not-for">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <ul className="not-for-list" data-reveal-stagger>
