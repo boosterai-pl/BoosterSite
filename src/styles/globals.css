@@ -114,7 +114,7 @@ img {
 }
 .h1 {
   font-weight: 500;
-  font-size: clamp(40px, 5.5vw, 88px);
+  font-size: clamp(36px, 4.4vw, 68px);
   line-height: 0.98;
   letter-spacing: -0.035em;
   white-space: pre-line;
