@@ -4256,3 +4256,41 @@ h3,
     gap: 32px;
   }
 }
+
+/* Closing blue CTA (home and /book): one centred axis, like the section headings, so the label,
+   heading, text and button no longer hang off to the left with an empty right half. */
+.cta {
+  text-align: center;
+}
+.cta-inner > div:first-child {
+  display: flex;
+  justify-content: center;
+}
+.cta h2 {
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+.cta h2 .serif {
+  display: block;
+}
+.cta-row {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-row p {
+  margin: 0 auto;
+}
+/* The rocket by the label is white here, otherwise it disappears on the blue background. */
+.eyebrow.cta-eyebrow::after {
+  filter: brightness(0) invert(1);
+}
+/* Home CTA: the accent sits inside an animated wrapper, so the wrapper takes the new line too. */
+.cta h2 .word-reveal:has(> .serif) {
+  display: block;
+}
