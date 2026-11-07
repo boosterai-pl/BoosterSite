@@ -18,10 +18,9 @@
 
 ## Case Studies
 
-- [OOH Manager](https://boosterai.pl/#work): Automated 7 out of 9 sales steps for a media network with 40,000+ billboard locations. Proposal creation cut from 7 days to 30 minutes. Shipped in 6 weeks.
+- [Sales proposal automation](https://boosterai.pl/#work): A large media company. We automated the preparation of sales proposals, which used to mean collecting data by hand from many places.
 - [Legal Flow — Restructuring](https://boosterai.pl/#work): AI engine transforms 1-hour audio client interviews into fully structured legal drafts, saving hundreds of billable hours per case.
 - [Municipal Application](https://boosterai.pl/#work): License-free, open-source B2G product line for Polish local governments, replacing expensive vendor lock-in with weeks-not-quarters deployment.
-- [Kancelaria Jablonska — Office Ops](https://boosterai.pl/#work): n8n + Claude + Python automation pipelines to clean, deduplicate, and structure thousands of messy business records.
 
 ## Process
 

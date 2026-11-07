@@ -29,13 +29,13 @@ export const caseStudies: readonly CaseStudyEntry[] = [
   },
   {
     en: {
-      title: "Sales Automation Platform",
-      description: "Automated the bulk of a manual sales workflow for a large operation. Cut proposal creation from days of digging through scattered spreadsheets to under an hour. Shipped to production in eight weeks.",
+      title: "Sales proposal automation",
+      description: "A large media company. We automated the preparation of sales proposals, which used to mean collecting data by hand from many places.",
       tags: ["B2B SaaS", "IN PRODUCTION"],
     },
     pl: {
-      title: "Sales Automation Platform",
-      description: "Zautomatyzowaliśmy większość ręcznego procesu sprzedaży dla dużej firmy. Skróciliśmy czas tworzenia ofert z kilku dni przeszukiwania rozproszonych arkuszy kalkulacyjnych do mniej niż godziny. Wdrożone produkcyjnie w osiem tygodni.",
+      title: "Automatyzacja ofert handlowych",
+      description: "Duża firma z branży mediowej. Zautomatyzowaliśmy przygotowywanie ofert handlowych, które wcześniej wymagało ręcznego zbierania danych z wielu miejsc.",
       tags: ["B2B SaaS", "W PRODUKCJI"],
     },
   },

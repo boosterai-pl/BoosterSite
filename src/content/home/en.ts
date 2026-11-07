@@ -49,7 +49,7 @@ export const homeEn: HomeCopy = {
           { name: "PlanetScale", component: "PlanetScaleLogo" },
         ],
       },
-      { label: "Currently shipping", value: "Media Sales Platform · LegalFlow · Lead Booster" },
+      { label: "Currently shipping", value: "Sales proposal automation · LegalFlow · Lead Booster" },
     ],
   },
   marquee: [
