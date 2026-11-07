@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./legalflow.css";
 
-const WORKER_URL = "https://clickup-lead-proxy.szymon-sidor.workers.dev";
 
 type FormState = "form" | "success";
 
@@ -165,17 +164,17 @@ export default function RestrukturyzacjaPage() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch(WORKER_URL, {
+      const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, phone, name, message: topic, source: `LegalFlow landing — formularz${sourceRef.current ? ` (${sourceRef.current})` : ""}` }),
+        body: JSON.stringify({ email, phone, name, topic, source: `LegalFlow landing — formularz${sourceRef.current ? ` (${sourceRef.current})` : ""}` }),
       });
       if (!res.ok) {
         let msg = "Coś poszło nie tak. Spróbuj ponownie za chwilę.";
         try {
           const data: unknown = await res.json();
-          if (isLeadResponse(data) && data.error === "Provide a valid email or phone") {
-            msg = "Podaj prawidłowy numer telefonu.";
+          if (isLeadResponse(data) && data.error === "Invalid input") {
+            msg = "Sprawdź e-mail, numer telefonu i opis sprawy.";
           }
         } catch {
           /* ignore */
