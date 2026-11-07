@@ -138,10 +138,30 @@ export type CaseStudy = {
     readonly link: { readonly label: string; readonly href: string };
   }[];
   readonly link?: { readonly label: string; readonly href: string };
+  /** Illustrative system screens drawn in HTML (no real client data), shown next to the text. */
+  readonly mock?: CaseMock;
   /** The large card at the top of the section. */
   readonly featured?: boolean;
   /** A use case (not a delivered project): shown full width, set apart from the real cases. */
   readonly example?: boolean;
+};
+export type CaseMock = {
+  /** Small label under the screens, e.g. "Ilustracja poglądowa". */
+  readonly caption: string;
+  readonly table: {
+    readonly title: string;
+    readonly search: string;
+    readonly action: string;
+    readonly columns: readonly [string, string, string];
+    readonly rows: readonly {
+      readonly venue: string;
+      readonly date: string;
+      readonly status: string;
+      readonly tone: "ok" | "wait" | "queue" | "late";
+      readonly note: string;
+    }[];
+  };
+  readonly map: { readonly title: string; readonly count: string; readonly legend: readonly [string, string] };
 };
 export type TitledText = { readonly title: string; readonly body: string };
 

@@ -155,6 +155,22 @@ export const caseStudies: readonly CaseStudyEntry[] = [
         { value: "Oferta jako link", label: "klient wybiera obiekt bez PDF-ów i wątków maili" },
       ],
       link: { label: "Porozmawiajmy o Twoim procesie", href: "/book?z=usecase-eventy" },
+      mock: {
+        caption: "Ilustracja poglądowa. Przykładowe dane, nie dane klienta.",
+        table: {
+          title: "Opcje na salach",
+          search: "Szukaj obiektu, sali, terminu…",
+          action: "Nowa opcja",
+          columns: ["Obiekt i sala", "Termin", "Status"],
+          rows: [
+            { venue: "Hotel nad jeziorem · Sala A", date: "14–15.11", status: "Opcja 1", tone: "ok", note: "ważna do 06.11" },
+            { venue: "Centrum kongresowe · Sala 2", date: "14–15.11", status: "Opcja 2", tone: "queue", note: "w kolejce, 2. miejsce" },
+            { venue: "Pałac pod miastem · Oranżeria", date: "21.11", status: "Wygasa", tone: "late", note: "zostały 2 dni" },
+            { venue: "Hotel w centrum · Sala B", date: "28.11", status: "Potwierdzona", tone: "wait", note: "klient zaakceptował link" },
+          ],
+        },
+        map: { title: "Mapa obiektów", count: "46 obiektów", legend: ["kilka obiektów", "pojedynczy obiekt"] },
+      },
     },
     en: {
       kind: "Custom ERP system",
@@ -167,6 +183,22 @@ export const caseStudies: readonly CaseStudyEntry[] = [
         { value: "Offer as a link", label: "the client picks a venue without PDFs or email threads" },
       ],
       link: { label: "Talk to us about your process", href: "/book?z=usecase-events" },
+      mock: {
+        caption: "Illustration. Sample data, not client data.",
+        table: {
+          title: "Room options",
+          search: "Search venue, room, date…",
+          action: "New option",
+          columns: ["Venue and room", "Date", "Status"],
+          rows: [
+            { venue: "Lakeside hotel · Room A", date: "14–15 Nov", status: "Option 1", tone: "ok", note: "valid until 6 Nov" },
+            { venue: "Congress centre · Room 2", date: "14–15 Nov", status: "Option 2", tone: "queue", note: "in queue, 2nd" },
+            { venue: "Country palace · Orangery", date: "21 Nov", status: "Expiring", tone: "late", note: "2 days left" },
+            { venue: "City hotel · Room B", date: "28 Nov", status: "Confirmed", tone: "wait", note: "client accepted the link" },
+          ],
+        },
+        map: { title: "Venue map", count: "46 venues", legend: ["several venues", "single venue"] },
+      },
     },
   },
 ];

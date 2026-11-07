@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CaseStudy, SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
+import { CaseMock } from "./CaseMock";
 
 type Props = { content: SiteContent["home"]["cases"]; items: SiteContent["cases"] };
 
@@ -19,7 +20,9 @@ function Metrics({ metrics }: { metrics: CaseStudy["metrics"] }) {
 
 function CaseCard({ item }: { item: CaseStudy }) {
   return (
-    <article className={item.featured ? "case case--featured" : item.example ? "case case--example" : "case"}>
+    <article
+      className={item.featured ? "case case--featured" : item.mock ? "case case--wide" : item.example ? "case case--example" : "case"}
+    >
       <div className="case-text">
         <span className="case-kind mono">{item.kind}</span>
         <h3 className="h3">{item.title}</h3>
@@ -32,6 +35,7 @@ function CaseCard({ item }: { item: CaseStudy }) {
           </a>
         ) : null}
       </div>
+      {item.mock ? <CaseMock mock={item.mock} /> : null}
       {item.products ? (
         <div className="case-products">
           {item.products.map((product) => (
