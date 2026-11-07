@@ -88,7 +88,6 @@ export function GrowthChart({ content }: Props) {
         <p>{step.text}</p>
         {step.note ? <span className="growth-note">{step.note}</span> : null}
       </div>
-      <figcaption className="growth-caption">{content.caption}</figcaption>
     </figure>
   );
 }
