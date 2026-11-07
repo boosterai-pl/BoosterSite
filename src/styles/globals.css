@@ -3143,3 +3143,15 @@ html.js-reveal .word-reveal.visible > span {
 .booking-hero {
   position: relative;
 }
+
+/* Home nav: logo and links on the left, language switch next to the call button on the right. */
+.home-page .nav {
+  justify-content: flex-start;
+}
+.home-page .nav-links {
+  margin-left: 56px;
+}
+.home-page .nav .lang-switcher {
+  margin-left: auto;
+  margin-right: 20px;
+}
