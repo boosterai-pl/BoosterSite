@@ -62,7 +62,9 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
         className="nav-cta btn-alive"
         {...(cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        <span className="dot" />
+        <span className="dot">
+          <img src="/assets/booster-sygnet.png" alt="" aria-hidden="true" className="dot-rocket" />
+        </span>
         {cta.label}
       </a>
     </nav>
