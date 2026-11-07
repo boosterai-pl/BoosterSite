@@ -212,6 +212,70 @@ img {
 .nav-links a:hover::after {
   transform: scaleX(1);
 }
+/* Dropdown under a nav link (e.g. Work → LegalFlow, Open Mercato). */
+.nav-drop {
+  position: relative;
+}
+.nav-drop > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-drop-caret {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.nav-drop-menu {
+  position: absolute;
+  top: 100%;
+  left: -16px;
+  min-width: 200px;
+  padding: 8px;
+  margin-top: 10px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -20px rgba(10, 14, 60, 0.3);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+/* Invisible bridge so the menu stays open while the pointer moves down to it. */
+.nav-drop-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 14px;
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-links .nav-drop-menu a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  opacity: 1;
+  white-space: nowrap;
+}
+.nav-links .nav-drop-menu a::after {
+  display: none;
+}
+.nav-links .nav-drop-menu a:hover {
+  background: var(--paper);
+  color: var(--accent);
+}
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -2494,8 +2558,12 @@ html.js-reveal .word-reveal.visible > span {
   --card-border: var(--line-dark);
   --text-soft: rgba(10, 10, 10, 0.7);
   --text-faint: var(--muted-dark);
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+/* Narrower column than the rest of the site, so lines and cards don't stretch on wide screens. */
+.home-page section.block.home-section .container-inner {
+  max-width: 1180px;
 }
 .home-page section.block.home-section:not(.light) {
   --card-bg: rgba(255, 255, 255, 0.04);
@@ -2536,10 +2604,10 @@ html.js-reveal .word-reveal.visible > span {
   border-top: 3px solid var(--accent);
 }
 .home-page .section-head {
-  margin-bottom: 56px;
+  margin-bottom: 40px;
 }
 .home-page .section-head .h1 {
-  font-size: clamp(36px, 5vw, 76px);
+  font-size: clamp(34px, 4.2vw, 60px);
   line-height: 1;
   max-width: 20ch;
 }
@@ -2570,8 +2638,8 @@ html.js-reveal .word-reveal.visible > span {
 
 /* Hero */
 .home-page section.block.home-section.home-hero {
-  padding-top: 150px;
-  padding-bottom: 88px;
+  padding-top: 136px;
+  padding-bottom: 72px;
 }
 .home-hero-grid {
   display: grid;
@@ -2590,7 +2658,7 @@ html.js-reveal .word-reveal.visible > span {
   box-shadow: 0 40px 80px -40px rgba(10, 14, 60, 0.35);
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 24px;
 }
@@ -3022,8 +3090,8 @@ html.js-reveal .word-reveal.visible > span {
     border-bottom: 1px solid var(--card-border);
   }
   .home-page section.block.home-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
   .home-page section.block.home-section.home-hero {
     padding-top: 120px;

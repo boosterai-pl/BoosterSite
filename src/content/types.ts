@@ -20,6 +20,8 @@ export type SiteMeta = {
 export type NavLink = {
   readonly label: string;
   readonly href: string;
+  // Shown as a dropdown under the link on hover / focus.
+  readonly children?: readonly { readonly label: string; readonly href: string }[];
 };
 
 export type HeadlineLine = {

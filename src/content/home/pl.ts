@@ -11,7 +11,14 @@ export const homePl: HomeCopy = {
   },
   nav: [
     { label: "Jak pracujemy", href: "#process" },
-    { label: "Realizacje", href: "#work" },
+    {
+      label: "Realizacje",
+      href: "#work",
+      children: [
+        { label: "LegalFlow", href: "/work/legalflow" },
+        { label: "Open Mercato", href: "/practices/open-source-erp" },
+      ],
+    },
     { label: "O nas", href: "#team" },
     { label: "Kariera", href: "/careers" },
   ],

@@ -32,10 +32,27 @@ export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
           const resolved = link.href.startsWith("#") && pathname !== homePath
             ? `${homePath}${link.href}`
             : link.href;
+          if (!link.children?.length) {
+            return (
+              <a key={link.href + link.label} href={resolved}>
+                {link.label}
+              </a>
+            );
+          }
           return (
-            <a key={link.href + link.label} href={resolved}>
-              {link.label}
-            </a>
+            <div key={link.href + link.label} className="nav-drop">
+              <a href={resolved} aria-haspopup="true">
+                {link.label}
+                <span className="nav-drop-caret" aria-hidden="true" />
+              </a>
+              <div className="nav-drop-menu">
+                {link.children.map((child) => (
+                  <a key={child.href} href={child.href}>
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           );
         })}
       </div>
