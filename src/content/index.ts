@@ -76,7 +76,7 @@ function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
   return {
     ...copy,
     services: services.map((s, i) => ({ id: toId(i), slug: s.slug, ...s[locale].card })),
-    cases: caseStudies.map((c, i) => ({ id: toId(i), featured: c.featured, ...c[locale] })),
+    cases: caseStudies.map((c, i) => ({ id: toId(i), featured: c.featured, example: c.example, ...c[locale] })),
     team: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], bio: m.bio[locale], photo: m.photo, linkedin: m.linkedin })),
     practices: services.map((s) => ({ slug: s.slug, ...s[locale].page })),
     legalflow: legalflow[locale],

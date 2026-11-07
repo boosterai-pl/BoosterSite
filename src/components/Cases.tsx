@@ -19,12 +19,12 @@ function Metrics({ metrics }: { metrics: CaseStudy["metrics"] }) {
 
 function CaseCard({ item }: { item: CaseStudy }) {
   return (
-    <article className={item.featured ? "case case--featured" : "case"}>
+    <article className={item.featured ? "case case--featured" : item.example ? "case case--example" : "case"}>
       <div className="case-text">
         <span className="case-kind mono">{item.kind}</span>
         <h3 className="h3">{item.title}</h3>
         <p className="case-company">{item.company}</p>
-        <Metrics metrics={item.metrics} />
+        {item.metrics.length ? <Metrics metrics={item.metrics} /> : null}
         <p className="case-summary">{item.summary}</p>
         {item.link ? (
           <a href={item.link.href} className="case-link">

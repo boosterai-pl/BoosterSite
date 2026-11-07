@@ -3741,3 +3741,10 @@ p {
     font-size: 10px;
   }
 }
+
+/* Use case card (not a delivered project): full width, dashed border, so it reads apart from real cases. */
+.case--example {
+  grid-column: 1 / -1;
+  border-style: dashed;
+  background: transparent;
+}

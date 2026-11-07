@@ -120,19 +120,48 @@ export const caseStudies: readonly CaseStudyEntry[] = [
   {
     pl: {
       kind: "Wdrożenie u klienta",
-      title: "System ERP",
-      company: "Duża firma z branży mediowej.",
-      summary: "Jeden system do zarządzania inwentarzem, sprzedażą, ofertami, klientami i dostępnością. Działa na bardzo dużym inwentarzu.",
-      metrics: [{ value: "Jeden system", label: "zamiast danych rozproszonych po wielu miejscach" }],
-      link: { label: "Oprogramowanie na miarę", href: "/practices/b2b-software" },
+      title: "Pamięć klienta dla agencji",
+      company: "Agencja strategiczno-kreatywna, która prowadzi klientów latami.",
+      summary:
+        "Wszystko, czego agencja nauczyła się o kliencie, jest w jednej karcie, na której pracują ludzie i agenci AI. Planer układa plan na kolejny miesiąc z pamięcią poprzednich kampanii, a Weryfikator sprawdza każdy materiał przed wysyłką do klienta.",
+      metrics: [
+        { value: "Cała historia", label: "współpracy z klientem przy każdej kampanii" },
+        { value: "Reguły w kodzie", label: "zakazy marki i daty sprawdzane przed wysyłką" },
+      ],
+      link: { label: "Automatyzacja z AI", href: "/practices/ai-automation" },
     },
     en: {
       kind: "Client project",
-      title: "ERP system",
-      company: "A large media company.",
-      summary: "One system for inventory, sales, offers, clients and availability. It runs on a very large inventory.",
-      metrics: [{ value: "One system", label: "instead of data scattered across many places" }],
-      link: { label: "Custom software", href: "/practices/b2b-software" },
+      title: "Client memory for an agency",
+      company: "A strategy and creative agency that works with clients for years.",
+      summary:
+        "Everything the agency has learned about a client lives in one client card that both people and AI agents work on. The Planner drafts next month's plan with the memory of past campaigns, and the Checker reviews every piece before it goes to the client.",
+      metrics: [
+        { value: "Full history", label: "of the client relationship behind every campaign" },
+        { value: "Rules in code", label: "brand bans and dates checked before anything is sent" },
+      ],
+      link: { label: "AI automation", href: "/practices/ai-automation" },
+    },
+  },
+  {
+    example: true,
+    pl: {
+      kind: "Przykład zastosowania",
+      title: "Opcje na salach w jednym kalendarzu, a nie w mailach",
+      company: "Agencje eventowe, obiekty konferencyjne i hotele.",
+      summary:
+        "Opcje na sale zakłada się dziś telefonicznie, a terminy żyją w prywatnych Excelach. Łączymy obiekty, opcje i oferty w jednym systemie: każda opcja ma datę ważności, zajęty termin ma kolejkę chętnych, a klient wybiera obiekt przez link zamiast z PDF-a.",
+      metrics: [],
+      link: { label: "Porozmawiajmy o Twoim procesie", href: "/book?z=usecase-eventy" },
+    },
+    en: {
+      kind: "Use case",
+      title: "Venue options in one calendar, not in email threads",
+      company: "Event agencies, conference venues and hotels.",
+      summary:
+        "Today, options on rooms are placed by phone and the dates live in private spreadsheets. We put venues, options and offers in one system: every option has an expiry date, a taken date has a waiting queue, and the client picks a venue through a link instead of a PDF.",
+      metrics: [],
+      link: { label: "Talk to us about your process", href: "/book?z=usecase-events" },
     },
   },
 ];

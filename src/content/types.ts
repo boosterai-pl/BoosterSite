@@ -21,7 +21,10 @@ export type NavLink = {
   readonly label: string;
   readonly href: string;
   // Shown as a dropdown under the link on hover / focus.
-  readonly children?: readonly { readonly label: string; readonly href: string }[];
+  readonly children?: readonly {
+    readonly label: string;
+    readonly href: string;
+  }[];
 };
 
 export type HeadlineLine = {
@@ -80,7 +83,10 @@ export type CaseStudy = {
   /** One or two sentences: what we did. */
   readonly summary: string;
   /** Results shown large. `label` is optional for short qualitative results. */
-  readonly metrics: readonly { readonly value: string; readonly label?: string }[];
+  readonly metrics: readonly {
+    readonly value: string;
+    readonly label?: string;
+  }[];
   /** Screens of the product, with links (used by the featured card). */
   readonly products?: readonly {
     readonly title: string;
@@ -91,6 +97,8 @@ export type CaseStudy = {
   readonly link?: { readonly label: string; readonly href: string };
   /** The large card at the top of the section. */
   readonly featured?: boolean;
+  /** A use case (not a delivered project): shown full width, set apart from the real cases. */
+  readonly example?: boolean;
 };
 export type TitledText = { readonly title: string; readonly body: string };
 
@@ -111,24 +119,36 @@ export type HomeLanding = {
     readonly chart: {
       readonly title: string;
       readonly legend: { readonly scale: string; readonly team: string };
-      readonly steps: readonly { readonly title: string; readonly note?: string }[];
+      readonly steps: readonly {
+        readonly title: string;
+        readonly note?: string;
+      }[];
     };
   };
   /** Short "talk to us" strips shown between sections, in this order: after stages, cases, process and data. */
-  readonly contactStrips: readonly { readonly text: string; readonly label: string; readonly href: string }[];
+  readonly contactStrips: readonly {
+    readonly text: string;
+    readonly label: string;
+    readonly href: string;
+  }[];
   /** Three short, true facts under the hero. */
   readonly facts: readonly { readonly value: string; readonly label: string }[];
-  readonly pain: HomeSection & { readonly items: readonly string[]; readonly closing: string };
+  readonly pain: HomeSection & {
+    readonly items: readonly string[];
+    readonly closing: string;
+  };
   readonly stages: HomeSection & {
     readonly items: readonly (TitledText & { readonly note?: string })[];
     readonly footnote: string;
   };
-  readonly cases: HomeSection & {
-  };
+  readonly cases: HomeSection & {};
   readonly foundation: HomeSection & {
     readonly body: string;
     readonly points: readonly TitledText[];
-    readonly partners: { readonly intro: string; readonly tools: readonly string[] };
+    readonly partners: {
+      readonly intro: string;
+      readonly tools: readonly string[];
+    };
   };
   readonly process: HomeSection & {
     readonly steps: readonly TitledText[];
@@ -140,10 +160,15 @@ export type HomeLanding = {
     readonly points: readonly TitledText[];
     readonly modelsLabel: string;
   };
-  readonly notFor: HomeSection & { readonly items: readonly string[]; readonly closing: string };
+  readonly notFor: HomeSection & {
+    readonly items: readonly string[];
+    readonly closing: string;
+  };
   readonly team: HomeSection & { readonly body: string };
   readonly services: HomeSection & { readonly body: string };
-  readonly faq: HomeSection & { readonly items: readonly { readonly q: string; readonly a: string }[] };
+  readonly faq: HomeSection & {
+    readonly items: readonly { readonly q: string; readonly a: string }[];
+  };
   readonly cta: HomeSection & {
     readonly body: string;
     readonly button: { readonly label: string; readonly href: string };
@@ -171,7 +196,8 @@ export type BlogPost = {
   readonly wordCount: number;
 };
 
-export type EmploymentType = "full-time" | "part-time" | "contract" | "internship";
+export type EmploymentType =
+  "full-time" | "part-time" | "contract" | "internship";
 
 export type JobRole = {
   readonly slug: string;
@@ -223,7 +249,10 @@ export type ContactFormCopy = {
 
 export type BookingStep = { readonly title: string; readonly body: string };
 
-export type BookingSection = { readonly eyebrow: string; readonly headline: HeadlineLine };
+export type BookingSection = {
+  readonly eyebrow: string;
+  readonly headline: HeadlineLine;
+};
 
 export type BookingExtras = {
   readonly points: readonly string[];
@@ -235,16 +264,31 @@ export type BookingExtras = {
     readonly link: { readonly label: string; readonly href: string };
   };
   /** Alternative to leaving a phone number: pick a slot in the calendar. */
-  readonly calendar: { readonly text: string; readonly label: string; readonly href: string };
+  readonly calendar: {
+    readonly text: string;
+    readonly label: string;
+    readonly href: string;
+  };
   readonly trustLabel: string;
-  readonly starters: BookingSection & { readonly items: readonly string[]; readonly hint: string };
-  readonly steps: BookingSection & { readonly imageAlt: string; readonly items: readonly BookingStep[] };
-  readonly outcomes: BookingSection & { readonly items: readonly BookingStep[] };
+  readonly starters: BookingSection & {
+    readonly items: readonly string[];
+    readonly hint: string;
+  };
+  readonly steps: BookingSection & {
+    readonly imageAlt: string;
+    readonly items: readonly BookingStep[];
+  };
+  readonly outcomes: BookingSection & {
+    readonly items: readonly BookingStep[];
+  };
   readonly team: BookingSection & { readonly body: string };
   readonly faq: BookingSection & {
     readonly items: readonly { readonly q: string; readonly a: string }[];
   };
-  readonly finalCta: BookingSection & { readonly body: string; readonly label: string };
+  readonly finalCta: BookingSection & {
+    readonly body: string;
+    readonly label: string;
+  };
 };
 
 export type BookingContent = BookingExtras & {
@@ -278,7 +322,10 @@ export type SiteContent = {
 // ---------------------------------------------------------------------------
 
 /** Everything in src/content/home/en.ts and src/content/home/pl.ts. */
-export type HomeCopy = Omit<SiteContent, "services" | "cases" | "team" | "practices" | "legalflow">;
+export type HomeCopy = Omit<
+  SiteContent,
+  "services" | "cases" | "team" | "practices" | "legalflow"
+>;
 
 export type ServiceCard = {
   readonly title: string;
@@ -297,7 +344,12 @@ export type ServiceEntry = {
 };
 
 /** One item in src/content/case-studies.ts. */
-export type CaseStudyEntry = Localized<Omit<CaseStudy, "id" | "featured">> & { readonly featured?: boolean };
+export type CaseStudyEntry = Localized<
+  Omit<CaseStudy, "id" | "featured" | "example">
+> & {
+  readonly featured?: boolean;
+  readonly example?: boolean;
+};
 
 /** One item in src/content/team.ts. */
 export type TeamMemberEntry = {
