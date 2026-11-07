@@ -3327,10 +3327,10 @@ html.js-reveal .word-reveal.visible > span {
   }
 }
 
-/* ===== "Alive" buttons: every button on the site (and the nav button) slowly waves its shape and,
+/* ===== "Alive" buttons: every "book a call" button (primary buttons and the nav button) slowly waves its shape and,
    every 16 s, briefly flips to its "pulse" colours. All buttons share the same timeline: AliveSync
    pins every animation to the start of the document timeline, so they move together. ===== */
-.btn,
+.btn-primary,
 .nav-cta {
   --alive-bg: var(--accent);
   --alive-fg: #fff;
@@ -3346,7 +3346,7 @@ html.js-reveal .word-reveal.visible > span {
   --alive-fg: #fff;
 }
 /* On hover the button stops playing and shows its normal hover colours. */
-.btn:hover,
+.btn-primary:hover,
 .nav-cta:hover {
   animation: none;
 }
@@ -3361,7 +3361,7 @@ html.js-reveal .word-reveal.visible > span {
   66%, 78% { background-color: var(--alive-bg); border-color: var(--alive-bg); color: var(--alive-fg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn,
+  .btn-primary,
   .nav-cta {
     animation: none !important;
   }
@@ -3751,4 +3751,53 @@ p {
 .case--example .case-summary {
   margin-top: 12px;
   max-width: 80ch;
+}
+
+/* Section label dots: the same rocket as in the nav button. The dot turns into the Booster rocket and
+   flies off, on the same 10 s timeline as the nav dot (AliveSync keeps them in step). */
+.eyebrow {
+  position: relative;
+}
+.eyebrow::before {
+  animation: dot-hide-ring 10s ease-in-out 3s infinite;
+}
+.eyebrow::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  background: url("/assets/booster-sygnet.png") center / contain no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  animation: dot-launch 10s ease-in 3s infinite;
+}
+@keyframes dot-hide-ring {
+  0%, 52% { opacity: 1; transform: scale(1); }
+  58%, 92% { opacity: 0; transform: scale(1); }
+  96% { opacity: 1; transform: scale(1.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow::before,
+  .eyebrow::after {
+    animation: none !important;
+  }
+}
+
+/* Line breaks: no single word left alone on the last line of lists, labels and short texts;
+   short labels are balanced across lines. */
+li,
+dd,
+dt,
+blockquote {
+  text-wrap: pretty;
+}
+dd,
+h2,
+h3,
+.case-company {
+  text-wrap: balance;
 }

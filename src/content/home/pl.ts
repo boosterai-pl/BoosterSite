@@ -62,7 +62,7 @@ export const homePl: HomeCopy = {
     facts: [
       { value: "70–90%", label: "mniej pracy ręcznej w procesach, które przejmuje AI" },
       { value: "Stała cena", label: "każdego etapu, znana przed rozpoczęciem prac" },
-      { value: "Twój kod i dane", label: "zostają u Ciebie, bez opłat za każdego użytkownika" },
+      { value: "Kod i dane", label: "zostają u Ciebie, bez opłat za każdego użytkownika" },
     ],
     pain: {
       eyebrow: "Poznajesz to?",
@@ -72,6 +72,7 @@ export const homePl: HomeCopy = {
         "Oferta powstaje kilka dni, bo dane są porozrzucane po Excelach.",
         "Jest jedna osoba, bez której pewne rzeczy stają.",
         "Raport robi się dwa dni, a i tak nikt mu do końca nie ufa.",
+        "Te same dane ktoś przepisuje ręcznie do kilku systemów.",
         "Ludzie używają AI, ale każdy po swojemu. Firma jako całość nic z tego nie ma.",
       ],
       closing: "Jedno nowe narzędzie tego nie zmieni. Firmę trzeba poukładać tak, żeby AI było jej centrum, a nie dodatkiem.",

@@ -53,8 +53,20 @@ function localizeHref(href: string, locale: SiteLocale): string {
   return href.startsWith("/#") || href.startsWith("/?") ? `/${locale}${href.slice(1)}` : `/${locale}${href}`;
 }
 
-// Applies localizeHref to every `href` string in a content tree (CTAs, practice pages, ...).
+// Polish typography: a one-letter word (a, i, o, u, w, z) must not be left at the end of a line,
+// so the space after it becomes a non-breaking space.
+const ORPHAN = /(^|[\s(„"])([aiouwzAIOUWZ]) (?=\S)/g;
+function keepOrphans(text: string): string {
+  // Run twice so that pairs like "a w " are both caught.
+  const kept = text.replace(ORPHAN, "$1$2\u00a0").replace(ORPHAN, "$1$2\u00a0");
+  // Longer texts: keep the last two words together, so one word never ends up alone on the last line.
+  return kept.split(" ").length > 2 ? kept.replace(/ (\S{1,18})$/, "\u00a0$1") : kept;
+}
+
+// Applies localizeHref to every `href` string in a content tree (CTAs, practice pages, ...),
+// and in Polish keeps one-letter words with the next word.
 function localizeHrefs<T>(value: T, locale: SiteLocale): T {
+  if (typeof value === "string") return (locale === "pl" ? keepOrphans(value) : value) as T;
   if (Array.isArray(value)) return value.map((v) => localizeHrefs(v, locale)) as T;
   if (value && typeof value === "object") {
     return Object.fromEntries(

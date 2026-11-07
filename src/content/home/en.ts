@@ -62,7 +62,7 @@ export const homeEn: HomeCopy = {
     facts: [
       { value: "70–90%", label: "less manual work in the processes AI takes over" },
       { value: "Fixed price", label: "for every stage, known before work starts" },
-      { value: "Your code and data", label: "stay with you, with no per-user fees" },
+      { value: "Code and data", label: "stay with you, with no per-user fees" },
     ],
     pain: {
       eyebrow: "Sound familiar?",
@@ -72,6 +72,7 @@ export const homeEn: HomeCopy = {
         "A proposal takes days because the data sits in a dozen spreadsheets.",
         "There is one person without whom some things simply stop.",
         "A report takes two days and nobody fully trusts it anyway.",
+        "Someone retypes the same data into several systems by hand.",
         "People use AI, but each in their own way. The company as a whole gets nothing from it.",
       ],
       closing: "One more tool won't fix this. The company has to be organised with AI at its centre, not bolted on the side.",
