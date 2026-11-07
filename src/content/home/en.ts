@@ -34,9 +34,9 @@ export const homeEn: HomeCopy = {
       primaryCta: { label: "Book a free call", href: "/book?z=hero" },
       secondaryCta: { label: "See what it looks like in practice", href: "#work" },
       photo: {
-        src: "/assets/booking-work.jpg",
-        alt: "Szymon Bazan at work",
-        caption: "Szymon Bazan, founder of Booster",
+        src: "/assets/hero-team.jpg",
+        alt: "The Booster team",
+        caption: "The Booster team",
       },
     },
     facts: [

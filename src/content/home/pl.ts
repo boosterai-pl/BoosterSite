@@ -34,9 +34,9 @@ export const homePl: HomeCopy = {
       primaryCta: { label: "Umów bezpłatną rozmowę", href: "/book?z=hero" },
       secondaryCta: { label: "Zobacz, jak to wygląda w praktyce", href: "#work" },
       photo: {
-        src: "/assets/booking-work.jpg",
-        alt: "Szymon Bazan przy pracy",
-        caption: "Szymon Bazan, założyciel Boostera",
+        src: "/assets/hero-team.jpg",
+        alt: "Zespół Boostera",
+        caption: "Zespół Boostera",
       },
     },
     facts: [
