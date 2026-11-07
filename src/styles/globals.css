@@ -3801,3 +3801,27 @@ h3,
 .case-company {
   text-wrap: balance;
 }
+
+/* Foundation on the home page: one centred axis. Logo above the text, text centred under the heading,
+   the three points centred too, so nothing hangs off to the left. */
+.home-page .foundation-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.home-page #foundation .home-point {
+  text-align: center;
+}
+.home-page #foundation .home-point p {
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Section headings: the accent part always starts on its own line, the same rhythm as the hero. */
+.home-page .section-head .accent-serif {
+  display: block;
+}

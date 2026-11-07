@@ -158,7 +158,7 @@ export const homeEn: HomeCopy = {
     },
     team: {
       eyebrow: "About us",
-      headline: { text: "You talk to the people who", accent: "then build it." },
+      headline: { text: "You talk to the people", accent: "who then build it." },
       body: "We don't have a sales department that hands the project over to someone else. The first call is with someone from the team that then works on the implementation.",
     },
     services: {

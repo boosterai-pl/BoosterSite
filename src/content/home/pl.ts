@@ -133,7 +133,7 @@ export const homePl: HomeCopy = {
     },
     data: {
       eyebrow: "Twoje dane",
-      headline: { text: "Twoje dane zostają pod", accent: "Twoją kontrolą." },
+      headline: { text: "Twoje dane zostają", accent: "pod Twoją kontrolą." },
       lead: "Na Twoich serwerach albo w chmurze. Na modelach, które znasz.",
       points: [
         { title: "Ty wybierasz, gdzie stoi system", body: "Na serwerach firmy (on-premise) albo w chmurze. Decyzja należy do Ciebie." },
@@ -158,7 +158,7 @@ export const homePl: HomeCopy = {
     },
     team: {
       eyebrow: "O nas",
-      headline: { text: "Rozmawiasz z ludźmi, którzy potem", accent: "to budują." },
+      headline: { text: "Rozmawiasz z ludźmi,", accent: "którzy potem to budują." },
       body: "Nie mamy działu sprzedaży, który przekazuje projekt dalej. Na pierwszej rozmowie jest ktoś z zespołu, który potem pracuje przy wdrożeniu.",
     },
     services: {
