@@ -43,11 +43,12 @@ const home = { en: homeEn, pl: homePl } as const;
 const toId = (index: number): string => String(index + 1).padStart(2, "0");
 
 // Internal links are written without a locale prefix (e.g. "/careers").
-// On the Polish site they need the /pl prefix so navigation stays in-locale.
+// Every page lives under /en or /pl, so the prefix is added here.
 function localizeHref(href: string, locale: SiteLocale): string {
-  if (locale !== "pl") return href;
-  if (!href.startsWith("/") || href.startsWith("/pl/") || href === "/pl") return href;
-  return href === "/" ? "/pl" : `/pl${href}`;
+  if (!href.startsWith("/") || href.startsWith("//")) return href;
+  if (/^\/(en|pl)(\/|$|#|\?)/.test(href)) return href;
+  if (href === "/") return `/${locale}`;
+  return href.startsWith("/#") || href.startsWith("/?") ? `/${locale}${href.slice(1)}` : `/${locale}${href}`;
 }
 
 // Applies localizeHref to every `href` string in a content tree (CTAs, practice pages, ...).

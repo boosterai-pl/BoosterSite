@@ -15,8 +15,7 @@ type Props = {
 export function Nav({ brand, links, cta, logoHref = "#top" }: Props) {
   const { scrolled, onLight } = useScrolledNav();
   const pathname = usePathname();
-  const isPolish = pathname === "/pl" || pathname.startsWith("/pl/");
-  const homePath = isPolish ? "/pl" : "/";
+  const homePath = pathname === "/pl" || pathname.startsWith("/pl/") ? "/pl" : "/en";
 
   const classes = ["nav"];
   if (scrolled) classes.push("scrolled");

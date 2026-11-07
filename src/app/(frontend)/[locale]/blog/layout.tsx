@@ -20,7 +20,7 @@ export default async function BlogLayout({ children, params }: Props) {
   return (
     <div className="blog-light-page">
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={homeLinks} cta={site.navCta} logoHref={prefix || "/"} />
+      <Nav brand={site.meta.brand} links={homeLinks} cta={site.navCta} logoHref={prefix} />
       {children}
     </div>
   );

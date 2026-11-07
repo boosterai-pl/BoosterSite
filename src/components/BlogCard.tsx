@@ -2,7 +2,7 @@ import type { BlogPost } from "@/content/types";
 
 type Props = {
   post: Pick<BlogPost, "slug" | "title" | "date" | "description">;
-  /** Locale URL prefix: "" for English, "/pl" for Polish. */
+  /** Locale URL prefix: "/en" or "/pl". */
   prefix?: string;
 };
 

@@ -67,7 +67,7 @@ export default async function BookPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteRuntime />
-      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix || "/"} />
+      <Nav brand={site.meta.brand} links={site.nav} cta={site.navCta} logoHref={prefix} />
       <main>
         <Booking content={site.booking} members={site.team.members} />
       </main>
