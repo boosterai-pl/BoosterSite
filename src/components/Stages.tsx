@@ -5,9 +5,9 @@ type Props = { content: SiteContent["home"]["stages"] };
 
 export function Stages({ content }: Props) {
   return (
-    <section className="block light home-section" id="stages">
+    <section className="block home-section" id="stages">
       <div className="container-inner">
-        <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
+        <SectionHead eyebrow={content.eyebrow} headline={content.headline} />
         <ol className="stages" data-reveal-stagger>
           {content.items.map((stage, i) => (
             <li key={stage.title} className={stage.note ? "stage stage--here" : "stage"}>

@@ -6,7 +6,7 @@ type Props = { content: SiteContent["home"]["foundation"] };
 
 export function Foundation({ content }: Props) {
   return (
-    <section className="block light home-section home-tint" id="foundation">
+    <section className="block light home-section" id="foundation">
       <div className="container-inner">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <div className="foundation-intro" data-reveal>

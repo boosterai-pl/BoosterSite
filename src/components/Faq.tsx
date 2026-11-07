@@ -5,7 +5,7 @@ type Props = { content: SiteContent["home"]["faq"] };
 
 export function Faq({ content }: Props) {
   return (
-    <section className="block light home-section home-tint" id="faq">
+    <section className="block light home-section" id="faq">
       <div className="container-inner faq-wrap">
         <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
         <div className="faq" data-reveal>
