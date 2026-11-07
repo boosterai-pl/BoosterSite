@@ -3584,3 +3584,105 @@ html.js-reveal .word-reveal.visible > span {
     grid-template-columns: 1fr;
   }
 }
+
+/* Static hero chart: steps are plain labels, not buttons. */
+ol.growth-steps {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+li.growth-step {
+  cursor: default;
+}
+li.growth-step .growth-note {
+  display: block;
+  margin-top: 6px;
+  width: fit-content;
+  padding: 2px 8px;
+  font-size: 11px;
+}
+.growth-chart .growth-marker {
+  stroke-opacity: 0.18;
+}
+.growth-chart .growth-point-dot {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+/* "Talk to us" strip between home sections. */
+.inline-cta {
+  padding: 28px var(--pad-x);
+  background: var(--accent);
+  color: #fff;
+}
+.inline-cta-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+}
+.inline-cta p {
+  margin: 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.inline-cta .btn-primary {
+  background: #fff;
+  border-color: #fff;
+  color: var(--accent);
+}
+.inline-cta .btn-primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .inline-cta-inner {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.person-linkedin {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Section heads and closing lines centred, with balanced line breaks so short words don't dangle. */
+.home-page .section-head {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-page .section-head .h1 {
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-page .section-head .eyebrow {
+  justify-content: center;
+}
+.home-page .home-lead,
+.home-page .home-closing,
+.home-page .stages-footnote {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.h1,
+.h3,
+.lead,
+.home-closing,
+.home-lead {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}

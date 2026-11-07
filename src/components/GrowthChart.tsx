@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import type { SiteContent } from "@/content/types";
 
 type Props = { content: SiteContent["home"]["hero"]["chart"] };
@@ -15,28 +12,11 @@ const POINTS = [
   { x: 340, y: 170 },
   { x: 480, y: 76 },
 ];
-const AUTOPLAY_MS = 3200;
 
+/** Static chart: nothing to click and nothing that changes on its own. */
 export function GrowthChart({ content }: Props) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setActive((i) => (i + 1) % POINTS.length), AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-  }, [paused]);
-
-  const pick = (i: number) => {
-    setPaused(true);
-    setActive(i);
-  };
-  const step = content.steps[active];
-  const point = POINTS[active];
-
   return (
-    <figure className="growth-chart" data-reveal onMouseLeave={() => setPaused(false)}>
+    <figure className="growth-chart" data-reveal>
       <div className="growth-chart-head">
         <span className="growth-chart-title">{content.title}</span>
         <span className="growth-chart-legend">
@@ -59,35 +39,23 @@ export function GrowthChart({ content }: Props) {
         <path d={`${GROWTH_PATH} L580,290 L40,290 Z`} fill="url(#growth-fill)" className="growth-area" />
         <path d={TEAM_PATH} className="growth-line growth-line--team" />
         <path d={GROWTH_PATH} className="growth-line growth-line--scale" pathLength={1} />
-        <line x1={point.x} x2={point.x} y1={point.y} y2="290" className="growth-marker" />
         {POINTS.map((p, i) => (
-          <g key={i} className={i === active ? "growth-point is-active" : "growth-point"} onMouseEnter={() => pick(i)} onClick={() => pick(i)}>
-            <circle cx={p.x} cy={p.y} r="16" className="growth-point-hit" />
-            <circle cx={p.x} cy={p.y} r={i === active ? 8 : 5} className="growth-point-dot" />
+          <g key={i}>
+            <line x1={p.x} x2={p.x} y1={p.y} y2="290" className="growth-marker" />
+            <circle cx={p.x} cy={p.y} r="6" className="growth-point-dot" />
           </g>
         ))}
       </svg>
 
-      <div className="growth-steps" role="tablist">
+      <ol className="growth-steps">
         {content.steps.map((s, i) => (
-          <button
-            key={s.title}
-            type="button"
-            role="tab"
-            aria-selected={i === active}
-            className={i === active ? "growth-step is-active" : "growth-step"}
-            onClick={() => pick(i)}
-            onMouseEnter={() => pick(i)}
-          >
+          <li key={s.title} className="growth-step">
             <span className="growth-step-num">{String(i + 1).padStart(2, "0")}</span>
             {s.title}
-          </button>
+            {s.note ? <span className="growth-note">{s.note}</span> : null}
+          </li>
         ))}
-      </div>
-      <div className="growth-detail" aria-live="polite">
-        <p>{step.text}</p>
-        {step.note ? <span className="growth-note">{step.note}</span> : null}
-      </div>
+      </ol>
     </figure>
   );
 }

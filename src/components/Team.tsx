@@ -21,6 +21,11 @@ export function Team({ content, members }: Props) {
               <h3>{member.name}</h3>
               <p className="person-role mono">{member.role}</p>
               <p className="person-bio">{member.bio}</p>
+              {member.linkedin ? (
+                <a href={member.linkedin} className="person-linkedin" target="_blank" rel="noopener noreferrer">
+                  LinkedIn <span className="arrow">↗</span>
+                </a>
+              ) : null}
             </div>
           ))}
         </div>

@@ -65,6 +65,8 @@ export type TeamMember = {
   /** One plain sentence about what the person does day to day. */
   readonly bio: string;
   readonly photo: string;
+  /** Full LinkedIn profile URL, shown as a link under the person. */
+  readonly linkedin?: string;
 };
 
 /** One case on the home page ("Realizacje"). Optional parts are simply not rendered. */
@@ -109,9 +111,11 @@ export type HomeLanding = {
     readonly chart: {
       readonly title: string;
       readonly legend: { readonly scale: string; readonly team: string };
-      readonly steps: readonly { readonly title: string; readonly text: string; readonly note?: string }[];
+      readonly steps: readonly { readonly title: string; readonly note?: string }[];
     };
   };
+  /** Short "talk to us" strips shown between sections, in this order: after stages, cases, process and data. */
+  readonly contactStrips: readonly { readonly text: string; readonly label: string; readonly href: string }[];
   /** Three short, true facts under the hero. */
   readonly facts: readonly { readonly value: string; readonly label: string }[];
   readonly pain: HomeSection & { readonly items: readonly string[]; readonly closing: string };
@@ -300,6 +304,8 @@ export type TeamMemberEntry = {
   readonly name: string;
   /** Path under public/, e.g. "/assets/team/jan-kowalski.jpg". */
   readonly photo: string;
+  /** Full LinkedIn profile URL, shown as a link under the person. */
+  readonly linkedin?: string;
   readonly role: Localized<string>;
   readonly bio: Localized<string>;
 };

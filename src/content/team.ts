@@ -7,6 +7,7 @@ export const team: readonly TeamMemberEntry[] = [
   {
     name: "Szymon Bazan",
     photo: "/assets/team/szymon-bazan.jpg",
+    linkedin: "https://www.linkedin.com/in/szymon-bazan/",
     role: { en: "Founder, CEO", pl: "Założyciel, CEO" },
     bio: {
       en: "Leads the first conversations with clients and makes sure the plan solves the company's real problem.",
@@ -16,6 +17,7 @@ export const team: readonly TeamMemberEntry[] = [
   {
     name: "Andrzej Chmielewski",
     photo: "/assets/team/andrzej.jpg",
+    linkedin: "https://www.linkedin.com/in/andrzej-chmielewski-43520857/",
     role: { en: "Co-founder, CTO", pl: "Współzałożyciel, CTO" },
     bio: {
       en: "Designs the systems and makes sure they work on the client's real data, not just in a demo.",

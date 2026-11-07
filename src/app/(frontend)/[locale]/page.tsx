@@ -14,6 +14,7 @@ import { Team } from "@/components/Team";
 import { Services } from "@/components/Services";
 import { Faq } from "@/components/Faq";
 import { CTA } from "@/components/CTA";
+import { InlineCta } from "@/components/InlineCta";
 import { Footer } from "@/components/Footer";
 import { SiteRuntime } from "@/components/SiteRuntime";
 
@@ -34,10 +35,14 @@ export default async function HomePage({ params }: Props) {
         <HomeHero content={home.hero} facts={home.facts} />
         <Pain content={home.pain} />
         <Stages content={home.stages} />
+        <InlineCta content={home.contactStrips[0]} />
         <Cases content={home.cases} items={site.cases} />
+        <InlineCta content={home.contactStrips[1]} />
         <Foundation content={home.foundation} />
         <Process content={home.process} />
+        <InlineCta content={home.contactStrips[2]} />
         <DataControl content={home.data} />
+        <InlineCta content={home.contactStrips[3]} />
         <NotFor content={home.notFor} />
         <Team content={home.team} members={site.team} />
         <Services content={home.services} items={site.services} basePath={`${prefix}/practices`} />

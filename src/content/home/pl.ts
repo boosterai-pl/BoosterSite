@@ -39,24 +39,26 @@ export const homePl: HomeCopy = {
         steps: [
           {
             title: "Pierwsze próby",
-            text: "Ludzie testują AI na własnych kontach. Każdy nowy klient to więcej ręcznej pracy i kolejne osoby do zatrudnienia.",
             note: "Tu jest dziś większość firm",
           },
           {
             title: "Porządek w danych",
-            text: "Wspólne dane i jasne procesy. Wiadomo, co robi człowiek, a co AI, i gdzie jest jedno źródło prawdy.",
           },
           {
             title: "Pierwsze procesy na AI",
-            text: "Powtarzalną pracę przejmują agenci AI. Ten sam zespół obsługuje więcej zleceń.",
           },
           {
             title: "AI w centrum firmy",
-            text: "Firma rośnie szybciej niż zespół. Ludzie podejmują decyzje i budują nowe usługi.",
           },
         ],
       },
     },
+    contactStrips: [
+      { text: "Nie wiesz, od czego zacząć? Pomożemy wybrać pierwszy proces.", label: "Porozmawiaj z nami", href: "/book?z=strip-stages" },
+      { text: "Chcesz podobnych efektów w swojej firmie?", label: "Umów rozmowę", href: "/book?z=strip-cases" },
+      { text: "Po pierwszej rozmowie dostajesz plan etapów z ceną pierwszego etapu.", label: "Skontaktuj się", href: "/book?z=strip-process" },
+      { text: "Masz pytania o bezpieczeństwo danych? Odpowiemy na rozmowie.", label: "Porozmawiaj z nami", href: "/book?z=strip-data" },
+    ],
     facts: [
       { value: "70–90%", label: "mniej pracy ręcznej w procesach, które przejmuje AI" },
       { value: "Stała cena", label: "każdego etapu, znana przed rozpoczęciem prac" },

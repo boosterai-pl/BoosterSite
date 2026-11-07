@@ -162,6 +162,11 @@ export function Booking({ content, members }: Props) {
                 ) : null}
                 <h3 className="h3">{member.name}</h3>
                 <p className="role">{member.role}</p>
+                {member.linkedin ? (
+                  <a href={member.linkedin} className="person-linkedin" target="_blank" rel="noopener noreferrer">
+                    LinkedIn <span className="arrow">↗</span>
+                  </a>
+                ) : null}
               </div>
             ))}
           </div>

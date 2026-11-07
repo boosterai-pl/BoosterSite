@@ -39,24 +39,26 @@ export const homeEn: HomeCopy = {
         steps: [
           {
             title: "First experiments",
-            text: "People try AI on their own accounts. Every new client means more manual work and more people to hire.",
             note: "Most companies are here today",
           },
           {
             title: "Data in order",
-            text: "Shared data and clear processes. It is clear what people do, what AI does and where the one source of truth is.",
           },
           {
             title: "First processes on AI",
-            text: "AI agents take over the repetitive work. The same team handles more orders.",
           },
           {
             title: "AI at the centre",
-            text: "The company grows faster than the team. People make decisions and build new services.",
           },
         ],
       },
     },
+    contactStrips: [
+      { text: "Not sure where to start? We'll help you pick the first process.", label: "Talk to us", href: "/book?z=strip-stages" },
+      { text: "Want similar results in your company?", label: "Book a call", href: "/book?z=strip-cases" },
+      { text: "After the first call you get a staged plan with the price of the first stage.", label: "Get in touch", href: "/book?z=strip-process" },
+      { text: "Questions about data security? We'll answer them on a call.", label: "Talk to us", href: "/book?z=strip-data" },
+    ],
     facts: [
       { value: "70–90%", label: "less manual work in the processes AI takes over" },
       { value: "Fixed price", label: "for every stage, known before work starts" },
