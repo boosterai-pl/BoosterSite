@@ -23,7 +23,7 @@ export const homeEn: HomeCopy = {
     { label: "Careers", href: "/careers" },
   ],
   navCta: {
-    label: "Get a quote",
+    label: "Book a call",
     href: "/book?z=nav",
   },
   home: {
@@ -31,7 +31,7 @@ export const homeEn: HomeCopy = {
       eyebrow: "AI transformation, end to end",
       headline: { text: "We boost companies with AI.", accent: "From the first process to the whole company." },
       lead: "We put AI at the centre of your company. We bring order to processes, automate repetitive work and build new services, so the business can grow faster than the headcount. We take you through the whole transformation, in stages, with a fixed price for each stage.",
-      primaryCta: { label: "Get a quote", href: "/book?z=hero" },
+      primaryCta: { label: "Book a free call", href: "/book?z=hero" },
       secondaryCta: { label: "See what it looks like in practice", href: "#work" },
       chart: {
         title: "How a company grows with AI at its centre",

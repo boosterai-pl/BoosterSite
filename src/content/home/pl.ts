@@ -23,7 +23,7 @@ export const homePl: HomeCopy = {
     { label: "Kariera", href: "/careers" },
   ],
   navCta: {
-    label: "Otrzymaj wycenę",
+    label: "Umów rozmowę",
     href: "/book?z=nav",
   },
   home: {
@@ -31,7 +31,7 @@ export const homePl: HomeCopy = {
       eyebrow: "Transformacja AI od A do Z",
       headline: { text: "Boostujemy firmy z AI.", accent: "Od pierwszego procesu do całej firmy." },
       lead: "Stawiamy AI w centrum Twojej firmy. Porządkujemy procesy, automatyzujemy powtarzalną pracę i budujemy nowe usługi, żeby firma mogła rosnąć szybciej, niż rośnie zespół. Prowadzimy przez całą transformację, etapami i ze stałą ceną każdego etapu.",
-      primaryCta: { label: "Otrzymaj wycenę", href: "/book?z=hero" },
+      primaryCta: { label: "Umów bezpłatną rozmowę", href: "/book?z=hero" },
       secondaryCta: { label: "Zobacz, jak to wygląda w praktyce", href: "#work" },
       chart: {
         title: "Jak rośnie firma z AI w centrum",
