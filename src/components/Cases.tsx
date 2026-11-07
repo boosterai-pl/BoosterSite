@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CaseStudy, SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
 import { CaseMock } from "./CaseMock";
+import { externalRel } from "@/lib/links";
 
 type Props = { content: SiteContent["home"]["cases"]; items: SiteContent["cases"] };
 
@@ -44,7 +45,7 @@ function CaseCard({ item }: { item: CaseStudy }) {
               href={product.link.href}
               className="case-product"
               target={product.link.href.startsWith("http") ? "_blank" : undefined}
-              rel={product.link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              rel={product.link.href.startsWith("http") ? externalRel(product.link.href) : undefined}
             >
               <Image src={product.image.src} alt={product.image.alt} width={1200} height={600} sizes="(max-width: 900px) 100vw, 40vw" />
               <span className="case-product-title">{product.title}</span>

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import type { PracticePage } from "@/content/types";
+import { externalRel } from "@/lib/links";
 
 type Props = { page: PracticePage };
 
 function external(href: string) {
-  return href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {};
+  return href.startsWith("http") ? { target: "_blank", rel: externalRel(href) } : {};
 }
 
 function BlockHead({ title }: { title: string }) {

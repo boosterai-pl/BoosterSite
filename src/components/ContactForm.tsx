@@ -27,7 +27,8 @@ function track(event: string, reason?: string) {
   try {
     window.dataLayer = window.dataLayer ?? [];
     window.dataLayer.push(detail);
-    window.datafast?.(event, { source: detail.source });
+    // Datafast goals: form_start, form_success (the conversion), form_error. See docs/customer-journeys.md.
+    window.datafast?.(event, { source: detail.source, lang: document.documentElement.lang });
   } catch {
     /* tracking must never break the form */
   }

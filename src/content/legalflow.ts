@@ -1,6 +1,7 @@
 // The /work/legalflow page, linked from the LegalFlow card in "Realizacje".
 // Same shape as a practice page. Only facts confirmed by Szymon; no LegalFlow prices.
 // Do not describe LegalFlow as Booster's own product.
+import { legalFlowHref } from "./links";
 import type { Localized, PracticePage } from "./types";
 
 export const legalflow: Localized<PracticePage> = {
@@ -8,7 +9,7 @@ export const legalflow: Localized<PracticePage> = {
     eyebrow: "Work / LegalFlow",
     headline: { text: "LegalFlow. A platform that works", accent: "in law firms." },
     lead: "A platform for Polish restructuring law firms, running in production. Case documents, communication with creditors, deadlines and an AI assistant in one place. Firms using it handle more cases with the same team.",
-    heroCta: { label: "Visit the LegalFlow site", href: "https://legal-flow.pl" },
+    heroCta: { label: "Visit the LegalFlow site", href: legalFlowHref("/", "work-legalflow-hero", "en") },
     facts: [
       { value: "up to 70%", label: "less administrative work in the firm" },
       { value: "Text, voice, phone", label: "the ways a client can talk to the assistant" },
@@ -59,13 +60,13 @@ export const legalflow: Localized<PracticePage> = {
         src: "/assets/work/legalflow-platform.jpg",
         alt: "A case card in LegalFlow",
         caption: "LegalFlow platform: a case card with documents, tasks and deadlines.",
-        link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+        link: { label: "legal-flow.pl", href: legalFlowHref("/", "work-legalflow-gallery-platform", "en") },
       },
       {
         src: "/assets/work/legalflow-assistant.jpg",
         alt: "A conversation with the LegalFlow AI assistant",
         caption: "AI assistant: a conversation with a client, with the data saved in the case.",
-        link: { label: "See the assistant", href: "https://legal-flow.pl/asystentka" },
+        link: { label: "See the assistant", href: legalFlowHref("/asystentka", "work-legalflow-gallery-assistant", "en") },
       },
     ],
     callout: {
@@ -84,7 +85,7 @@ export const legalflow: Localized<PracticePage> = {
         href: "tel:+48713001502",
         note: "Call and play a client. The assistant answers in Polish on a sample law firm. Standard call rates apply.",
       },
-      link: { label: "More about the assistant", href: "https://legal-flow.pl/asystentka" },
+      link: { label: "More about the assistant", href: legalFlowHref("/asystentka", "work-legalflow-callout", "en") },
     },
     sections: [
       {
@@ -102,7 +103,7 @@ export const legalflow: Localized<PracticePage> = {
     eyebrow: "Realizacje / LegalFlow",
     headline: { text: "LegalFlow. Platforma, która działa", accent: "w kancelariach." },
     lead: "Platforma dla kancelarii restrukturyzacyjnych, działająca produkcyjnie. Dokumenty spraw, komunikacja z wierzycielami, terminy i asystent AI w jednym miejscu. Kancelarie prowadzą na niej więcej spraw tym samym zespołem.",
-    heroCta: { label: "Zobacz stronę LegalFlow", href: "https://legal-flow.pl" },
+    heroCta: { label: "Zobacz stronę LegalFlow", href: legalFlowHref("/", "work-legalflow-hero", "pl") },
     facts: [
       { value: "do 70%", label: "mniej pracy administracyjnej w kancelarii" },
       { value: "Tekst, głos, telefon", label: "tak klient może rozmawiać z asystentem" },
@@ -153,13 +154,13 @@ export const legalflow: Localized<PracticePage> = {
         src: "/assets/work/legalflow-platform.jpg",
         alt: "Karta sprawy w LegalFlow",
         caption: "Platforma LegalFlow: karta sprawy z pismami, zadaniami i terminami.",
-        link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+        link: { label: "legal-flow.pl", href: legalFlowHref("/", "work-legalflow-gallery-platform", "pl") },
       },
       {
         src: "/assets/work/legalflow-assistant.jpg",
         alt: "Rozmowa z Asystentem AI LegalFlow",
         caption: "Asystent AI: rozmowa z klientem, a dane zapisane w sprawie.",
-        link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/asystentka" },
+        link: { label: "Zobacz asystenta", href: legalFlowHref("/asystentka", "work-legalflow-gallery-assistant", "pl") },
       },
     ],
     callout: {
@@ -178,7 +179,7 @@ export const legalflow: Localized<PracticePage> = {
         href: "tel:+48713001502",
         note: "Zadzwoń i zagraj klienta, a asystentka poprowadzi resztę. Linia działa na przykładowej kancelarii. Opłata jak za zwykłe połączenie krajowe.",
       },
-      link: { label: "Więcej o asystentce", href: "https://legal-flow.pl/asystentka" },
+      link: { label: "Więcej o asystentce", href: legalFlowHref("/asystentka", "work-legalflow-callout", "pl") },
     },
     sections: [
       {

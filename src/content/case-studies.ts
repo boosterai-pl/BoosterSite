@@ -1,6 +1,7 @@
 // Cases in the "Realizacje" section of the home page. Order = display order.
 // Keep each card short: what we did in a sentence or two, and the results shown large.
 // Only true results. The media client is confidential: no name, no system name, no numbers.
+import { legalFlowHref } from "./links";
 import type { CaseStudyEntry } from "./types";
 
 export const caseStudies: readonly CaseStudyEntry[] = [
@@ -17,13 +18,13 @@ export const caseStudies: readonly CaseStudyEntry[] = [
           title: "Platforma LegalFlow",
           text: "Sprawy, pisma, zadania i terminy w jednym miejscu.",
           image: { src: "/assets/work/legalflow-platform.jpg", alt: "Karta sprawy w LegalFlow" },
-          link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+          link: { label: "legal-flow.pl", href: legalFlowHref("/", "home-case-platform", "pl") },
         },
         {
           title: "Asystent AI",
           text: "Odbiera telefon, gdy w kancelarii nikt nie może, i zapisuje sprawę w systemie. Zadzwoń na linię demo: 71 300 15 02.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "Rozmowa z Asystentem AI LegalFlow" },
-          link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/asystentka" },
+          link: { label: "Zobacz asystenta", href: legalFlowHref("/asystentka", "home-case-assistant", "pl") },
         },
       ],
       link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
@@ -39,13 +40,13 @@ export const caseStudies: readonly CaseStudyEntry[] = [
           title: "LegalFlow platform",
           text: "Cases, documents, tasks and deadlines in one place.",
           image: { src: "/assets/work/legalflow-platform.jpg", alt: "A case card in LegalFlow" },
-          link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+          link: { label: "legal-flow.pl", href: legalFlowHref("/", "home-case-platform", "en") },
         },
         {
           title: "AI assistant",
           text: "Answers the phone when nobody in the firm can and saves the case in the system. Demo line (in Polish): +48 71 300 15 02.",
           image: { src: "/assets/work/legalflow-assistant.jpg", alt: "A conversation with the LegalFlow AI assistant" },
-          link: { label: "See the assistant", href: "https://legal-flow.pl/asystentka" },
+          link: { label: "See the assistant", href: legalFlowHref("/asystentka", "home-case-assistant", "en") },
         },
       ],
       link: { label: "More about LegalFlow", href: "/work/legalflow" },

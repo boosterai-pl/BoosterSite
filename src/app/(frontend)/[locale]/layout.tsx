@@ -9,6 +9,7 @@ import { localeAlternates } from "@/i18n/locale";
 import "@/styles/globals.css";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AliveSync } from "@/components/AliveSync";
+import { DatafastGoals } from "@/components/DatafastGoals";
 import { Analytics } from "@vercel/analytics/next";
 
 type Props = {
@@ -63,6 +64,15 @@ export default async function LocaleLayout({ children, params }: Props) {
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
           rel="stylesheet"
         />
+        {/* Queues Datafast goals sent before the script has loaded. */}
+        <script
+          id="datafast-queue"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.datafast=window.datafast||function(){(window.datafast.q=window.datafast.q||[]).push(arguments)};",
+          }}
+        />
         <script
           defer
           data-website-id="dfid_tg468q8wxZ0nWQgvnEQNn"
@@ -93,6 +103,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <AliveSync />
+        <DatafastGoals />
         <CookieConsent locale={locale === "pl" ? "pl" : "en"} />
         <Analytics />
       </body>
