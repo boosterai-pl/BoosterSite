@@ -3,8 +3,8 @@
 //
 //   home/en.ts, home/pl.ts      home page copy, nav, footer, booking
 //   services/<slug>.ts          service card + /practices/<slug> page
-//   case-studies.ts             "Work" section on the home page
-//   team.ts                     "Team" section on the home page
+//   case-studies.ts             "Realizacje" (cases) section on the home page
+//   team.ts                     team section on the home page and /book
 //   careers/<slug>.<locale>.md  job roles (/careers, /careers/<slug>)
 //   blog/<slug>.<locale>.md     blog posts (/blog, /blog/<slug>)
 //
@@ -73,26 +73,9 @@ export function loadSite(locale: SiteLocale = "en"): SiteContent {
 function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
   return {
     ...copy,
-    nav: copy.nav.map((link) => ({ ...link, href: localizeHref(link.href, locale) })),
-    services: {
-      ...copy.services,
-      items: services.map((s, i) => ({ id: toId(i), slug: s.slug, ...s[locale].card })),
-    },
-    cases: {
-      ...copy.cases,
-      items: caseStudies.map((c, i) => ({ id: toId(i), ...c[locale] })),
-    },
-    team: {
-      ...copy.team,
-      members: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], photo: m.photo })),
-    },
-    footer: {
-      ...copy.footer,
-      columns: copy.footer.columns.map((col) => ({
-        ...col,
-        links: col.links.map((link) => ({ ...link, href: localizeHref(link.href, locale) })),
-      })),
-    },
+    services: services.map((s, i) => ({ id: toId(i), slug: s.slug, ...s[locale].card })),
+    cases: caseStudies.map((c, i) => ({ id: toId(i), featured: c.featured, ...c[locale] })),
+    team: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], bio: m.bio[locale], photo: m.photo })),
     practices: services.map((s) => ({ slug: s.slug, ...s[locale].page })),
   };
 }

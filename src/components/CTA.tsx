@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { SiteContent } from "@/content/types";
 import { WordReveal, WordRevealAccent } from "./WordReveal";
 
-type Props = { content: SiteContent["cta"] };
+type Props = { content: SiteContent["home"]["cta"] };
 
 export function CTA({ content }: Props) {
   const lines = content.headline.text.split("\n");

@@ -3,14 +3,14 @@ import type { BookingContent, BookingSection, SiteContent } from "@/content/type
 import { ContactForm } from "@/components/ContactForm";
 import { ClickUpLogo, MondayLogo, PipedriveLogo, TilioLogo } from "@/components/BrandLogos";
 
-type Props = { content: BookingContent; members: SiteContent["team"]["members"] };
+type Props = { content: BookingContent; members: SiteContent["team"] };
 
 const TEAM_ON_CALL = 3;
 
-function SectionTitle({ section, light = true }: { section: BookingSection; light?: boolean }) {
+function SectionTitle({ section }: { section: BookingSection }) {
   return (
     <div className="booking-head">
-      <span className={light ? "eyebrow light" : "eyebrow"}>{section.eyebrow}</span>
+      <span className="eyebrow light">{section.eyebrow}</span>
       <h2 className="h2">
         {section.headline.text}
         {section.headline.accent ? (
@@ -28,7 +28,6 @@ export function Booking({ content, members }: Props) {
   return (
     <>
       <section className="block light booking">
-        <div className="booking-glow" aria-hidden="true" />
         <div className="container-inner booking-hero">
           <div className="booking-intro">
             <span className="eyebrow light">{content.eyebrow}</span>
@@ -47,14 +46,14 @@ export function Booking({ content, members }: Props) {
                 <li key={point}>{point}</li>
               ))}
             </ul>
-            <dl className="booking-stats">
-              {content.stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt>{stat.value}</dt>
-                  <dd>{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
+            <aside className="booking-proof">
+              <span className="mono booking-proof-kind">{content.proof.kind}</span>
+              <h2 className="h3">{content.proof.title}</h2>
+              <p>{content.proof.body}</p>
+              <a href={content.proof.link.href} target="_blank" rel="noopener noreferrer">
+                {content.proof.link.label} <span className="arrow">↗</span>
+              </a>
+            </aside>
             <div className="booking-trust">
               <span className="mono">{content.trustLabel}</span>
               <div className="booking-trust-logos">
@@ -70,6 +69,12 @@ export function Booking({ content, members }: Props) {
             <h2 className="h3">{content.form.formTitle}</h2>
             <p className="booking-required">{content.form.requiredNote}</p>
             <ContactForm copy={content.form} source="boosterai.pl — formularz /book" />
+            <p className="booking-calendar">
+              {content.calendar.text}{" "}
+              <a href={content.calendar.href} target="_blank" rel="noopener noreferrer">
+                {content.calendar.label} <span className="arrow">↗</span>
+              </a>
+            </p>
           </div>
         </div>
       </section>
@@ -93,9 +98,9 @@ export function Booking({ content, members }: Props) {
         </div>
       </section>
 
-      <section className="block booking-section booking-dark">
+      <section className="block light booking-section booking-tint">
         <div className="container-inner">
-          <SectionTitle section={content.steps} light={false} />
+          <SectionTitle section={content.steps} />
           <div className="booking-steps-wrap">
             <Image
               src="/assets/booking-work.jpg"
@@ -163,9 +168,9 @@ export function Booking({ content, members }: Props) {
       </section>
 
       <section className="block light booking-section">
-        <div className="container-inner booking-faq-wrap">
+        <div className="container-inner faq-wrap">
           <SectionTitle section={content.faq} />
-          <div className="booking-faq">
+          <div className="faq">
             {content.faq.items.map((item) => (
               <details key={item.q}>
                 <summary>{item.q}</summary>

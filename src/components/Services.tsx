@@ -1,28 +1,22 @@
 import type { SiteContent } from "@/content/types";
 import { SectionHead } from "./SectionHead";
 
-type Props = { content: SiteContent["services"]; basePath?: string };
+type Props = { content: SiteContent["home"]["services"]; items: SiteContent["services"]; basePath: string };
 
-export function Services({ content, basePath = "/practices" }: Props) {
+export function Services({ content, items, basePath }: Props) {
   return (
-    <section className="block" id="services">
+    <section className="block light home-section" id="services">
       <div className="container-inner">
-        <SectionHead eyebrow={content.eyebrow} headline={content.headline} />
-
-        <div className="services" data-reveal-stagger>
-          {content.items.map((service) => (
-            <a href={`${basePath}/${service.slug}`} className="service-card" key={service.id}>
-              <div className="service-num">
-                <span>— {service.id}</span>
-                <span className="service-arrow">↗</span>
-              </div>
-              <h3>{service.title}</h3>
+        <SectionHead eyebrow={content.eyebrow} headline={content.headline} light />
+        <p className="lead home-lead" data-reveal>
+          {content.body}
+        </p>
+        <div className="service-links" data-reveal-stagger>
+          {items.map((service) => (
+            <a href={`${basePath}/${service.slug}`} className="service-link" key={service.id}>
+              <h3 className="h3">{service.title}</h3>
               <p>{service.description}</p>
-              <div className="service-tags">
-                {service.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
+              <span className="arrow">→</span>
             </a>
           ))}
         </div>

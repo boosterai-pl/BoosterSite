@@ -78,51 +78,6 @@ export function useScrolledNav(): { scrolled: boolean; onLight: boolean } {
   return { scrolled, onLight };
 }
 
-export function useCursorBlob(enabled: boolean) {
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!enabled) return;
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let tx = x;
-    let ty = y;
-    let raf = 0;
-
-    const move = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-    };
-    const tick = () => {
-      x += (tx - x) * 0.12;
-      y += (ty - y) * 0.12;
-      el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("mousemove", move);
-    raf = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      cancelAnimationFrame(raf);
-    };
-  }, [enabled]);
-
-  return ref;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Analytics: click delegation                                        */
-/* ------------------------------------------------------------------ */
-
-/**
- * Single global click listener that captures all trackable interactions.
- * Runs in SiteRuntime so Server Components stay untouched.
- */
 export function useClickTracking(): void {
   // Track last nav click timestamp to distinguish scroll vs nav arrivals
   const lastNavClick = useRef(0);
