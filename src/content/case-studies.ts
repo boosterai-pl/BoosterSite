@@ -49,24 +49,24 @@ export const caseStudies: readonly CaseStudyEntry[] = [
     en: {
       kind: "Client project",
       title: "AI agent that finds new clients",
-      company: "Bergman Engineering, engineering contractor from Wrocław.",
+      company: "An engineering contractor from Wrocław.",
       did: "An AI agent searches the web and suggests companies that may be interested in the client's offer to the sales team. Plus a simple panel for entering data.",
       after: "According to the client: accurate, valuable leads and a more effective sales team.",
       quote: {
         text: "The first results were visible just three weeks after we started working together. The suggested leads turned out to be accurate and valuable, which made our sales team more effective. (translated from Polish)",
-        source: "Bergman Engineering sp. z o.o., reference letter, 10.2025",
+        source: "Client reference letter, 10.2025",
         pending: "[reference letter PDF: to be added]",
       },
     },
     pl: {
       kind: "Wdrożenie u klienta",
       title: "Agent AI do pozyskiwania klientów",
-      company: "Bergman Engineering, wykonawstwo inżynieryjne, Wrocław.",
+      company: "Firma wykonawstwa inżynieryjnego z Wrocławia.",
       did: "Agent AI przeszukuje sieć i podsuwa handlowcom firmy, które mogą być zainteresowane ofertą klienta. Do tego prosty panel do wprowadzania danych.",
       after: "Według klienta: trafne leady i wyższa efektywność działu handlowego.",
       quote: {
         text: "Pierwsze efekty wdrożenia były widoczne już po trzech tygodniach od rozpoczęcia współpracy – sugerowane leady okazały się trafne i wartościowe, co przełożyło się na wzrost efektywności działu handlowego.",
-        source: "Bergman Engineering sp. z o.o., list referencyjny, 10.2025",
+        source: "List referencyjny klienta, 10.2025",
         pending: "[list referencyjny PDF: do dodania]",
       },
     },
