@@ -21,9 +21,14 @@ export function Foundation({ content }: Props) {
             </div>
           ))}
         </div>
-        <p className="home-closing" data-reveal>
-          {content.partners}
-        </p>
+        <div className="partner-tools" data-reveal>
+          <p>{content.partners.intro}</p>
+          <ul>
+            {content.partners.tools.map((tool) => (
+              <li key={tool}>{tool}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

@@ -70,28 +70,26 @@ export type TeamMember = {
 /** One case on the home page ("Realizacje"). Optional parts are simply not rendered. */
 export type CaseStudy = {
   readonly id: string;
-  /** Small label above the title: whose case it is, e.g. "Nasz produkt", "Wdrożenie u klienta". */
+  /** Small label above the title, e.g. "Nasz produkt", "Wdrożenie u klienta". */
   readonly kind: string;
   readonly title: string;
   /** Type of company: industry and size. */
   readonly company: string;
-  readonly before?: string;
-  readonly did: string;
-  readonly after?: string;
-  /** When it went live or how long it took. */
-  readonly when?: string;
-  readonly quote?: {
+  /** One or two sentences: what we did. */
+  readonly summary: string;
+  /** Results shown large. `label` is optional for short qualitative results. */
+  readonly metrics: readonly { readonly value: string; readonly label?: string }[];
+  /** Screens of the product, with links (used by the featured card). */
+  readonly products?: readonly {
+    readonly title: string;
     readonly text: string;
-    readonly source: string;
-    readonly link?: { readonly label: string; readonly href: string };
-    /** Shown instead of the link while the file is missing, e.g. "[list referencyjny PDF: do dodania]". */
-    readonly pending?: string;
-  };
+    readonly image: { readonly src: string; readonly alt: string };
+    readonly link: { readonly label: string; readonly href: string };
+  }[];
   readonly link?: { readonly label: string; readonly href: string };
   /** The large card at the top of the section. */
   readonly featured?: boolean;
 };
-
 export type TitledText = { readonly title: string; readonly body: string };
 
 type HomeSection = {
@@ -122,13 +120,11 @@ export type HomeLanding = {
     readonly footnote: string;
   };
   readonly cases: HomeSection & {
-    readonly industries: string;
-    readonly labels: { readonly before: string; readonly did: string; readonly after: string };
   };
   readonly foundation: HomeSection & {
     readonly body: string;
     readonly points: readonly TitledText[];
-    readonly partners: string;
+    readonly partners: { readonly intro: string; readonly tools: readonly string[] };
   };
   readonly process: HomeSection & {
     readonly steps: readonly TitledText[];
@@ -141,7 +137,7 @@ export type HomeLanding = {
     readonly modelsLabel: string;
   };
   readonly notFor: HomeSection & { readonly items: readonly string[]; readonly closing: string };
-  readonly team: HomeSection & { readonly body: string; readonly story: string };
+  readonly team: HomeSection & { readonly body: string };
   readonly services: HomeSection & { readonly body: string };
   readonly faq: HomeSection & { readonly items: readonly { readonly q: string; readonly a: string }[] };
   readonly cta: HomeSection & {

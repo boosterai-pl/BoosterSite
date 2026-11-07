@@ -3455,3 +3455,132 @@ html.js-reveal .word-reveal.visible > span {
     animation: none !important;
   }
 }
+
+/* Hero: the accent part of the headline always starts on its own line. */
+.home-hero-title .accent-serif {
+  display: block;
+}
+/* Tools we also implement on, shown under the Open Mercato section. */
+.partner-tools {
+  margin-top: 40px;
+  text-align: center;
+}
+.partner-tools p {
+  margin: 0 0 16px;
+  color: var(--text-soft);
+}
+.partner-tools ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.partner-tools li {
+  padding: 12px 22px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* Cases, short version: results shown large, one or two sentences, a link. */
+.case-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+}
+.case-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  margin: 22px 0 18px;
+}
+.case-metrics dt {
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.case-metrics dd {
+  margin-top: 6px;
+  max-width: 24ch;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-soft);
+}
+.case-summary {
+  margin: 0 0 20px;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+.case--featured {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 32px;
+  align-items: start;
+}
+.case--featured .case-metrics dt {
+  font-size: clamp(40px, 4.4vw, 64px);
+}
+.case-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.case-product {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 10px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: var(--paper);
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.case-product:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.case-product img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  object-position: top left;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--card-border);
+}
+.case-product-title,
+.case-product-text,
+.case-product-link {
+  padding: 0 6px;
+}
+.case-product-title {
+  font-weight: 600;
+}
+.case-product-text {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+.case-product-link {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+@media (max-width: 900px) {
+  .case--featured,
+  .case-products {
+    grid-template-columns: 1fr;
+  }
+}

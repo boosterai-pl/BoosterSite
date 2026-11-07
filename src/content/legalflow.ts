@@ -18,10 +18,6 @@ export const legalflow: Localized<PracticePage> = {
         body: "It generates case documents from the firm's own templates. It handles communication with creditors and tracks deadlines. It turns an hour-long client interview into a structured draft. The assistant works by text, dictation and phone.",
       },
       { title: "The result", body: "Up to 70% less administrative work. Lawyers spend their time on cases, not on retyping documents." },
-      {
-        title: "Why we show it",
-        body: "LegalFlow was built with the same approach we offer our clients: data and process first, then AI, stage by stage. It shows that we build and maintain systems like this, not just design them.",
-      },
     ],
     cta: { microCopy: "Want something similar in your company?", label: "Book a free call", href: "/book?z=legalflow" },
   },
@@ -40,10 +36,6 @@ export const legalflow: Localized<PracticePage> = {
         body: "Generuje dokumentację sprawy z szablonów kancelarii. Prowadzi komunikację z wierzycielami i pilnuje terminów. Z godzinnej rozmowy z klientem robi uporządkowany szkic dokumentu. Asystent działa tekstem, dyktowaniem i przez telefon.",
       },
       { title: "Efekt", body: "Do 70% mniej pracy administracyjnej. Prawnicy zajmują się sprawami, a nie przepisywaniem dokumentów." },
-      {
-        title: "Dlaczego o tym piszemy",
-        body: "LegalFlow powstał na tym samym podejściu, które proponujemy klientom: najpierw dane i proces, potem AI, etap po etapie. To dowód, że takie systemy budujemy i utrzymujemy, a nie tylko projektujemy.",
-      },
     ],
     cta: { microCopy: "Chcesz podobnego rozwiązania w swojej firmie?", label: "Umów bezpłatną rozmowę", href: "/book?z=legalflow" },
   },

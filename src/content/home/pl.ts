@@ -58,13 +58,13 @@ export const homePl: HomeCopy = {
       },
     },
     facts: [
-      { value: "do 70%", label: "mniej pracy administracyjnej w kancelariach, które pracują na LegalFlow" },
-      { value: "Plan i cena", label: "po pierwszej rozmowie: plan etapów z ceną pierwszego etapu" },
-      { value: "Twój kod", label: "kod i dane zostają u Ciebie, bez opłat za każdego użytkownika" },
+      { value: "70–90%", label: "mniej pracy ręcznej w procesach, które przejmuje AI" },
+      { value: "Stała cena", label: "każdego etapu, znana przed rozpoczęciem prac" },
+      { value: "Twój kod i dane", label: "zostają u Ciebie, bez opłat za każdego użytkownika" },
     ],
     pain: {
       eyebrow: "Poznajesz to?",
-      headline: { text: "Firma rośnie,", accent: "a razem z nią ręczna robota." },
+      headline: { text: "Firma rośnie,", accent: "a wraz z nią przybywa pracy ręcznej." },
       items: [
         "Każdy nowy klient oznacza kolejną osobę do zatrudnienia.",
         "Oferta powstaje kilka dni, bo dane są porozrzucane po Excelach.",
@@ -92,13 +92,11 @@ export const homePl: HomeCopy = {
           body: "Agenci AI wykonują powtarzalną pracę na danych firmy, a ludzie podejmują decyzje i budują nowe usługi. Kolejni klienci nie wymagają kolejnych etatów.",
         },
       ],
-      footnote: "Przeprowadzamy przez całą tę drogę, od A do Z. Zaczynamy od procesu, który dziś najbardziej boli.",
+      footnote: "Przeprowadzamy przez całą tę drogę, od A do Z. Zaczynamy od procesu, który przyniesie najwięcej wartości.",
     },
     cases: {
       eyebrow: "Realizacje",
       headline: { text: "Jak to wygląda", accent: "w praktyce." },
-      industries: "Pracowaliśmy z firmami z mediów, marketingu, budownictwa, produkcji, usług i z kancelariami.",
-      labels: { before: "Przed", did: "Co zrobiliśmy", after: "Efekt" },
     },
     foundation: {
       eyebrow: "Fundament",
@@ -109,7 +107,10 @@ export const homePl: HomeCopy = {
         { title: "Bez opłat za użytkownika", body: "Płacisz za wdrożenie, a nie za każde konto w systemie." },
         { title: "System zostaje Twój", body: "Kod jest otwarty. Gdyby nas zabrakło, inny zespół może go dalej rozwijać." },
       ],
-      partners: "Jeśli Twoja firma pracuje na Monday, ClickUp albo Pipedrive, wdrażamy też na nich. Jesteśmy partnerami tych platform.",
+      partners: {
+        intro: "Pracujemy też na systemach, które Twoja firma już zna. Wdrażamy między innymi:",
+        tools: ["Monday", "ClickUp", "Pipedrive", "Tillio"],
+      },
     },
     process: {
       eyebrow: "Jak pracujemy",
@@ -156,12 +157,11 @@ export const homePl: HomeCopy = {
       eyebrow: "O nas",
       headline: { text: "Rozmawiasz z ludźmi, którzy potem", accent: "to budują." },
       body: "Nie mamy działu sprzedaży, który przekazuje projekt dalej. Na pierwszej rozmowie jest ktoś z zespołu, który potem pracuje przy wdrożeniu.",
-      story: "LegalFlow powstał w Boosterze. Zbudowaliśmy go na tym samym podejściu, które proponujemy klientom, i sami go utrzymujemy.",
     },
     services: {
       eyebrow: "Czym to robimy",
-      headline: { text: "Narzędzia dobieramy", accent: "do problemu." },
-      body: "Nie musisz wybierać technologii. Opisz problem, a my zaproponujemy, czym go rozwiązać.",
+      headline: { text: "Automatyzacja i wdrożenia AI", accent: "dopasowane do problemu." },
+      body: "Świadczymy różne usługi w obszarze automatyzacji i wdrożeń AI, w zależności od potrzeb i problemów Twojej firmy. Nie musisz wybierać technologii. Opisz problem lub wyzwanie, a my zaproponujemy, jak go rozwiązać.",
     },
     faq: {
       eyebrow: "Pytania",
@@ -195,7 +195,7 @@ export const homePl: HomeCopy = {
     },
     cta: {
       eyebrow: "Pierwszy krok",
-      headline: { text: "Zacznijmy od jednego procesu, który dziś", accent: "najbardziej boli." },
+      headline: { text: "Zacznijmy od procesu, który przyniesie", accent: "najwięcej wartości." },
       body: "Rozmowa jest bezpłatna. Po niej dostajesz plan etapów z ceną pierwszego etapu, a decyzja należy do Ciebie.",
       button: { label: "Umów bezpłatną rozmowę", href: "/book?z=cta" },
     },
@@ -235,7 +235,7 @@ export const homePl: HomeCopy = {
   },
   booking: {
     eyebrow: "Bezpłatna rozmowa",
-    headline: { text: "Opowiedz nam, co dziś", accent: "najbardziej boli." },
+    headline: { text: "Opowiedz nam, co chcesz", accent: "usprawnić w firmie." },
     body: "Pół godziny o Twojej firmie i o procesie, który chcesz zmienić. Po rozmowie dostajesz plan etapów z ceną pierwszego etapu. Co dalej, decydujesz Ty.",
     points: [
       "Rozmowa nic nie kosztuje",
@@ -279,7 +279,7 @@ export const homePl: HomeCopy = {
       eyebrow: "Po rozmowie",
       headline: { text: "Co", accent: "dostajesz." },
       items: [
-        { title: "Plan etapów", body: "Co robimy i w jakiej kolejności, zaczynając od tego, co najbardziej boli." },
+        { title: "Plan etapów", body: "Co robimy i w jakiej kolejności, zaczynając od tego, co przyniesie najwięcej wartości." },
         { title: "Cenę pierwszego etapu", body: "Stała kwota, którą znasz, zanim cokolwiek zaczniemy." },
         { title: "Czas na decyzję", body: "Nie musisz decydować na rozmowie. Plan możesz spokojnie przemyśleć." },
       ],

@@ -58,13 +58,13 @@ export const homeEn: HomeCopy = {
       },
     },
     facts: [
-      { value: "up to 70%", label: "less administrative work in law firms running on LegalFlow" },
-      { value: "Plan and price", label: "after the first call: a staged plan with the price of the first stage" },
-      { value: "Your code", label: "code and data stay with you, no per-user fees" },
+      { value: "70–90%", label: "less manual work in the processes AI takes over" },
+      { value: "Fixed price", label: "for every stage, known before work starts" },
+      { value: "Your code and data", label: "stay with you, with no per-user fees" },
     ],
     pain: {
       eyebrow: "Sound familiar?",
-      headline: { text: "The company grows.", accent: "So does the manual work." },
+      headline: { text: "The company grows,", accent: "and so does the manual work." },
       items: [
         "Every new client means another person to hire.",
         "A proposal takes days because the data sits in a dozen spreadsheets.",
@@ -92,13 +92,11 @@ export const homeEn: HomeCopy = {
           body: "AI agents do the repetitive work on company data, while people make decisions and build new services. More clients no longer mean more hires.",
         },
       ],
-      footnote: "We take you through the whole journey, end to end. We start with the process that hurts most today.",
+      footnote: "We take you through the whole journey, end to end. We start with the process that will bring the most value.",
     },
     cases: {
       eyebrow: "Work",
       headline: { text: "What it looks like", accent: "in practice." },
-      industries: "We have worked with companies in media, marketing, construction, manufacturing, services and with law firms.",
-      labels: { before: "Before", did: "What we did", after: "Result" },
     },
     foundation: {
       eyebrow: "Foundation",
@@ -109,7 +107,10 @@ export const homeEn: HomeCopy = {
         { title: "No per-user fees", body: "You pay for the implementation, not for every account in the system." },
         { title: "The system stays yours", body: "The code is open. If we were gone, another team could keep developing it." },
       ],
-      partners: "If your company runs on Monday, ClickUp or Pipedrive, we implement on those too. We are partners of all three.",
+      partners: {
+        intro: "We also work on systems your company already knows. Among others, we implement:",
+        tools: ["Monday", "ClickUp", "Pipedrive", "Tillio"],
+      },
     },
     process: {
       eyebrow: "How we work",
@@ -156,12 +157,11 @@ export const homeEn: HomeCopy = {
       eyebrow: "About us",
       headline: { text: "You talk to the people who", accent: "then build it." },
       body: "We don't have a sales department that hands the project over to someone else. The first call is with someone from the team that then works on the implementation.",
-      story: "LegalFlow was born at Booster. We built it with the same approach we offer our clients, and we run it ourselves.",
     },
     services: {
       eyebrow: "What we build with",
-      headline: { text: "We pick the tools", accent: "to fit the problem." },
-      body: "You don't need to choose the technology. Describe the problem and we'll suggest how to solve it.",
+      headline: { text: "Automation and AI projects", accent: "shaped by the problem." },
+      body: "We offer a range of automation and AI services, depending on what your company needs and what it struggles with. You don't have to choose the technology. Describe the problem or the challenge and we'll suggest how to solve it.",
     },
     faq: {
       eyebrow: "Questions",
@@ -195,7 +195,7 @@ export const homeEn: HomeCopy = {
     },
     cta: {
       eyebrow: "First step",
-      headline: { text: "Let's start with the one process that", accent: "hurts most today." },
+      headline: { text: "Let's start with the process that brings", accent: "the most value." },
       body: "The call is free. Afterwards you get a staged plan with the price of the first stage, and the decision is yours.",
       button: { label: "Book a free call", href: "/book?z=cta" },
     },
@@ -235,7 +235,7 @@ export const homeEn: HomeCopy = {
   },
   booking: {
     eyebrow: "Free call",
-    headline: { text: "Tell us what hurts", accent: "most today." },
+    headline: { text: "Tell us what you want", accent: "to improve." },
     body: "Half an hour about your company and the process you want to change. After the call you get a staged plan with the price of the first stage. What happens next is up to you.",
     points: [
       "The call costs nothing",
@@ -279,7 +279,7 @@ export const homeEn: HomeCopy = {
       eyebrow: "After the call",
       headline: { text: "What you", accent: "get." },
       items: [
-        { title: "A staged plan", body: "What we do and in what order, starting with what hurts most." },
+        { title: "A staged plan", body: "What we do and in what order, starting with what brings the most value." },
         { title: "The price of the first stage", body: "A fixed amount you know before anything starts." },
         { title: "Time to decide", body: "You don't have to decide on the call. Take the plan and think it over." },
       ],

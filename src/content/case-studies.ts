@@ -1,104 +1,138 @@
 // Cases in the "Realizacje" section of the home page. Order = display order.
-// Only true facts: every number needs a real implementation behind it.
-// The media client is confidential: no name, no system name, no numbers.
+// Keep each card short: what we did in a sentence or two, and the results shown large.
+// Only true results. The media client is confidential: no name, no system name, no numbers.
 import type { CaseStudyEntry } from "./types";
 
 export const caseStudies: readonly CaseStudyEntry[] = [
   {
     featured: true,
-    en: {
-      kind: "Our product",
-      title: "LegalFlow",
-      company: "Platform for Polish restructuring law firms. We built it and run it ourselves.",
-      before: "In a restructuring firm much of the day goes into case paperwork, letters to creditors and watching court deadlines.",
-      did: "LegalFlow generates case documents from the firm's own templates, handles communication with creditors and tracks deadlines. It turns an hour-long client interview into a structured draft. The assistant works by text, dictation and phone.",
-      after: "Up to 70% less administrative work. The firm handles more cases with the same team.",
-      link: { label: "More about LegalFlow", href: "/work/legalflow" },
-    },
     pl: {
       kind: "Nasz produkt",
       title: "LegalFlow",
-      company: "Platforma dla kancelarii restrukturyzacyjnych. Zbudowaliśmy ją i sami ją utrzymujemy.",
-      before: "W kancelarii restrukturyzacyjnej duża część dnia idzie na dokumenty sprawy, korespondencję z wierzycielami i pilnowanie terminów.",
-      did: "LegalFlow generuje dokumentację sprawy z szablonów kancelarii, prowadzi komunikację z wierzycielami i pilnuje terminów. Z godzinnej rozmowy z klientem robi uporządkowany szkic dokumentu. Asystent działa tekstem, dyktowaniem i przez telefon.",
-      after: "Do 70% mniej pracy administracyjnej. Kancelaria prowadzi więcej spraw tym samym zespołem.",
+      company: "Platforma dla kancelarii restrukturyzacyjnych.",
+      summary: "Dokumenty sprawy z szablonów kancelarii, komunikacja z wierzycielami i pilnowanie terminów w jednym systemie. Asystent AI rozmawia z klientem i sam uzupełnia sprawę.",
+      metrics: [{ value: "do 70%", label: "mniej pracy administracyjnej w kancelarii" }],
+      products: [
+        {
+          title: "Platforma LegalFlow",
+          text: "Sprawy, pisma, zadania i terminy w jednym miejscu.",
+          image: { src: "/assets/work/legalflow-platform.jpg", alt: "Karta sprawy w LegalFlow" },
+          link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+        },
+        {
+          title: "Asystent AI",
+          text: "Rozmawia z klientem kancelarii tekstem, głosem i przez telefon, a dane zapisuje w sprawie.",
+          image: { src: "/assets/work/legalflow-assistant.jpg", alt: "Rozmowa z Asystentem AI LegalFlow" },
+          link: { label: "Zobacz asystenta", href: "https://legal-flow.pl/#produkt" },
+        },
+      ],
       link: { label: "Więcej o LegalFlow", href: "/work/legalflow" },
     },
+    en: {
+      kind: "Our product",
+      title: "LegalFlow",
+      company: "A platform for restructuring law firms in Poland.",
+      summary: "Case documents from the firm's own templates, communication with creditors and deadline tracking in one system. An AI assistant talks to the client and fills in the case.",
+      metrics: [{ value: "up to 70%", label: "less administrative work in the firm" }],
+      products: [
+        {
+          title: "LegalFlow platform",
+          text: "Cases, documents, tasks and deadlines in one place.",
+          image: { src: "/assets/work/legalflow-platform.jpg", alt: "A case card in LegalFlow" },
+          link: { label: "legal-flow.pl", href: "https://legal-flow.pl" },
+        },
+        {
+          title: "AI assistant",
+          text: "Talks to the firm's clients by text, voice and phone, and saves the data in the case.",
+          image: { src: "/assets/work/legalflow-assistant.jpg", alt: "A conversation with the LegalFlow AI assistant" },
+          link: { label: "See the assistant", href: "https://legal-flow.pl/#produkt" },
+        },
+      ],
+      link: { label: "More about LegalFlow", href: "/work/legalflow" },
+    },
   },
   {
-    en: {
-      kind: "Client project",
-      title: "Certificates for workers posted to Germany",
-      company: "A group of four construction companies with crews on sites in Germany.",
-      before: "Every month the accountant copied date ranges of stays in Germany, dates of birth and addresses from work calendars into certificates. About 300 people a month, about 3 working days.",
-      did: "Automation built into the spreadsheets the company already uses. No new system, no training. One menu item reads the calendars of all four companies, works out the periods of work, fills in personal data and adds new workers. The accountant's own entries stay untouched, a backup is made before every write, and unusual cases go to a log for a person to check.",
-      after: "The monthly update is one click plus checking the exceptions. On historical data the result matched the accountant's manual work in 99.8% of cases (2,914 of 2,920). The rest were typos in the source data, which the system flagged.",
-      when: "Running at the client since October 2026.",
-    },
     pl: {
       kind: "Wdrożenie u klienta",
-      title: "Zaświadczenia dla pracowników delegowanych",
-      company: "Grupa czterech spółek budowlanych z pracownikami na budowach w Niemczech.",
-      before: "Co miesiąc księgowa przepisywała z kalendarzy pracy zakresy dat pobytu w Niemczech, daty urodzenia i adresy do zaświadczeń. Około 300 osób miesięcznie, około 3 dni pracy.",
-      did: "Automatyzacja wbudowana w arkusze, na których firma już pracuje. Bez nowego systemu i bez szkolenia. Jedna pozycja w menu czyta kalendarze czterech spółek, wylicza okresy pracy, uzupełnia dane osobowe i dopisuje nowych pracowników. Wpisy księgowej zostają nietknięte, przed każdym zapisem powstaje kopia, a nietypowe przypadki trafiają do dziennika do sprawdzenia przez człowieka.",
-      after: "Comiesięczna aktualizacja to jedno kliknięcie i sprawdzenie wyjątków. Na danych historycznych wynik zgadzał się z ręczną pracą księgowej w 99,8% przypadków (2914 z 2920). Pozostałe różnice to literówki w danych źródłowych, które system wskazał.",
-      when: "Działa u klienta od października 2026.",
+      title: "Zaświadczenia dla pracowników fizycznych",
+      company: "Grupa czterech spółek budowlanych z pracownikami na budowach za granicą.",
+      summary: "Comiesięczna aktualizacja zaświadczeń to teraz jedno kliknięcie w arkuszach, na których firma już pracuje.",
+      metrics: [
+        { value: "3 dni → 30 min", label: "comiesięcznej pracy" },
+        { value: "99,8%", label: "skuteczności. Reszta to literówki do ręcznej poprawy" },
+      ],
+      link: { label: "Automatyzacja z AI", href: "/practices/ai-automation" },
+    },
+    en: {
+      kind: "Client project",
+      title: "Certificates for site workers",
+      company: "A group of four construction companies with crews on sites abroad.",
+      summary: "The monthly certificate update is now one click in the spreadsheets the company already uses.",
+      metrics: [
+        { value: "3 days → 30 min", label: "of monthly work" },
+        { value: "99.8%", label: "accuracy. The rest are typos to fix by hand" },
+      ],
+      link: { label: "AI automation", href: "/practices/ai-automation" },
     },
   },
   {
-    en: {
-      kind: "Client project",
-      title: "AI agent that finds new clients",
-      company: "An engineering contractor from Wrocław.",
-      did: "An AI agent searches the web and suggests companies that may be interested in the client's offer to the sales team. Plus a simple panel for entering data.",
-      after: "According to the client: accurate, valuable leads and a more effective sales team.",
-      quote: {
-        text: "The first results were visible just three weeks after we started working together. The suggested leads turned out to be accurate and valuable, which made our sales team more effective. (translated from Polish)",
-        source: "Client reference letter, 10.2025",
-        pending: "[reference letter PDF: to be added]",
-      },
-    },
     pl: {
       kind: "Wdrożenie u klienta",
       title: "Agent AI do pozyskiwania klientów",
       company: "Firma wykonawstwa inżynieryjnego z Wrocławia.",
-      did: "Agent AI przeszukuje sieć i podsuwa handlowcom firmy, które mogą być zainteresowane ofertą klienta. Do tego prosty panel do wprowadzania danych.",
-      after: "Według klienta: trafne leady i wyższa efektywność działu handlowego.",
-      quote: {
-        text: "Pierwsze efekty wdrożenia były widoczne już po trzech tygodniach od rozpoczęcia współpracy – sugerowane leady okazały się trafne i wartościowe, co przełożyło się na wzrost efektywności działu handlowego.",
-        source: "List referencyjny klienta, 10.2025",
-        pending: "[list referencyjny PDF: do dodania]",
-      },
+      summary: "Agent AI przeszukuje sieć i podsuwa handlowcom firmy, które mogą być zainteresowane ofertą.",
+      metrics: [
+        { value: "3 tyg.", label: "do pierwszych efektów, według listu referencyjnego klienta" },
+        { value: "Trafne leady", label: "i wyższa efektywność działu handlowego" },
+      ],
+      link: { label: "Automatyzacja z AI", href: "/practices/ai-automation" },
     },
-  },
-  {
-    en: {
-      kind: "We run on it ourselves",
-      title: "Our own marketing engine",
-      company: "Booster. This is not a client project, it is how we work.",
-      did: "AI agents run our campaigns in Google Ads, Meta Ads and TikTok Ads. Other agents build and update the landing pages for those campaigns. Everything is stored in one place connected to the CRM, and what happens in the CRM (a new lead, a stage change, no reply) triggers the next steps on its own.",
-      after: "We build the same setup for companies that want ads, landing pages and CRM to work as one process.",
-    },
-    pl: {
-      kind: "Sami tak działamy",
-      title: "Nasz własny silnik marketingu",
-      company: "Booster. To nie wdrożenie u klienta, tylko sposób, w jaki sami pracujemy.",
-      did: "Agenci AI prowadzą nasze kampanie w Google Ads, Meta Ads i TikTok Ads. Inni agenci budują i aktualizują strony pod te kampanie. Wszystko zapisuje się w jednym miejscu połączonym z CRM, a to, co dzieje się w CRM (nowy lead, zmiana etapu, brak odpowiedzi), samo uruchamia kolejne kroki.",
-      after: "Ten sam układ budujemy dla firm, które chcą połączyć reklamy, strony i CRM w jeden proces.",
-    },
-  },
-  {
     en: {
       kind: "Client project",
-      title: "Sales proposals",
-      company: "A large media company.",
-      did: "We automated the preparation of sales proposals, which used to mean collecting data by hand from many places.",
+      title: "AI agent that finds new clients",
+      company: "An engineering contractor from Wrocław.",
+      summary: "An AI agent searches the web and suggests companies that may be interested in the offer to the sales team.",
+      metrics: [
+        { value: "3 weeks", label: "to first results, according to the client's reference letter" },
+        { value: "Accurate leads", label: "and a more effective sales team" },
+      ],
+      link: { label: "AI automation", href: "/practices/ai-automation" },
     },
+  },
+  {
     pl: {
       kind: "Wdrożenie u klienta",
-      title: "Oferty handlowe",
+      title: "Silnik marketingu",
+      company: "Firma produkująca treści cyfrowe.",
+      summary: "Agenci AI prowadzą kampanie w Google, Meta i TikTok, budują strony pod kampanie i łączą wszystko z CRM w jeden proces.",
+      metrics: [{ value: "Tańsze kampanie" }, { value: "Większa kontrola" }, { value: "Wzrost MRR" }],
+      link: { label: "Automatyzacja z AI", href: "/practices/ai-automation" },
+    },
+    en: {
+      kind: "Client project",
+      title: "Marketing engine",
+      company: "A digital content production company.",
+      summary: "AI agents run campaigns in Google, Meta and TikTok, build landing pages for them and connect everything with the CRM in one process.",
+      metrics: [{ value: "Cheaper campaigns" }, { value: "More control" }, { value: "Higher MRR" }],
+      link: { label: "AI automation", href: "/practices/ai-automation" },
+    },
+  },
+  {
+    pl: {
+      kind: "Wdrożenie u klienta",
+      title: "System ERP",
       company: "Duża firma z branży mediowej.",
-      did: "Zautomatyzowaliśmy przygotowywanie ofert handlowych, które wcześniej wymagało ręcznego zbierania danych z wielu miejsc.",
+      summary: "Jeden system do zarządzania inwentarzem, sprzedażą, ofertami, klientami i dostępnością. Działa na bardzo dużym inwentarzu.",
+      metrics: [{ value: "Jeden system", label: "zamiast danych rozproszonych po wielu miejscach" }],
+      link: { label: "Oprogramowanie na miarę", href: "/practices/b2b-software" },
+    },
+    en: {
+      kind: "Client project",
+      title: "ERP system",
+      company: "A large media company.",
+      summary: "One system for inventory, sales, offers, clients and availability. It runs on a very large inventory.",
+      metrics: [{ value: "One system", label: "instead of data scattered across many places" }],
+      link: { label: "Custom software", href: "/practices/b2b-software" },
     },
   },
 ];

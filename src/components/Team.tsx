@@ -24,9 +24,6 @@ export function Team({ content, members }: Props) {
             </div>
           ))}
         </div>
-        <p className="home-closing" data-reveal>
-          {content.story}
-        </p>
       </div>
     </section>
   );
