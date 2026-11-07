@@ -2709,11 +2709,11 @@ html.js-reveal .word-reveal.visible > span {
   padding-left: 18px;
   border-left: 3px solid var(--accent);
 }
-.case-quote p {
+.case-quote p:first-child {
   font-size: 17px;
   line-height: 1.5;
 }
-.case-quote footer {
+.case-quote-source {
   margin-top: 10px;
   font-size: 13px;
   color: var(--muted-dark);

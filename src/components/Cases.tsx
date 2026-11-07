@@ -32,7 +32,7 @@ function CaseCard({ item, labels }: { item: CaseStudy; labels: Props["content"][
       {item.quote ? (
         <blockquote className="case-quote">
           <p>{item.quote.text}</p>
-          <footer>
+          <p className="case-quote-source">
             {item.quote.source}
             {item.quote.link ? (
               <>
@@ -44,7 +44,7 @@ function CaseCard({ item, labels }: { item: CaseStudy; labels: Props["content"][
             ) : item.quote.pending ? (
               <span className="placeholder-note"> {item.quote.pending}</span>
             ) : null}
-          </footer>
+          </p>
         </blockquote>
       ) : null}
       {item.when ? <p className="case-when mono">{item.when}</p> : null}
