@@ -3748,3 +3748,7 @@ p {
   border-style: dashed;
   background: transparent;
 }
+.case--example .case-summary {
+  margin-top: 12px;
+  max-width: 80ch;
+}
