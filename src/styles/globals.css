@@ -148,7 +148,8 @@ img {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  padding: 14px var(--pad-x);
+  /* Logo and links line up with the page content column. */
+  padding: 14px max(var(--pad-x), calc((100% - var(--nav-container, var(--container))) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2562,8 +2563,16 @@ html.js-reveal .word-reveal.visible > span {
   padding-bottom: 88px;
 }
 /* Narrower column than the rest of the site, so lines and cards don't stretch on wide screens. */
+.home-page {
+  --nav-container: 1180px;
+}
 .home-page section.block.home-section .container-inner {
   max-width: 1180px;
+}
+/* Keep the call button visible from the start, so the right edge of the nav lines up with the content. */
+.home-page .nav-cta {
+  opacity: 1;
+  pointer-events: auto;
 }
 .home-page section.block.home-section:not(.light) {
   --card-bg: rgba(255, 255, 255, 0.04);
