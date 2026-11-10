@@ -345,7 +345,31 @@ export function useDatafastGoals(): void {
 
 const AD_PARAM_RE = /^(utm_[a-z_]+|gclid|gbraid|wbraid|fbclid)$/i;
 
-/** Carries ad click parameters (utm_*, gclid, fbclid) from the landing URL onto internal links, so they reach /book. */
+function readCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+/**
+ * Cal.com saves utm_* and metadata[...] query params on the booking, so each booking shows which ad it came from
+ * (DataFast cannot see the click itself: the Facebook in-app browser leaves before the goal is sent).
+ * Visitors without ad params get utm_source=boosterai.pl; metadata[datafast_visitor_id] matches the booking to DataFast.
+ */
+function tagCalendarLink(url: URL, carry: [string, string][]): void {
+  const utm = carry.filter(([k]) => /^utm_/i.test(k));
+  if (utm.length === 0) {
+    utm.push(["utm_source", "boosterai.pl"], ["utm_medium", "website"]);
+  }
+  for (const [k, v] of utm) if (!url.searchParams.has(k)) url.searchParams.set(k, v);
+  url.searchParams.set("metadata[page]", window.location.pathname);
+  const visitorId = readCookie("datafast_visitor_id");
+  if (visitorId) url.searchParams.set("metadata[datafast_visitor_id]", visitorId);
+}
+
+/**
+ * Carries ad click parameters (utm_*, gclid, fbclid) from the landing URL onto internal links, so they reach /book,
+ * and the utm_* ones onto cal.com links, so the booking records its source.
+ */
 export function usePreserveAdParams(): void {
   useEffect(() => {
     function handler(e: MouseEvent) {
@@ -354,8 +378,13 @@ export function usePreserveAdParams(): void {
       if (!anchor || !href) return;
       try {
         const carry = [...new URLSearchParams(window.location.search)].filter(([k]) => AD_PARAM_RE.test(k));
-        if (carry.length === 0) return;
         const url = new URL(href, window.location.href);
+        if (url.hostname === "cal.com") {
+          tagCalendarLink(url, carry);
+          anchor.setAttribute("href", url.toString());
+          return;
+        }
+        if (carry.length === 0) return;
         if (url.origin !== window.location.origin) return;
         for (const [k, v] of carry) if (!url.searchParams.has(k)) url.searchParams.set(k, v);
         anchor.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
