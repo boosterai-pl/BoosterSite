@@ -63,6 +63,8 @@ export type PracticeContent = {
   readonly headline: HeadlineLine;
   readonly lead: string;
   readonly heroCta?: SectionCta;
+  /** Quiet second button next to the hero CTA. */
+  readonly secondaryCta?: SectionCta;
   /** Short true facts under the hero, shown large. Only real numbers. */
   readonly facts?: readonly { readonly value: string; readonly label: string }[];
   /** Pain points, written as short scenes from the client's company. */

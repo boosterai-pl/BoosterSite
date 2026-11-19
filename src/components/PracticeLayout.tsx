@@ -49,6 +49,11 @@ export function PracticeLayout({ page }: Props) {
                 {page.heroCta.label}
                 <span className="arrow">{heroExternal ? "↗" : "→"}</span>
               </a>
+              {page.secondaryCta ? (
+                <a href={page.secondaryCta.href} className="btn btn-quiet-light" {...external(page.secondaryCta.href)}>
+                  {page.secondaryCta.label}
+                </a>
+              ) : null}
             </div>
           ) : null}
           {page.facts ? (
@@ -141,7 +146,7 @@ export function PracticeLayout({ page }: Props) {
       ) : null}
 
       {page.steps ? (
-        <section className="block light pp-block pp-tint">
+        <section id="steps" className="block light pp-block pp-tint">
           <div className="container-inner">
             <BlockHead title={page.steps.title} />
             <ol className="pp-steps" data-reveal-stagger>
@@ -213,7 +218,7 @@ export function PracticeLayout({ page }: Props) {
         </section>
       ) : null}
 
-      <aside className="inline-cta pp-cta" data-reveal>
+      <aside id="contact" className="inline-cta pp-cta" data-reveal>
         <div className="container-inner inline-cta-inner">
           <p>{page.cta.microCopy}</p>
           <a href={page.cta.href} className="btn btn-primary" {...external(page.cta.href)}>

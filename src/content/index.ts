@@ -6,6 +6,7 @@
 //   case-studies.ts             "Realizacje" (cases) section on the home page
 //   team.ts                     team section on the home page and /book
 //   legalflow.ts                the /work/legalflow page
+//   open-mercato.ts             the /open-mercato landing page
 //   careers/<slug>.<locale>.md  job roles (/careers, /careers/<slug>)
 //   blog/<slug>.<locale>.md     blog posts (/blog, /blog/<slug>)
 //
