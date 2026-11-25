@@ -6,6 +6,7 @@
 //   case-studies.ts             "Realizacje" (cases) section on the home page
 //   team.ts                     team section on the home page and /book
 //   legalflow.ts                the /work/legalflow page
+//   voicebots.ts                the /voicebots page
 //   careers/<slug>.<locale>.md  job roles (/careers, /careers/<slug>)
 //   blog/<slug>.<locale>.md     blog posts (/blog, /blog/<slug>)
 //
@@ -26,6 +27,7 @@ import { services } from "./services";
 import { caseStudies } from "./case-studies";
 import { team } from "./team";
 import { legalflow } from "./legalflow";
+import { voicebots } from "./voicebots";
 import {
   countWords,
   optionalBoolean,
@@ -92,6 +94,7 @@ function buildSite(copy: HomeCopy, locale: SiteLocale): SiteContent {
     team: team.map((m, i) => ({ id: toId(i), name: m.name, role: m.role[locale], bio: m.bio[locale], photo: m.photo, linkedin: m.linkedin })),
     practices: services.map((s) => ({ slug: s.slug, ...s[locale].page })),
     legalflow: legalflow[locale],
+    voicebots: voicebots[locale],
   };
 }
 
